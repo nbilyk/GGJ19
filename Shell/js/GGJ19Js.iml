@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../out/js/production/GGJ19Js" />
+    <output-test url="file://$MODULE_DIR$/../../out/js/test/GGJ19Js" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/www" />
+      <sourceFolder url="file://$MODULE_DIR$/src" type="kotlin-source" />
+      <sourceFolder url="file://$MODULE_DIR$/resources" type="kotlin-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="GGJ19Core" />
+    <orderEntry type="library" name="KotlinJavaScript" level="project" />
+    <orderEntry type="module-library">
+      <library name="&lt;Kotlin JavaScript library&gt;">
+        <CLASSES>
+          <root url="kotlin-js-meta://$KOTLIN_BUNDLED$/lib/kotlin-jslib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-jslib-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="AcornUiJsBackend" />
+    <orderEntry type="module" module-name="AcornUiCore" />
+    <orderEntry type="module" module-name="AcornUtils" />
+  </component>
+</module>
+

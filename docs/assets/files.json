@@ -1,0 +1,136 @@
+{
+	"files": [
+		{
+			"path": "assets/build.txt",
+			"modified": 1526510430032,
+			"size": 4,
+			"mimeType": "text/plain"
+		},
+		{
+			"path": "assets/res/ui.properties",
+			"modified": 1526510427278,
+			"size": 0,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/uiskin.json",
+			"modified": 1526510427280,
+			"size": 7000,
+			"mimeType": "application/json"
+		},
+		{
+			"path": "assets/uiskin/uiskin0.png",
+			"modified": 1526510427281,
+			"size": 64473,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/verdana_14.bmfc",
+			"modified": 1526510427279,
+			"size": 747,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/verdana_14.fnt",
+			"modified": 1526510427279,
+			"size": 26201,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/verdana_14_bold.fnt",
+			"modified": 1526510427280,
+			"size": 21882,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/verdana_14_bold_italic.fnt",
+			"modified": 1526510427279,
+			"size": 21889,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/verdana_14_italic.fnt",
+			"modified": 1526510427279,
+			"size": 21884,
+			"mimeType": null
+		},
+		{
+			"path": "assets/uiskin/cursors/Alias.png",
+			"modified": 1526510427284,
+			"size": 2983,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/AllScroll.png",
+			"modified": 1526510427282,
+			"size": 2918,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Cell.png",
+			"modified": 1526510427283,
+			"size": 2886,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Copy.png",
+			"modified": 1526510427286,
+			"size": 2983,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Crosshair.png",
+			"modified": 1526510427283,
+			"size": 2856,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Help.png",
+			"modified": 1526510427283,
+			"size": 2940,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/IBeam.png",
+			"modified": 1526510427286,
+			"size": 2862,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Move.png",
+			"modified": 1526510427282,
+			"size": 2919,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/NotAllowed.png",
+			"modified": 1526510427282,
+			"size": 2961,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/PointerWait.png",
+			"modified": 1526510427285,
+			"size": 3029,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/ResizeNE.png",
+			"modified": 1526510427282,
+			"size": 2884,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/ResizeSE.png",
+			"modified": 1526510427284,
+			"size": 2891,
+			"mimeType": "image/png"
+		},
+		{
+			"path": "assets/uiskin/cursors/Wait.png",
+			"modified": 1526510427284,
+			"size": 2958,
+			"mimeType": "image/png"
+		}
+	]
+}

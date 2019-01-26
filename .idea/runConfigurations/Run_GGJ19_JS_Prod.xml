@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run GGJ19 JS Prod" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="false" uri="http://localhost:63342/GGJ19/GGJ19Js/wwwDist/index.html">
+    <method>
+      <option name="RunConfigurationTask" enabled="true" run_configuration_name="Deploy JS" run_configuration_type="JetRunConfigurationType" />
+    </method>
+  </configuration>
+</component>
