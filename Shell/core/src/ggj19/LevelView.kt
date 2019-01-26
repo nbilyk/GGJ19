@@ -26,10 +26,12 @@ import com.acornui.component.drawing.staticMeshC
 import com.acornui.component.layout.algorithm.CanvasLayoutContainer
 import com.acornui.component.layout.algorithm.hGroup
 import com.acornui.component.layout.moveTo
+import com.acornui.component.layout.spacer
 import com.acornui.component.scroll.ScrollModelImpl
 import com.acornui.component.scroll.TossScrollModelBinding
 import com.acornui.component.scroll.TossScroller
 import com.acornui.component.text.text
+import com.acornui.core.cache.recycle
 import com.acornui.core.di.Owned
 import com.acornui.core.di.own
 import com.acornui.core.graphic.orthographicCamera
@@ -44,10 +46,8 @@ import com.acornui.core.tween.TweenRegistry
 import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
 import com.acornui.graphic.Color
-import com.acornui.math.Easing
-import com.acornui.math.Interpolation
-import com.acornui.math.MathUtils
-import com.acornui.math.Vector2
+import com.acornui.math.*
+import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
 import ggj19.model.emptyLevel
 import ggj19.util.Isometric
@@ -75,6 +75,8 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private val stageW = TILE_SIZE * GameLevel.MAX_COLS + padding * 2f
 	private val stageH = TILE_SIZE * GameLevel.MAX_ROWS + padding * 2f
 
+	private val characterIcons = ArrayList<GameCharacterIconView>()
+
 	init {
 		originalData.bind { currentLevel.value = it }
 		interactivityMode = InteractivityMode.ALWAYS
@@ -86,13 +88,28 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	}
 
 	private fun initCharacterQueue() {
-		+hGroup {
-			+text {
-				currentLevel.bind { level ->
-					text = "Chars: ${level.pendingCharacters.map { it.type }}"
+		+panel {
+			style.background = {
+				rect {
+					style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
 				}
 			}
-		} layout { right = 10f; top = 10f }
+			style.padding = Pad(5f)
+			+hGroup {
+				+spacer() layout { widthPercent = 1f }
+				currentLevel.bind { newData ->
+					recycle(
+							data = newData.characters,
+							existingElements = characterIcons,
+							factory = { item, index -> +GameCharacterIconView(this) },
+							configure = { element, item, index -> element.data.value = item },
+							disposer = { element -> element.dispose() },
+							retriever = { element -> element.data.value },
+							equality = { o1, o2 -> true }
+					)
+				}
+			} layout { widthPercent = 1f }
+		} layout { widthPercent = 1f }
 	}
 
 	private fun initTileViews() {
@@ -253,7 +270,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	fun resetLevel() {
 		currentLevel.value = originalData.value
 	}
-	
+
 	companion object {
 		const val TILE_SIZE = 64f
 	}

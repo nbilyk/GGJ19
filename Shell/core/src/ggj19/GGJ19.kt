@@ -20,8 +20,6 @@ import com.acornui.async.then
 import com.acornui.collection.ArrayList
 import com.acornui.collection.poll
 import com.acornui.component.layout.algorithm.CanvasLayoutContainer
-import com.acornui.component.layout.algorithm.hGroup
-import com.acornui.component.rect
 import com.acornui.component.stage
 import com.acornui.component.text.text
 import com.acornui.core.asset.AssetType
@@ -30,7 +28,6 @@ import com.acornui.core.di.Owned
 import com.acornui.core.nav.NavBindable
 import com.acornui.core.observe.dataBinding
 import com.acornui.core.observe.or
-import com.acornui.graphic.Color
 import com.acornui.signal.bind
 import ggj19.model.*
 
@@ -53,7 +50,7 @@ class GGJ19(owner: Owned) : CanvasLayoutContainer(owner), NavBindable {
 
 		// Temp data:
 		levels.value = listOf(GameLevel(
-				pendingCharacters = listOf(GameCharacter(GameCharacterType.ARTIST), GameCharacter(GameCharacterType.GRANDMA), GameCharacter(GameCharacterType.ARTIST))
+				characters = listOf(GameCharacter(GameCharacterType.ARTIST), GameCharacter(GameCharacterType.GRANDMA), GameCharacter(GameCharacterType.ARTIST))
 		))
 
 		val levelView = +LevelView(this).apply {
@@ -69,16 +66,16 @@ class GGJ19(owner: Owned) : CanvasLayoutContainer(owner), NavBindable {
 			}
 		}
 
-		+rect {
-			style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
-		} layout { widthPercent = 1f; height = 40f }
-		+hGroup {
-			+text {
-				currentLevel.bind {
-					text = "Level $it"
-				}
-			}
-		} layout { left = 10f; top = 10f }
+//		+rect {
+//			style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
+//		} layout { widthPercent = 1f; height = 40f }
+//		+hGroup {
+//			+text {
+//				currentLevel.bind {
+//					text = "Level $it"
+//				}
+//			}
+//		} layout { left = 10f; top = 10f }
 
 	}
 }

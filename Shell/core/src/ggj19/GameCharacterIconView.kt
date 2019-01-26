@@ -14,30 +14,26 @@
  * limitations under the License.
  */
 
-package ggj19.model
+package ggj19
 
-import com.acornui.core.UidUtil
+import com.acornui.component.StackLayoutContainer
+import com.acornui.component.contentsAtlas
+import com.acornui.component.image
+import com.acornui.core.di.Owned
+import com.acornui.core.observe.dataBinding
+import ggj19.model.GameCharacter
 
-data class GameCharacter(
-		val type: GameCharacterType = GameCharacterType.UNKNOWN,
-		val x: Int = -1,
-		val y: Int = -1
-)
+class GameCharacterIconView(owner: Owned) : StackLayoutContainer(owner) {
 
-enum class GameCharacterType(val char: Char) {
-	MUSICIAN('M'),
-	GRANDMA('G'),
-	ARTIST('A'),
-	UNKNOWN('U');
+	private val atlasPath = "assets/ggj.json"
 
-	companion object {
+	val data = dataBinding(GameCharacter())
 
-		fun fromLetter(char: Char): GameCharacterType {
-			for (value in values()) {
-				if (value.char == char) return value
-			}
-			return UNKNOWN
+	private val icon = +image() layout { width = 32f; height = 32f }
+
+	init {
+		data.bind {
+			icon.contentsAtlas(atlasPath, it.type.char.toString())
 		}
 	}
 }
-
