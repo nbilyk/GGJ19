@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-requirejs.config({
-	urlArgs: function (id, url) {
-		for (var i = 0; i < manifest.files.length; i++) {
-			var file = manifest.files[i];
-			if (file.path == url) {
-				return "?version=" + file.modified;
-			}
-		}
-		return "";
-	}
-});
+package ggj19.model
 
-requirejs(["GGJ19Js"]);
+import com.acornui.collection.ArrayList
+
+data class GameLevel(
+
+		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { EmptyTile }}
+) {
+
+	fun getTile(row: Int, col: Int): Tile {
+		return grid[row][col]
+	}
+
+	companion object {
+		const val MAX_COLS = 20
+		const val MAX_ROWS = 20
+	}
+}

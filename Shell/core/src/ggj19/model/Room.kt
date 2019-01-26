@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-requirejs.config({
-	urlArgs: function (id, url) {
-		for (var i = 0; i < manifest.files.length; i++) {
-			var file = manifest.files[i];
-			if (file.path == url) {
-				return "?version=" + file.modified;
-			}
-		}
-		return "";
-	}
-});
+package ggj19.model
 
-requirejs(["GGJ19Js"]);
+data class Room(
+		override val resources: List<Resource> = emptyList(),
+		override val traits: List<Traits> = emptyList(),
+		val occupant: Occupant? = null
+) : Tile

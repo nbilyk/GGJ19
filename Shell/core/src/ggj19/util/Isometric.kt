@@ -14,16 +14,17 @@
  * limitations under the License.
  */
 
-requirejs.config({
-	urlArgs: function (id, url) {
-		for (var i = 0; i < manifest.files.length; i++) {
-			var file = manifest.files[i];
-			if (file.path == url) {
-				return "?version=" + file.modified;
-			}
-		}
-		return "";
-	}
-});
+package ggj19.util
 
-requirejs(["GGJ19Js"]);
+import com.acornui.math.Vector2
+
+object Isometric {
+
+	fun isoToTwoD(coord: Vector2): Vector2 {
+		return coord.set((2f * coord.y + coord.x) / 2f, (2f * coord.y - coord.x) / 2f)
+	}
+
+	fun twoDToIso(coord: Vector2): Vector2 {
+		return coord.set(coord.x - coord.y, (coord.x + coord.y) / 2)
+	}
+}

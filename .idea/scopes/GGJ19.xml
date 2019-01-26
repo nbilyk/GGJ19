@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="GGJ19" pattern="*||src[group:GGJ19Shell]:*..*||src[GGJ19Build]:*..*" />
+</component>
