@@ -19,8 +19,9 @@ package ggj19.model
 import com.acornui.collection.ArrayList
 
 data class GameLevel(
-
-		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { EmptyTile }}
+		val pendingCharacters: List<GameCharacter> = emptyList(),
+		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { Tile() }},
+		val placedCharacters: List<GameCharacter> = emptyList()
 ) {
 
 	fun getTile(row: Int, col: Int): Tile {
@@ -32,3 +33,5 @@ data class GameLevel(
 		const val MAX_ROWS = 20
 	}
 }
+
+val emptyLevel = GameLevel()

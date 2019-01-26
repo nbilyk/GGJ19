@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package ggj19.model
+package ggj19
 
-data class Occupant(
-		val traits: List<Traits> = emptyList()
-)
+import com.acornui.component.UiComponent
+import com.acornui.graphic.Color
+import com.acornui.skins.BasicUiSkin
 
-enum class Traits {
-	SUNNY,
-	NOISY,
-	DANGEROUS
+class Skin(stage: UiComponent) : BasicUiSkin(stage) {
+
+	override fun initTheme() {
+		theme.textColor = Color(1f, 1f, 1f, 1f)
+	}
 }

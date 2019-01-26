@@ -1,6 +1,6 @@
 {
   "alphaThreshold": 0,
-  "filterMag": "NEAREST",
+  "filterMag": "LINEAR",
   "filterMin": "LINEAR_MIPMAP_LINEAR",
   "pixelType": "UNSIGNED_BYTE",
   "pixelFormat": "RGBA",

@@ -5,10 +5,11 @@
     <output-test url="file://$MODULE_DIR$/../../out/js/test/GGJ19Js" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/www" />
       <sourceFolder url="file://$MODULE_DIR$/src" type="kotlin-source" />
       <sourceFolder url="file://$MODULE_DIR$/resources" type="kotlin-resource" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/www" />
+      <excludeFolder url="file://$MODULE_DIR$/wwwDist" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -30,4 +31,3 @@
     <orderEntry type="module" module-name="AcornUtils" />
   </component>
 </module>
-

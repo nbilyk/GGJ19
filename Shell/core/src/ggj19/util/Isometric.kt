@@ -20,10 +20,12 @@ import com.acornui.math.Vector2
 
 object Isometric {
 
+	fun isoToTwoD(x: Float, y: Float): Vector2 = isoToTwoD(Vector2(x, y))
 	fun isoToTwoD(coord: Vector2): Vector2 {
 		return coord.set((2f * coord.y + coord.x) / 2f, (2f * coord.y - coord.x) / 2f)
 	}
 
+	fun twoDToIso(x: Float, y: Float): Vector2 = twoDToIso(Vector2(x, y))
 	fun twoDToIso(coord: Vector2): Vector2 {
 		return coord.set(coord.x - coord.y, (coord.x + coord.y) / 2)
 	}

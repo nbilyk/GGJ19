@@ -16,12 +16,11 @@
 
 package ggj19.model
 
-interface Tile {
-	val resources: List<Resource>
-	val traits: List<Traits>
-}
+data class Tile(
+		val roomType: RoomType = RoomType.NONE
+)
 
-object EmptyTile : Tile {
-	override val resources: List<Resource> = emptyList()
-	override val traits: List<Traits> = emptyList()
+enum class RoomType {
+	NONE,
+	STANDARD
 }

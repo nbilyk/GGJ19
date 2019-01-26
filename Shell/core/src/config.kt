@@ -19,4 +19,4 @@ import com.acornui.graphic.Color
  * limitations under the License.
  */
 
-val config = AppConfig(frameRate = 60, window = WindowConfig(title = "GGJ19", backgroundColor = Color.DARK_GRAY), gl = GlConfig(antialias = true))
+val config = AppConfig(frameRate = 60, window = WindowConfig(title = "GGJ19", backgroundColor = Color(0.2f, 0.2f, 0.2f, 1f)), gl = GlConfig(antialias = true))

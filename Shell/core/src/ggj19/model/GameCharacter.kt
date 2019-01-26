@@ -16,8 +16,28 @@
 
 package ggj19.model
 
-data class Room(
-		override val resources: List<Resource> = emptyList(),
-		override val traits: List<Traits> = emptyList(),
-		val occupant: Occupant? = null
-) : Tile
+data class GameCharacter(
+		val type: GameCharacterType,
+		val x: Int = -1,
+		val y: Int = -1
+)
+
+enum class GameCharacterType {
+	MUSICIAN,
+	GRANDMA,
+	ARTIST,
+	UNKNOWN;
+
+	companion object {
+
+		fun fromLetter(char: Char): GameCharacterType {
+			return when (char) {
+				'G' -> GameCharacterType.GRANDMA
+				'A' -> GameCharacterType.ARTIST
+				'M' -> GameCharacterType.MUSICIAN
+				else -> GameCharacterType.UNKNOWN
+			}
+		}
+	}
+}
+

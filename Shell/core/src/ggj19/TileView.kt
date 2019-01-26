@@ -16,33 +16,30 @@
 
 package ggj19
 
-import com.acornui.component.StackLayoutContainer
+import com.acornui.component.ContainerImpl
 import com.acornui.component.atlas
-import com.acornui.component.text.text
 import com.acornui.core.di.Owned
 import com.acornui.core.observe.dataBinding
-import ggj19.model.EmptyTile
-import ggj19.model.Room
+import ggj19.model.RoomType
 import ggj19.model.Tile
 
-class TileView(owner: Owned) : StackLayoutContainer(owner) {
+class TileView(owner: Owned) : ContainerImpl(owner) {
 
 	private val atlasPath = "assets/ggj.json"
-	val data = dataBinding<Tile>(EmptyTile)
+	val data = dataBinding(Tile())
 
-	private val atlas = +atlas(atlasPath, "EmptyTile") layout { fill() }
+	private val atlas = addChild(atlas(atlasPath, "EmptyTile") {
+		originY = 128f
+		setScaling(0.5f, 0.5f)
+	})
 
 	init {
-
-		defaultWidth = 64f
-		defaultHeight = 64f
-
 		data.bind {
-			if (it is Room) {
-				atlas.setRegion(atlasPath, "Room")
-			} else {
-				atlas.setRegion(atlasPath, "EmptyRoom")
+			val region = when (it.roomType) {
+				RoomType.NONE -> "EmptyRoom"
+				RoomType.STANDARD -> "Room"
 			}
+			atlas.setRegion(atlasPath, region)
 		}
 
 

@@ -17,13 +17,19 @@
 package ggj19
 
 import com.acornui.collection.ArrayList
+import com.acornui.collection.replaceAt
 import com.acornui.component.*
+import com.acornui.component.drawing.MeshBuilderStyle
 import com.acornui.component.drawing.line
 import com.acornui.component.drawing.staticMesh
 import com.acornui.component.drawing.staticMeshC
+import com.acornui.component.layout.algorithm.CanvasLayoutContainer
+import com.acornui.component.layout.algorithm.hGroup
+import com.acornui.component.layout.moveTo
 import com.acornui.component.scroll.ScrollModelImpl
 import com.acornui.component.scroll.TossScrollModelBinding
 import com.acornui.component.scroll.TossScroller
+import com.acornui.component.text.text
 import com.acornui.core.di.Owned
 import com.acornui.core.di.own
 import com.acornui.core.graphic.orthographicCamera
@@ -41,38 +47,84 @@ import com.acornui.math.Interpolation
 import com.acornui.math.MathUtils
 import com.acornui.math.Vector2
 import ggj19.model.GameLevel
+import ggj19.model.emptyLevel
 import ggj19.util.Isometric
 
-class LevelView(owner: Owned) : StackLayoutContainer(owner) {
+class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
-	private val stateData = dataBinding(OverviewStateVo())
+	private val stateData = dataBinding(UiControlsStateVo())
 
-	val data = dataBinding(GameLevel())
+	val originalData = dataBinding(emptyLevel)
+	private val currentLevel = dataBinding(originalData.value)
 
 	private val tileViews: List<List<TileView>> = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { TileView(this) } }
 
-	private val gameStage = stack()
+	private val gameStage = container()
 
+	// Camera and toss scrolling properties.
 	private val overviewCam = orthographicCamera(true)
-
 	private val drag = dragAttachment()
-
 	private val tossScroller = own(TossScroller(gameStage, dragAttachment = drag))
-
 	private val hScroll = own(ScrollModelImpl())
 	private val vScroll = own(ScrollModelImpl())
 	private val tossScrollBinding = own(TossScrollModelBinding(tossScroller, hScroll, vScroll))
 
+	private val padding = 0f
+	private val stageW = TILE_SIZE * GameLevel.MAX_COLS + padding * 2f
+	private val stageH = TILE_SIZE * GameLevel.MAX_ROWS + padding * 2f
+
 	init {
+		originalData.bind { currentLevel.value = it }
 		interactivityMode = InteractivityMode.ALWAYS
 
+		initTileViews()
+		initCameraControls()
+		initStageView()
+		initCharacterQueue()
+	}
+
+	private fun initCharacterQueue() {
+		+hGroup {
+			+text {
+				currentLevel.bind { level ->
+					text = "Chars: ${level.pendingCharacters.map { it.type }}"
+				}
+			}
+		} layout { right = 10f; top = 10f }
+	}
+
+	private fun initTileViews() {
+		for (row in 0 until GameLevel.MAX_ROWS) {
+			for (col in 0 until GameLevel.MAX_COLS) {
+				tileViews[row][col].data.bind { newTile ->
+					currentLevel.change {
+						it.copy(
+								grid = it.grid.replaceAt(row, it.grid[row].replaceAt(col, newTile))
+						)
+					}
+				}
+			}
+		}
+
+		currentLevel.bind {
+			for (row in 0 until GameLevel.MAX_ROWS) {
+				for (col in 0 until GameLevel.MAX_COLS) {
+					tileViews[row][col].data.value = it.getTile(row, col)
+				}
+			}
+		}
+	}
+
+	private fun initCameraControls() {
 		window.sizeChanged.add { newWidth: Float, newHeight: Float, _: Boolean ->
 			overviewCam.setViewport(newWidth, newHeight)
 			updateCam()
 		}
 
-		hScroll.min = 0f
-		vScroll.min = 0f
+		hScroll.min = -stageH
+		vScroll.min = -stageW * 0.5f
+		hScroll.max = stageW
+		vScroll.max = stageH * 0.5f
 
 		hScroll.changed.add {
 			moveCamera(x = it.value)
@@ -98,64 +150,47 @@ class LevelView(owner: Owned) : StackLayoutContainer(owner) {
 			updateCam()
 		}
 
-		drag.dragStart.add {
-			println("D S")
-		}
-
 		wheel().add {
 			tossScroller.stop()
 			if (it.deltaY != 0f) {
 				zoomCamera(stateData.value.camera.zoom * if (it.deltaY > 0f) 1.2f else 0.8f)
 			}
 		}
+	}
 
+	private fun initStageView() {
 		+gameStage.apply {
-			val padding = 50f
-			val stageW = 64f * 20f + padding * 2f
-			val stageH = 64f * 20f + padding * 2f
-			defaultWidth = stageW
-			defaultHeight = stageH
-
-			hScroll.max = stageW
-			vScroll.max = stageH
-
 			cameraOverride = overviewCam
+
+			val origin = Isometric.twoDToIso(Vector2(GameLevel.MAX_COLS / 2 * TILE_SIZE, GameLevel.MAX_ROWS / 2 * TILE_SIZE))
+			setOrigin(origin.x, origin.y)
 
 			+container {
 
 				+staticMeshC {
 					mesh = staticMesh {
 						buildMesh {
+							MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 1f)
 
-							for (row in 0 until GameLevel.MAX_ROWS) {
-								for (col in 0 until GameLevel.MAX_COLS) {
-									val ptA = Isometric.twoDToIso(Vector2(col * 64f, row * 64f))
-									val ptB = Isometric.twoDToIso(Vector2((col + 1f) * 64f, row * 64f))
-									val ptC = Isometric.twoDToIso(Vector2((col + 1f) * 64f, (row + 1f) * 64f))
-									val ptD = Isometric.twoDToIso(Vector2((col) * 64f, (row + 1f) * 64f))
-									line(ptA.x, ptA.y, ptB.x, ptB.y)
-									line(ptB.x, ptB.y, ptC.x, ptC.y)
-									line(ptC.x, ptC.y, ptD.x, ptD.y)
-									line(ptD.x, ptD.y, ptA.x, ptA.y)
-								}
+							for (row in 0..GameLevel.MAX_ROWS) {
+								val ptA = Isometric.twoDToIso(Vector2(0f, row * TILE_SIZE))
+								val ptB = Isometric.twoDToIso(Vector2(GameLevel.MAX_ROWS * TILE_SIZE, row * TILE_SIZE))
+								line(ptA.x, ptA.y, ptB.x, ptB.y)
+							}
+							for (col in 0..GameLevel.MAX_COLS) {
+								val ptA = Isometric.twoDToIso(Vector2(col * TILE_SIZE, 0f))
+								val ptB = Isometric.twoDToIso(Vector2(col * TILE_SIZE, GameLevel.MAX_ROWS * TILE_SIZE))
+								line(ptA.x, ptA.y, ptB.x, ptB.y)
 							}
 						}
 					}
 				}
 
-//				for (row in 0 until GameLevel.MAX_ROWS) {
-//					for (col in 0 until GameLevel.MAX_COLS) {
-//						+tileViews[row][col]
-//						tileViews[row][col].moveTo(col * 64f + padding, row * 64f + padding)
-//					}
-//				}
-			} layout { fill() }
-		} layout { fill() }
-
-		data.bind {
-			for (row in 0 until GameLevel.MAX_ROWS) {
-				for (col in 0 until GameLevel.MAX_COLS) {
-					tileViews[row][col].data.value = it.getTile(row, col)
+				for (row in 0 until GameLevel.MAX_ROWS) {
+					for (col in 0 until GameLevel.MAX_COLS) {
+						+tileViews[row][col]
+						tileViews[row][col].moveTo(Isometric.twoDToIso(col * TILE_SIZE + padding, row * TILE_SIZE + padding))
+					}
 				}
 			}
 		}
@@ -196,7 +231,7 @@ class LevelView(owner: Owned) : StackLayoutContainer(owner) {
 
 	private fun tweenCamera(x: Float = stateData.value.camera.x, y: Float = stateData.value.camera.y, zoom: Float = stateData.value.camera.zoom, duration: Float = 0.5f, ease: Interpolation = Easing.pow3, delay: Float = 0f) {
 		val start = stateData.value.camera.copy()
-		val end = OverviewCameraVo(x, y, MathUtils.clamp(zoom, 0.1f, 4f))
+		val end = CameraVo(x, y, MathUtils.clamp(zoom, 0.1f, 4f))
 		driveTween(createPropertyTween(this, "camera", duration, ease, { 0f }, { alpha ->
 			stateData.change {
 				it.copy(camera = start.lerp(end, alpha))
@@ -204,13 +239,21 @@ class LevelView(owner: Owned) : StackLayoutContainer(owner) {
 		}, targetValue = 1f, delay = delay))
 
 	}
+
+	fun resetLevel() {
+		currentLevel.value = originalData.value
+	}
+	
+	companion object {
+		const val TILE_SIZE = 64f
+	}
 }
 
-data class OverviewStateVo(
-		val camera: OverviewCameraVo = OverviewCameraVo()
+data class UiControlsStateVo(
+		val camera: CameraVo = CameraVo()
 )
 
-data class OverviewCameraVo(
+data class CameraVo(
 		val x: Float = 0f,
 		val y: Float = 0f,
 		val zoom: Float = 1f
@@ -219,7 +262,7 @@ data class OverviewCameraVo(
 	/**
 	 * Linearly interpolates this camera value to the destination value.
 	 */
-	fun lerp(other: OverviewCameraVo, alpha: Float): OverviewCameraVo {
-		return OverviewCameraVo((other.x - x) * alpha + x, (other.y - y) * alpha + y, (other.zoom - zoom) * alpha + zoom)
+	fun lerp(other: CameraVo, alpha: Float): CameraVo {
+		return CameraVo((other.x - x) * alpha + x, (other.y - y) * alpha + y, (other.zoom - zoom) * alpha + zoom)
 	}
 }

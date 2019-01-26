@@ -16,18 +16,21 @@
 
 package ggj19
 
+import com.acornui.async.then
+import com.acornui.collection.ArrayList
+import com.acornui.collection.poll
 import com.acornui.component.layout.algorithm.CanvasLayoutContainer
 import com.acornui.component.layout.algorithm.hGroup
-import com.acornui.component.layout.algorithm.scaleBox
 import com.acornui.component.stage
 import com.acornui.component.text.text
+import com.acornui.core.asset.AssetType
+import com.acornui.core.asset.load
 import com.acornui.core.di.Owned
 import com.acornui.core.nav.NavBindable
 import com.acornui.core.observe.dataBinding
 import com.acornui.core.observe.or
 import com.acornui.signal.bind
-import com.acornui.skins.BasicUiSkin
-import ggj19.model.GameLevel
+import ggj19.model.*
 
 /**
  * @author nbilyk
@@ -40,20 +43,70 @@ class GGJ19(owner: Owned) : CanvasLayoutContainer(owner), NavBindable {
 	private val currentLevel = dataBinding(0)
 
 	init {
-		BasicUiSkin(stage).apply()
+		Skin(stage).apply()
 
-		+LevelView(this).apply {
+		load("assets/levelData.txt", AssetType.TEXT).then {
+			levels.value = parseGameData(it)
+		}
+
+		// Temp data:
+		levels.value = listOf(GameLevel(
+				pendingCharacters = listOf(GameCharacter(GameCharacterType.ARTIST), GameCharacter(GameCharacterType.GRANDMA), GameCharacter(GameCharacterType.ARTIST))
+		))
+
+		val levelView = +LevelView(this).apply {
 			(levels or currentLevel).bind {
-				data.value = levels.value[currentLevel.value]
+				originalData.value = levels.value.getOrNull(currentLevel.value) ?: emptyLevel
 			}
 		} layout { fill() }
+
+		(levels or currentLevel).bind {
+			if (levels.value.isNotEmpty() && currentLevel.value >= levels.value.size) {
+				levelView.visible = false
+				+text("Victory!!!") layout { center() }
+			}
+		}
 
 		+hGroup {
 			+text {
 				currentLevel.bind {
-					text = "Level: $it"
+					text = "Level $it"
 				}
 			}
 		} layout { left = 10f; top = 10f }
+	}
+}
+
+fun parseGameData(str: String): List<GameLevel> {
+	val lines = str.split("\n").toMutableList()
+	val levels = ArrayList<GameLevel>()
+	while (lines.isNotEmpty()) {
+		lines.eatEmptyLines()
+		val grid = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { Tile() } }
+		for (row in 0 until GameLevel.MAX_ROWS) {
+			val cols = lines.poll().split(" ")
+			for (col in 0 until GameLevel.MAX_COLS) {
+				if (cols[col] != ".") {
+					grid[row][col] = Tile(roomType = RoomType.STANDARD)
+				}
+			}
+		}
+		lines.eatEmptyLines()
+		val queue = lines.poll()
+		val queueChars = queue.split(" ")
+		val pendingCharacters = ArrayList<GameCharacter>()
+		for (queueChar in queueChars) {
+			pendingCharacters.add(GameCharacter(GameCharacterType.fromLetter(queueChar[0])))
+		}
+		levels.add(GameLevel(pendingCharacters, grid))
+		lines.eatEmptyLines()
+	}
+
+	return levels
+}
+
+private fun MutableList<String>.eatEmptyLines() {
+	while (isNotEmpty() && (this[0].isBlank() || this[0].startsWith("#"))) {
+		poll()
 	}
 }
