@@ -1,56 +1,616 @@
-define(['exports', 'kotlin', 'AcornUiCore', 'AcornUtils'], function (_, Kotlin, $module$AcornUiCore, $module$AcornUtils) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin', 'AcornUtils', 'AcornUiCore'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'), require('AcornUtils'), require('AcornUiCore'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Core'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'GGJ19Core'.");
+    }
+    if (typeof AcornUtils === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Core'. Its dependency 'AcornUtils' was not found. Please, check whether 'AcornUtils' is loaded prior to 'GGJ19Core'.");
+    }
+    if (typeof AcornUiCore === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Core'. Its dependency 'AcornUiCore' was not found. Please, check whether 'AcornUiCore' is loaded prior to 'GGJ19Core'.");
+    }
+    root.GGJ19Core = factory(typeof GGJ19Core === 'undefined' ? {} : GGJ19Core, kotlin, AcornUtils, AcornUiCore);
+  }
+}(this, function (_, Kotlin, $module$AcornUtils, $module$AcornUiCore) {
   'use strict';
-  var throwUPAE = Kotlin.throwUPAE;
-  var StackLayoutContainer = $module$AcornUiCore.com.acornui.component.StackLayoutContainer;
+  var $$importsForInline$$ = _.$$importsForInline$$ || (_.$$importsForInline$$ = {});
+  var Color = $module$AcornUtils.com.acornui.graphic.Color;
+  var WindowConfig = $module$AcornUiCore.com.acornui.core.WindowConfig;
+  var GlConfig = $module$AcornUiCore.com.acornui.core.GlConfig;
+  var AppConfig = $module$AcornUiCore.com.acornui.core.AppConfig;
+  var CanvasLayoutContainer = $module$AcornUiCore.com.acornui.component.layout.algorithm.CanvasLayoutContainer;
+  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
+  var dataBinding = $module$AcornUiCore.com.acornui.core.observe.dataBinding_7pofm6$;
   var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
   var BasicUiSkin = $module$AcornUiCore.com.acornui.skins.BasicUiSkin;
-  var Pad_init = $module$AcornUtils.com.acornui.math.Pad_init_mx4ult$;
-  var ScrollPolicy = $module$AcornUiCore.com.acornui.component.scroll.ScrollPolicy;
+  var or = $module$AcornUiCore.com.acornui.core.observe.or_x919w3$;
   var Unit = Kotlin.kotlin.Unit;
-  var textArea = $module$AcornUiCore.com.acornui.component.text.textArea_t0y7uh$;
-  var scrollArea = $module$AcornUiCore.com.acornui.component.scroll.scrollArea_fanjlz$;
+  var bind = $module$AcornUtils.com.acornui.signal.bind_3tpvqv$;
+  var text = $module$AcornUiCore.com.acornui.component.text.text_os944a$;
+  var hGroup = $module$AcornUiCore.com.acornui.component.layout.algorithm.hGroup_aiug52$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var NavBindable = $module$AcornUiCore.com.acornui.core.nav.NavBindable;
-  GGJ19.prototype = Object.create(StackLayoutContainer.prototype);
+  var tween = $module$AcornUiCore.com.acornui.core.tween;
+  var math = $module$AcornUtils.com.acornui.math;
+  var createPropertyTween = $module$AcornUiCore.com.acornui.core.tween.createPropertyTween_abp5vu$;
+  var driveTween = $module$AcornUiCore.com.acornui.core.tween.driveTween_asoma$;
+  var StackLayoutContainer = $module$AcornUiCore.com.acornui.component.StackLayoutContainer;
+  var stack = $module$AcornUiCore.com.acornui.component.stack_339xz$;
+  var orthographicCamera = $module$AcornUiCore.com.acornui.core.graphic.orthographicCamera_fsqvpo$;
+  var dragAttachment = $module$AcornUiCore.com.acornui.core.input.interaction.dragAttachment_rt6gw7$;
+  var TossScroller = $module$AcornUiCore.com.acornui.component.scroll.TossScroller;
+  var own = $module$AcornUiCore.com.acornui.core.di.own_hwf7iz$;
+  var ScrollModelImpl = $module$AcornUiCore.com.acornui.component.scroll.ScrollModelImpl;
+  var TossScrollModelBinding = $module$AcornUiCore.com.acornui.component.scroll.TossScrollModelBinding;
+  var InteractivityMode = $module$AcornUiCore.com.acornui.component.InteractivityMode;
+  var pinchStart = $module$AcornUiCore.com.acornui.core.input.interaction.pinchStart_erfg7f$;
+  var pinch = $module$AcornUiCore.com.acornui.core.input.interaction.pinch_erfg7f$;
+  var println = Kotlin.kotlin.io.println_s8jyv4$;
+  var wheel = $module$AcornUiCore.com.acornui.core.input.wheel_w26x3n$;
+  var Vector2 = $module$AcornUtils.com.acornui.math.Vector2;
+  var line = $module$AcornUiCore.com.acornui.component.drawing.line_5nybxc$;
+  var staticMesh = $module$AcornUiCore.com.acornui.component.drawing.staticMesh_mkeht6$;
+  var staticMeshC = $module$AcornUiCore.com.acornui.component.drawing.staticMeshC_ig2bzk$;
+  var container = $module$AcornUiCore.com.acornui.component.container_10kks9$;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var Enum = Kotlin.kotlin.Enum;
+  var throwISE = Kotlin.throwISE;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
+  var atlas = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
+  GGJ19.prototype = Object.create(CanvasLayoutContainer.prototype);
   GGJ19.prototype.constructor = GGJ19;
+  LevelView.prototype = Object.create(StackLayoutContainer.prototype);
+  LevelView.prototype.constructor = LevelView;
+  TileView.prototype = Object.create(StackLayoutContainer.prototype);
+  TileView.prototype.constructor = TileView;
+  var config;
   function GGJ19(owner) {
-    StackLayoutContainer.call(this, owner);
-    this.mainText_el1cz8$_0 = this.mainText_el1cz8$_0;
+    CanvasLayoutContainer.call(this, owner);
+    this.atlasPath_0 = 'assets/ggj.json';
+    this.levels_0 = dataBinding(this, listOf(new GameLevel()));
+    this.currentLevel_0 = dataBinding(this, 0);
     (new BasicUiSkin(get_stage(this))).apply();
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(scrollArea(this, GGJ19_init$lambda(this))), GGJ19_init$lambda_0);
+    var $receiver = new LevelView(this);
+    bind(or(this.levels_0, this.currentLevel_0), GGJ19_init$lambda$lambda(this, $receiver));
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$($receiver), GGJ19_init$lambda);
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(hGroup(this, GGJ19_init$lambda_0(this))), GGJ19_init$lambda_1);
   }
-  Object.defineProperty(GGJ19.prototype, 'mainText_0', {get: function () {
-    if (this.mainText_el1cz8$_0 == null)
-      return throwUPAE('mainText');
-    return this.mainText_el1cz8$_0;
-  }, set: function (mainText) {
-    this.mainText_el1cz8$_0 = mainText;
-  }});
-  function GGJ19_init$lambda$lambda($receiver) {
-    $receiver.allowTab = true;
-    $receiver.flowStyle.padding = Pad_init(20.0);
-    $receiver.hScrollPolicy = ScrollPolicy.AUTO;
-    $receiver.text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis tincidunt mi. Nam elementum feugiat quam. Vestibulum blandit, tortor ut lacinia elementum, enim nunc ultrices tortor, eget eleifend ex lacus vitae mi. Suspendisse massa leo, molestie ac feugiat eleifend, elementum eu ex. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sed mauris elementum, fermentum nisl quis, luctus arcu. Integer aliquet est eget sagittis mollis. Nullam egestas vestibulum feugiat. Fusce pharetra nibh sed nisi pharetra semper. Integer aliquet velit a fermentum egestas. Mauris id quam ut libero imperdiet egestas a sed velit. Nam porta sit amet augue congue rhoncus. Ut blandit finibus orci a blandit. Aliquam eu vulputate lectus, sed efficitur tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nDonec elit tortor, aliquet a dictum quis, placerat sit amet magna. In dictum enim ac odio viverra, ac tristique turpis tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam lorem augue, rhoncus ut varius et, malesuada in eros. Nulla ex quam, rutrum in dapibus id, lobortis eget leo. Suspendisse dignissim turpis in bibendum pulvinar. Etiam imperdiet maximus justo, ut egestas ex cursus quis. Praesent vel eleifend ex, eu tincidunt mauris. Proin vel nulla et tortor iaculis ornare a a nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi eleifend est quis ante viverra, vitae tempus lectus pharetra. Nullam turpis felis, blandit vehicula enim ac, sagittis fringilla sem. Donec pellentesque lacus laoreet libero efficitur, vel imperdiet diam iaculis. Praesent iaculis elementum enim nec convallis.\n\nDonec id dui posuere, egestas magna vitae, efficitur ligula. Morbi ultrices scelerisque velit id ullamcorper. Nunc mollis, ligula at rhoncus gravida, augue diam sagittis mi, id porttitor magna nunc et est. Phasellus eu enim et lectus auctor dignissim. Morbi augue dolor, fringilla nec laoreet sit amet, tincidunt ac mauris. Vestibulum congue arcu in nunc laoreet, gravida fringilla enim feugiat. Vestibulum sit amet sapien placerat, varius nisl vitae, facilisis nibh. Donec posuere cursus nibh vitae suscipit. Mauris eleifend venenatis feugiat.\n\nMorbi lobortis tristique egestas. Phasellus commodo ac eros et scelerisque. Nulla viverra orci ut elit scelerisque, eget fermentum augue luctus. Integer laoreet, tortor vel ultricies pellentesque, quam arcu condimentum ex, quis efficitur elit mi sit amet felis. Curabitur rhoncus dictum convallis. In hac habitasse platea dictumst. Proin laoreet mi nec nunc venenatis auctor.\n\nDuis nec egestas ante. Mauris pulvinar porttitor erat, non sodales mi. Pellentesque dapibus metus in odio aliquet, vitae feugiat tortor rhoncus. Donec tristique, mi vel eleifend interdum, nibh justo aliquet nisl, sit amet sagittis libero ipsum a est. Duis egestas ut orci sed vehicula. In sed elit sit amet augue dignissim vulputate eget at nunc. Nulla ut urna ac turpis venenatis scelerisque id in lorem. Sed interdum sapien sapien, at pellentesque dolor dictum vitae. Suspendisse nec quam non turpis rhoncus laoreet commodo in magna. Nulla aliquam velit laoreet sapien rutrum, nec aliquam tortor sagittis. Vivamus facilisis tellus vitae consectetur vulputate. Nunc porta eu purus congue viverra. Donec a tempus enim. Morbi a tempor velit, vel faucibus massa.\n\nMaecenas fermentum vitae nunc in convallis. Nulla in finibus purus. Nullam a lorem a augue dictum condimentum nec vel quam. Vestibulum et auctor est. Vestibulum volutpat blandit tellus a dictum. In id suscipit lorem. Nunc metus magna, eleifend sit amet varius a, tempus volutpat massa. Sed ut arcu vel lectus cursus porta. Sed facilisis, ante nec suscipit molestie, turpis justo sagittis lacus, et iaculis magna orci a massa. Duis mollis convallis magna, eget imperdiet orci blandit vitae. Aenean sollicitudin maximus est, in condimentum ex mattis quis. Etiam at urna iaculis, mattis orci vitae, interdum odio. Aenean quis enim urna. Praesent gravida libero ac lorem ultricies, at sodales nulla tristique. Duis ornare non mi ut mattis. Vivamus at tristique elit, at dapibus nisl.\n\nNulla ut lectus lorem. Curabitur sed ligula consectetur eros interdum ullamcorper. Cras non pretium ipsum. Sed cursus tempor justo, eget lobortis leo consequat dapibus. Sed ut augue in ex fringilla ultrices. Nullam eget ultricies velit, quis venenatis lacus. Maecenas diam enim, vulputate a nisi id, laoreet sodales enim. Sed ultricies tortor ligula, et accumsan enim porta ac. Nam sit amet consectetur mauris. Suspendisse aliquet massa id neque elementum ullamcorper.\n\nDonec pellentesque enim ut velit fermentum fringilla. Morbi iaculis tellus a condimentum sollicitudin. Nullam in sapien eget metus fermentum tempus. Duis nulla lectus, blandit vitae imperdiet a, pharetra sit amet nisi. Mauris et quam est. Sed aliquet massa consequat, volutpat eros varius, egestas urna. Sed dignissim fermentum pulvinar. Morbi mi libero, vulputate et finibus at, eleifend ut dolor. Suspendisse urna urna, porta sed varius sit amet, tincidunt in sapien. Vivamus vel lobortis elit. Proin convallis justo metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra ipsum in nunc pharetra, elementum sollicitudin lorem scelerisque. Ut quis bibendum tortor. Sed luctus ultricies ante ac feugiat. Nam dolor mi, lacinia in ipsum et, sollicitudin viverra sem.\n\nAenean et ex nulla. Nullam ligula enim, varius a nibh sed, ornare consequat felis. Curabitur venenatis in nisi scelerisque condimentum. Praesent molestie viverra dapibus. Nullam commodo massa tellus, vel auctor urna sodales eget. Integer nec leo viverra, maximus quam non, maximus enim. Aliquam nisl risus, luctus non interdum ut, efficitur egestas sapien. Curabitur ac ultrices purus. Nam interdum venenatis tortor, congue efficitur nisi venenatis ut. Phasellus pharetra libero vel turpis tristique aliquam. Sed ultricies semper sem, id ullamcorper leo sollicitudin at. Nunc cursus id felis eget molestie. Nullam mattis dapibus lobortis. Etiam ac efficitur libero.\n\nNulla vel commodo lectus. Cras in vehicula magna. Sed et sodales purus, id mollis turpis. Suspendisse molestie lacus in mauris porttitor vestibulum fringilla et nulla. Quisque non turpis non enim egestas egestas. Donec interdum molestie dui, ut imperdiet lorem molestie in. Sed viverra in ipsum non posuere. Donec tincidunt augue eget massa euismod vehicula.\n\nVestibulum sit amet lobortis libero. Sed aliquet imperdiet faucibus. Suspendisse porta massa nec tincidunt malesuada. Proin et pretium ex, quis hendrerit nunc. Donec gravida purus massa, et varius nunc commodo vel. Nunc laoreet mollis nibh, vel sodales velit dapibus laoreet. Vestibulum ornare tincidunt dui, vel viverra sapien consectetur eu. Nam posuere a arcu condimentum molestie.\n\nNullam sed ante non nunc iaculis ultricies. Duis eget urna quis ex vestibulum rutrum. Phasellus eu lacinia enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam neque augue, vulputate in lacus id, maximus ultrices arcu. Cras in aliquet nisi, non vehicula ligula. Aliquam erat volutpat. Vivamus scelerisque tristique velit, vel elementum est pharetra eu. Donec vel leo nec mauris dictum lobortis ac ac purus. Sed quis vehicula justo, non porta lorem. Nullam at accumsan mauris. Vestibulum mollis convallis dui nec egestas. Nam sem mi, efficitur ut semper ut, pellentesque ut metus. Phasellus molestie non sapien eget eleifend. Suspendisse pulvinar pharetra enim ac dignissim. Sed a euismod turpis.\n\nProin fermentum magna eu libero molestie sollicitudin. Vestibulum ultricies orci sed porttitor mattis. Fusce ut orci nisl. Aliquam turpis arcu, fermentum nec ipsum non, tristique euismod est. Phasellus viverra, massa vitae tincidunt vehicula, diam orci ullamcorper sapien, ac hendrerit velit sapien dictum lacus. Ut facilisis risus neque, at tincidunt orci tempor et. Suspendisse gravida nibh sed tincidunt imperdiet. Praesent porta dolor nec nisl mollis molestie. Nunc volutpat, magna sit amet imperdiet viverra, tortor odio accumsan est, nec convallis dui odio a lorem. Nunc semper tincidunt erat, quis efficitur felis pretium ac. Donec et quam at arcu lobortis vestibulum. Fusce imperdiet gravida arcu quis ornare. Vestibulum posuere ornare lobortis. Integer non arcu at sapien dignissim elementum sit amet vitae diam. Morbi accumsan tortor dui, quis aliquet magna varius consectetur. Morbi porttitor felis libero.\n\nQuisque a massa sapien. Nam et libero suscipit est sagittis accumsan vel in elit. Nam non elit non nisl scelerisque consectetur a id nulla. Integer ac auctor nunc, vitae venenatis enim. Quisque faucibus augue purus. Aenean sed risus eu sapien commodo iaculis. Etiam iaculis neque vitae mi feugiat efficitur.\n\nIn hac habitasse platea dictumst. Sed quis egestas arcu, nec convallis libero. Ut eu malesuada elit, nec sodales orci. Aliquam rhoncus nisi orci, sollicitudin rhoncus nunc vestibulum id. Etiam id ornare nisi. Aliquam erat volutpat. Integer vestibulum magna sed ipsum fringilla rutrum. Nam sit amet accumsan felis, at accumsan libero. Ut pharetra enim ipsum, sit amet dignissim felis tristique at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar pretium massa, vel vestibulum sem hendrerit eget. Sed lacus lectus, suscipit eu pellentesque non, vehicula ut justo. Maecenas elementum elit id magna dictum scelerisque. Morbi in massa sit amet felis pellentesque sagittis. Phasellus dictum, mauris nec congue interdum, justo ligula elementum purus, at facilisis lorem nibh eget sem. Sed tincidunt, nisl eu rhoncus semper, nunc urna egestas magna, eget tempor arcu justo a purus.\n\nVivamus congue, felis volutpat iaculis rutrum, tellus enim rutrum ligula, in tincidunt est erat ut nisi. Donec auctor sagittis magna. Aliquam tellus ipsum, aliquam id dolor ut, luctus semper mi. Nam tristique velit id elit venenatis, ac pretium quam euismod. Integer in nisl ut massa ultricies aliquet at et nisl. In condimentum sem non orci posuere, aliquam dictum erat placerat. Etiam quis nisl finibus, venenatis mi quis, dignissim mi. Nunc tincidunt fringilla nunc a tempus. Fusce odio nibh, malesuada at tempor id, facilisis id neque. Aliquam faucibus, neque sed eleifend fermentum, augue urna blandit dui, non rutrum mi dolor nec mauris. Nunc suscipit vel neque non ullamcorper. Vivamus tincidunt feugiat odio, eu eleifend orci dictum feugiat. Nullam vulputate nisi eget erat molestie, quis ullamcorper dui fringilla. Sed gravida orci non orci vestibulum pretium.\n\nSuspendisse suscipit nunc turpis, aliquam varius mauris euismod ut. Etiam vel velit sodales, varius elit vitae, efficitur eros. Vivamus blandit volutpat convallis. Ut nec dignissim tortor. Nam hendrerit dui eu tellus pellentesque sagittis. Aliquam tincidunt arcu ex, et tristique sem porttitor sit amet. Nunc non libero lacus. In in placerat mauris, sit amet condimentum dolor. Vestibulum commodo consectetur nunc, eu aliquam purus consectetur eu.\n\nVivamus eget laoreet purus. Aenean velit tortor, efficitur ac lectus id, varius malesuada justo. Fusce diam nisl, lacinia a tellus ut, finibus varius velit. Aliquam molestie nunc aliquam felis vestibulum, quis dignissim lacus semper. Fusce sed neque auctor, mattis lacus id, aliquam neque. Suspendisse non rhoncus metus, non porttitor est. Vestibulum aliquam mi in lacus hendrerit tempus. Phasellus venenatis mi magna, ac varius urna blandit nec. Donec pellentesque sit amet purus ac porttitor. Aliquam in quam nec nisl pulvinar venenatis. Quisque ipsum turpis, convallis vel ipsum at, molestie dignissim nisl. Fusce a diam sit amet elit mollis posuere et nec neque. In eleifend ligula urna, et pretium elit tristique eget.\n\nCurabitur rhoncus nunc non accumsan suscipit. Vivamus justo arcu, gravida vitae faucibus ac, bibendum quis dolor. Sed a blandit sapien. Mauris auctor eu arcu quis lobortis. Aenean rhoncus urna quis erat rhoncus, quis pellentesque libero fermentum. Donec et quam porta, lacinia ligula ac, imperdiet felis. Etiam blandit laoreet ligula id accumsan. Maecenas tincidunt lorem et diam egestas semper. Mauris consectetur sed sem vitae varius. Nullam feugiat erat vel metus tincidunt consectetur. Aenean pulvinar metus et nibh placerat lacinia. Aliquam mattis facilisis ante. Donec viverra mattis quam, vitae tristique quam viverra eu. Integer quam nulla, lacinia at metus sed, dignissim efficitur diam.\n\nNullam finibus urna non tincidunt egestas. Sed id lorem sed massa gravida maximus. Duis iaculis vel turpis quis iaculis. Aliquam id ultrices sem. Morbi euismod volutpat semper. Curabitur euismod elementum luctus. Morbi tempor egestas nisi non faucibus. Ut vitae hendrerit neque. Vivamus dignissim libero sed sapien congue, non malesuada lacus porttitor. Sed mauris urna, lobortis ac enim vel, porttitor mattis lectus. Quisque sem odio, lacinia eget tortor a, rutrum ultrices orci. Praesent at orci in tellus semper commodo. Quisque dictum aliquet ornare. Quisque placerat purus lectus, nec venenatis sapien ultrices id.\n\nCurabitur ante sem, dictum ultrices aliquam id, vulputate ut eros. Maecenas euismod venenatis erat, sed tempus elit fermentum ut. Donec sollicitudin, risus at sodales sodales, enim libero gravida ante, eu tristique elit sem ac ligula. Nullam nec neque mi. Sed tincidunt quis ex ut eleifend. Morbi pellentesque, est eget ultricies faucibus, leo turpis accumsan leo, cursus lobortis lacus orci ac tortor. Donec dictum eget ante vel lacinia. Nam congue nulla non vehicula porta. Sed arcu justo, dictum aliquet est at, pharetra aliquet nisl. Nunc lectus libero, ornare ac finibus vitae, commodo sed quam.\n\nDonec mauris enim, hendrerit sit amet sem at, viverra sagittis est. Nunc nec ligula et leo mattis pretium. Aliquam vulputate elit nunc, sit amet fermentum tortor volutpat ut. Phasellus turpis nisl, venenatis id interdum vitae, ullamcorper sit amet nunc. Mauris at aliquet orci, at commodo ligula. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam quis sodales nibh. Suspendisse at condimentum diam. Proin in felis vehicula, dapibus sem vel, pharetra nulla. Quisque eu metus fermentum, accumsan quam quis, volutpat sapien.\n\nVivamus fermentum, est iaculis auctor feugiat, urna augue porttitor velit, ornare gravida dolor felis eget magna. Suspendisse consectetur turpis at erat rutrum, non pulvinar metus sodales. Etiam pretium justo augue, sit amet eleifend ante laoreet et. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat nibh ac ipsum consequat, ut convallis leo imperdiet. Nulla mollis ipsum quis urna ultricies, vitae vestibulum quam vehicula. Ut tempor enim in pretium auctor. Vivamus nec elit quis erat elementum sodales quis eget est. Curabitur eget nulla id erat rutrum rhoncus. Donec sed arcu eget turpis euismod rutrum. Aliquam iaculis nibh vel laoreet convallis. Aliquam ut maximus felis. Praesent id mi eu nibh consequat accumsan.\n\nEtiam bibendum dolor eget nulla tincidunt, a commodo nulla semper. Curabitur felis dui, ullamcorper at enim in, interdum consequat nunc. Proin euismod vehicula mi, quis ultrices lacus gravida at. Curabitur facilisis quam ut nibh molestie, et blandit elit rhoncus. Aenean laoreet ex a tristique blandit. Quisque eu ullamcorper sapien, sit amet posuere tellus. Mauris vestibulum ut est nec aliquet. Sed luctus ligula et enim eleifend, sit amet elementum libero rhoncus. Proin sed lorem id leo vehicula placerat. In laoreet condimentum nisi nec blandit. Curabitur sit amet mi id odio pretium varius vel id arcu. Fusce sodales lectus vitae viverra condimentum. Cras eu dictum enim. Nulla interdum, ligula at imperdiet egestas, orci leo elementum ligula, vitae malesuada elit neque in purus.\n\nEtiam ut hendrerit nisl, nec fermentum purus. Nunc consectetur mauris et erat blandit varius. Ut interdum justo sit amet facilisis efficitur. Praesent commodo libero vitae orci varius, ac varius sem porttitor. Nunc bibendum pharetra metus sit amet convallis. Quisque porta finibus consequat. Nullam vitae elit in lacus blandit pharetra. Etiam tristique tortor et ipsum facilisis, a commodo augue viverra. Duis venenatis turpis a nisi semper, non vulputate velit laoreet.\n\nVivamus sit amet tempus mauris, et vulputate ligula. Donec justo purus, luctus in eleifend placerat, euismod non sem. Cras interdum ut metus nec interdum. Quisque iaculis eu neque cursus tempus. Phasellus imperdiet vulputate blandit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla vel pulvinar magna. Etiam mattis nisi ac facilisis bibendum. Pellentesque nunc lorem, hendrerit et odio nec, semper congue sem. Sed tristique mauris non hendrerit accumsan. In sollicitudin ipsum orci, nec hendrerit ex varius ac. Nullam sit amet ligula sit amet neque vulputate vestibulum eget in nulla. Duis rutrum, odio in viverra lobortis, erat libero viverra tellus, et tempor augue lorem vitae quam. Nullam ultrices ut nulla et lacinia.\n\nVivamus pellentesque ipsum eu sapien euismod, semper fermentum massa imperdiet. Praesent at augue vitae nisl rutrum egestas. Quisque a risus sit amet lectus pulvinar pellentesque. Donec sit amet magna vel quam dictum pulvinar vitae a urna. Nunc felis nulla, tincidunt ac nibh non, faucibus volutpat orci. Aliquam volutpat tortor in pretium varius. Aenean sodales nisi et tortor commodo, vitae rhoncus augue convallis. Etiam accumsan eget risus a fringilla. Nulla eget volutpat justo, non ornare magna. Sed eu consectetur tortor. Cras non tellus mollis eros ullamcorper cursus et sit amet lacus. Etiam quis hendrerit erat. Donec sodales ipsum nisi, eu auctor nisl laoreet vel. Etiam et est consectetur, congue lectus ut, scelerisque lacus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.\n\nSuspendisse vitae turpis eu mi sollicitudin eleifend vitae a neque. Suspendisse vel urna porttitor, sodales mi eu, aliquet velit. Proin faucibus id nunc in sollicitudin. Nullam orci est, iaculis vitae sollicitudin quis, lobortis eu magna. Nullam elementum facilisis lacus et aliquam. Donec tincidunt pellentesque vulputate. Sed placerat ac sem vitae elementum. Proin vehicula, enim eu finibus vestibulum, neque tellus luctus massa, a porttitor justo orci at tortor. Praesent in dolor eu eros hendrerit egestas. Aliquam quis dapibus libero. Nulla venenatis turpis ut posuere faucibus. Sed nulla dui, eleifend ut pretium id, condimentum eu turpis. Pellentesque id semper ex, in hendrerit felis. Mauris aliquet, ex non finibus pretium, est tellus interdum risus, vitae imperdiet quam velit vitae elit.\n\nCurabitur molestie augue quam, id auctor elit tempus sit amet. Aliquam pretium sapien eget dapibus efficitur. Nunc sit amet lorem viverra, auctor lacus a, mollis ligula. Vivamus rutrum a nulla eu pretium. Nam eget neque quis libero commodo accumsan. Praesent mi elit, dictum finibus nulla a, ornare varius nisi. Nullam elit augue, vestibulum ut ligula nec, egestas blandit tortor. Sed pretium velit vel mauris sodales, et vestibulum urna efficitur.\n\nNulla commodo vestibulum elit id pellentesque. Duis auctor lacus vel feugiat dignissim. Vestibulum posuere interdum nisl, semper semper ante commodo vitae. Proin et luctus felis. Sed ornare et magna vel varius. Etiam dui enim, viverra sit amet dictum sit amet, efficitur eu enim. Nam massa ligula, ullamcorper et libero in, pulvinar blandit metus. Etiam et volutpat ex. Nam ac nunc sed ante porttitor lobortis quis eget arcu. Morbi imperdiet enim aliquam, commodo sapien et, tincidunt lacus.\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis tincidunt mi. Nam elementum feugiat quam. Vestibulum blandit, tortor ut lacinia elementum, enim nunc ultrices tortor, eget eleifend ex lacus vitae mi. Suspendisse massa leo, molestie ac feugiat eleifend, elementum eu ex. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla sed mauris elementum, fermentum nisl quis, luctus arcu. Integer aliquet est eget sagittis mollis. Nullam egestas vestibulum feugiat. Fusce pharetra nibh sed nisi pharetra semper. Integer aliquet velit a fermentum egestas. Mauris id quam ut libero imperdiet egestas a sed velit. Nam porta sit amet augue congue rhoncus. Ut blandit finibus orci a blandit. Aliquam eu vulputate lectus, sed efficitur tortor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nDonec elit tortor, aliquet a dictum quis, placerat sit amet magna. In dictum enim ac odio viverra, ac tristique turpis tristique. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam lorem augue, rhoncus ut varius et, malesuada in eros. Nulla ex quam, rutrum in dapibus id, lobortis eget leo. Suspendisse dignissim turpis in bibendum pulvinar. Etiam imperdiet maximus justo, ut egestas ex cursus quis. Praesent vel eleifend ex, eu tincidunt mauris. Proin vel nulla et tortor iaculis ornare a a nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi eleifend est quis ante viverra, vitae tempus lectus pharetra. Nullam turpis felis, blandit vehicula enim ac, sagittis fringilla sem. Donec pellentesque lacus laoreet libero efficitur, vel imperdiet diam iaculis. Praesent iaculis elementum enim nec convallis.\n\nDonec id dui posuere, egestas magna vitae, efficitur ligula. Morbi ultrices scelerisque velit id ullamcorper. Nunc mollis, ligula at rhoncus gravida, augue diam sagittis mi, id porttitor magna nunc et est. Phasellus eu enim et lectus auctor dignissim. Morbi augue dolor, fringilla nec laoreet sit amet, tincidunt ac mauris. Vestibulum congue arcu in nunc laoreet, gravida fringilla enim feugiat. Vestibulum sit amet sapien placerat, varius nisl vitae, facilisis nibh. Donec posuere cursus nibh vitae suscipit. Mauris eleifend venenatis feugiat.\n\nMorbi lobortis tristique egestas. Phasellus commodo ac eros et scelerisque. Nulla viverra orci ut elit scelerisque, eget fermentum augue luctus. Integer laoreet, tortor vel ultricies pellentesque, quam arcu condimentum ex, quis efficitur elit mi sit amet felis. Curabitur rhoncus dictum convallis. In hac habitasse platea dictumst. Proin laoreet mi nec nunc venenatis auctor.\n\nDuis nec egestas ante. Mauris pulvinar porttitor erat, non sodales mi. Pellentesque dapibus metus in odio aliquet, vitae feugiat tortor rhoncus. Donec tristique, mi vel eleifend interdum, nibh justo aliquet nisl, sit amet sagittis libero ipsum a est. Duis egestas ut orci sed vehicula. In sed elit sit amet augue dignissim vulputate eget at nunc. Nulla ut urna ac turpis venenatis scelerisque id in lorem. Sed interdum sapien sapien, at pellentesque dolor dictum vitae. Suspendisse nec quam non turpis rhoncus laoreet commodo in magna. Nulla aliquam velit laoreet sapien rutrum, nec aliquam tortor sagittis. Vivamus facilisis tellus vitae consectetur vulputate. Nunc porta eu purus congue viverra. Donec a tempus enim. Morbi a tempor velit, vel faucibus massa.\n\nMaecenas fermentum vitae nunc in convallis. Nulla in finibus purus. Nullam a lorem a augue dictum condimentum nec vel quam. Vestibulum et auctor est. Vestibulum volutpat blandit tellus a dictum. In id suscipit lorem. Nunc metus magna, eleifend sit amet varius a, tempus volutpat massa. Sed ut arcu vel lectus cursus porta. Sed facilisis, ante nec suscipit molestie, turpis justo sagittis lacus, et iaculis magna orci a massa. Duis mollis convallis magna, eget imperdiet orci blandit vitae. Aenean sollicitudin maximus est, in condimentum ex mattis quis. Etiam at urna iaculis, mattis orci vitae, interdum odio. Aenean quis enim urna. Praesent gravida libero ac lorem ultricies, at sodales nulla tristique. Duis ornare non mi ut mattis. Vivamus at tristique elit, at dapibus nisl.\n\nNulla ut lectus lorem. Curabitur sed ligula consectetur eros interdum ullamcorper. Cras non pretium ipsum. Sed cursus tempor justo, eget lobortis leo consequat dapibus. Sed ut augue in ex fringilla ultrices. Nullam eget ultricies velit, quis venenatis lacus. Maecenas diam enim, vulputate a nisi id, laoreet sodales enim. Sed ultricies tortor ligula, et accumsan enim porta ac. Nam sit amet consectetur mauris. Suspendisse aliquet massa id neque elementum ullamcorper.\n\nDonec pellentesque enim ut velit fermentum fringilla. Morbi iaculis tellus a condimentum sollicitudin. Nullam in sapien eget metus fermentum tempus. Duis nulla lectus, blandit vitae imperdiet a, pharetra sit amet nisi. Mauris et quam est. Sed aliquet massa consequat, volutpat eros varius, egestas urna. Sed dignissim fermentum pulvinar. Morbi mi libero, vulputate et finibus at, eleifend ut dolor. Suspendisse urna urna, porta sed varius sit amet, tincidunt in sapien. Vivamus vel lobortis elit. Proin convallis justo metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi pharetra ipsum in nunc pharetra, elementum sollicitudin lorem scelerisque. Ut quis bibendum tortor. Sed luctus ultricies ante ac feugiat. Nam dolor mi, lacinia in ipsum et, sollicitudin viverra sem.\n\nAenean et ex nulla. Nullam ligula enim, varius a nibh sed, ornare consequat felis. Curabitur venenatis in nisi scelerisque condimentum. Praesent molestie viverra dapibus. Nullam commodo massa tellus, vel auctor urna sodales eget. Integer nec leo viverra, maximus quam non, maximus enim. Aliquam nisl risus, luctus non interdum ut, efficitur egestas sapien. Curabitur ac ultrices purus. Nam interdum venenatis tortor, congue efficitur nisi venenatis ut. Phasellus pharetra libero vel turpis tristique aliquam. Sed ultricies semper sem, id ullamcorper leo sollicitudin at. Nunc cursus id felis eget molestie. Nullam mattis dapibus lobortis. Etiam ac efficitur libero.\n\nNulla vel commodo lectus. Cras in vehicula magna. Sed et sodales purus, id mollis turpis. Suspendisse molestie lacus in mauris porttitor vestibulum fringilla et nulla. Quisque non turpis non enim egestas egestas. Donec interdum molestie dui, ut imperdiet lorem molestie in. Sed viverra in ipsum non posuere. Donec tincidunt augue eget massa euismod vehicula.\n\nVestibulum sit amet lobortis libero. Sed aliquet imperdiet faucibus. Suspendisse porta massa nec tincidunt malesuada. Proin et pretium ex, quis hendrerit nunc. Donec gravida purus massa, et varius nunc commodo vel. Nunc laoreet mollis nibh, vel sodales velit dapibus laoreet. Vestibulum ornare tincidunt dui, vel viverra sapien consectetur eu. Nam posuere a arcu condimentum molestie.\n\nNullam sed ante non nunc iaculis ultricies. Duis eget urna quis ex vestibulum rutrum. Phasellus eu lacinia enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam neque augue, vulputate in lacus id, maximus ultrices arcu. Cras in aliquet nisi, non vehicula ligula. Aliquam erat volutpat. Vivamus scelerisque tristique velit, vel elementum est pharetra eu. Donec vel leo nec mauris dictum lobortis ac ac purus. Sed quis vehicula justo, non porta lorem. Nullam at accumsan mauris. Vestibulum mollis convallis dui nec egestas. Nam sem mi, efficitur ut semper ut, pellentesque ut metus. Phasellus molestie non sapien eget eleifend. Suspendisse pulvinar pharetra enim ac dignissim. Sed a euismod turpis.\n\nProin fermentum magna eu libero molestie sollicitudin. Vestibulum ultricies orci sed porttitor mattis. Fusce ut orci nisl. Aliquam turpis arcu, fermentum nec ipsum non, tristique euismod est. Phasellus viverra, massa vitae tincidunt vehicula, diam orci ullamcorper sapien, ac hendrerit velit sapien dictum lacus. Ut facilisis risus neque, at tincidunt orci tempor et. Suspendisse gravida nibh sed tincidunt imperdiet. Praesent porta dolor nec nisl mollis molestie. Nunc volutpat, magna sit amet imperdiet viverra, tortor odio accumsan est, nec convallis dui odio a lorem. Nunc semper tincidunt erat, quis efficitur felis pretium ac. Donec et quam at arcu lobortis vestibulum. Fusce imperdiet gravida arcu quis ornare. Vestibulum posuere ornare lobortis. Integer non arcu at sapien dignissim elementum sit amet vitae diam. Morbi accumsan tortor dui, quis aliquet magna varius consectetur. Morbi porttitor felis libero.\n\nQuisque a massa sapien. Nam et libero suscipit est sagittis accumsan vel in elit. Nam non elit non nisl scelerisque consectetur a id nulla. Integer ac auctor nunc, vitae venenatis enim. Quisque faucibus augue purus. Aenean sed risus eu sapien commodo iaculis. Etiam iaculis neque vitae mi feugiat efficitur.\n\nIn hac habitasse platea dictumst. Sed quis egestas arcu, nec convallis libero. Ut eu malesuada elit, nec sodales orci. Aliquam rhoncus nisi orci, sollicitudin rhoncus nunc vestibulum id. Etiam id ornare nisi. Aliquam erat volutpat. Integer vestibulum magna sed ipsum fringilla rutrum. Nam sit amet accumsan felis, at accumsan libero. Ut pharetra enim ipsum, sit amet dignissim felis tristique at. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut pulvinar pretium massa, vel vestibulum sem hendrerit eget. Sed lacus lectus, suscipit eu pellentesque non, vehicula ut justo. Maecenas elementum elit id magna dictum scelerisque. Morbi in massa sit amet felis pellentesque sagittis. Phasellus dictum, mauris nec congue interdum, justo ligula elementum purus, at facilisis lorem nibh eget sem. Sed tincidunt, nisl eu rhoncus semper, nunc urna egestas magna, eget tempor arcu justo a purus.\n\nVivamus congue, felis volutpat iaculis rutrum, tellus enim rutrum ligula, in tincidunt est erat ut nisi. Donec auctor sagittis magna. Aliquam tellus ipsum, aliquam id dolor ut, luctus semper mi. Nam tristique velit id elit venenatis, ac pretium quam euismod. Integer in nisl ut massa ultricies aliquet at et nisl. In condimentum sem non orci posuere, aliquam dictum erat placerat. Etiam quis nisl finibus, venenatis mi quis, dignissim mi. Nunc tincidunt fringilla nunc a tempus. Fusce odio nibh, malesuada at tempor id, facilisis id neque. Aliquam faucibus, neque sed eleifend fermentum, augue urna blandit dui, non rutrum mi dolor nec mauris. Nunc suscipit vel neque non ullamcorper. Vivamus tincidunt feugiat odio, eu eleifend orci dictum feugiat. Nullam vulputate nisi eget erat molestie, quis ullamcorper dui fringilla. Sed gravida orci non orci vestibulum pretium.\n\nSuspendisse suscipit nunc turpis, aliquam varius mauris euismod ut. Etiam vel velit sodales, varius elit vitae, efficitur eros. Vivamus blandit volutpat convallis. Ut nec dignissim tortor. Nam hendrerit dui eu tellus pellentesque sagittis. Aliquam tincidunt arcu ex, et tristique sem porttitor sit amet. Nunc non libero lacus. In in placerat mauris, sit amet condimentum dolor. Vestibulum commodo consectetur nunc, eu aliquam purus consectetur eu.\n\nVivamus eget laoreet purus. Aenean velit tortor, efficitur ac lectus id, varius malesuada justo. Fusce diam nisl, lacinia a tellus ut, finibus varius velit. Aliquam molestie nunc aliquam felis vestibulum, quis dignissim lacus semper. Fusce sed neque auctor, mattis lacus id, aliquam neque. Suspendisse non rhoncus metus, non porttitor est. Vestibulum aliquam mi in lacus hendrerit tempus. Phasellus venenatis mi magna, ac varius urna blandit nec. Donec pellentesque sit amet purus ac porttitor. Aliquam in quam nec nisl pulvinar venenatis. Quisque ipsum turpis, convallis vel ipsum at, molestie dignissim nisl. Fusce a diam sit amet elit mollis posuere et nec neque. In eleifend ligula urna, et pretium elit tristique eget.\n\n';
-    return Unit;
-  }
-  function GGJ19_init$lambda$lambda_0($receiver) {
-    $receiver.fill();
-    return Unit;
-  }
-  function GGJ19_init$lambda(this$GGJ19) {
-    return function ($receiver) {
-      this$GGJ19.mainText_0 = $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(textArea($receiver, GGJ19_init$lambda$lambda)), GGJ19_init$lambda$lambda_0);
+  function GGJ19_init$lambda$lambda(this$GGJ19, this$) {
+    return function () {
+      this$.data.value = this$GGJ19.levels_0.value.get_za3lpa$(this$GGJ19.currentLevel_0.value);
       return Unit;
     };
   }
-  function GGJ19_init$lambda_0($receiver) {
+  function GGJ19_init$lambda($receiver) {
     $receiver.fill();
     return Unit;
   }
-  GGJ19.$metadata$ = {kind: Kind_CLASS, simpleName: 'GGJ19', interfaces: [NavBindable, StackLayoutContainer]};
+  function GGJ19_init$lambda$lambda$lambda(this$) {
+    return function (it) {
+      this$.text = 'Level: ' + it;
+      return Unit;
+    };
+  }
+  function GGJ19_init$lambda$lambda_0(this$GGJ19) {
+    return function ($receiver) {
+      this$GGJ19.currentLevel_0.bind_qlkmfe$(GGJ19_init$lambda$lambda$lambda($receiver));
+      return Unit;
+    };
+  }
+  function GGJ19_init$lambda_0(this$GGJ19) {
+    return function ($receiver) {
+      $receiver.unaryPlus_b3a6qy$(text($receiver, GGJ19_init$lambda$lambda_0(this$GGJ19)));
+      return Unit;
+    };
+  }
+  function GGJ19_init$lambda_1($receiver) {
+    $receiver.left = 10.0;
+    $receiver.top = 10.0;
+    return Unit;
+  }
+  GGJ19.$metadata$ = {kind: Kind_CLASS, simpleName: 'GGJ19', interfaces: [NavBindable, CanvasLayoutContainer]};
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  function LevelView(owner) {
+    StackLayoutContainer.call(this, owner);
+    this.stateData_0 = dataBinding(this, new OverviewStateVo());
+    this.data = dataBinding(this, new GameLevel());
+    var tmp$;
+    var a = ArrayList_init(20);
+    tmp$ = 20 - 1 | 0;
+    for (var i = 0; i <= tmp$; i++) {
+      var tmp$_0 = a.add_11rb$;
+      var tmp$_1;
+      var a_0 = ArrayList_init(20);
+      tmp$_1 = 20 - 1 | 0;
+      for (var i_0 = 0; i_0 <= tmp$_1; i_0++) {
+        a_0.add_11rb$(new TileView(this));
+      }
+      tmp$_0.call(a, a_0);
+    }
+    this.tileViews_0 = a;
+    this.gameStage_0 = stack(this);
+    this.overviewCam_0 = orthographicCamera(this, true);
+    this.drag_0 = dragAttachment(this);
+    this.tossScroller_0 = own(this, new TossScroller(this.gameStage_0, void 0, this.drag_0));
+    this.hScroll_0 = own(this, new ScrollModelImpl());
+    this.vScroll_0 = own(this, new ScrollModelImpl());
+    this.tossScrollBinding_0 = own(this, new TossScrollModelBinding(this.tossScroller_0, this.hScroll_0, this.vScroll_0));
+    this.interactivityMode = InteractivityMode.ALWAYS;
+    this.window.sizeChanged.add_trkh7z$(LevelView_init$lambda(this));
+    this.hScroll_0.min = 0.0;
+    this.vScroll_0.min = 0.0;
+    this.hScroll_0.changed.add_trkh7z$(LevelView_init$lambda_0(this));
+    this.vScroll_0.changed.add_trkh7z$(LevelView_init$lambda_1(this));
+    var startZoom = {v: 0.0};
+    pinchStart(this).add_trkh7z$(LevelView_init$lambda_2(this, startZoom));
+    pinch(this).add_trkh7z$(LevelView_init$lambda_3(startZoom, this));
+    this.stateData_0.bind_qlkmfe$(LevelView_init$lambda_4(this));
+    this.drag_0.dragStart.add_trkh7z$(LevelView_init$lambda_5);
+    wheel(this).add_trkh7z$(LevelView_init$lambda_6(this));
+    var $receiver = this.gameStage_0;
+    var padding = 50.0;
+    var stageW = 64.0 * 20.0 + padding * 2.0;
+    var stageH = 64.0 * 20.0 + padding * 2.0;
+    $receiver.defaultWidth = stageW;
+    $receiver.defaultHeight = stageH;
+    this.hScroll_0.max = stageW;
+    this.vScroll_0.max = stageH;
+    $receiver.cameraOverride = this.overviewCam_0;
+    $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(container($receiver, LevelView_init$lambda$lambda)), LevelView_init$lambda$lambda_0);
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$($receiver), LevelView_init$lambda_7);
+    this.data.bind_qlkmfe$(LevelView_init$lambda_8(this));
+  }
+  LevelView.prototype.updateCam_0 = function () {
+    var cam = this.stateData_0.value.camera;
+    var z = cam.zoom;
+    var w = this.overviewCam_0.viewportWidth * z;
+    var h = this.overviewCam_0.viewportHeight * z;
+    this.overviewCam_0.zoom = z;
+    this.overviewCam_0.moveToLookAtRect_qymak0$(cam.x - w * 0.5, cam.y - h * 0.5, w, h);
+    this.tossScrollBinding_0.modelToPixelsX = 1.0 / z;
+    this.tossScrollBinding_0.modelToPixelsY = 1.0 / z;
+    this.window.requestRender();
+  };
+  function LevelView$moveCamera$lambda(this$LevelView, closure$x, closure$y, closure$zoom) {
+    return function (it) {
+      tween.TweenRegistry.kill_4hrdoq$(this$LevelView, 'camera', true);
+      return it.copy_1k3lfx$(it.camera.copy_y2kzbl$(closure$x, closure$y, closure$zoom));
+    };
+  }
+  LevelView.prototype.moveCamera_0 = function (x, y, zoom) {
+    if (x === void 0)
+      x = this.stateData_0.value.camera.x;
+    if (y === void 0)
+      y = this.stateData_0.value.camera.y;
+    if (zoom === void 0)
+      zoom = this.stateData_0.value.camera.zoom;
+    this.stateData_0.change_ru8m0w$(LevelView$moveCamera$lambda(this, x, y, zoom));
+  };
+  function LevelView$zoomCamera$lambda(this$LevelView, closure$zoom) {
+    return function (it) {
+      tween.TweenRegistry.kill_4hrdoq$(this$LevelView, 'camera', true);
+      var value = closure$zoom;
+      var clamp_73gzaq$result;
+      clamp_73gzaq$break: do {
+        if (Kotlin.compareTo(value, 0.1) <= 0) {
+          clamp_73gzaq$result = 0.1;
+          break clamp_73gzaq$break;
+        }
+        if (Kotlin.compareTo(value, 4.0) >= 0) {
+          clamp_73gzaq$result = 4.0;
+          break clamp_73gzaq$break;
+        }
+        clamp_73gzaq$result = value;
+      }
+       while (false);
+      var newZoom = clamp_73gzaq$result;
+      var cam = it.camera;
+      return it.copy_1k3lfx$(cam.copy_y2kzbl$(void 0, void 0, newZoom));
+    };
+  }
+  LevelView.prototype.zoomCamera_0 = function (zoom) {
+    this.stateData_0.change_ru8m0w$(LevelView$zoomCamera$lambda(this, zoom));
+  };
+  function LevelView$tweenCamera$lambda() {
+    return 0.0;
+  }
+  function LevelView$tweenCamera$lambda$lambda(closure$start, closure$end, closure$alpha) {
+    return function (it) {
+      return it.copy_1k3lfx$(closure$start.lerp_u94za0$(closure$end, closure$alpha));
+    };
+  }
+  function LevelView$tweenCamera$lambda_0(this$LevelView, closure$start, closure$end) {
+    return function (alpha) {
+      this$LevelView.stateData_0.change_ru8m0w$(LevelView$tweenCamera$lambda$lambda(closure$start, closure$end, alpha));
+      return Unit;
+    };
+  }
+  LevelView.prototype.tweenCamera_0 = function (x, y, zoom, duration, ease, delay) {
+    if (x === void 0)
+      x = this.stateData_0.value.camera.x;
+    if (y === void 0)
+      y = this.stateData_0.value.camera.y;
+    if (zoom === void 0)
+      zoom = this.stateData_0.value.camera.zoom;
+    if (duration === void 0)
+      duration = 0.5;
+    if (ease === void 0)
+      ease = math.Easing.pow3;
+    if (delay === void 0)
+      delay = 0.0;
+    var start = this.stateData_0.value.camera.copy_y2kzbl$();
+    var clamp_73gzaq$result;
+    clamp_73gzaq$break: do {
+      if (Kotlin.compareTo(zoom, 0.1) <= 0) {
+        clamp_73gzaq$result = 0.1;
+        break clamp_73gzaq$break;
+      }
+      if (Kotlin.compareTo(zoom, 4.0) >= 0) {
+        clamp_73gzaq$result = 4.0;
+        break clamp_73gzaq$break;
+      }
+      clamp_73gzaq$result = zoom;
+    }
+     while (false);
+    var end = new OverviewCameraVo(x, y, clamp_73gzaq$result);
+    driveTween(this, createPropertyTween(this, 'camera', duration, ease, LevelView$tweenCamera$lambda, LevelView$tweenCamera$lambda_0(this, start, end), 1.0, delay));
+  };
+  function LevelView_init$lambda(this$LevelView) {
+    return function (newWidth, newHeight, f) {
+      this$LevelView.overviewCam_0.setViewport_dleff0$(newWidth, newHeight);
+      this$LevelView.updateCam_0();
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_0(this$LevelView) {
+    return function (it) {
+      this$LevelView.moveCamera_0(it.value);
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_1(this$LevelView) {
+    return function (it) {
+      this$LevelView.moveCamera_0(void 0, it.value);
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_2(this$LevelView, closure$startZoom) {
+    return function (it) {
+      closure$startZoom.v = this$LevelView.stateData_0.value.camera.zoom;
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_3(closure$startZoom, this$LevelView) {
+    return function (it) {
+      this$LevelView.zoomCamera_0(it.startDistance * closure$startZoom.v / it.distance);
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_4(this$LevelView) {
+    return function (it) {
+      if (!this$LevelView.hScroll_0.changed.isDispatching && !this$LevelView.vScroll_0.changed.isDispatching) {
+        this$LevelView.hScroll_0.value = it.camera.x;
+        this$LevelView.vScroll_0.value = it.camera.y;
+      }
+      this$LevelView.updateCam_0();
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda_5(it) {
+    println('D S');
+    return Unit;
+  }
+  function LevelView_init$lambda_6(this$LevelView) {
+    return function (it) {
+      this$LevelView.tossScroller_0.stop();
+      if (it.deltaY !== 0.0) {
+        this$LevelView.zoomCamera_0(this$LevelView.stateData_0.value.camera.zoom * (it.deltaY > 0.0 ? 1.2 : 0.8));
+      }
+      return Unit;
+    };
+  }
+  function LevelView_init$lambda$lambda$lambda$lambda$lambda($receiver) {
+    for (var row = 0; row < 20; row++) {
+      for (var col = 0; col < 20; col++) {
+        var ptA = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2(col * 64.0, row * 64.0));
+        var ptB = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2((col + 1.0) * 64.0, row * 64.0));
+        var ptC = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2((col + 1.0) * 64.0, (row + 1.0) * 64.0));
+        var ptD = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2(col * 64.0, (row + 1.0) * 64.0));
+        line($receiver, ptA.x, ptA.y, ptB.x, ptB.y);
+        line($receiver, ptB.x, ptB.y, ptC.x, ptC.y);
+        line($receiver, ptC.x, ptC.y, ptD.x, ptD.y);
+        line($receiver, ptD.x, ptD.y, ptA.x, ptA.y);
+      }
+    }
+    return Unit;
+  }
+  function LevelView_init$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.buildMesh_dmwms7$(LevelView_init$lambda$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function LevelView_init$lambda$lambda$lambda($receiver) {
+    $receiver.mesh = staticMesh($receiver, LevelView_init$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function LevelView_init$lambda$lambda($receiver) {
+    $receiver.unaryPlus_b3a6qy$(staticMeshC($receiver, LevelView_init$lambda$lambda$lambda));
+    return Unit;
+  }
+  function LevelView_init$lambda$lambda_0($receiver) {
+    $receiver.fill();
+    return Unit;
+  }
+  function LevelView_init$lambda_7($receiver) {
+    $receiver.fill();
+    return Unit;
+  }
+  function LevelView_init$lambda_8(this$LevelView) {
+    return function (it) {
+      for (var row = 0; row < 20; row++) {
+        for (var col = 0; col < 20; col++) {
+          this$LevelView.tileViews_0.get_za3lpa$(row).get_za3lpa$(col).data.value = it.getTile_vux9f0$(row, col);
+        }
+      }
+      return Unit;
+    };
+  }
+  LevelView.$metadata$ = {kind: Kind_CLASS, simpleName: 'LevelView', interfaces: [StackLayoutContainer]};
+  function OverviewStateVo(camera) {
+    if (camera === void 0)
+      camera = new OverviewCameraVo();
+    this.camera = camera;
+  }
+  OverviewStateVo.$metadata$ = {kind: Kind_CLASS, simpleName: 'OverviewStateVo', interfaces: []};
+  OverviewStateVo.prototype.component1 = function () {
+    return this.camera;
+  };
+  OverviewStateVo.prototype.copy_1k3lfx$ = function (camera) {
+    return new OverviewStateVo(camera === void 0 ? this.camera : camera);
+  };
+  OverviewStateVo.prototype.toString = function () {
+    return 'OverviewStateVo(camera=' + Kotlin.toString(this.camera) + ')';
+  };
+  OverviewStateVo.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.camera) | 0;
+    return result;
+  };
+  OverviewStateVo.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.camera, other.camera))));
+  };
+  function OverviewCameraVo(x, y, zoom) {
+    if (x === void 0)
+      x = 0.0;
+    if (y === void 0)
+      y = 0.0;
+    if (zoom === void 0)
+      zoom = 1.0;
+    this.x = x;
+    this.y = y;
+    this.zoom = zoom;
+  }
+  OverviewCameraVo.prototype.lerp_u94za0$ = function (other, alpha) {
+    return new OverviewCameraVo((other.x - this.x) * alpha + this.x, (other.y - this.y) * alpha + this.y, (other.zoom - this.zoom) * alpha + this.zoom);
+  };
+  OverviewCameraVo.$metadata$ = {kind: Kind_CLASS, simpleName: 'OverviewCameraVo', interfaces: []};
+  OverviewCameraVo.prototype.component1 = function () {
+    return this.x;
+  };
+  OverviewCameraVo.prototype.component2 = function () {
+    return this.y;
+  };
+  OverviewCameraVo.prototype.component3 = function () {
+    return this.zoom;
+  };
+  OverviewCameraVo.prototype.copy_y2kzbl$ = function (x, y, zoom) {
+    return new OverviewCameraVo(x === void 0 ? this.x : x, y === void 0 ? this.y : y, zoom === void 0 ? this.zoom : zoom);
+  };
+  OverviewCameraVo.prototype.toString = function () {
+    return 'OverviewCameraVo(x=' + Kotlin.toString(this.x) + (', y=' + Kotlin.toString(this.y)) + (', zoom=' + Kotlin.toString(this.zoom)) + ')';
+  };
+  OverviewCameraVo.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.x) | 0;
+    result = result * 31 + Kotlin.hashCode(this.y) | 0;
+    result = result * 31 + Kotlin.hashCode(this.zoom) | 0;
+    return result;
+  };
+  OverviewCameraVo.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.zoom, other.zoom)))));
+  };
+  function GameLevel(grid) {
+    GameLevel$Companion_getInstance();
+    if (grid === void 0) {
+      var tmp$;
+      var a = ArrayList_init(20);
+      tmp$ = 20 - 1 | 0;
+      for (var i = 0; i <= tmp$; i++) {
+        var tmp$_0 = a.add_11rb$;
+        var tmp$_1;
+        var a_0 = ArrayList_init(20);
+        tmp$_1 = 20 - 1 | 0;
+        for (var i_0 = 0; i_0 <= tmp$_1; i_0++) {
+          a_0.add_11rb$(EmptyTile_getInstance());
+        }
+        tmp$_0.call(a, a_0);
+      }
+      grid = a;
+    }
+    this.grid = grid;
+  }
+  GameLevel.prototype.getTile_vux9f0$ = function (row, col) {
+    return this.grid.get_za3lpa$(row).get_za3lpa$(col);
+  };
+  function GameLevel$Companion() {
+    GameLevel$Companion_instance = this;
+    this.MAX_COLS = 20;
+    this.MAX_ROWS = 20;
+  }
+  GameLevel$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  var GameLevel$Companion_instance = null;
+  function GameLevel$Companion_getInstance() {
+    if (GameLevel$Companion_instance === null) {
+      new GameLevel$Companion();
+    }
+    return GameLevel$Companion_instance;
+  }
+  GameLevel.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameLevel', interfaces: []};
+  GameLevel.prototype.component1 = function () {
+    return this.grid;
+  };
+  GameLevel.prototype.copy_m6jspb$ = function (grid) {
+    return new GameLevel(grid === void 0 ? this.grid : grid);
+  };
+  GameLevel.prototype.toString = function () {
+    return 'GameLevel(grid=' + Kotlin.toString(this.grid) + ')';
+  };
+  GameLevel.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.grid) | 0;
+    return result;
+  };
+  GameLevel.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.grid, other.grid))));
+  };
+  var Traits$SUNNY_instance;
+  var Traits$NOISY_instance;
+  var Traits$DANGEROUS_instance;
+  var Resource$NOISE_instance;
+  var Resource$SUNLIGHT_instance;
+  var Resource$DANGER_instance;
+  function Room(resources, traits, occupant) {
+    if (resources === void 0)
+      resources = emptyList();
+    if (traits === void 0)
+      traits = emptyList();
+    if (occupant === void 0)
+      occupant = null;
+    this.resources_untibd$_0 = resources;
+    this.traits_h5abml$_0 = traits;
+    this.occupant = occupant;
+  }
+  Object.defineProperty(Room.prototype, 'resources', {get: function () {
+    return this.resources_untibd$_0;
+  }});
+  Object.defineProperty(Room.prototype, 'traits', {get: function () {
+    return this.traits_h5abml$_0;
+  }});
+  Room.$metadata$ = {kind: Kind_CLASS, simpleName: 'Room', interfaces: [Tile]};
+  Room.prototype.component1 = function () {
+    return this.resources;
+  };
+  Room.prototype.component2 = function () {
+    return this.traits;
+  };
+  Room.prototype.component3 = function () {
+    return this.occupant;
+  };
+  Room.prototype.copy_2i63p2$ = function (resources, traits, occupant) {
+    return new Room(resources === void 0 ? this.resources : resources, traits === void 0 ? this.traits : traits, occupant === void 0 ? this.occupant : occupant);
+  };
+  Room.prototype.toString = function () {
+    return 'Room(resources=' + Kotlin.toString(this.resources) + (', traits=' + Kotlin.toString(this.traits)) + (', occupant=' + Kotlin.toString(this.occupant)) + ')';
+  };
+  Room.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.resources) | 0;
+    result = result * 31 + Kotlin.hashCode(this.traits) | 0;
+    result = result * 31 + Kotlin.hashCode(this.occupant) | 0;
+    return result;
+  };
+  Room.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.resources, other.resources) && Kotlin.equals(this.traits, other.traits) && Kotlin.equals(this.occupant, other.occupant)))));
+  };
+  function Tile() {
+  }
+  Tile.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Tile', interfaces: []};
+  function EmptyTile() {
+    EmptyTile_instance = this;
+    this.resources_x48rh3$_0 = emptyList();
+    this.traits_q7pg5d$_0 = emptyList();
+  }
+  Object.defineProperty(EmptyTile.prototype, 'resources', {get: function () {
+    return this.resources_x48rh3$_0;
+  }});
+  Object.defineProperty(EmptyTile.prototype, 'traits', {get: function () {
+    return this.traits_q7pg5d$_0;
+  }});
+  EmptyTile.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyTile', interfaces: [Tile]};
+  var EmptyTile_instance = null;
+  function EmptyTile_getInstance() {
+    if (EmptyTile_instance === null) {
+      new EmptyTile();
+    }
+    return EmptyTile_instance;
+  }
+  function TileView(owner) {
+    StackLayoutContainer.call(this, owner);
+    this.atlasPath_0 = 'assets/ggj.json';
+    this.data = dataBinding(this, EmptyTile_getInstance());
+    this.atlas_0 = this.layout_ge8abi$(this.unaryPlus_b3a6qy$(atlas(this, this.atlasPath_0, 'EmptyTile')), TileView$atlas$lambda);
+    this.defaultWidth = 64.0;
+    this.defaultHeight = 64.0;
+    this.data.bind_qlkmfe$(TileView_init$lambda(this));
+  }
+  function TileView$atlas$lambda($receiver) {
+    $receiver.fill();
+    return Unit;
+  }
+  function TileView_init$lambda(this$TileView) {
+    return function (it) {
+      if (Kotlin.isType(it, Room)) {
+        this$TileView.atlas_0.setRegion_puj7f4$(this$TileView.atlasPath_0, 'Room');
+      }
+       else {
+        this$TileView.atlas_0.setRegion_puj7f4$(this$TileView.atlasPath_0, 'EmptyRoom');
+      }
+      return Unit;
+    };
+  }
+  TileView.$metadata$ = {kind: Kind_CLASS, simpleName: 'TileView', interfaces: [StackLayoutContainer]};
+  function Isometric() {
+    Isometric_instance = this;
+  }
+  Isometric.prototype.isoToTwoD_9wm29l$ = function (coord) {
+    return coord.set_dleff0$((2.0 * coord.y + coord.x) / 2.0, (2.0 * coord.y - coord.x) / 2.0);
+  };
+  Isometric.prototype.twoDToIso_9wm29l$ = function (coord) {
+    return coord.set_dleff0$(coord.x - coord.y, (coord.x + coord.y) / 2);
+  };
+  Isometric.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Isometric', interfaces: []};
+  var Isometric_instance = null;
+  function Isometric_getInstance() {
+    if (Isometric_instance === null) {
+      new Isometric();
+    }
+    return Isometric_instance;
+  }
+  Object.defineProperty(_, 'config', {get: function () {
+    return config;
+  }});
   var package$ggj19 = _.ggj19 || (_.ggj19 = {});
   package$ggj19.GGJ19 = GGJ19;
+  $$importsForInline$$.AcornUtils = $module$AcornUtils;
+  package$ggj19.LevelView = LevelView;
+  package$ggj19.OverviewStateVo = OverviewStateVo;
+  package$ggj19.OverviewCameraVo = OverviewCameraVo;
+  Object.defineProperty(GameLevel, 'Companion', {get: GameLevel$Companion_getInstance});
+  var package$model = package$ggj19.model || (package$ggj19.model = {});
+  package$model.GameLevel = GameLevel;
+  package$model.Room = Room;
+  package$model.Tile = Tile;
+  Object.defineProperty(package$model, 'EmptyTile', {get: EmptyTile_getInstance});
+  package$ggj19.TileView = TileView;
+  var package$util = package$ggj19.util || (package$ggj19.util = {});
+  Object.defineProperty(package$util, 'Isometric', {get: Isometric_getInstance});
+  config = new AppConfig(void 0, void 0, void 0, void 0, 60, void 0, void 0, new WindowConfig('GGJ19', void 0, void 0, Color.Companion.DARK_GRAY), new GlConfig(true));
   return _;
-});
+}));
 
 //# sourceMappingURL=GGJ19Core.js.map
+function alwaysTrue() { return true; }

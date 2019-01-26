@@ -17,14 +17,12 @@
 package ggj19.js
 
 import com.acornui.component.stage
-import com.acornui.core.AppConfig
-import com.acornui.core.GlConfig
-import com.acornui.core.WindowConfig
 import com.acornui.js.gl.WebGlApplication
+import config
 import ggj19.GGJ19
 
 fun main(args: Array<String>) {
-	WebGlApplication("gGJ19Root").start(AppConfig(frameRate = 60, window = WindowConfig(title = "GGJ19"), gl = GlConfig(antialias = false))) {
+	WebGlApplication("gGJ19Root").start(config) {
 		stage.addElement(GGJ19(this)) // Ignore the inspection error, this is because we're mixing module types.
 	}
 }

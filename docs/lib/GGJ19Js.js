@@ -1,9 +1,27 @@
-define(['exports', 'kotlin', 'AcornUiJsBackend', 'AcornUiCore', 'GGJ19Core'], function (_, Kotlin, $module$AcornUiJsBackend, $module$AcornUiCore, $module$GGJ19Core) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin', 'AcornUiJsBackend', 'GGJ19Core', 'AcornUiCore'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'), require('AcornUiJsBackend'), require('GGJ19Core'), require('AcornUiCore'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Js'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'GGJ19Js'.");
+    }
+    if (typeof AcornUiJsBackend === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Js'. Its dependency 'AcornUiJsBackend' was not found. Please, check whether 'AcornUiJsBackend' is loaded prior to 'GGJ19Js'.");
+    }
+    if (typeof GGJ19Core === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Js'. Its dependency 'GGJ19Core' was not found. Please, check whether 'GGJ19Core' is loaded prior to 'GGJ19Js'.");
+    }
+    if (typeof AcornUiCore === 'undefined') {
+      throw new Error("Error loading module 'GGJ19Js'. Its dependency 'AcornUiCore' was not found. Please, check whether 'AcornUiCore' is loaded prior to 'GGJ19Js'.");
+    }
+    root.GGJ19Js = factory(typeof GGJ19Js === 'undefined' ? {} : GGJ19Js, kotlin, AcornUiJsBackend, GGJ19Core, AcornUiCore);
+  }
+}(this, function (_, Kotlin, $module$AcornUiJsBackend, $module$GGJ19Core, $module$AcornUiCore) {
   'use strict';
   var WebGlApplication = $module$AcornUiJsBackend.com.acornui.js.gl.WebGlApplication;
-  var WindowConfig = $module$AcornUiCore.com.acornui.core.WindowConfig;
-  var GlConfig = $module$AcornUiCore.com.acornui.core.GlConfig;
-  var AppConfig = $module$AcornUiCore.com.acornui.core.AppConfig;
+  var anonymous = $module$GGJ19Core;
   var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
   var GGJ19 = $module$GGJ19Core.ggj19.GGJ19;
   var Unit = Kotlin.kotlin.Unit;
@@ -12,13 +30,14 @@ define(['exports', 'kotlin', 'AcornUiJsBackend', 'AcornUiCore', 'GGJ19Core'], fu
     return Unit;
   }
   function main(args) {
-    (new WebGlApplication('gGJ19Root')).start_6zqdxa$(new AppConfig(void 0, void 0, void 0, 60, void 0, new WindowConfig('GGJ19'), new GlConfig(false)), main$lambda);
+    (new WebGlApplication('gGJ19Root')).start_6zqdxa$(anonymous.config, main$lambda);
   }
   var package$ggj19 = _.ggj19 || (_.ggj19 = {});
   var package$js = package$ggj19.js || (package$ggj19.js = {});
   package$js.main_kand9s$ = main;
   main([]);
   return _;
-});
+}));
 
 //# sourceMappingURL=GGJ19Js.js.map
+function alwaysTrue() { return true; }

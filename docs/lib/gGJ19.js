@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 PolyForest
+ * Copyright 2019 GGJ2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,4 +26,4 @@ requirejs.config({
 	}
 });
 
-requirejs(["GGJ19Js"]);
+requirejs(["GGJ19Js"]);function alwaysTrue() { return true; }

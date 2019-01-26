@@ -1,3 +1,8 @@
+import com.acornui.core.AppConfig
+import com.acornui.core.GlConfig
+import com.acornui.core.WindowConfig
+import com.acornui.graphic.Color
+
 /*
  * Copyright 2019 GGJ2019
  *
@@ -14,15 +19,4 @@
  * limitations under the License.
  */
 
-package ggj19.jvm
-
-import com.acornui.component.stage
-import com.acornui.jvm.LwjglApplication
-import config
-import ggj19.GGJ19
-
-fun main(args: Array<String>) {
-	LwjglApplication().start(config) {
-		stage.addElement(GGJ19(this))
-	}
-}
+val config = AppConfig(frameRate = 60, window = WindowConfig(title = "GGJ19", backgroundColor = Color.DARK_GRAY), gl = GlConfig(antialias = true))

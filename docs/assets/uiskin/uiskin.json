@@ -6,15 +6,74 @@
 			"height": 256,
 			"pixelFormat": "RGBA",
 			"premultipliedAlpha": false,
-			"filterMin": "LINEAR_MIPMAP_LINEAR",
-			"filterMag": "NEAREST",
+			"filterMin": "LINEAR",
+			"filterMag": "LINEAR",
 			"regions": [
 				{
-					"name": "CheckMark.png",
+					"name": "ArrowRight.png",
 					"isRotated": false,
 					"bounds": {
 						"x": 3,
 						"y": 2,
+						"width": 7,
+						"height": 11
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
+					"name": "Button_disabled.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 12,
+						"y": 2,
+						"width": 22,
+						"height": 19
+					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
+					"padding": [ 1, 1, 1, 1 ]
+				},
+				{
+					"name": "Button_down.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 304,
+						"y": 28,
+						"width": 19,
+						"height": 22
+					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
+					"padding": [ 1, 1, 1, 1 ]
+				},
+				{
+					"name": "Button_over.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 304,
+						"y": 52,
+						"width": 19,
+						"height": 22
+					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
+					"padding": [ 1, 1, 1, 1 ]
+				},
+				{
+					"name": "Button_up.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 325,
+						"y": 28,
+						"width": 19,
+						"height": 22
+					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
+					"padding": [ 1, 1, 1, 1 ]
+				},
+				{
+					"name": "CheckMark.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 2,
+						"y": 23,
 						"width": 43,
 						"height": 43
 					},
@@ -24,8 +83,8 @@
 					"name": "CollapseSelected.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 305,
-						"y": 58,
+						"x": 2,
+						"y": 68,
 						"width": 17,
 						"height": 15
 					},
@@ -33,32 +92,45 @@
 				},
 				{
 					"name": "CollapseUnselected.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 327,
-						"y": 36,
-						"width": 15,
-						"height": 16
+						"x": 21,
+						"y": 68,
+						"width": 16,
+						"height": 15
 					},
 					"padding": [ 2, 1, 1, 1 ]
 				},
 				{
-					"name": "Curve.png",
-					"isRotated": false,
+					"name": "CurvedFill.png",
+					"isRotated": true,
 					"bounds": {
-						"x": 305,
-						"y": 2,
-						"width": 32,
-						"height": 32
+						"x": 325,
+						"y": 52,
+						"width": 19,
+						"height": 22
 					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
+					"padding": [ 1, 1, 1, 1 ]
+				},
+				{
+					"name": "CurvedStroke.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 304,
+						"y": 2,
+						"width": 21,
+						"height": 24
+					},
+					"splits": [ 9.0, 9.0, 9.0, 9.0 ],
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
 					"name": "DownArrow.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 315,
-						"y": 75,
+						"x": 39,
+						"y": 76,
 						"width": 6,
 						"height": 5
 					},
@@ -68,8 +140,8 @@
 					"name": "DownArrowStepper.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 330,
-						"y": 77,
+						"x": 251,
+						"y": 175,
 						"width": 5,
 						"height": 4
 					},
@@ -79,33 +151,33 @@
 					"name": "FocusRect.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 305,
-						"y": 36,
+						"x": 2,
+						"y": 175,
 						"width": 20,
 						"height": 20
 					},
-					"splits": [ 3.0, 3.0, 3.0, 3.0 ],
+					"splits": [ 4.0, 4.0, 4.0, 4.0 ],
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
 					"name": "HDividerBar.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 53,
+						"x": 224,
 						"y": 175,
-						"width": 2,
-						"height": 10
+						"width": 10,
+						"height": 2
 					},
 					"padding": [ 3, 0, 3, 0 ]
 				},
 				{
 					"name": "HDividerHandle.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 339,
-						"y": 2,
-						"width": 6,
-						"height": 20
+						"x": 304,
+						"y": 76,
+						"width": 20,
+						"height": 6
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
@@ -113,30 +185,41 @@
 					"name": "LeftArrow.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 349,
-						"y": 54,
+						"x": 36,
+						"y": 14,
 						"width": 5,
 						"height": 6
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
-					"name": "OptionsListArrow.png",
+					"name": "LeftArrowStepper.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 72,
+						"y": 190,
+						"width": 5,
+						"height": 4
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
+					"name": "OptionListArrow.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 342,
-						"y": 62,
+						"x": 143,
+						"y": 175,
 						"width": 14,
 						"height": 14
 					},
-					"padding": [ 3, 3, 3, 3 ]
+					"padding": [ 1, 1, 1, 1 ]
 				},
 				{
 					"name": "Picker.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 339,
-						"y": 24,
+						"x": 191,
+						"y": 175,
 						"width": 10,
 						"height": 10
 					},
@@ -146,8 +229,8 @@
 					"name": "ResizeHandle.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 305,
-						"y": 75,
+						"x": 214,
+						"y": 175,
 						"width": 8,
 						"height": 8
 					},
@@ -157,32 +240,32 @@
 					"name": "RightArrow.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 323,
-						"y": 77,
+						"x": 236,
+						"y": 175,
 						"width": 5,
 						"height": 6
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
-					"name": "SelectionRect.png",
-					"isRotated": false,
+					"name": "RightArrowStepper.png",
+					"isRotated": true,
 					"bounds": {
-						"x": 18,
-						"y": 175,
-						"width": 10,
-						"height": 10
+						"x": 79,
+						"y": 190,
+						"width": 5,
+						"height": 4
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
 					"name": "SliderArrowDown.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 30,
-						"y": 175,
-						"width": 10,
-						"height": 9
+						"x": 36,
+						"y": 2,
+						"width": 9,
+						"height": 10
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
@@ -190,7 +273,7 @@
 					"name": "SliderArrowDownLarge.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 2,
+						"x": 159,
 						"y": 175,
 						"width": 14,
 						"height": 13
@@ -201,7 +284,7 @@
 					"name": "SliderArrowRight.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 42,
+						"x": 203,
 						"y": 175,
 						"width": 9,
 						"height": 10
@@ -210,23 +293,34 @@
 				},
 				{
 					"name": "SliderArrowRightLarge.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 175,
+						"y": 175,
+						"width": 14,
+						"height": 13
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
+					"name": "SmallPicker.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 351,
-						"y": 20,
-						"width": 13,
-						"height": 14
+						"x": 39,
+						"y": 68,
+						"width": 6,
+						"height": 6
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
 					"name": "TextInputCaret.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 347,
-						"y": 2,
-						"width": 1,
-						"height": 20
+						"x": 24,
+						"y": 193,
+						"width": 20,
+						"height": 1
 					},
 					"padding": [ 0, 0, 1, 0 ]
 				},
@@ -234,8 +328,8 @@
 					"name": "UpArrow.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 57,
-						"y": 179,
+						"x": 243,
+						"y": 175,
 						"width": 6,
 						"height": 5
 					},
@@ -245,8 +339,8 @@
 					"name": "UpArrowStepper.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 69,
-						"y": 175,
+						"x": 86,
+						"y": 190,
 						"width": 5,
 						"height": 4
 					},
@@ -256,8 +350,8 @@
 					"name": "VDividerBar.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 57,
-						"y": 175,
+						"x": 224,
+						"y": 179,
 						"width": 10,
 						"height": 2
 					},
@@ -267,19 +361,30 @@
 					"name": "VDividerHandle.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 327,
-						"y": 54,
+						"x": 326,
+						"y": 76,
 						"width": 20,
 						"height": 6
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
+					"name": "calendar.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 24,
+						"y": 175,
+						"width": 14,
+						"height": 16
+					},
+					"padding": [ 1, 0, 1, 0 ]
+				},
+				{
 					"name": "clipboard-paste.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 344,
-						"y": 36,
+						"x": 40,
+						"y": 175,
 						"width": 14,
 						"height": 16
 					},
@@ -287,12 +392,12 @@
 				},
 				{
 					"name": "document.png",
-					"isRotated": false,
+					"isRotated": true,
 					"bounds": {
-						"x": 350,
-						"y": 2,
-						"width": 12,
-						"height": 16
+						"x": 108,
+						"y": 175,
+						"width": 16,
+						"height": 12
 					},
 					"padding": [ 2, 0, 2, 0 ]
 				},
@@ -300,8 +405,8 @@
 					"name": "documents.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 360,
-						"y": 36,
+						"x": 56,
+						"y": 175,
 						"width": 14,
 						"height": 16
 					},
@@ -311,8 +416,8 @@
 					"name": "folder-horizontal-open.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 324,
-						"y": 62,
+						"x": 72,
+						"y": 175,
 						"width": 16,
 						"height": 13
 					},
@@ -322,8 +427,8 @@
 					"name": "folder-horizontal.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 358,
-						"y": 54,
+						"x": 90,
+						"y": 175,
 						"width": 16,
 						"height": 13
 					},
@@ -333,8 +438,8 @@
 					"name": "scissors-blue.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 358,
-						"y": 69,
+						"x": 126,
+						"y": 175,
 						"width": 15,
 						"height": 14
 					},
@@ -344,7 +449,7 @@
 					"name": "verdana_14_0.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 48,
+						"x": 47,
 						"y": 2,
 						"width": 255,
 						"height": 81

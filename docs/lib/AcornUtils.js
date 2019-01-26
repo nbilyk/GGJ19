@@ -1,101 +1,127 @@
-define(['exports', 'kotlin'], function (_, Kotlin) {
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd)
+    define(['exports', 'kotlin'], factory);
+  else if (typeof exports === 'object')
+    factory(module.exports, require('kotlin'));
+  else {
+    if (typeof kotlin === 'undefined') {
+      throw new Error("Error loading module 'AcornUtils'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'AcornUtils'.");
+    }
+    root.AcornUtils = factory(typeof AcornUtils === 'undefined' ? {} : AcornUtils, kotlin);
+  }
+}(this, function (_, Kotlin) {
   'use strict';
-  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var throwCCE = Kotlin.throwCCE;
+  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
   var Unit = Kotlin.kotlin.Unit;
-  var experimental = Kotlin.kotlin.coroutines.experimental;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var unboxChar = Kotlin.unboxChar;
+  var numberToLong = Kotlin.numberToLong;
+  var wrapFunction = Kotlin.wrapFunction;
+  var stringMapOf = Kotlin.kotlin.collections.stringMapOf_gkrhic$;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
+  var iterator = Kotlin.kotlin.js.iterator_s8jyvk$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
-  var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
-  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
-  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
-  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
-  var Throwable = Error;
-  var Any = Object;
-  var ensureNotNull = Kotlin.ensureNotNull;
+  var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
+  var startCoroutine = Kotlin.kotlin.coroutines.startCoroutine_x18nsh$;
+  var coroutines = Kotlin.kotlin.coroutines;
+  var Continuation = Kotlin.kotlin.coroutines.Continuation;
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
-  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
+  var Throwable = Error;
+  var Any = Object;
   var Exception_init = Kotlin.kotlin.Exception_init_pdl1vj$;
+  var ensureNotNull = Kotlin.ensureNotNull;
   var to = Kotlin.kotlin.to_ujzrz7$;
-  var StringBuilder = Kotlin.kotlin.text.StringBuilder;
   var split = Kotlin.kotlin.text.split_ip8yn$;
   var indexOf = Kotlin.kotlin.text.indexOf_l5u8uk$;
   var Pair = Kotlin.kotlin.Pair;
   var equals = Kotlin.equals;
-  var properties = Kotlin.kotlin.properties;
-  var PropertyMetadata = Kotlin.PropertyMetadata;
+  var throwUPAE = Kotlin.throwUPAE;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
+  var defineInlineFunction = Kotlin.defineInlineFunction;
+  var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
   var getCallableRef = Kotlin.getCallableRef;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var get_lastIndex_0 = Kotlin.kotlin.collections.get_lastIndex_m7z4lg$;
   var ListIterator = Kotlin.kotlin.collections.ListIterator;
   var Iterable = Kotlin.kotlin.collections.Iterable;
+  var get_lastIndex_1 = Kotlin.kotlin.collections.get_lastIndex_rjqryz$;
   var hashCode = Kotlin.hashCode;
-  var defineInlineFunction = Kotlin.defineInlineFunction;
-  var wrapFunction = Kotlin.wrapFunction;
+  var get_lastIndex_2 = Kotlin.kotlin.collections.get_lastIndex_tmsbgo$;
   var last = Kotlin.kotlin.collections.last_2p1efm$;
   var kotlin_js_internal_FloatCompanionObject = Kotlin.kotlin.js.internal.FloatCompanionObject;
-  var StringBuilder_init = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
+  var StringBuilder_init_0 = Kotlin.kotlin.text.StringBuilder_init_za3lpa$;
   var List = Kotlin.kotlin.collections.List;
   var MutableList = Kotlin.kotlin.collections.MutableList;
-  var kotlin_js_internal_IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
   var NoSuchElementException_init = Kotlin.kotlin.NoSuchElementException_init;
   var MutableListIterator = Kotlin.kotlin.collections.MutableListIterator;
   var MutableIterable = Kotlin.kotlin.collections.MutableIterable;
   var IllegalStateException_init_0 = Kotlin.kotlin.IllegalStateException_init;
-  var numberToInt = Kotlin.numberToInt;
-  var IndexOutOfBoundsException = Kotlin.kotlin.IndexOutOfBoundsException;
-  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
+  var contentToString = Kotlin.arrayToString;
   var MutableIterator = Kotlin.kotlin.collections.MutableIterator;
   var toList = Kotlin.kotlin.collections.toList_us0mfu$;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
-  var unboxChar = Kotlin.unboxChar;
+  var MutableMap = Kotlin.kotlin.collections.MutableMap;
+  var putAll = Kotlin.kotlin.collections.putAll_5gv49o$;
+  var L9007199254740991 = new Kotlin.Long(-1, 2097151);
+  var L_9007199254740992 = new Kotlin.Long(0, -2097152);
+  var numberToInt = Kotlin.numberToInt;
   var indexOf_0 = Kotlin.kotlin.text.indexOf_8eortd$;
   var replace = Kotlin.kotlin.text.replace_680rmw$;
-  var toInt = Kotlin.kotlin.text.toInt_6ic1pp$;
   var toChar = Kotlin.toChar;
   var toBoxedChar = Kotlin.toBoxedChar;
   var Regex_init = Kotlin.kotlin.text.Regex_init_61zpoe$;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
+  var L4278190080 = new Kotlin.Long(-16777216, 0);
+  var L16711680 = Kotlin.Long.fromInt(16711680);
+  var L65280 = Kotlin.Long.fromInt(65280);
+  var L255 = Kotlin.Long.fromInt(255);
   var startsWith_0 = Kotlin.kotlin.text.startsWith_7epoxm$;
   var toLong = Kotlin.kotlin.text.toLong_pdl1vz$;
   var toIntOrNull = Kotlin.kotlin.text.toIntOrNull_pdl1vz$;
   var split_0 = Kotlin.kotlin.text.split_o64adg$;
   var toIntOrNull_0 = Kotlin.kotlin.text.toIntOrNull_6ic1pp$;
   var padStart = Kotlin.kotlin.text.padStart_vrc1nu$;
-  var toString = Kotlin.toString;
+  var toByte = Kotlin.toByte;
+  var toShort = Kotlin.toShort;
+  var get_lastIndex_4 = Kotlin.kotlin.text.get_lastIndex_gw00vp$;
   var substringAfterLast = Kotlin.kotlin.text.substringAfterLast_8cymmc$;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_8cymmc$;
   var equals_0 = Kotlin.kotlin.text.equals_igcy3c$;
   var Comparable = Kotlin.kotlin.Comparable;
+  var toString = Kotlin.toString;
   var arrayListOf = Kotlin.kotlin.collections.arrayListOf_i5x0yv$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
-  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
+  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
+  var toList_0 = Kotlin.kotlin.collections.toList_7wnvza$;
   var mutableMapOf = Kotlin.kotlin.collections.mutableMapOf_qfcya0$;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var minOf = Kotlin.kotlin.comparisons.minOf_sdesaw$;
   var maxOf = Kotlin.kotlin.comparisons.maxOf_sdesaw$;
   var isNaN_0 = Kotlin.kotlin.isNaN_81szk$;
-  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
-  var toByte = Kotlin.toByte;
+  var toFloatArray = Kotlin.kotlin.collections.toFloatArray_zwy31$;
+  var Random = Kotlin.kotlin.random.Random;
+  var L4294967295 = new Kotlin.Long(-1, 0);
+  var L_1 = Kotlin.Long.NEG_ONE;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
-  var indexOf_1 = Kotlin.kotlin.collections.indexOf_bv23uc$;
-  var isWhitespace = Kotlin.kotlin.text.isWhitespace_myv2d0$;
-  var toShortOrNull = Kotlin.kotlin.text.toShortOrNull_pdl1vz$;
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
   var toLongOrNull = Kotlin.kotlin.text.toLongOrNull_pdl1vz$;
   var toDoubleOrNull = Kotlin.kotlin.text.toDoubleOrNull_pdl1vz$;
-  var get_lastIndex_2 = Kotlin.kotlin.text.get_lastIndex_gw00vp$;
   var substringAfter = Kotlin.kotlin.text.substringAfter_j4ogox$;
-  var indexOf_2 = Kotlin.kotlin.collections.indexOf_o2f9me$;
-  AsyncWorker$DeferredStatus.prototype = Object.create(Enum.prototype);
-  AsyncWorker$DeferredStatus.prototype.constructor = AsyncWorker$DeferredStatus;
+  var indexOf_1 = Kotlin.kotlin.collections.indexOf_o2f9me$;
+  Deferred$Status.prototype = Object.create(Enum.prototype);
+  Deferred$Status.prototype.constructor = Deferred$Status;
   LateValue.prototype = Object.create(Promise.prototype);
   LateValue.prototype.constructor = LateValue;
-  Promise$Status.prototype = Object.create(Enum.prototype);
-  Promise$Status.prototype.constructor = Promise$Status;
   MutableListBase.prototype = Object.create(ListBase.prototype);
   MutableListBase.prototype.constructor = MutableListBase;
   ConcurrentListImpl.prototype = Object.create(MutableListBase.prototype);
@@ -106,8 +132,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ConcurrentListImplIterator.prototype.constructor = ConcurrentListImplIterator;
   WatchedMutableConcurrentListIteratorImpl.prototype = Object.create(WatchedConcurrentListIteratorImpl.prototype);
   WatchedMutableConcurrentListIteratorImpl.prototype.constructor = WatchedMutableConcurrentListIteratorImpl;
-  CyclicList.prototype = Object.create(MutableListBase.prototype);
-  CyclicList.prototype.constructor = CyclicList;
+  FloatList.prototype = Object.create(ListBase.prototype);
+  FloatList.prototype.constructor = FloatList;
   MutableListIteratorImpl.prototype = Object.create(ListIteratorImpl.prototype);
   MutableListIteratorImpl.prototype.constructor = MutableListIteratorImpl;
   SubList.prototype = Object.create(ListBase.prototype);
@@ -123,14 +149,14 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ClearableObjectPool.prototype.constructor = ClearableObjectPool;
   InvalidMarkException.prototype = Object.create(Throwable.prototype);
   InvalidMarkException.prototype.constructor = InvalidMarkException;
+  BufferUnderflowException.prototype = Object.create(Throwable.prototype);
+  BufferUnderflowException.prototype.constructor = BufferUnderflowException;
   ExpIn.prototype = Object.create(Exp.prototype);
   ExpIn.prototype.constructor = ExpIn;
   ExpOut.prototype = Object.create(Exp.prototype);
   ExpOut.prototype.constructor = ExpOut;
-  ElasticIn.prototype = Object.create(Elastic.prototype);
-  ElasticIn.prototype.constructor = ElasticIn;
-  ElasticOut.prototype = Object.create(Elastic.prototype);
-  ElasticOut.prototype.constructor = ElasticOut;
+  MatrixMode.prototype = Object.create(Enum.prototype);
+  MatrixMode.prototype.constructor = MatrixMode;
   PlaneSide.prototype = Object.create(Enum.prototype);
   PlaneSide.prototype.constructor = PlaneSide;
   Signal0.prototype = Object.create(SignalBase.prototype);
@@ -143,9 +169,241 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Signal3.prototype.constructor = Signal3;
   StoppableSignalImpl.prototype = Object.create(SignalBase.prototype);
   StoppableSignalImpl.prototype.constructor = StoppableSignalImpl;
+  function getStack() {
+    var tmp$;
+    return typeof (tmp$ = (new Error()).stack) === 'string' ? tmp$ : throwCCE();
+  }
   function get_as1($receiver) {
     return $receiver;
   }
+  function get_as2($receiver) {
+    return $receiver;
+  }
+  function get_as3($receiver) {
+    return $receiver;
+  }
+  function JsonSerializer() {
+    JsonSerializer_instance = this;
+  }
+  JsonSerializer.prototype.read_11rb$ = function (data) {
+    return new JsonNode(JSON.parse(data));
+  };
+  JsonSerializer.prototype.write_ma9gy0$ = function (callback) {
+    return this.write_9nik4k$(callback, '\t', '\n');
+  };
+  JsonSerializer.prototype.write_9nik4k$ = function (callback, tabStr, returnStr) {
+    var buffer = StringBuilder_init();
+    var writer = new JsonWriter(buffer, '', tabStr, returnStr);
+    callback(writer);
+    return buffer.toString();
+  };
+  JsonSerializer.$metadata$ = {kind: Kind_OBJECT, simpleName: 'JsonSerializer', interfaces: [Serializer]};
+  var JsonSerializer_instance = null;
+  function JsonSerializer_getInstance() {
+    if (JsonSerializer_instance === null) {
+      new JsonSerializer();
+    }
+    return JsonSerializer_instance;
+  }
+  function JsonNode(source) {
+    this.source_0 = source;
+    this._properties_d4vj00$_0 = lazy(JsonNode$_properties$lambda(this));
+    this._elements_wqpc0k$_0 = lazy(JsonNode$_elements$lambda(this));
+  }
+  Object.defineProperty(JsonNode.prototype, '_properties_0', {get: function () {
+    return this._properties_d4vj00$_0.value;
+  }});
+  Object.defineProperty(JsonNode.prototype, '_elements_0', {get: function () {
+    return this._elements_wqpc0k$_0.value;
+  }});
+  JsonNode.prototype.properties = function () {
+    return this._properties_0;
+  };
+  JsonNode.prototype.elements = function () {
+    return this._elements_0;
+  };
+  Object.defineProperty(JsonNode.prototype, 'isNull', {get: function () {
+    return this.source_0 == null;
+  }});
+  JsonNode.prototype.byte = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'number' ? tmp$ : null;
+  };
+  JsonNode.prototype.bool = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'boolean' ? tmp$ : null;
+  };
+  JsonNode.prototype.char = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || Kotlin.isChar(tmp$) ? tmp$ : null;
+  };
+  JsonNode.prototype.string = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'string' ? tmp$ : null;
+  };
+  JsonNode.prototype.short = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'number' ? tmp$ : null;
+  };
+  JsonNode.prototype.int = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'number' ? tmp$ : null;
+  };
+  JsonNode.prototype.long = function () {
+    var tmp$, tmp$_0;
+    return (tmp$_0 = Kotlin.isNumber(tmp$ = this.source_0) ? tmp$ : null) != null ? numberToLong(tmp$_0) : null;
+  };
+  JsonNode.prototype.float = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'number' ? tmp$ : null;
+  };
+  JsonNode.prototype.double = function () {
+    var tmp$;
+    return (tmp$ = this.source_0) == null || typeof tmp$ === 'number' ? tmp$ : null;
+  };
+  JsonNode.prototype.toString = function () {
+    return this.source_0.toString();
+  };
+  JsonNode.prototype.keys_0 = function (json) {
+    return Object.keys(json);
+  };
+  function JsonNode$_properties$lambda(this$JsonNode) {
+    return function () {
+      var tmp$, tmp$_0;
+      var m = stringMapOf([]);
+      if (this$JsonNode.source_0 != null) {
+        var json = this$JsonNode.source_0;
+        tmp$ = Object.keys(json);
+        for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
+          var name = tmp$[tmp$_0];
+          if (this$JsonNode.source_0.hasOwnProperty(name) == true) {
+            var value = new JsonNode(this$JsonNode.source_0[name]);
+            m.put_xwzc9p$(name, value);
+          }
+        }
+      }
+      return m;
+    };
+  }
+  function JsonNode$_elements$lambda(this$JsonNode) {
+    return function () {
+      var tmp$;
+      var e = ArrayList_init();
+      if (this$JsonNode.source_0 != null) {
+        tmp$ = iterator(this$JsonNode.source_0);
+        while (tmp$.hasNext()) {
+          var element = tmp$.next();
+          e.add_11rb$(new JsonNode(element));
+        }
+      }
+      return e;
+    };
+  }
+  JsonNode.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsonNode', interfaces: [Reader]};
+  function JsonWriter(builder, indentStr, tabStr, returnStr) {
+    this.builder = builder;
+    this.indentStr = indentStr;
+    this.tabStr = tabStr;
+    this.returnStr = returnStr;
+    this.size_0 = 0;
+  }
+  JsonWriter.prototype.property_61zpoe$ = function (name) {
+    var tmp$;
+    if ((tmp$ = this.size_0, this.size_0 = tmp$ + 1 | 0, tmp$) > 0)
+      this.builder.append_gw00v9$(',' + this.returnStr);
+    this.builder.append_gw00v9$(this.indentStr);
+    this.builder.append_s8itvh$(34);
+    this.builder.append_gw00v9$(name);
+    this.builder.append_gw00v9$('": ');
+    return new JsonWriter(this.builder, this.indentStr, this.tabStr, this.returnStr);
+  };
+  JsonWriter.prototype.element = function () {
+    var tmp$;
+    if ((tmp$ = this.size_0, this.size_0 = tmp$ + 1 | 0, tmp$) > 0)
+      this.builder.append_gw00v9$(',' + this.returnStr);
+    this.builder.append_gw00v9$(this.indentStr);
+    return new JsonWriter(this.builder, this.indentStr, this.tabStr, this.returnStr);
+  };
+  JsonWriter.prototype.byte_mz3mdy$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8jyv4$(value);
+  };
+  JsonWriter.prototype.bool_1v8dbw$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    if (value)
+      this.builder.append_gw00v9$('true');
+    else
+      this.builder.append_gw00v9$('false');
+  };
+  JsonWriter.prototype.string_pdl1vj$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8itvh$(34);
+    this.builder.append_gw00v9$(this.escape_0(value));
+    this.builder.append_s8itvh$(34);
+  };
+  JsonWriter.prototype.int_s8ev37$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8jyv4$(value);
+  };
+  JsonWriter.prototype.long_mts6q2$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8jyv4$(value);
+  };
+  JsonWriter.prototype.float_81sz4$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8jyv4$(value);
+  };
+  JsonWriter.prototype.double_yrwdxb$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8jyv4$(value);
+  };
+  JsonWriter.prototype.char_myv2ck$ = function (value) {
+    if (value == null)
+      return this.writeNull();
+    this.builder.append_s8itvh$(34);
+    this.builder.append_s8itvh$(value);
+    this.builder.append_s8itvh$(34);
+  };
+  JsonWriter.prototype.obj_qpf9uf$ = function (complex, contents) {
+    var r = complex ? this.returnStr : ' ';
+    this.builder.append_gw00v9$('{' + r);
+    var childIndent = complex ? this.indentStr + this.tabStr : '';
+    var childWriter = new JsonWriter(this.builder, childIndent, this.tabStr, r);
+    contents(childWriter);
+    if (childWriter.size_0 > 0) {
+      this.builder.append_gw00v9$(r);
+    }
+    if (complex)
+      this.builder.append_gw00v9$(this.indentStr);
+    this.builder.append_s8itvh$(125);
+  };
+  JsonWriter.prototype.array_qpf9uf$ = function (complex, contents) {
+    var r = complex ? this.returnStr : ' ';
+    this.builder.append_gw00v9$('[' + r);
+    var childIndent = complex ? this.indentStr + this.tabStr : '';
+    var childWriter = new JsonWriter(this.builder, childIndent, this.tabStr, r);
+    contents(childWriter);
+    if (childWriter.size_0 > 0) {
+      this.builder.append_gw00v9$(r);
+    }
+    if (complex)
+      this.builder.append_gw00v9$(this.indentStr);
+    this.builder.append_s8itvh$(93);
+  };
+  JsonWriter.prototype.writeNull = function () {
+    this.builder.append_gw00v9$('null');
+  };
+  JsonWriter.prototype.escape_0 = function (value) {
+    return replace2(replace2(replace2(replace2(replace2(value, '\\', '\\\\'), '\r', '\\r'), '\n', '\\n'), '\t', '\\t'), '"', '\\"');
+  };
+  JsonWriter.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsonWriter', interfaces: [Writer]};
   function toRadix($receiver, radix) {
     var d = $receiver;
     return d.toString(radix);
@@ -153,30 +411,19 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function Decorator() {
   }
   Decorator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Decorator', interfaces: []};
-  function noopDecorator() {
-    var tmp$;
-    return Kotlin.isType(tmp$ = NoopDecorator_getInstance(), Decorator) ? tmp$ : throwCCE();
-  }
-  function NoopDecorator() {
-    NoopDecorator_instance = this;
-  }
-  NoopDecorator.prototype.decorate_11rb$ = function (target) {
-    return target;
-  };
-  NoopDecorator.$metadata$ = {kind: Kind_OBJECT, simpleName: 'NoopDecorator', interfaces: [Decorator]};
   var NoopDecorator_instance = null;
-  function NoopDecorator_getInstance() {
-    if (NoopDecorator_instance === null) {
-      new NoopDecorator();
-    }
-    return NoopDecorator_instance;
-  }
   function Progress() {
   }
   Object.defineProperty(Progress.prototype, 'percentLoaded', {get: function () {
     return this.secondsTotal <= 0.0 ? 1.0 : this.secondsLoaded / this.secondsTotal;
   }});
   Progress.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Progress', interfaces: []};
+  var coroutineDebugMode;
+  var activeCoroutines;
+  var activeCoroutinesStr;
+  function refreshActiveCoroutinesStr() {
+    activeCoroutinesStr = joinToString(activeCoroutines.entries, '\n--------------------------------------\n\n');
+  }
   function launch(block) {
     startCoroutine(block, new BasicContinuationImpl());
   }
@@ -185,16 +432,27 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function BasicContinuationImpl(context) {
     if (context === void 0)
-      context = experimental.EmptyCoroutineContext;
+      context = coroutines.EmptyCoroutineContext;
     this.context_3h9l6k$_0 = context;
+    if (coroutineDebugMode) {
+      var $receiver = activeCoroutines;
+      var value = getStack();
+      $receiver.put_xwzc9p$(this, value);
+      refreshActiveCoroutinesStr();
+    }
   }
   Object.defineProperty(BasicContinuationImpl.prototype, 'context', {get: function () {
     return this.context_3h9l6k$_0;
   }});
-  BasicContinuationImpl.prototype.resume_11rb$ = function (value) {
-  };
-  BasicContinuationImpl.prototype.resumeWithException_tcv7n7$ = function (exception) {
-    throw exception;
+  BasicContinuationImpl.prototype.resumeWith_tl1gpc$ = function (result) {
+    var tmp$;
+    if ((tmp$ = result.exceptionOrNull()) != null) {
+      throw tmp$;
+    }
+    if (coroutineDebugMode) {
+      activeCoroutines.remove_11rb$(this);
+      refreshActiveCoroutinesStr();
+    }
   };
   BasicContinuationImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'BasicContinuationImpl', interfaces: [Continuation]};
   function PendingDisposablesRegistry() {
@@ -204,7 +462,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   PendingDisposablesRegistry.prototype.register_4pykkx$ = function (continuation) {
     if (this.isDisposing_0)
-      throw IllegalStateException_init('Cannot add a disposable to the registry on dispose.');
+      throw IllegalStateException_init('Cannot addBinding a disposable to the registry on dispose.');
     this.allPending_0.put_xwzc9p$(continuation, Unit);
   };
   PendingDisposablesRegistry.prototype.unregister_4pykkx$ = function (continuation) {
@@ -233,6 +491,50 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function Deferred() {
   }
+  function Deferred$Status(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function Deferred$Status_initFields() {
+    Deferred$Status_initFields = function () {
+    };
+    Deferred$Status$PENDING_instance = new Deferred$Status('PENDING', 0);
+    Deferred$Status$SUCCESSFUL_instance = new Deferred$Status('SUCCESSFUL', 1);
+    Deferred$Status$FAILED_instance = new Deferred$Status('FAILED', 2);
+  }
+  var Deferred$Status$PENDING_instance;
+  function Deferred$Status$PENDING_getInstance() {
+    Deferred$Status_initFields();
+    return Deferred$Status$PENDING_instance;
+  }
+  var Deferred$Status$SUCCESSFUL_instance;
+  function Deferred$Status$SUCCESSFUL_getInstance() {
+    Deferred$Status_initFields();
+    return Deferred$Status$SUCCESSFUL_instance;
+  }
+  var Deferred$Status$FAILED_instance;
+  function Deferred$Status$FAILED_getInstance() {
+    Deferred$Status_initFields();
+    return Deferred$Status$FAILED_instance;
+  }
+  Deferred$Status.$metadata$ = {kind: Kind_CLASS, simpleName: 'Status', interfaces: [Enum]};
+  function Deferred$Status$values() {
+    return [Deferred$Status$PENDING_getInstance(), Deferred$Status$SUCCESSFUL_getInstance(), Deferred$Status$FAILED_getInstance()];
+  }
+  Deferred$Status.values = Deferred$Status$values;
+  function Deferred$Status$valueOf(name) {
+    switch (name) {
+      case 'PENDING':
+        return Deferred$Status$PENDING_getInstance();
+      case 'SUCCESSFUL':
+        return Deferred$Status$SUCCESSFUL_getInstance();
+      case 'FAILED':
+        return Deferred$Status$FAILED_getInstance();
+      default:throwISE('No enum constant com.acornui.async.Deferred.Status.' + name);
+    }
+  }
+  Deferred$Status.valueOf_61zpoe$ = Deferred$Status$valueOf;
   Deferred.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Deferred', interfaces: []};
   function awaitOrNull($receiver_0, continuation_0, suspended) {
     var instance = new Coroutine$awaitOrNull($receiver_0, continuation_0);
@@ -280,6 +582,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             return this.local$tmp$;
           case 4:
             throw this.exception_0;
+          default:this.state_0 = 4;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -346,7 +650,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             continue;
           case 3:
             if (this.local$successful) {
-              return this.local$closure$callback((tmp$ = this.local$result) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE()), Unit;
+              return this.local$closure$callback((tmp$ = this.local$result) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE()), Unit;
             }
              else {
               this.state_0 = 4;
@@ -357,6 +661,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             return Unit;
           case 5:
             throw this.exception_0;
+          default:this.state_0 = 5;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -373,26 +679,52 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   function then($receiver, callback) {
     launch(then$lambda($receiver, callback));
+    return $receiver;
+  }
+  function then$lambda_0(closure$callback) {
+    return function (it) {
+      closure$callback(it.first, it.second);
+      return Unit;
+    };
+  }
+  function then_0($receiver, callback) {
+    return then($receiver, then$lambda_0(callback));
   }
   function AsyncWorker(work) {
-    this.status_0 = AsyncWorker$DeferredStatus$PENDING_getInstance();
-    this.result_0 = null;
-    this.error_0 = null;
+    this._status_0 = Deferred$Status$PENDING_getInstance();
+    this._result_0 = null;
+    this._error_0 = null;
     this.children_0 = ArrayList_init();
     launch(AsyncWorker_init$lambda(work, this));
   }
+  Object.defineProperty(AsyncWorker.prototype, 'status', {get: function () {
+    return this._status_0;
+  }});
+  Object.defineProperty(AsyncWorker.prototype, 'result', {get: function () {
+    var tmp$;
+    if (this._status_0 !== Deferred$Status$SUCCESSFUL_getInstance())
+      throw Exception_init('status is not SUCCESSFUL');
+    return (tmp$ = this._result_0) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE();
+  }});
+  Object.defineProperty(AsyncWorker.prototype, 'error', {get: function () {
+    var tmp$;
+    if (this._status_0 !== Deferred$Status$FAILED_getInstance())
+      throw Exception_init('status is not FAILED');
+    return alwaysTrue(tmp$ = this._error_0, Throwable) ? tmp$ : throwCCE();
+  }});
   function AsyncWorker$await$lambda(this$AsyncWorker) {
     return function (cont) {
       this$AsyncWorker.children_0.add_11rb$(cont);
       return Unit;
     };
   }
-  var SafeContinuation_init = Kotlin.kotlin.coroutines.experimental.SafeContinuation_init_n4f53e$;
+  var intercepted = Kotlin.kotlin.coroutines.intrinsics.intercepted_f9mg25$;
+  var SafeContinuation_init = Kotlin.kotlin.coroutines.SafeContinuation_init_wj8d80$;
   function suspendCoroutine$lambda(closure$block) {
     return function (c) {
-      var safe = SafeContinuation_init(c);
+      var safe = SafeContinuation_init(intercepted(c));
       closure$block(safe);
-      return safe.getResult();
+      return safe.getOrThrow();
     };
   }
   AsyncWorker.prototype.await = function (continuation_0, suspended) {
@@ -417,16 +749,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         switch (this.state_0) {
           case 0:
             var tmp$;
-            switch (this.$this.status_0.name) {
+            switch (this.$this._status_0.name) {
               case 'PENDING':
                 this.state_0 = 2;
-                this.result_0 = suspendCoroutine$lambda(AsyncWorker$await$lambda(this.$this))(this.facade);
+                this.result_0 = suspendCoroutine$lambda(AsyncWorker$await$lambda(this.$this))(this);
                 if (this.result_0 === COROUTINE_SUSPENDED)
                   return COROUTINE_SUSPENDED;
                 continue;
               case 'FAILED':
-                throw ensureNotNull(this.$this.error_0);
-              default:this.local$tmp$_0 = (tmp$ = this.$this.result_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
+                throw ensureNotNull(this.$this._error_0);
+              default:this.local$tmp$_0 = (tmp$ = this.$this._result_0) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE();
                 this.state_0 = 3;
                 continue;
             }
@@ -440,6 +772,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             continue;
           case 3:
             return this.local$tmp$_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -454,50 +788,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       }
      while (true);
   };
-  function AsyncWorker$DeferredStatus(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function AsyncWorker$DeferredStatus_initFields() {
-    AsyncWorker$DeferredStatus_initFields = function () {
-    };
-    AsyncWorker$DeferredStatus$PENDING_instance = new AsyncWorker$DeferredStatus('PENDING', 0);
-    AsyncWorker$DeferredStatus$SUCCESSFUL_instance = new AsyncWorker$DeferredStatus('SUCCESSFUL', 1);
-    AsyncWorker$DeferredStatus$FAILED_instance = new AsyncWorker$DeferredStatus('FAILED', 2);
-  }
-  var AsyncWorker$DeferredStatus$PENDING_instance;
-  function AsyncWorker$DeferredStatus$PENDING_getInstance() {
-    AsyncWorker$DeferredStatus_initFields();
-    return AsyncWorker$DeferredStatus$PENDING_instance;
-  }
-  var AsyncWorker$DeferredStatus$SUCCESSFUL_instance;
-  function AsyncWorker$DeferredStatus$SUCCESSFUL_getInstance() {
-    AsyncWorker$DeferredStatus_initFields();
-    return AsyncWorker$DeferredStatus$SUCCESSFUL_instance;
-  }
-  var AsyncWorker$DeferredStatus$FAILED_instance;
-  function AsyncWorker$DeferredStatus$FAILED_getInstance() {
-    AsyncWorker$DeferredStatus_initFields();
-    return AsyncWorker$DeferredStatus$FAILED_instance;
-  }
-  AsyncWorker$DeferredStatus.$metadata$ = {kind: Kind_CLASS, simpleName: 'DeferredStatus', interfaces: [Enum]};
-  function AsyncWorker$DeferredStatus$values() {
-    return [AsyncWorker$DeferredStatus$PENDING_getInstance(), AsyncWorker$DeferredStatus$SUCCESSFUL_getInstance(), AsyncWorker$DeferredStatus$FAILED_getInstance()];
-  }
-  AsyncWorker$DeferredStatus.values = AsyncWorker$DeferredStatus$values;
-  function AsyncWorker$DeferredStatus$valueOf(name) {
-    switch (name) {
-      case 'PENDING':
-        return AsyncWorker$DeferredStatus$PENDING_getInstance();
-      case 'SUCCESSFUL':
-        return AsyncWorker$DeferredStatus$SUCCESSFUL_getInstance();
-      case 'FAILED':
-        return AsyncWorker$DeferredStatus$FAILED_getInstance();
-      default:throwISE('No enum constant com.acornui.async.AsyncWorker.DeferredStatus.' + name);
-    }
-  }
-  AsyncWorker$DeferredStatus.valueOf_61zpoe$ = AsyncWorker$DeferredStatus$valueOf;
+  var Result = Kotlin.kotlin.Result;
+  var createFailure = Kotlin.kotlin.createFailure_tcv7n7$;
   function AsyncWorker_init$lambda(closure$work_0, this$AsyncWorker_0) {
     return function (continuation_0, suspended) {
       var instance = new Coroutine$AsyncWorker_init$lambda(closure$work_0, this$AsyncWorker_0, continuation_0);
@@ -529,8 +821,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
               return COROUTINE_SUSPENDED;
             continue;
           case 1:
-            this.local$this$AsyncWorker.result_0 = this.result_0;
-            this.local$this$AsyncWorker.status_0 = AsyncWorker$DeferredStatus$SUCCESSFUL_getInstance();
+            this.local$this$AsyncWorker._result_0 = this.result_0;
+            this.local$this$AsyncWorker._status_0 = Deferred$Status$SUCCESSFUL_getInstance();
             this.exceptionState_0 = 4;
             this.state_0 = 3;
             continue;
@@ -538,26 +830,26 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             this.exceptionState_0 = 4;
             var e = this.exception_0;
             if (Kotlin.isType(e, Throwable)) {
-              this.local$this$AsyncWorker.error_0 = e;
-              this.local$this$AsyncWorker.status_0 = AsyncWorker$DeferredStatus$FAILED_getInstance();
+              this.local$this$AsyncWorker._error_0 = e;
+              this.local$this$AsyncWorker._status_0 = Deferred$Status$FAILED_getInstance();
             }
              else
               throw e;
             this.state_0 = 3;
             continue;
           case 3:
-            switch (this.local$this$AsyncWorker.status_0.name) {
+            switch (this.local$this$AsyncWorker._status_0.name) {
               case 'SUCCESSFUL':
-                var r = (tmp$ = this.local$this$AsyncWorker.result_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
+                var r = (tmp$ = this.local$this$AsyncWorker._result_0) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE();
                 while (!this.local$this$AsyncWorker.children_0.isEmpty()) {
-                  poll(this.local$this$AsyncWorker.children_0).resume_11rb$(r);
+                  poll(this.local$this$AsyncWorker.children_0).resumeWith_tl1gpc$(new Result(r));
                 }
 
                 break;
               case 'FAILED':
-                var e_0 = Kotlin.isType(tmp$_0 = this.local$this$AsyncWorker.error_0, Throwable) ? tmp$_0 : throwCCE();
+                var e_0 = Kotlin.isType(tmp$_0 = this.local$this$AsyncWorker._error_0, Throwable) ? tmp$_0 : throwCCE();
                 while (!this.local$this$AsyncWorker.children_0.isEmpty()) {
-                  poll(this.local$this$AsyncWorker.children_0).resumeWithException_tcv7n7$(e_0);
+                  poll(this.local$this$AsyncWorker.children_0).resumeWith_tl1gpc$(new Result(createFailure(e_0)));
                 }
 
                 break;
@@ -567,6 +859,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             return Unit;
           case 4:
             throw this.exception_0;
+          default:this.state_0 = 4;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -586,7 +880,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Promise.call(this);
   }
   Object.defineProperty(LateValue.prototype, 'isPending', {get: function () {
-    return this.status === Promise$Status$PENDING_getInstance();
+    return this.status === Deferred$Status$PENDING_getInstance();
   }});
   LateValue.prototype.setValue_11rb$ = function (value) {
     this.success_11rb$(value);
@@ -596,7 +890,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   LateValue.$metadata$ = {kind: Kind_CLASS, simpleName: 'LateValue', interfaces: [Promise]};
   function Promise() {
-    this._status_cqc4ss$_0 = Promise$Status$PENDING_getInstance();
+    this._status_cqc4ss$_0 = Deferred$Status$PENDING_getInstance();
     this._result_8rtqbj$_0 = null;
     this._error_okjor6$_0 = null;
     this.continuations_d42isf$_0 = ArrayList_init();
@@ -605,27 +899,33 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this._status_cqc4ss$_0;
   }});
   Object.defineProperty(Promise.prototype, 'result', {get: function () {
-    return this._result_8rtqbj$_0;
+    var tmp$;
+    if (this._status_cqc4ss$_0 !== Deferred$Status$SUCCESSFUL_getInstance())
+      throw Exception_init('status is not SUCCESSFUL.');
+    return (tmp$ = this._result_8rtqbj$_0) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE();
   }});
-  Object.defineProperty(Promise.prototype, 'error_g30mbv$_0', {get: function () {
-    return this._error_okjor6$_0;
+  Object.defineProperty(Promise.prototype, 'error', {get: function () {
+    var tmp$;
+    if (this._status_cqc4ss$_0 !== Deferred$Status$FAILED_getInstance())
+      throw Exception_init('status is not FAILED.');
+    return alwaysTrue(tmp$ = this._error_okjor6$_0, Throwable) ? tmp$ : throwCCE();
   }});
   Promise.prototype.success_11rb$ = function (result) {
-    if (this._status_cqc4ss$_0 !== Promise$Status$PENDING_getInstance())
+    if (this._status_cqc4ss$_0 !== Deferred$Status$PENDING_getInstance())
       throw IllegalStateException_init('Promise is not in pending state.');
     this._result_8rtqbj$_0 = result;
-    this._status_cqc4ss$_0 = Promise$Status$SUCCESSFUL_getInstance();
+    this._status_cqc4ss$_0 = Deferred$Status$SUCCESSFUL_getInstance();
     while (!this.continuations_d42isf$_0.isEmpty()) {
-      poll(this.continuations_d42isf$_0).resume_11rb$(result);
+      poll(this.continuations_d42isf$_0).resumeWith_tl1gpc$(new Result(result));
     }
   };
   Promise.prototype.fail_tcv7n7$ = function (error) {
-    if (this._status_cqc4ss$_0 !== Promise$Status$PENDING_getInstance())
+    if (this._status_cqc4ss$_0 !== Deferred$Status$PENDING_getInstance())
       throw IllegalStateException_init('Promise is not in pending state.');
     this._error_okjor6$_0 = error;
-    this._status_cqc4ss$_0 = Promise$Status$FAILED_getInstance();
+    this._status_cqc4ss$_0 = Deferred$Status$FAILED_getInstance();
     while (!this.continuations_d42isf$_0.isEmpty()) {
-      poll(this.continuations_d42isf$_0).resumeWithException_tcv7n7$(error);
+      poll(this.continuations_d42isf$_0).resumeWith_tl1gpc$(new Result(createFailure(error)));
     }
   };
   function Promise$await$lambda(this$Promise) {
@@ -636,10 +936,12 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
           this$Promise.continuations_d42isf$_0.add_11rb$(cont);
           break;
         case 'SUCCESSFUL':
-          cont.resume_11rb$((tmp$ = this$Promise._result_8rtqbj$_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE());
+          var value = (tmp$ = this$Promise._result_8rtqbj$_0) == null || alwaysTrue(tmp$, Any) ? tmp$ : throwCCE();
+          cont.resumeWith_tl1gpc$(new Result(value));
           break;
         case 'FAILED':
-          cont.resumeWithException_tcv7n7$(Kotlin.isType(tmp$_0 = this$Promise._error_okjor6$_0, Throwable) ? tmp$_0 : throwCCE());
+          var exception = Kotlin.isType(tmp$_0 = this$Promise._error_okjor6$_0, Throwable) ? tmp$_0 : throwCCE();
+          cont.resumeWith_tl1gpc$(new Result(createFailure(exception)));
           break;
         default:Kotlin.noWhenBranchMatched();
           break;
@@ -649,9 +951,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function suspendCoroutine$lambda_0(closure$block) {
     return function (c) {
-      var safe = SafeContinuation_init(c);
+      var safe = SafeContinuation_init(intercepted(c));
       closure$block(safe);
-      return safe.getResult();
+      return safe.getOrThrow();
     };
   }
   Promise.prototype.await = function (continuation_0, suspended) {
@@ -675,7 +977,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         switch (this.state_0) {
           case 0:
             this.state_0 = 2;
-            this.result_0 = suspendCoroutine$lambda_0(Promise$await$lambda(this.$this))(this.facade);
+            this.result_0 = suspendCoroutine$lambda_0(Promise$await$lambda(this.$this))(this);
             if (this.result_0 === COROUTINE_SUSPENDED)
               return COROUTINE_SUSPENDED;
             continue;
@@ -684,6 +986,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
           case 2:
             this.result_0;
             return this.result_0;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -698,50 +1002,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       }
      while (true);
   };
-  function Promise$Status(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function Promise$Status_initFields() {
-    Promise$Status_initFields = function () {
-    };
-    Promise$Status$PENDING_instance = new Promise$Status('PENDING', 0);
-    Promise$Status$SUCCESSFUL_instance = new Promise$Status('SUCCESSFUL', 1);
-    Promise$Status$FAILED_instance = new Promise$Status('FAILED', 2);
-  }
-  var Promise$Status$PENDING_instance;
-  function Promise$Status$PENDING_getInstance() {
-    Promise$Status_initFields();
-    return Promise$Status$PENDING_instance;
-  }
-  var Promise$Status$SUCCESSFUL_instance;
-  function Promise$Status$SUCCESSFUL_getInstance() {
-    Promise$Status_initFields();
-    return Promise$Status$SUCCESSFUL_instance;
-  }
-  var Promise$Status$FAILED_instance;
-  function Promise$Status$FAILED_getInstance() {
-    Promise$Status_initFields();
-    return Promise$Status$FAILED_instance;
-  }
-  Promise$Status.$metadata$ = {kind: Kind_CLASS, simpleName: 'Status', interfaces: [Enum]};
-  function Promise$Status$values() {
-    return [Promise$Status$PENDING_getInstance(), Promise$Status$SUCCESSFUL_getInstance(), Promise$Status$FAILED_getInstance()];
-  }
-  Promise$Status.values = Promise$Status$values;
-  function Promise$Status$valueOf(name) {
-    switch (name) {
-      case 'PENDING':
-        return Promise$Status$PENDING_getInstance();
-      case 'SUCCESSFUL':
-        return Promise$Status$SUCCESSFUL_getInstance();
-      case 'FAILED':
-        return Promise$Status$FAILED_getInstance();
-      default:throwISE('No enum constant com.acornui.async.Promise.Status.' + name);
-    }
-  }
-  Promise$Status.valueOf_61zpoe$ = Promise$Status$valueOf;
   Promise.$metadata$ = {kind: Kind_CLASS, simpleName: 'Promise', interfaces: [Deferred]};
   function awaitAll($receiver_0, continuation_0, suspended) {
     var instance = new Coroutine$awaitAll($receiver_0, continuation_0);
@@ -769,7 +1029,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
           case 0:
             this.local$copy = copy(this.local$$receiver);
             var size = this.local$copy.size;
-            this.local$a = ArrayList_init(size);
+            this.local$a = ArrayList_init_0(size);
             this.local$tmp$ = size - 1 | 0;
             this.local$i = 0;
             this.state_0 = 2;
@@ -797,6 +1057,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             continue;
           case 5:
             return this.local$a;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -834,7 +1096,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       try {
         switch (this.state_0) {
           case 0:
-            var $receiver = copy_0(this.local$$receiver);
+            var $receiver = copy_1(this.local$$receiver);
             this.local$other = HashMap_init();
             this.local$tmp$ = $receiver.entries.iterator();
             this.state_0 = 2;
@@ -863,6 +1125,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
             continue;
           case 4:
             return this.local$other;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
         }
       }
        catch (e) {
@@ -881,7 +1145,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   UrlParams.prototype.toQueryString = function () {
     var tmp$;
-    var result = new StringBuilder();
+    var result = StringBuilder_init();
     tmp$ = this.items.iterator();
     while (tmp$.hasNext()) {
       var tmp$_0 = tmp$.next();
@@ -968,7 +1232,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   UrlParamsImpl_0.prototype.get_61zpoe$ = function (name) {
     var tmp$;
     var $receiver = this._items_0;
-    var tmp$_0;
     var lastIndex = get_lastIndex($receiver);
     var indexOfFirst2$result;
     indexOfFirst2$break: do {
@@ -990,11 +1253,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
      while (false);
     var index = indexOfFirst2$result;
-    if (index === -1)
-      throw Exception_init('Element not found matching predicate');
-    else
-      tmp$_0 = $receiver.get_za3lpa$(index);
-    return (tmp$ = tmp$_0) != null ? tmp$.second : null;
+    return (tmp$ = index === -1 ? null : $receiver.get_za3lpa$(index)) != null ? tmp$.second : null;
   };
   UrlParamsImpl_0.prototype.getAll_61zpoe$ = function (name) {
     var tmp$;
@@ -1040,7 +1299,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   UrlParamsImpl_0.prototype.contains_61zpoe$ = function (name) {
     var $receiver = this._items_0;
-    var tmp$;
     var lastIndex = get_lastIndex($receiver);
     var indexOfFirst2$result;
     indexOfFirst2$break: do {
@@ -1062,59 +1320,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
      while (false);
     var index = indexOfFirst2$result;
-    if (index === -1)
-      throw Exception_init('Element not found matching predicate');
-    else
-      tmp$ = $receiver.get_za3lpa$(index);
-    return tmp$ != null;
+    return (index === -1 ? null : $receiver.get_za3lpa$(index)) != null;
   };
   UrlParamsImpl_0.prototype.clear = function () {
     this._items_0.clear();
   };
   UrlParamsImpl_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'UrlParamsImpl', interfaces: [UrlParams, Clearable]};
   var encodeUriComponent2;
-  var encodeUriComponent2_metadata = new PropertyMetadata('encodeUriComponent2');
   function get_encodeUriComponent2() {
-    return encodeUriComponent2.getValue_lrcp0p$(this, encodeUriComponent2_metadata);
+    if (encodeUriComponent2 == null)
+      return throwUPAE('encodeUriComponent2');
+    return encodeUriComponent2;
   }
   function set_encodeUriComponent2(encodeUriComponent2_0) {
-    encodeUriComponent2.setValue_9rddgb$(this, encodeUriComponent2_metadata, encodeUriComponent2_0);
+    encodeUriComponent2 = encodeUriComponent2_0;
   }
   var decodeUriComponent2;
-  var decodeUriComponent2_metadata = new PropertyMetadata('decodeUriComponent2');
   function get_decodeUriComponent2() {
-    return decodeUriComponent2.getValue_lrcp0p$(this, decodeUriComponent2_metadata);
+    if (decodeUriComponent2 == null)
+      return throwUPAE('decodeUriComponent2');
+    return decodeUriComponent2;
   }
   function set_decodeUriComponent2(decodeUriComponent2_0) {
-    decodeUriComponent2.setValue_9rddgb$(this, decodeUriComponent2_metadata, decodeUriComponent2_0);
+    decodeUriComponent2 = decodeUriComponent2_0;
   }
   function appendParam($receiver, paramName, paramValue) {
     return $receiver + (contains($receiver, '?') ? '&' : '?' + (paramName + '=' + get_encodeUriComponent2()(paramValue)));
   }
   function ActiveList(initialCapacity) {
-    this.wrapped = ArrayList_init(initialCapacity);
+    this.wrapped = ArrayList_init_0(initialCapacity);
     this._added_fkp0f3$_0 = new Signal2();
+    this.added_9nlpte$_0 = this._added_fkp0f3$_0.asRo();
     this._removed_vykc5d$_0 = new Signal2();
+    this.removed_e3k38u$_0 = this._removed_vykc5d$_0.asRo();
     this._changed_6wehcj$_0 = new Signal3();
+    this.changed_i2l58e$_0 = this._changed_6wehcj$_0.asRo();
     this._modified_eppxhm$_0 = new Signal2();
+    this.modified_7i5rrt$_0 = this._modified_eppxhm$_0.asRo();
     this._reset_7i41xq$_0 = new Signal0();
+    this.reset_hq6oar$_0 = this._reset_7i41xq$_0.asRo();
     this.updatesEnabled = true;
-    this.iteratorPool_d7bbag$_0 = ClearableObjectPool_init(ActiveList$iteratorPool$lambda(this));
+    this.iteratorPool = ClearableObjectPool_init(ActiveList$iteratorPool$lambda(this));
   }
   Object.defineProperty(ActiveList.prototype, 'added', {get: function () {
-    return this._added_fkp0f3$_0;
+    return this.added_9nlpte$_0;
   }});
   Object.defineProperty(ActiveList.prototype, 'removed', {get: function () {
-    return this._removed_vykc5d$_0;
+    return this.removed_e3k38u$_0;
   }});
   Object.defineProperty(ActiveList.prototype, 'changed', {get: function () {
-    return this._changed_6wehcj$_0;
+    return this.changed_i2l58e$_0;
   }});
   Object.defineProperty(ActiveList.prototype, 'modified', {get: function () {
-    return this._modified_eppxhm$_0;
+    return this.modified_7i5rrt$_0;
   }});
   Object.defineProperty(ActiveList.prototype, 'reset', {get: function () {
-    return this._reset_7i41xq$_0;
+    return this.reset_hq6oar$_0;
   }});
   ActiveList.prototype.remove_11rb$ = function (element) {
     var index = this.indexOf_11rb$(element);
@@ -1141,22 +1402,24 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     tmp$ = elements.iterator();
     while (tmp$.hasNext()) {
       var i = tmp$.next();
-      changed = (changed && this.remove_11rb$(i));
+      changed = changed || this.remove_11rb$(i);
     }
     return changed;
   };
-  function ActiveList$retainAll$lambda(closure$elements, closure$changed, this$ActiveList) {
-    return function (it) {
-      if (!closure$elements.contains_11rb$(it)) {
-        closure$changed.v = true;
-        this$ActiveList.remove_11rb$(it);
-      }
-      return true;
-    };
-  }
   ActiveList.prototype.retainAll_brywnq$ = function (elements) {
     var changed = {v: false};
-    this.iterate_ucl7l2$(ActiveList$retainAll$lambda(elements, changed, this));
+    var iterator = this.iteratorPool.obtain();
+    while (iterator.hasNext()) {
+      var it = iterator.next();
+      if (!elements.contains_11rb$(it)) {
+        changed.v = true;
+        this.remove_11rb$(it);
+      }
+      var shouldContinue = true;
+      if (!shouldContinue)
+        break;
+    }
+    this.iteratorPool.free_11rb$(iterator);
     return changed.v;
   };
   ActiveList.prototype.clear = function () {
@@ -1235,25 +1498,46 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     iterator.cursor = index;
     return iterator;
   };
-  ActiveList.prototype.iterate_ucl7l2$ = function (body) {
-    var iterator = this.iteratorPool_d7bbag$_0.obtain();
+  ActiveList.prototype.iterate_nhjr8t$ = defineInlineFunction('AcornUtils.com.acornui.collection.ActiveList.iterate_nhjr8t$', function (body, reversed) {
+    if (reversed) {
+      var iterator = this.iteratorPool.obtain();
+      iterator.cursor = this.size;
+      while (iterator.hasPrevious()) {
+        var shouldContinue = body(iterator.previous());
+        if (!shouldContinue)
+          break;
+      }
+      this.iteratorPool.free_11rb$(iterator);
+    }
+     else {
+      var iterator_0 = this.iteratorPool.obtain();
+      while (iterator_0.hasNext()) {
+        var shouldContinue_0 = body(iterator_0.next());
+        if (!shouldContinue_0)
+          break;
+      }
+      this.iteratorPool.free_11rb$(iterator_0);
+    }
+  });
+  ActiveList.prototype.iterate_ucl7l2$ = defineInlineFunction('AcornUtils.com.acornui.collection.ActiveList.iterate_ucl7l2$', function (body) {
+    var iterator = this.iteratorPool.obtain();
     while (iterator.hasNext()) {
       var shouldContinue = body(iterator.next());
       if (!shouldContinue)
         break;
     }
-    this.iteratorPool_d7bbag$_0.free_11rb$(iterator);
-  };
-  ActiveList.prototype.iterateReversed_ucl7l2$ = function (body) {
-    var iterator = this.iteratorPool_d7bbag$_0.obtain();
+    this.iteratorPool.free_11rb$(iterator);
+  });
+  ActiveList.prototype.iterateReversed_ucl7l2$ = defineInlineFunction('AcornUtils.com.acornui.collection.ActiveList.iterateReversed_ucl7l2$', function (body) {
+    var iterator = this.iteratorPool.obtain();
     iterator.cursor = this.size;
     while (iterator.hasPrevious()) {
       var shouldContinue = body(iterator.previous());
       if (!shouldContinue)
         break;
     }
-    this.iteratorPool_d7bbag$_0.free_11rb$(iterator);
-  };
+    this.iteratorPool.free_11rb$(iterator);
+  });
   ActiveList.prototype.batchUpdate_o14v8n$ = function (inner) {
     this.updatesEnabled = false;
     inner();
@@ -1261,6 +1545,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this._reset_7i41xq$_0.dispatch();
   };
   ActiveList.prototype.notifyElementModified_za3lpa$ = function (index) {
+    if (index < 0 || index >= this.size)
+      return;
     this._modified_eppxhm$_0.dispatch_xwzc9p$(index, this.get_za3lpa$(index));
   };
   ActiveList.prototype.dirty = function () {
@@ -1295,14 +1581,14 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function poll($receiver) {
     return $receiver.removeAt_za3lpa$(0);
   }
-  function peek($receiver) {
-    return $receiver.isEmpty() ? null : $receiver.get_za3lpa$(get_lastIndex($receiver));
+  function shift($receiver) {
+    return $receiver.removeAt_za3lpa$(0);
   }
   function ConcurrentListImpl() {
     MutableListBase.call(this);
     this.iteratorStack_0 = ArrayList_init();
     this.list_0 = ArrayList_init();
-    this.iteratorPool_0 = ClearableObjectPool_init(ConcurrentListImpl$iteratorPool$lambda(this));
+    this.iteratorPool = ClearableObjectPool_init(ConcurrentListImpl$iteratorPool$lambda(this));
   }
   ConcurrentListImpl.prototype.add_wxm5ur$ = function (index, element) {
     var tmp$;
@@ -1348,25 +1634,76 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     iterator.cursor = index;
     return iterator;
   };
-  ConcurrentListImpl.prototype.iterate_ucl7l2$ = function (body) {
-    var iterator = this.iteratorPool_0.obtain();
+  ConcurrentListImpl.prototype.iterate_nhjr8t$ = defineInlineFunction('AcornUtils.com.acornui.collection.ConcurrentListImpl.iterate_nhjr8t$', function (body, reversed) {
+    if (reversed) {
+      iterateReversed_ucl7l2$break: do {
+        if (this.size === 0)
+          break iterateReversed_ucl7l2$break;
+        else if (this.size === 1) {
+          body(this.get_za3lpa$(0));
+          break iterateReversed_ucl7l2$break;
+        }
+        var iterator = this.iteratorPool.obtain();
+        iterator.cursor = this.size;
+        while (iterator.hasPrevious()) {
+          var shouldContinue = body(iterator.previous());
+          if (!shouldContinue)
+            break;
+        }
+        this.iteratorPool.free_11rb$(iterator);
+      }
+       while (false);
+    }
+     else {
+      iterate_ucl7l2$break: do {
+        if (this.size === 0)
+          break iterate_ucl7l2$break;
+        else if (this.size === 1) {
+          body(this.get_za3lpa$(0));
+          break iterate_ucl7l2$break;
+        }
+        var iterator_0 = this.iteratorPool.obtain();
+        while (iterator_0.hasNext()) {
+          var shouldContinue_0 = body(iterator_0.next());
+          if (!shouldContinue_0)
+            break;
+        }
+        this.iteratorPool.free_11rb$(iterator_0);
+      }
+       while (false);
+    }
+  });
+  ConcurrentListImpl.prototype.iterate_ucl7l2$ = defineInlineFunction('AcornUtils.com.acornui.collection.ConcurrentListImpl.iterate_ucl7l2$', function (body) {
+    if (this.size === 0)
+      return;
+    else if (this.size === 1) {
+      body(this.get_za3lpa$(0));
+      return;
+    }
+    var iterator = this.iteratorPool.obtain();
     while (iterator.hasNext()) {
       var shouldContinue = body(iterator.next());
       if (!shouldContinue)
         break;
     }
-    this.iteratorPool_0.free_11rb$(iterator);
-  };
-  ConcurrentListImpl.prototype.iterateReversed_ucl7l2$ = function (body) {
-    var iterator = this.iteratorPool_0.obtain();
+    this.iteratorPool.free_11rb$(iterator);
+  });
+  ConcurrentListImpl.prototype.iterateReversed_ucl7l2$ = defineInlineFunction('AcornUtils.com.acornui.collection.ConcurrentListImpl.iterateReversed_ucl7l2$', function (body) {
+    if (this.size === 0)
+      return;
+    else if (this.size === 1) {
+      body(this.get_za3lpa$(0));
+      return;
+    }
+    var iterator = this.iteratorPool.obtain();
     iterator.cursor = this.size;
     while (iterator.hasPrevious()) {
       var shouldContinue = body(iterator.previous());
       if (!shouldContinue)
         break;
     }
-    this.iteratorPool_0.free_11rb$(iterator);
-  };
+    this.iteratorPool.free_11rb$(iterator);
+  });
   function ConcurrentListImpl$iteratorPool$lambda(this$ConcurrentListImpl) {
     return function () {
       return new ConcurrentListImplIterator(this$ConcurrentListImpl, this$ConcurrentListImpl.iteratorStack_0);
@@ -1387,12 +1724,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ConcurrentListImplIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'ConcurrentListImplIterator', interfaces: [MutableConcurrentListIteratorImpl_0]};
   function ConcurrentList() {
   }
-  ConcurrentList.prototype.iterate_nhjr8t$ = function (body, reversed) {
-    if (reversed)
-      this.iterateReversed_ucl7l2$(body);
-    else
-      this.iterate_ucl7l2$(body);
-  };
   ConcurrentList.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ConcurrentList', interfaces: [List]};
   function MutableConcurrentList() {
   }
@@ -1402,7 +1733,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ConcurrentListIterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ConcurrentListIterator', interfaces: [Disposable, Iterable, ListIterator, Clearable]};
   function ConcurrentListIteratorImpl(list) {
     var tmp$;
-    return new WatchedConcurrentListIteratorImpl(new ConcurrentListIteratorImpl_0(Kotlin.isType(tmp$ = list, List) ? tmp$ : throwCCE()), list);
+    return new WatchedConcurrentListIteratorImpl(new ConcurrentListIteratorImpl_0(alwaysTrue(tmp$ = list, List) ? tmp$ : throwCCE()), list);
   }
   function WatchedConcurrentListIteratorImpl(impl, list) {
     this.impl_0 = impl;
@@ -1421,6 +1752,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }, set: function (tmp$) {
     this.impl_0.cursor = tmp$;
   }});
+  Object.defineProperty(WatchedConcurrentListIteratorImpl.prototype, 'size', {get: function () {
+    return this.impl_0.size;
+  }});
   WatchedConcurrentListIteratorImpl.prototype.clear = function () {
     return this.impl_0.clear();
   };
@@ -1429,12 +1763,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   WatchedConcurrentListIteratorImpl.prototype.hasPrevious = function () {
     return this.impl_0.hasPrevious();
-  };
-  WatchedConcurrentListIteratorImpl.prototype.iterate_ucl7l2$ = function (body) {
-    return this.impl_0.iterate_ucl7l2$(body);
-  };
-  WatchedConcurrentListIteratorImpl.prototype.iterateReversed_ucl7l2$ = function (body) {
-    return this.impl_0.iterateReversed_ucl7l2$(body);
   };
   WatchedConcurrentListIteratorImpl.prototype.iterator = function () {
     return this.impl_0.iterator();
@@ -1466,7 +1794,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   WatchedConcurrentListIteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'WatchedConcurrentListIteratorImpl', interfaces: [ConcurrentListIterator]};
   function MutableConcurrentListIteratorImpl(list) {
     var tmp$;
-    return new WatchedMutableConcurrentListIteratorImpl(new MutableConcurrentListIteratorImpl_0(Kotlin.isType(tmp$ = list, MutableList) ? tmp$ : throwCCE()), list);
+    return new WatchedMutableConcurrentListIteratorImpl(new MutableConcurrentListIteratorImpl_0(alwaysTrue(tmp$ = list, MutableList) ? tmp$ : throwCCE()), list);
   }
   function WatchedMutableConcurrentListIteratorImpl(impl, list) {
     WatchedConcurrentListIteratorImpl.call(this, impl, list);
@@ -1491,6 +1819,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.cursor_jxk223$_0 = 0;
     this.lastRet = -1;
   }
+  Object.defineProperty(ConcurrentListIteratorImpl_0.prototype, 'size', {get: function () {
+    return this.list_x48lb7$_0.size;
+  }});
   Object.defineProperty(ConcurrentListIteratorImpl_0.prototype, 'cursor', {get: function () {
     return this.cursor_jxk223$_0;
   }, set: function (cursor) {
@@ -1513,7 +1844,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
   };
   ConcurrentListIteratorImpl_0.prototype.notifyCleared = function () {
-    this.cursor = kotlin_js_internal_IntCompanionObject.MAX_VALUE;
+    this.cursor = 2147483647;
   };
   ConcurrentListIteratorImpl_0.prototype.hasNext = function () {
     return this.cursor < this.list_x48lb7$_0.size;
@@ -1550,23 +1881,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ConcurrentListIteratorImpl_0.prototype.iterator = function () {
     return this;
   };
-  ConcurrentListIteratorImpl_0.prototype.iterate_ucl7l2$ = function (body) {
-    this.clear();
-    while (this.hasNext()) {
-      var shouldContinue = body(this.next());
-      if (!shouldContinue)
-        break;
-    }
-  };
-  ConcurrentListIteratorImpl_0.prototype.iterateReversed_ucl7l2$ = function (body) {
-    this.clear();
-    this.cursor = this.list_x48lb7$_0.size;
-    while (this.hasPrevious()) {
-      var shouldContinue = body(this.previous());
-      if (!shouldContinue)
-        break;
-    }
-  };
   ConcurrentListIteratorImpl_0.prototype.dispose = function () {
   };
   ConcurrentListIteratorImpl_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'ConcurrentListIteratorImpl', interfaces: [ConcurrentListIterator]};
@@ -1599,215 +1913,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.lastRet = -1;
   };
   MutableConcurrentListIteratorImpl_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'MutableConcurrentListIteratorImpl', interfaces: [MutableConcurrentListIterator, ConcurrentListIteratorImpl_0]};
-  function CyclicList(initialCapacity) {
-    if (initialCapacity === void 0)
-      initialCapacity = 16;
-    MutableListBase.call(this);
-    this.items_0 = ArrayList_init(initialCapacity);
-    this._size_0 = 0;
-    this.capacity_0 = initialCapacity;
-    this.start_0 = 0;
-    var $receiver = this.items_0;
-    var newSize = initialCapacity;
-    var tmp$, tmp$_0;
-    tmp$ = $receiver.size;
-    tmp$_0 = newSize - 1 | 0;
-    for (var i = tmp$; i <= tmp$_0; i++) {
-      $receiver.add_11rb$(null);
-    }
-  }
-  Object.defineProperty(CyclicList.prototype, 'size', {get: function () {
-    return this._size_0;
-  }});
-  CyclicList.prototype.unshift_7l2mas$ = function (values) {
-    var tmp$;
-    tmp$ = get_lastIndex_0(values);
-    for (var i = 0; i <= tmp$; i++) {
-      this.unshift_11rb$(values[i]);
-    }
-  };
-  var Math_0 = Math;
-  CyclicList.prototype.unshift_11rb$ = function (value) {
-    if (this._size_0 === this.capacity_0) {
-      var b = numberToInt(this._size_0 * 1.75);
-      this.resize_0(Math_0.max(8, b));
-    }
-    var localIndex = this.getLocalIndex_0(-1);
-    this.items_0.set_wxm5ur$(localIndex, value);
-    this.start_0 = localIndex;
-    this._size_0 = this._size_0 + 1 | 0;
-  };
-  CyclicList.prototype.shift = function () {
-    if (this._size_0 === 0)
-      throw Exception_init('List is empty');
-    var item = ensureNotNull(this.items_0.get_za3lpa$(this.start_0));
-    this.items_0.set_wxm5ur$(this.start_0, null);
-    this.start_0 = this.getLocalIndex_0(1);
-    this._size_0 = this._size_0 - 1 | 0;
-    return item;
-  };
-  CyclicList.prototype.addAll_p1ys8y$ = function (values) {
-    var tmp$;
-    tmp$ = values.iterator();
-    while (tmp$.hasNext()) {
-      var t = tmp$.next();
-      this.add_11rb$(t);
-    }
-  };
-  CyclicList.prototype.addAll_7l2mas$ = function (values) {
-    var tmp$;
-    tmp$ = get_lastIndex_0(values);
-    for (var i = 0; i <= tmp$; i++) {
-      this.add_11rb$(values[i]);
-    }
-  };
-  CyclicList.prototype.add_wxm5ur$ = function (index, element) {
-    if (index === 0) {
-      this.unshift_11rb$(element);
-    }
-     else if (index === this.size) {
-      this.add_11rb$(element);
-    }
-     else {
-      var localIndex = this.getLocalIndex_0(index);
-      this.items_0.add_wxm5ur$(localIndex, element);
-      this._size_0 = this._size_0 + 1 | 0;
-      this.capacity_0 = this.capacity_0 + 1 | 0;
-    }
-  };
-  CyclicList.prototype.removeAt_za3lpa$ = function (index) {
-    var tmp$;
-    if (index >= this._size_0)
-      throw new IndexOutOfBoundsException(index.toString() + ' is out of bounds');
-    if (index === 0) {
-      tmp$ = this.shift();
-    }
-     else if (index === this.lastIndex) {
-      tmp$ = this.pop();
-    }
-     else {
-      var localIndex = this.getLocalIndex_0(index);
-      var e = ensureNotNull(this.items_0.removeAt_za3lpa$(localIndex));
-      this._size_0 = this._size_0 - 1 | 0;
-      this.capacity_0 = this.capacity_0 - 1 | 0;
-      tmp$ = e;
-    }
-    return tmp$;
-  };
-  CyclicList.prototype.set_wxm5ur$ = function (index, element) {
-    var tmp$;
-    var localIndex = this.getLocalIndex_0(index);
-    tmp$ = this.items_0.get_za3lpa$(localIndex);
-    if (tmp$ == null) {
-      throw new IndexOutOfBoundsException(index.toString() + ' is out of bounds');
-    }
-    var previous = tmp$;
-    this.items_0.set_wxm5ur$(localIndex, element);
-    return previous;
-  };
-  CyclicList.prototype.add_11rb$ = function (element) {
-    if (this._size_0 === this.capacity_0) {
-      var b = numberToInt(this._size_0 * 1.75);
-      this.resize_0(Math_0.max(8, b));
-    }
-    var localIndex = this.getLocalIndex_0(this._size_0);
-    this.items_0.set_wxm5ur$(localIndex, element);
-    this._size_0 = this._size_0 + 1 | 0;
-    return true;
-  };
-  CyclicList.prototype.pop = function () {
-    if (this._size_0 === 0)
-      throw Exception_init('List is empty');
-    var localIndex = this.getLocalIndex_0(this._size_0 - 1 | 0);
-    var item = ensureNotNull(this.items_0.get_za3lpa$(localIndex));
-    this.items_0.set_wxm5ur$(localIndex, null);
-    this._size_0 = this._size_0 - 1 | 0;
-    return item;
-  };
-  CyclicList.prototype.get_za3lpa$ = function (index) {
-    var tmp$;
-    if (index < 0 || index >= this.size)
-      throw IllegalArgumentException_init('Index is out of bounds: ' + index);
-    var localIndex = this.getLocalIndex_0(index);
-    return (tmp$ = this.items_0.get_za3lpa$(localIndex)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
-  };
-  CyclicList.prototype.getLocalIndex_0 = function (index) {
-    var localIndex = this.start_0 + index | 0;
-    if (localIndex >= this.capacity_0) {
-      localIndex = localIndex - this.capacity_0 | 0;
-      if (localIndex >= this.start_0) {
-        throw IllegalArgumentException_init('Index is out of bounds: ' + index);
-      }
-    }
-    if (localIndex < 0) {
-      localIndex = localIndex + this.capacity_0 | 0;
-      if (localIndex < (this.start_0 + this._size_0 | 0)) {
-        throw IllegalArgumentException_init('Index is out of bounds: ' + index);
-      }
-    }
-    return localIndex;
-  };
-  CyclicList.prototype.clear = function () {
-    var tmp$;
-    tmp$ = this._size_0 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      var localIndex = i + this.start_0 | 0;
-      if (localIndex >= this.capacity_0)
-        localIndex = localIndex - this.capacity_0 | 0;
-      else if (localIndex < 0)
-        localIndex = localIndex + this.capacity_0 | 0;
-      this.items_0.set_wxm5ur$(localIndex, null);
-    }
-    this._size_0 = 0;
-    this.start_0 = 0;
-  };
-  CyclicList.prototype.resize_0 = function (newCapacity) {
-    var newItems = ArrayList_init(newCapacity);
-    var tmp$, tmp$_0;
-    tmp$ = newItems.size;
-    tmp$_0 = newCapacity - 1 | 0;
-    for (var i = tmp$; i <= tmp$_0; i++) {
-      newItems.add_11rb$(null);
-    }
-    if ((this.start_0 + this.size | 0) > this.capacity_0) {
-      arrayCopy_2(this.items_0, this.start_0, newItems, 0, this.capacity_0 - this.start_0 | 0);
-      arrayCopy_2(this.items_0, 0, newItems, this.capacity_0 - this.start_0 | 0, this.size - this.capacity_0 + this.start_0 | 0);
-    }
-     else {
-      arrayCopy_2(this.items_0, this.start_0, newItems, 0, this.size);
-    }
-    this.items_0 = newItems;
-    this.start_0 = 0;
-    this.capacity_0 = newCapacity;
-  };
-  CyclicList.prototype.shiftAll_za3lpa$ = function (delta) {
-    if (delta === 0)
-      return;
-    var delta2 = delta;
-    if (delta2 < 0)
-      delta2 = delta2 + this.size | 0;
-    var newItems = ArrayList_init(this.capacity_0);
-    var newSize = this.capacity_0;
-    var tmp$, tmp$_0;
-    tmp$ = newItems.size;
-    tmp$_0 = newSize - 1 | 0;
-    for (var i = tmp$; i <= tmp$_0; i++) {
-      newItems.add_11rb$(null);
-    }
-    arrayCopy_2(this, delta2, newItems, 0, this.size - delta2 | 0);
-    arrayCopy_2(this, 0, newItems, this.size - delta2 | 0, delta2);
-    this.items_0 = newItems;
-    this.start_0 = 0;
-  };
-  CyclicList.$metadata$ = {kind: Kind_CLASS, simpleName: 'CyclicList', interfaces: [MutableListBase, Clearable]};
-  function cyclicListPool$lambda() {
-    return new CyclicList();
-  }
-  var cyclicListPool;
-  function cyclicListObtain() {
-    var tmp$;
-    return Kotlin.isType(tmp$ = cyclicListPool.obtain(), CyclicList) ? tmp$ : throwCCE();
-  }
   function DualHashMap(removeEmptyInnerMaps) {
     if (removeEmptyInnerMaps === void 0)
       removeEmptyInnerMaps = false;
@@ -1849,102 +1954,42 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.map.clear();
   };
   DualHashMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'DualHashMap', interfaces: [Clearable]};
-  function arrayCopy_2(src, srcPos, dest, destPos, length) {
-    if (destPos === void 0)
-      destPos = 0;
-    if (length === void 0)
-      length = src.size;
-    var tmp$, tmp$_0, tmp$_1;
-    if (destPos > srcPos) {
-      var destIndex = length + destPos - 1 | 0;
-      for (var i = srcPos + length - 1 | 0; i >= srcPos; i--) {
-        addOrSet(dest, (tmp$ = destIndex, destIndex = tmp$ - 1 | 0, tmp$), src.get_za3lpa$(i));
-      }
+  function FloatList(target) {
+    ListBase.call(this);
+    this.target_0 = target;
+  }
+  Object.defineProperty(FloatList.prototype, 'size', {get: function () {
+    return this.target_0.length;
+  }});
+  FloatList.prototype.get_za3lpa$ = function (index) {
+    return this.target_0[index];
+  };
+  FloatList.prototype.set_24o109$ = function (index, element) {
+    this.target_0[index] = element;
+  };
+  FloatList.prototype.equals = function (other) {
+    var tmp$, tmp$_0;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, List) ? tmp$ : throwCCE();
+    tmp$_0 = get_lastIndex_1(this.target_0);
+    for (var i = 0; i <= tmp$_0; i++) {
+      if (this.target_0[i] !== other.get_za3lpa$(i))
+        return false;
     }
-     else {
-      var destIndex_0 = destPos;
-      tmp$_0 = srcPos + length - 1 | 0;
-      for (var i_0 = srcPos; i_0 <= tmp$_0; i_0++) {
-        addOrSet(dest, (tmp$_1 = destIndex_0, destIndex_0 = tmp$_1 + 1 | 0, tmp$_1), src.get_za3lpa$(i_0));
-      }
-    }
-  }
-  function copy($receiver) {
-    var newList = ArrayList_init($receiver.size);
-    arrayCopy_2($receiver, 0, newList);
-    return newList;
-  }
-  function sortedInsertionIndex($receiver, element, fromIndex, toIndex, matchForwards) {
-    if (fromIndex === void 0)
-      fromIndex = 0;
-    if (toIndex === void 0)
-      toIndex = $receiver.size;
-    if (matchForwards === void 0)
-      matchForwards = true;
-    var indexA = fromIndex;
-    var indexB = toIndex;
-    while (indexA < indexB) {
-      var midIndex = indexA + indexB >>> 1;
-      var comparison = Kotlin.compareTo(element, $receiver.get_za3lpa$(midIndex));
-      if (comparison === 0) {
-        if (matchForwards) {
-          indexA = midIndex + 1 | 0;
-        }
-         else {
-          indexB = midIndex;
-        }
-      }
-       else if (comparison > 0) {
-        indexA = midIndex + 1 | 0;
-      }
-       else {
-        indexB = midIndex;
-      }
-    }
-    return indexA;
-  }
-  function sortedInsertionIndex_0($receiver, element, fromIndex, toIndex, matchForwards, comparator) {
-    if (fromIndex === void 0)
-      fromIndex = 0;
-    if (toIndex === void 0)
-      toIndex = $receiver.size;
-    if (matchForwards === void 0)
-      matchForwards = true;
-    var indexA = fromIndex;
-    var indexB = toIndex;
-    while (indexA < indexB) {
-      var midIndex = indexA + indexB >>> 1;
-      var comparison = comparator(element, $receiver.get_za3lpa$(midIndex));
-      if (comparison === 0) {
-        if (matchForwards) {
-          indexA = midIndex + 1 | 0;
-        }
-         else {
-          indexB = midIndex;
-        }
-      }
-       else if (comparison > 0) {
-        indexA = midIndex + 1 | 0;
-      }
-       else {
-        indexB = midIndex;
-      }
-    }
-    return indexA;
-  }
-  function addSorted($receiver, element, matchForwards, comparator) {
-    if (matchForwards === void 0)
-      matchForwards = true;
-    var index = sortedInsertionIndex_0($receiver, element, void 0, void 0, matchForwards, comparator);
-    $receiver.add_wxm5ur$(index, element);
-    return index;
-  }
-  function addSorted_0($receiver, element, matchForwards) {
-    if (matchForwards === void 0)
-      matchForwards = true;
-    var index = sortedInsertionIndex($receiver, element, void 0, void 0, matchForwards);
-    $receiver.add_wxm5ur$(index, element);
-    return index;
+    return true;
+  };
+  FloatList.prototype.hashCode = function () {
+    return hashCode(this.target_0);
+  };
+  FloatList.prototype.toString = function () {
+    return 'FloatList(' + contentToString(this.target_0) + ')';
+  };
+  FloatList.$metadata$ = {kind: Kind_CLASS, simpleName: 'FloatList', interfaces: [ListBase]};
+  function FloatList_init(size, $this) {
+    $this = $this || Object.create(FloatList.prototype);
+    FloatList.call($this, new Float32Array(size));
+    return $this;
   }
   function ListBase() {
   }
@@ -2080,47 +2125,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return new MutableSubList(this, fromIndex, toIndex);
   };
   MutableListBase.$metadata$ = {kind: Kind_CLASS, simpleName: 'MutableListBase', interfaces: [MutableList, Clearable, ListBase]};
-  function ListIteratorImpl(list) {
-    this.list = list;
-    this.cursor = 0;
-    this.lastRet = -1;
-  }
-  ListIteratorImpl.prototype.hasNext = function () {
-    return this.cursor < this.list.size;
-  };
-  ListIteratorImpl.prototype.next = function () {
-    var i = this.cursor;
-    if (i >= this.list.size)
-      throw Exception_init('Iterator does not have next.');
-    this.cursor = i + 1 | 0;
-    this.lastRet = i;
-    return this.list.get_za3lpa$(i);
-  };
-  ListIteratorImpl.prototype.nextIndex = function () {
-    return this.cursor;
-  };
-  ListIteratorImpl.prototype.hasPrevious = function () {
-    return this.cursor !== 0;
-  };
-  ListIteratorImpl.prototype.previous = function () {
-    var i = this.cursor - 1 | 0;
-    if (i < 0)
-      throw Exception_init('Iterator does not have previous.');
-    this.cursor = i;
-    this.lastRet = i;
-    return this.list.get_za3lpa$(i);
-  };
-  ListIteratorImpl.prototype.previousIndex = function () {
-    return this.cursor - 1 | 0;
-  };
-  ListIteratorImpl.prototype.clear = function () {
-    this.cursor = 0;
-    this.lastRet = -1;
-  };
-  ListIteratorImpl.prototype.iterator = function () {
-    return this;
-  };
-  ListIteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ListIteratorImpl', interfaces: [Iterable, ListIterator, Clearable]};
   function MutableListIteratorImpl(mutableList) {
     ListIteratorImpl.call(this, mutableList);
     this.mutableList_rym7p8$_0 = mutableList;
@@ -2176,6 +2180,188 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.target_0.set_wxm5ur$(index - this.fromIndex_0 | 0, element);
   };
   MutableSubList.$metadata$ = {kind: Kind_CLASS, simpleName: 'MutableSubList', interfaces: [MutableListBase]};
+  function arrayCopy_4(src, srcPos, dest, destPos, length) {
+    if (destPos === void 0)
+      destPos = 0;
+    if (length === void 0)
+      length = src.size;
+    var tmp$, tmp$_0, tmp$_1;
+    if (destPos > srcPos) {
+      var destIndex = length + destPos - 1 | 0;
+      for (var i = srcPos + length - 1 | 0; i >= srcPos; i--) {
+        addOrSet(dest, (tmp$ = destIndex, destIndex = tmp$ - 1 | 0, tmp$), src.get_za3lpa$(i));
+      }
+    }
+     else {
+      var destIndex_0 = destPos;
+      tmp$_0 = srcPos + length - 1 | 0;
+      for (var i_0 = srcPos; i_0 <= tmp$_0; i_0++) {
+        addOrSet(dest, (tmp$_1 = destIndex_0, destIndex_0 = tmp$_1 + 1 | 0, tmp$_1), src.get_za3lpa$(i_0));
+      }
+    }
+  }
+  function copy($receiver) {
+    var newList = ArrayList_init_0($receiver.size);
+    arrayCopy_4($receiver, 0, newList);
+    return newList;
+  }
+  function copy_0($receiver) {
+    var newList = ArrayList_init_0($receiver.size);
+    newList.addAll_brywnq$($receiver);
+    return newList;
+  }
+  function sortedInsertionIndex($receiver, element, fromIndex, toIndex, matchForwards, comparator) {
+    if (fromIndex === void 0)
+      fromIndex = 0;
+    if (toIndex === void 0)
+      toIndex = $receiver.size;
+    if (matchForwards === void 0)
+      matchForwards = true;
+    var indexA = fromIndex;
+    var indexB = toIndex;
+    if (indexA < indexB) {
+      var midIndex = toIndex - 1 | 0;
+      var comparison = comparator(element, $receiver.get_za3lpa$(midIndex));
+      if (comparison === 0) {
+        if (matchForwards) {
+          indexA = midIndex + 1 | 0;
+        }
+         else {
+          indexB = midIndex;
+        }
+      }
+       else if (comparison > 0) {
+        indexA = midIndex + 1 | 0;
+      }
+       else {
+        indexB = midIndex;
+      }
+    }
+     else {
+      return indexA;
+    }
+    if (indexA < indexB) {
+      var midIndex_0 = indexA;
+      var comparison_0 = comparator(element, $receiver.get_za3lpa$(midIndex_0));
+      if (comparison_0 === 0) {
+        if (matchForwards) {
+          indexA = midIndex_0 + 1 | 0;
+        }
+         else {
+          indexB = midIndex_0;
+        }
+      }
+       else if (comparison_0 > 0) {
+        indexA = midIndex_0 + 1 | 0;
+      }
+       else {
+        indexB = midIndex_0;
+      }
+    }
+     else {
+      return indexA;
+    }
+    while (indexA < indexB) {
+      var midIndex_1 = indexA + indexB >>> 1;
+      var comparison_1 = comparator(element, $receiver.get_za3lpa$(midIndex_1));
+      if (comparison_1 === 0) {
+        if (matchForwards) {
+          indexA = midIndex_1 + 1 | 0;
+        }
+         else {
+          indexB = midIndex_1;
+        }
+      }
+       else if (comparison_1 > 0) {
+        indexA = midIndex_1 + 1 | 0;
+      }
+       else {
+        indexB = midIndex_1;
+      }
+    }
+    return indexA;
+  }
+  function sortedInsertionIndex$lambda(o1, o2) {
+    return Kotlin.compareTo(o1, o2);
+  }
+  function sortedInsertionIndex_0($receiver, element, fromIndex, toIndex, matchForwards) {
+    if (fromIndex === void 0)
+      fromIndex = 0;
+    if (toIndex === void 0)
+      toIndex = $receiver.size;
+    if (matchForwards === void 0)
+      matchForwards = true;
+    return sortedInsertionIndex($receiver, element, fromIndex, toIndex, matchForwards, sortedInsertionIndex$lambda);
+  }
+  function sortedInsertionIndex$lambda_0(closure$comparator) {
+    return function (f, o2) {
+      return closure$comparator(o2);
+    };
+  }
+  function sortedInsertionIndex_1($receiver, fromIndex, toIndex, matchForwards, comparator) {
+    if (fromIndex === void 0)
+      fromIndex = 0;
+    if (toIndex === void 0)
+      toIndex = $receiver.size;
+    if (matchForwards === void 0)
+      matchForwards = true;
+    return sortedInsertionIndex($receiver, null, fromIndex, toIndex, matchForwards, sortedInsertionIndex$lambda_0(comparator));
+  }
+  function addSorted($receiver, element, matchForwards, comparator) {
+    if (matchForwards === void 0)
+      matchForwards = true;
+    var index = sortedInsertionIndex($receiver, element, void 0, void 0, matchForwards, comparator);
+    $receiver.add_wxm5ur$(index, element);
+    return index;
+  }
+  function addSorted_0($receiver, element, matchForwards) {
+    if (matchForwards === void 0)
+      matchForwards = true;
+    var index = sortedInsertionIndex_0($receiver, element, void 0, void 0, matchForwards);
+    $receiver.add_wxm5ur$(index, element);
+    return index;
+  }
+  function ListIteratorImpl(list) {
+    this.list = list;
+    this.cursor = 0;
+    this.lastRet = -1;
+  }
+  ListIteratorImpl.prototype.hasNext = function () {
+    return this.cursor < this.list.size;
+  };
+  ListIteratorImpl.prototype.next = function () {
+    var i = this.cursor;
+    if (i >= this.list.size)
+      throw Exception_init('Iterator does not have next.');
+    this.cursor = i + 1 | 0;
+    this.lastRet = i;
+    return this.list.get_za3lpa$(i);
+  };
+  ListIteratorImpl.prototype.nextIndex = function () {
+    return this.cursor;
+  };
+  ListIteratorImpl.prototype.hasPrevious = function () {
+    return this.cursor !== 0;
+  };
+  ListIteratorImpl.prototype.previous = function () {
+    var i = this.cursor - 1 | 0;
+    if (i < 0)
+      throw Exception_init('Iterator does not have previous.');
+    this.cursor = i;
+    this.lastRet = i;
+    return this.list.get_za3lpa$(i);
+  };
+  ListIteratorImpl.prototype.previousIndex = function () {
+    return this.cursor - 1 | 0;
+  };
+  ListIteratorImpl.prototype.clear = function () {
+    this.cursor = 0;
+    this.lastRet = -1;
+  };
+  ListIteratorImpl.prototype.iterator = function () {
+    return this;
+  };
+  ListIteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ListIteratorImpl', interfaces: [Iterable, ListIterator, Clearable]};
   function arrayListPool$ObjectLiteral(initialCapacity, create) {
     ObjectPool.call(this, initialCapacity, create);
   }
@@ -2190,7 +2376,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   var arrayListPool;
   function arrayListObtain() {
     var tmp$;
-    return Kotlin.isType(tmp$ = arrayListPool.obtain(), MutableList) ? tmp$ : throwCCE();
+    return alwaysTrue(tmp$ = arrayListPool.obtain(), MutableList) ? tmp$ : throwCCE();
   }
   function addOrSet($receiver, i, value) {
     if (i === $receiver.size)
@@ -2198,6 +2384,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     else
       $receiver.set_wxm5ur$(i, value);
   }
+  var Math_0 = Math;
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
   var Comparator = Kotlin.kotlin.Comparator;
   function ListView() {
@@ -2205,13 +2392,17 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.observableWrapped_0 = null;
     this.local_0 = ArrayList_init();
     this._added_0 = new Signal2();
+    this.added_ygzxv$_0 = this._added_0.asRo();
     this._removed_0 = new Signal2();
+    this.removed_8orn83$_0 = this._removed_0.asRo();
     this._changed_0 = new Signal3();
+    this.changed_u6769t$_0 = this._changed_0.asRo();
     this._modified_0 = new Signal2();
+    this.modified_3l50l4$_0 = this._modified_0.asRo();
     this._reset_0 = new Signal0();
     this.reset_911yf8$_0 = this._reset_0;
     this.isDirty_0 = true;
-    this.iteratorPool_0 = ClearableObjectPool_init(ListView$iteratorPool$lambda(this));
+    this.iteratorPool = ClearableObjectPool_init(ListView$iteratorPool$lambda(this));
     this.filter_yjeey1$_0 = new observable$ObjectLiteral(ListView$filter$lambda(this), null);
     this.sortComparator_owsusz$_0 = new observable$ObjectLiteral(ListView$sortComparator$lambda(this), null);
     this.insertionComparator_0 = ListView$insertionComparator$lambda(this);
@@ -2220,7 +2411,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   var ListView$filter_metadata = new PropertyMetadata('filter');
   var ListView$sortComparator_metadata = new PropertyMetadata('sortComparator');
   var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  function copy_0($receiver) {
+  function copy_1($receiver) {
     var m = HashMap_init();
     m.putAll_a2k3zr$($receiver);
     return m;
@@ -2237,16 +2428,30 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return HashMap_init();
   }
   var mapPool;
+  function _stringMap$lambda() {
+    return HashMap_init();
+  }
+  var _stringMap;
+  function stringMapOf_0(pairs) {
+    var tmp$;
+    var $receiver = alwaysTrue(tmp$ = _stringMap(), MutableMap) ? tmp$ : throwCCE();
+    putAll($receiver, pairs);
+    return $receiver;
+  }
   function ObservableConcatList(listA, listB) {
     ListBase.call(this);
     this.listA_0 = listA;
     this.listB_0 = listB;
     this._added_0 = new Signal2();
+    this.added_68pcnz$_0 = this._added_0.asRo();
     this._removed_0 = new Signal2();
+    this.removed_jvtjzz$_0 = this._removed_0.asRo();
     this._changed_0 = new Signal3();
+    this.changed_caboh9$_0 = this._changed_0.asRo();
     this._modified_0 = new Signal2();
+    this.modified_trrjna$_0 = this._modified_0.asRo();
     this._reset_0 = new Signal0();
-    this.iteratorPool_0 = ClearableObjectPool_init(ObservableConcatList$iteratorPool$lambda(this));
+    this.reset_1tvlte$_0 = this._reset_0.asRo();
     this.listA_0.added.add_trkh7z$(ObservableConcatList_init$lambda(this));
     this.listB_0.added.add_trkh7z$(ObservableConcatList_init$lambda_0(this));
     this.listA_0.removed.add_trkh7z$(ObservableConcatList_init$lambda_1(this));
@@ -2260,7 +2465,21 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function ObservableList() {
   }
-  ObservableList.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ObservableList', interfaces: [ConcurrentList]};
+  ObservableList.prototype.addBinding_o14v8n$ = function (callback) {
+    this.added.add_trkh7z$(get_as2(callback));
+    this.removed.add_trkh7z$(get_as2(callback));
+    this.changed.add_trkh7z$(get_as3(callback));
+    this.modified.add_trkh7z$(get_as2(callback));
+    this.reset.add_trkh7z$(callback);
+  };
+  ObservableList.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.added.remove_trkh7z$(get_as2(callback));
+    this.removed.remove_trkh7z$(get_as2(callback));
+    this.changed.remove_trkh7z$(get_as3(callback));
+    this.modified.remove_trkh7z$(get_as2(callback));
+    this.reset.remove_trkh7z$(callback);
+  };
+  ObservableList.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ObservableList', interfaces: [Bindable, ConcurrentList]};
   function MutableObservableList() {
   }
   MutableObservableList.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableObservableList', interfaces: [MutableConcurrentList, ObservableList]};
@@ -2283,7 +2502,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function ObjectPool(initialCapacity, create) {
     this.create_m4w01p$_0 = create;
-    this.freeObjects_qy8k4t$_0 = ArrayList_init(initialCapacity);
+    this.freeObjects_qy8k4t$_0 = ArrayList_init_0(initialCapacity);
   }
   ObjectPool.prototype.obtain = function () {
     var tmp$;
@@ -2335,6 +2554,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.mostRecent_0 = -1;
     this.activeObjects_0 = arrayFactory(this.size);
   }
+  function tuple_1($receiver, second) {
+    return new Pair($receiver, second);
+  }
   function Disposable() {
   }
   Disposable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Disposable', interfaces: []};
@@ -2345,20 +2567,50 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function floor($receiver) {
     return numberToInt($receiver);
   }
-  function round($receiver) {
-    return Math_0.round($receiver);
-  }
+  var round = Kotlin.kotlin.math.round_14dthe$;
   function notCloseTo($receiver, other, tolerance) {
     if (tolerance === void 0)
       tolerance = 1.0E-4;
-    var value = $receiver - other;
-    return (value < 0.0 ? -value : value) > tolerance;
+    var x = $receiver - other;
+    return Math_0.abs(x) > tolerance;
   }
   function closeTo($receiver, other, tolerance) {
     if (tolerance === void 0)
       tolerance = 1.0E-4;
-    var value = $receiver - other;
-    return (value < 0.0 ? -value : value) <= tolerance;
+    var x = $receiver - other;
+    return Math_0.abs(x) <= tolerance;
+  }
+  function zeroPadding($receiver, intDigits, decimalDigits) {
+    if (decimalDigits === void 0)
+      decimalDigits = 0;
+    return zeroPadding_0($receiver.toString(), intDigits, decimalDigits);
+  }
+  function zeroPadding_0($receiver, intDigits, decimalDigits) {
+    if (decimalDigits === void 0)
+      decimalDigits = 0;
+    var str = $receiver;
+    if (intDigits === 0 && decimalDigits === 0)
+      return str;
+    var decimalMarkIndex = indexOf(str, '.');
+    var currIntDigits;
+    var currDecDigits;
+    if (decimalMarkIndex !== -1) {
+      currIntDigits = decimalMarkIndex;
+      currDecDigits = str.length - decimalMarkIndex - 1 | 0;
+    }
+     else {
+      currIntDigits = str.length;
+      currDecDigits = 0;
+    }
+    if (intDigits > currIntDigits) {
+      str = repeat2('0', intDigits - currIntDigits | 0) + str;
+    }
+    if (decimalDigits > currDecDigits) {
+      if (decimalMarkIndex === -1)
+        str += '.';
+      str += repeat2('0', decimalDigits - currDecDigits | 0);
+    }
+    return str;
   }
   function replace2($receiver, target, replacement) {
     return join2_0(split2_0($receiver, target.toString()), replacement.toString());
@@ -2368,7 +2620,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function join2($receiver, delim) {
     var tmp$;
-    var builder = new StringBuilder();
+    var builder = StringBuilder_init();
     tmp$ = get_lastIndex_0($receiver);
     for (var i = 0; i <= tmp$; i++) {
       if (i !== 0)
@@ -2377,17 +2629,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return builder.toString();
   }
-  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
+  var iterator_0 = Kotlin.kotlin.text.iterator_gw00vp$;
   var Array_0 = Array;
   function split2($receiver, delim) {
     var tmp$;
     var count = 0;
-    tmp$ = iterator($receiver);
+    tmp$ = iterator_0($receiver);
     while (tmp$.hasNext()) {
       var element = unboxChar(tmp$.next());
-      if (unboxChar(toBoxedChar(element)) === delim) {
+      if (unboxChar(toBoxedChar(element)) === delim)
         count = count + 1 | 0;
-      }
     }
     var size = count + 1 | 0;
     var index = {v: 0};
@@ -2412,7 +2663,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function join2_0($receiver, delim) {
     var tmp$;
-    var builder = new StringBuilder();
+    var builder = StringBuilder_init();
     tmp$ = get_lastIndex_0($receiver);
     for (var i = 0; i <= tmp$; i++) {
       if (i !== 0)
@@ -2455,82 +2706,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function repeat2($receiver, n) {
     if (n < 0)
       throw IllegalArgumentException_init('Value should be non-negative, but was ' + n);
-    var sb = StringBuilder_init(Kotlin.imul(n, $receiver.length));
+    var sb = StringBuilder_init_0(Kotlin.imul(n, $receiver.length));
     for (var i = 1; i <= n; i++) {
       sb.append_gw00v9$($receiver);
     }
     return sb.toString();
   }
   var lineSeparator;
-  function removeBackslashes(value) {
-    var tmp$;
-    var unescaped = new StringBuilder();
-    var lastIndex = 0;
-    var i = 0;
-    var n = value.length;
-    while (i < n) {
-      if (value.charCodeAt(i) === 92 && (i + 1 | 0) < n) {
-        var next = value.charCodeAt((i = i + 1 | 0, i));
-        switch (next) {
-          case 116:
-            tmp$ = 9;
-            break;
-          case 98:
-            tmp$ = 8;
-            break;
-          case 110:
-            tmp$ = 10;
-            break;
-          case 114:
-            tmp$ = 13;
-            break;
-          case 39:
-            tmp$ = 39;
-            break;
-          case 34:
-            tmp$ = 34;
-            break;
-          case 47:
-            tmp$ = 47;
-            break;
-          case 92:
-            tmp$ = 92;
-            break;
-          case 36:
-            tmp$ = 36;
-            break;
-          case 117:
-            if ((i + 5 | 0) <= n) {
-              var startIndex = i + 1 | 0;
-              var endIndex = i + 5 | 0;
-              var digits = toInt(value.substring(startIndex, endIndex), 16);
-              var startIndex_0 = lastIndex;
-              var endIndex_0 = i - 1 | 0;
-              unescaped.append_gw00v9$(value.substring(startIndex_0, endIndex_0));
-              unescaped.append_s8itvh$(toChar(digits));
-              i = i + 4 | 0;
-              lastIndex = i + 1 | 0;
-            }
-
-            tmp$ = null;
-            break;
-          default:tmp$ = null;
-            break;
-        }
-        var newChar = tmp$;
-        if (newChar != null) {
-          var startIndex_1 = lastIndex;
-          var endIndex_1 = i - 1 | 0;
-          unescaped.append_gw00v9$(value.substring(startIndex_1, endIndex_1));
-          unescaped.append_s8itvh$(newChar);
-          lastIndex = i + 1 | 0;
-        }
-      }
-      i = i + 1 | 0;
-    }
-    var startIndex_2 = lastIndex;
-    unescaped.append_gw00v9$(value.substring(startIndex_2));
-    return unescaped.toString();
+  var whitespaceChars;
+  function isWhitespace2($receiver) {
+    return whitespaceChars.containsKey_11rb$(toBoxedChar($receiver));
   }
   function LazyInstance(receiver, factory) {
     this.receiver_0 = receiver;
@@ -2563,13 +2748,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function ColorRo() {
   }
   ColorRo.prototype.times_mx4ult$ = function (value) {
-    return (new Color_0()).set_xksl39$(this).mul_mx4ult$(value);
+    return (new Color_0()).set_8suw10$(this).mul_mx4ult$(value);
   };
-  ColorRo.prototype.plus_xksl39$ = function (color) {
-    return (new Color_0()).set_xksl39$(this).add_xksl39$(color);
+  ColorRo.prototype.plus_8suw10$ = function (color) {
+    return (new Color_0()).set_8suw10$(this).add_8suw10$(color);
   };
-  ColorRo.prototype.minus_xksl39$ = function (color) {
-    return (new Color_0()).set_xksl39$(this).sub_xksl39$(color);
+  ColorRo.prototype.minus_8suw10$ = function (color) {
+    return (new Color_0()).set_8suw10$(this).sub_8suw10$(color);
   };
   ColorRo.prototype.toCssString = function () {
     return 'rgba(' + numberToInt(this.r * 255) + ', ' + numberToInt(this.g * 255) + ', ' + numberToInt(this.b * 255) + ', ' + this.a + ')';
@@ -2580,7 +2765,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   ColorRo.prototype.toRgbaString = function () {
     return toOctet(this.r) + toOctet(this.g) + toOctet(this.b) + toOctet(this.a);
   };
-  ColorRo.prototype.toHsl_y02iys$ = function (out) {
+  ColorRo.prototype.toHsl_3f6jmr$ = function (out) {
     out.a = this.a;
     var a = this.r;
     var b = this.g;
@@ -2610,12 +2795,12 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         out.h = out.h + 360.0;
       if (out.h >= 360.0)
         out.h = out.h - 360.0;
-      var value = 2 * out.l - 1.0;
-      out.s = d / (1.0 - (value < 0.0 ? -value : value));
+      var x = 2 * out.l - 1.0;
+      out.s = d / (1.0 - Math_0.abs(x));
     }
     return out;
   };
-  ColorRo.prototype.toHsv_y02iyi$ = function (out) {
+  ColorRo.prototype.toHsv_3f6jmh$ = function (out) {
     out.a = this.a;
     var a = this.r;
     var b = this.g;
@@ -2651,7 +2836,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return out;
   };
-  ColorRo.prototype.closeTo_c3ty5c$$default = function (other, tolerance) {
+  ColorRo.prototype.closeTo_xc6en5$$default = function (other, tolerance) {
     if (this === other)
       return true;
     if (!closeTo(this.r, other.r, tolerance))
@@ -2664,13 +2849,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return false;
     return true;
   };
-  ColorRo.prototype.closeTo_c3ty5c$ = function (other, tolerance, callback$default) {
+  ColorRo.prototype.closeTo_xc6en5$ = function (other, tolerance, callback$default) {
     if (tolerance === void 0)
       tolerance = 1.0E-4;
-    return callback$default ? callback$default(other, tolerance) : this.closeTo_c3ty5c$$default(other, tolerance);
+    return callback$default ? callback$default(other, tolerance) : this.closeTo_xc6en5$$default(other, tolerance);
   };
   ColorRo.prototype.copy = function () {
-    return (new Color_0()).set_xksl39$(this);
+    return (new Color_0()).set_8suw10$(this);
   };
   ColorRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ColorRo', interfaces: []};
   function Color(rgba) {
@@ -2686,39 +2871,39 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       b = 0.0;
     if (a === void 0)
       a = 0.0;
-    this.r_ok1x94$_0 = r;
-    this.g_ok1wzn$_0 = g;
-    this.b_ok1wvc$_0 = b;
-    this.a_ok1wuh$_0 = a;
+    this.r_b9twgn$_0 = r;
+    this.g_b9tw76$_0 = g;
+    this.b_b9tw2v$_0 = b;
+    this.a_b9tw20$_0 = a;
   }
   Object.defineProperty(Color_0.prototype, 'r', {get: function () {
-    return this.r_ok1x94$_0;
+    return this.r_b9twgn$_0;
   }, set: function (r) {
-    this.r_ok1x94$_0 = r;
+    this.r_b9twgn$_0 = r;
   }});
   Object.defineProperty(Color_0.prototype, 'g', {get: function () {
-    return this.g_ok1wzn$_0;
+    return this.g_b9tw76$_0;
   }, set: function (g) {
-    this.g_ok1wzn$_0 = g;
+    this.g_b9tw76$_0 = g;
   }});
   Object.defineProperty(Color_0.prototype, 'b', {get: function () {
-    return this.b_ok1wvc$_0;
+    return this.b_b9tw2v$_0;
   }, set: function (b) {
-    this.b_ok1wvc$_0 = b;
+    this.b_b9tw2v$_0 = b;
   }});
   Object.defineProperty(Color_0.prototype, 'a', {get: function () {
-    return this.a_ok1wuh$_0;
+    return this.a_b9tw20$_0;
   }, set: function (a) {
-    this.a_ok1wuh$_0 = a;
+    this.a_b9tw20$_0 = a;
   }});
-  Color_0.prototype.set_xksl39$ = function (color) {
+  Color_0.prototype.set_8suw10$ = function (color) {
     this.r = color.r;
     this.g = color.g;
     this.b = color.b;
     this.a = color.a;
     return this;
   };
-  Color_0.prototype.mul_xksl39$ = function (color) {
+  Color_0.prototype.mul_8suw10$ = function (color) {
     this.r = this.r * color.r;
     this.g = this.g * color.g;
     this.b = this.b * color.b;
@@ -2732,7 +2917,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.a = this.a * value;
     return this;
   };
-  Color_0.prototype.add_xksl39$ = function (color) {
+  Color_0.prototype.add_8suw10$ = function (color) {
     this.r = this.r + color.r;
     this.g = this.g + color.g;
     this.b = this.b + color.b;
@@ -2745,7 +2930,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.b = 0.0;
     this.a = 0.0;
   };
-  Color_0.prototype.sub_xksl39$ = function (color) {
+  Color_0.prototype.sub_8suw10$ = function (color) {
     this.r = this.r - color.r;
     this.g = this.g - color.g;
     this.b = this.b - color.b;
@@ -2779,10 +2964,17 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this;
   };
   Color_0.prototype.set8888_s8cxhz$ = function (rgba) {
-    this.r = rgba.and(Kotlin.Long.fromInt(-16777216)).shiftRightUnsigned(24).toNumber() / 255.0;
-    this.g = rgba.and(Kotlin.Long.fromInt(16711680)).shiftRightUnsigned(16).toNumber() / 255.0;
-    this.b = rgba.and(Kotlin.Long.fromInt(65280)).shiftRightUnsigned(8).toNumber() / 255.0;
-    this.a = rgba.and(Kotlin.Long.fromInt(255)).toNumber() / 255.0;
+    this.r = rgba.and(L4278190080).shiftRightUnsigned(24).toNumber() / 255.0;
+    this.g = rgba.and(L16711680).shiftRightUnsigned(16).toNumber() / 255.0;
+    this.b = rgba.and(L65280).shiftRightUnsigned(8).toNumber() / 255.0;
+    this.a = rgba.and(L255).toNumber() / 255.0;
+    return this;
+  };
+  Color_0.prototype.set8888_za3lpa$ = function (rgba) {
+    this.r = ((rgba & -16777216) >>> 24) / 255.0;
+    this.g = ((rgba & 16711680) >>> 16) / 255.0;
+    this.b = ((rgba & 65280) >>> 8) / 255.0;
+    this.a = (rgba & 255) / 255.0;
     return this;
   };
   Color_0.prototype.set888_za3lpa$ = function (rgb) {
@@ -2813,7 +3005,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.a = this.a * a;
     return this;
   };
-  Color_0.prototype.lerp_c3ty5c$ = function (target, t) {
+  Color_0.prototype.lerp_xc6en5$ = function (target, t) {
     this.r = this.r + t * (target.r - this.r);
     this.g = this.g + t * (target.g - this.g);
     this.b = this.b + t * (target.b - this.b);
@@ -2864,22 +3056,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.clamped_0 = new Color_0();
   }
   Color$Companion.prototype.fromStr_61zpoe$ = function (str) {
-    if (startsWith_0(str, '0x')) {
-      return this.fromRgbaStr_61zpoe$(str.substring(2));
-    }
-     else if (startsWith_0(str, '#')) {
-      return this.fromRgbaStr_61zpoe$(str.substring(1));
-    }
-     else if (startsWith_0(str, 'rgb', true))
-      return this.fromCssStr_61zpoe$(str);
-    else
-      return this.fromRgbaStr_61zpoe$(str);
+    return startsWith_0(str, '0x') ? this.fromRgbaStr_61zpoe$(str.substring(2)) : startsWith_0(str, '#') ? this.fromRgbaStr_61zpoe$(str.substring(1)) : startsWith_0(str, 'rgb', true) ? this.fromCssStr_61zpoe$(str) : this.fromRgbaStr_61zpoe$(str);
   };
   var trim = Kotlin.kotlin.text.trim_gw00vp$;
   Color$Companion.prototype.from8888Str_61zpoe$ = function (value) {
     var c = new Color_0();
     var tmp$;
-    c.set8888_s8cxhz$(toLong(trim(Kotlin.isCharSequence(tmp$ = value) ? tmp$ : throwCCE()).toString()));
+    c.set8888_s8cxhz$(toLong(trim(alwaysTrue(tmp$ = value) ? tmp$ : throwCCE()).toString()));
     return c;
   };
   Color$Companion.prototype.from888Str_61zpoe$ = function (value) {
@@ -2900,7 +3083,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var split = split_0(sub, Kotlin.charArrayOf(44));
     var $receiver = split.get_za3lpa$(0);
     var tmp$;
-    var r = toDouble(trim(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString()) / 255.0;
+    var r = toDouble(trim(alwaysTrue(tmp$ = $receiver) ? tmp$ : throwCCE()).toString()) / 255.0;
     var $receiver_0 = split.get_za3lpa$(1);
     var tmp$_0;
     var g = toDouble(trim(Kotlin.isCharSequence(tmp$_0 = $receiver_0) ? tmp$_0 : throwCCE()).toString()) / 255.0;
@@ -2932,12 +3115,12 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Color$Companion.prototype.rgba8888_7b5o5w$ = function (r, g, b, a) {
     return numberToInt(r * 255) << 24 | numberToInt(g * 255) << 16 | numberToInt(b * 255) << 8 | numberToInt(a * 255);
   };
-  Color$Companion.prototype.rgb888_xksl39$ = function (color) {
-    this.clamped_0.set_xksl39$(color).clamp();
+  Color$Companion.prototype.rgb888_8suw10$ = function (color) {
+    this.clamped_0.set_8suw10$(color).clamp();
     return numberToInt(this.clamped_0.r * 255) << 16 | numberToInt(this.clamped_0.g * 255) << 8 | numberToInt(this.clamped_0.b * 255);
   };
-  Color$Companion.prototype.rgba8888_xksl39$ = function (color) {
-    this.clamped_0.set_xksl39$(color).clamp();
+  Color$Companion.prototype.rgba8888_8suw10$ = function (color) {
+    this.clamped_0.set_8suw10$(color).clamp();
     return numberToInt(this.clamped_0.r * 255) << 24 | numberToInt(this.clamped_0.g * 255) << 16 | numberToInt(this.clamped_0.b * 255) << 8 | numberToInt(this.clamped_0.a * 255);
   };
   Color$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
@@ -2981,50 +3164,50 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function HsvRo() {
   }
   HsvRo.prototype.copy = function () {
-    return (new Hsv()).set_1nms9p$(this);
+    return (new Hsv()).set_kuj9z0$(this);
   };
-  HsvRo.prototype.toRgb_1qghwi$$default = function (out) {
+  HsvRo.prototype.toRgb_kxczlt$$default = function (out) {
     out.a = this.a;
     var c = this.v * this.s;
-    var value = this.h / 60.0 % 2.0 - 1.0;
-    var x = c * (1.0 - (value < 0.0 ? -value : value));
+    var x = this.h / 60.0 % 2.0 - 1.0;
+    var x_0 = c * (1.0 - Math_0.abs(x));
     var m = this.v - c;
     if (this.h < 60.0) {
       out.r = c + m;
-      out.g = x + m;
+      out.g = x_0 + m;
       out.b = 0.0 + m;
     }
      else if (this.h < 120.0) {
-      out.r = x + m;
+      out.r = x_0 + m;
       out.g = c + m;
       out.b = 0.0 + m;
     }
      else if (this.h < 180.0) {
       out.r = 0.0 + m;
       out.g = c + m;
-      out.b = x + m;
+      out.b = x_0 + m;
     }
      else if (this.h < 240.0) {
       out.r = 0.0 + m;
-      out.g = x + m;
+      out.g = x_0 + m;
       out.b = c + m;
     }
      else if (this.h < 300.0) {
-      out.r = x + m;
+      out.r = x_0 + m;
       out.g = 0.0 + m;
       out.b = c + m;
     }
      else {
       out.r = c + m;
       out.g = 0.0 + m;
-      out.b = x + m;
+      out.b = x_0 + m;
     }
     return out;
   };
-  HsvRo.prototype.toRgb_1qghwi$ = function (out, callback$default) {
+  HsvRo.prototype.toRgb_kxczlt$ = function (out, callback$default) {
     if (out === void 0)
       out = new Color_0();
-    return callback$default ? callback$default(out) : this.toRgb_1qghwi$$default(out);
+    return callback$default ? callback$default(out) : this.toRgb_kxczlt$$default(out);
   };
   HsvRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'HsvRo', interfaces: []};
   function Hsv(h, s, v, a) {
@@ -3036,30 +3219,30 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       v = 0.0;
     if (a === void 0)
       a = 1.0;
-    this.h_jogyt6$_0 = h;
-    this.s_jogz2n$_0 = s;
-    this.v_jogz58$_0 = v;
-    this.a_jogyn5$_0 = a;
+    this.h_70lu6f$_0 = h;
+    this.s_70ltwy$_0 = s;
+    this.v_70ltud$_0 = v;
+    this.a_70lucg$_0 = a;
   }
   Object.defineProperty(Hsv.prototype, 'h', {get: function () {
-    return this.h_jogyt6$_0;
+    return this.h_70lu6f$_0;
   }, set: function (h) {
-    this.h_jogyt6$_0 = h;
+    this.h_70lu6f$_0 = h;
   }});
   Object.defineProperty(Hsv.prototype, 's', {get: function () {
-    return this.s_jogz2n$_0;
+    return this.s_70ltwy$_0;
   }, set: function (s) {
-    this.s_jogz2n$_0 = s;
+    this.s_70ltwy$_0 = s;
   }});
   Object.defineProperty(Hsv.prototype, 'v', {get: function () {
-    return this.v_jogz58$_0;
+    return this.v_70ltud$_0;
   }, set: function (v) {
-    this.v_jogz58$_0 = v;
+    this.v_70ltud$_0 = v;
   }});
   Object.defineProperty(Hsv.prototype, 'a', {get: function () {
-    return this.a_jogyn5$_0;
+    return this.a_70lucg$_0;
   }, set: function (a) {
-    this.a_jogyn5$_0 = a;
+    this.a_70lucg$_0 = a;
   }});
   Hsv.prototype.clear = function () {
     this.h = 0.0;
@@ -3067,7 +3250,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.v = 0.0;
     this.a = 0.0;
   };
-  Hsv.prototype.set_1nms9p$ = function (other) {
+  Hsv.prototype.set_kuj9z0$ = function (other) {
     this.h = other.h;
     this.s = other.s;
     this.v = other.v;
@@ -3100,48 +3283,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function toOctet($receiver) {
     return padStart(toRadix(numberToInt($receiver * 255), 16), 2, 48);
   }
-  function BufferBase(_capacity) {
+  function BufferBase(capacity) {
     BufferBase$Companion_getInstance();
-    this._capacity = _capacity;
-    this._limit = 0;
-    this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
-    this._position = 0;
-    if (this._capacity < 0) {
-      throw IllegalArgumentException_init('capacity < 0: ' + toString(this._capacity));
+    this.capacity_3ojs19$_0 = capacity;
+    this._limit_vva9jp$_0 = this.capacity;
+    this._mark_usxozj$_0 = -1;
+    this._position_btwcrf$_0 = 0;
+    if (this.capacity < 0) {
+      throw IllegalArgumentException_init('capacity < 0: ' + this.capacity);
     }
-    this._limit = this._capacity;
   }
+  Object.defineProperty(BufferBase.prototype, 'capacity', {get: function () {
+    return this.capacity_3ojs19$_0;
+  }});
+  Object.defineProperty(BufferBase.prototype, '_limit', {get: function () {
+    return this._limit_vva9jp$_0;
+  }, set: function (_limit) {
+    this._limit_vva9jp$_0 = _limit;
+  }});
+  Object.defineProperty(BufferBase.prototype, '_mark', {get: function () {
+    return this._mark_usxozj$_0;
+  }, set: function (_mark) {
+    this._mark_usxozj$_0 = _mark;
+  }});
+  Object.defineProperty(BufferBase.prototype, '_position', {get: function () {
+    return this._position_btwcrf$_0;
+  }, set: function (_position) {
+    this._position_btwcrf$_0 = _position;
+  }});
   BufferBase.prototype.clear = function () {
     this._position = 0;
-    this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
-    this._limit = this._capacity;
+    this._mark = -1;
+    this._limit = this.capacity;
     return this;
   };
   BufferBase.prototype.flip = function () {
     this._limit = this._position;
     this._position = 0;
-    this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
+    this._mark = -1;
     return this;
   };
   Object.defineProperty(BufferBase.prototype, 'hasRemaining', {get: function () {
     return this._position < this._limit;
   }});
-  Object.defineProperty(BufferBase.prototype, 'capacity', {get: function () {
-    return this._capacity;
-  }});
   Object.defineProperty(BufferBase.prototype, 'limit', {get: function () {
     return this._limit;
   }});
   BufferBase.prototype.limit_za3lpa$ = function (newLimit) {
-    if (newLimit < 0 || newLimit > this._capacity) {
-      throw IllegalArgumentException_init('Bad limit (capacity ' + this._capacity + '): ' + newLimit);
+    if (newLimit < 0 || newLimit > this.capacity) {
+      throw IllegalArgumentException_init('Bad limit (capacity ' + this.capacity + '): ' + newLimit);
     }
     this._limit = newLimit;
     if (this._position > newLimit) {
       this._position = newLimit;
     }
     if (this._mark > newLimit) {
-      this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
+      this._mark = -1;
     }
     return this;
   };
@@ -3156,12 +3353,12 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       throw IllegalArgumentException_init('Bad position (limit ' + this._limit + '): ' + value);
     }
     this._position = value;
-    if (this._mark !== BufferBase$Companion_getInstance().UNSET_MARK && this._mark > this._position) {
-      this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
+    if (this._mark !== -1 && this._mark > this._position) {
+      this._mark = -1;
     }
   }});
   BufferBase.prototype.reset = function () {
-    if (this._mark === BufferBase$Companion_getInstance().UNSET_MARK) {
+    if (this._mark === -1) {
       throw new InvalidMarkException('Mark not set');
     }
     this._position = this._mark;
@@ -3169,11 +3366,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   BufferBase.prototype.rewind = function () {
     this._position = 0;
-    this._mark = BufferBase$Companion_getInstance().UNSET_MARK;
+    this._mark = -1;
     return this;
   };
+  BufferBase.prototype.nextPosition_za3lpa$ = function (inc) {
+    if (inc === void 0)
+      inc = 1;
+    if ((this.limit - this.position | 0) < inc)
+      throw new BufferUnderflowException();
+    var p = this.position;
+    this.position = p + inc | 0;
+    return p;
+  };
   BufferBase.prototype.toString = function () {
-    return '[position=' + this._position + ',limit=' + this._limit + ',capacity=' + this._capacity + ']';
+    return 'BufferBase(capacity=' + this.capacity + ', limit=' + this._limit + ', position=' + this._position + ')';
   };
   function BufferBase$Companion() {
     BufferBase$Companion_instance = this;
@@ -3187,7 +3393,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return BufferBase$Companion_instance;
   }
-  BufferBase.$metadata$ = {kind: Kind_CLASS, simpleName: 'BufferBase', interfaces: [ReadWriteBuffer]};
+  BufferBase.$metadata$ = {kind: Kind_CLASS, simpleName: 'BufferBase', interfaces: [Buffer]};
   function InvalidMarkException(message) {
     Throwable.call(this);
     this.message_en1ec$_0 = message;
@@ -3202,6 +3408,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.cause_81pigm$_0;
   }});
   InvalidMarkException.$metadata$ = {kind: Kind_CLASS, simpleName: 'InvalidMarkException', interfaces: [Throwable]};
+  function BufferUnderflowException() {
+    Throwable.call(this);
+    this.message_ne0paq$_0 = void 0;
+    this.cause_byj3ws$_0 = null;
+    Kotlin.captureStack(Throwable, this);
+    this.name = 'BufferUnderflowException';
+  }
+  Object.defineProperty(BufferUnderflowException.prototype, 'message', {get: function () {
+    return this.message_ne0paq$_0;
+  }});
+  Object.defineProperty(BufferUnderflowException.prototype, 'cause', {get: function () {
+    return this.cause_byj3ws$_0;
+  }});
+  BufferUnderflowException.$metadata$ = {kind: Kind_CLASS, simpleName: 'BufferUnderflowException', interfaces: [Throwable]};
   function Buffer() {
   }
   Object.defineProperty(Buffer.prototype, 'remaining', {get: function () {
@@ -3211,41 +3431,50 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function ReadBuffer() {
   }
   ReadBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadBuffer', interfaces: [Buffer]};
+  function ReadByteBuffer() {
+  }
+  ReadByteBuffer.prototype.getChar8 = function () {
+    return toBoxedChar(toChar(this.get()));
+  };
+  ReadByteBuffer.prototype.getChar16 = function () {
+    return toBoxedChar(toChar(this.getShort()));
+  };
+  ReadByteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadByteBuffer', interfaces: [ReadBuffer]};
   function WriteBuffer() {
   }
-  WriteBuffer.prototype.put_kcizie$ = function (value) {
-    while (value.hasRemaining) {
-      this.put_11rb$(value.get());
-    }
-  };
-  WriteBuffer.prototype.put_p1ys8y$ = function (value) {
-    var tmp$;
-    tmp$ = value.iterator();
-    while (tmp$.hasNext()) {
-      var i = tmp$.next();
-      this.put_11rb$(i);
-    }
-  };
-  WriteBuffer.prototype.put_1phuh2$ = function (value) {
-    while (value.hasNext()) {
-      this.put_11rb$(value.next());
-    }
-  };
-  WriteBuffer.prototype.fill_11rb$ = function (value) {
-    var tmp$, tmp$_0;
-    tmp$ = this.position;
-    tmp$_0 = this.limit - 1 | 0;
-    for (var i = tmp$; i <= tmp$_0; i++) {
-      this.put_11rb$(value);
-    }
-  };
   WriteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'WriteBuffer', interfaces: [Buffer]};
+  function put($receiver, value) {
+    while (value.hasRemaining) {
+      $receiver.put_11rb$(value.get());
+    }
+  }
+  function WriteByteBuffer() {
+  }
+  WriteByteBuffer.prototype.putChar8_s8itvh$ = function (value) {
+    this.put_11rb$(toByte(value | 0));
+  };
+  WriteByteBuffer.prototype.putChar16_s8itvh$ = function (value) {
+    this.putShort_mq22fl$(toShort(value | 0));
+  };
+  WriteByteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'WriteByteBuffer', interfaces: [WriteBuffer]};
   function ReadWriteBuffer() {
   }
   ReadWriteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadWriteBuffer', interfaces: [WriteBuffer, ReadBuffer]};
-  function NativeBuffer() {
+  function ReadWriteByteBuffer() {
   }
-  NativeBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'NativeBuffer', interfaces: [ReadWriteBuffer]};
+  ReadWriteByteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadWriteByteBuffer', interfaces: [ReadByteBuffer, WriteByteBuffer, ReadWriteBuffer]};
+  function NativeReadBuffer() {
+  }
+  NativeReadBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'NativeReadBuffer', interfaces: [ReadBuffer]};
+  function NativeReadByteBuffer() {
+  }
+  NativeReadByteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'NativeReadByteBuffer', interfaces: [ReadByteBuffer, NativeReadBuffer]};
+  function NativeReadWriteBuffer() {
+  }
+  NativeReadWriteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'NativeReadWriteBuffer', interfaces: [ReadWriteBuffer, NativeReadBuffer]};
+  function NativeReadWriteByteBuffer() {
+  }
+  NativeReadWriteByteBuffer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'NativeReadWriteByteBuffer', interfaces: [NativeReadWriteBuffer, ReadWriteByteBuffer, NativeReadByteBuffer]};
   function FilesManifest(files) {
     this.files = files;
   }
@@ -3370,65 +3599,85 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return ManifestEntrySerializer_instance;
   }
-  function ILogger() {
-    ILogger$Companion_getInstance();
+  function Logger() {
+    Logger$Companion_getInstance();
   }
-  function ILogger$Companion() {
-    ILogger$Companion_instance = this;
+  function Logger$Companion() {
+    Logger$Companion_instance = this;
     this.ERROR = 1;
     this.WARN = 2;
     this.INFO = 3;
     this.DEBUG = 4;
   }
-  ILogger$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
-  var ILogger$Companion_instance = null;
-  function ILogger$Companion_getInstance() {
-    if (ILogger$Companion_instance === null) {
-      new ILogger$Companion();
+  Logger$Companion.prototype.getLogLevelFromString_61zpoe$ = function (str) {
+    var tmp$;
+    switch (str.toLowerCase()) {
+      case 'error':
+        tmp$ = this.ERROR;
+        break;
+      case 'warn':
+        tmp$ = this.WARN;
+        break;
+      case 'info':
+        tmp$ = this.INFO;
+        break;
+      case 'verbose':
+      case 'debug':
+        tmp$ = this.DEBUG;
+        break;
+      default:throw IllegalArgumentException_init('Unknown log level ' + str);
     }
-    return ILogger$Companion_instance;
+    return tmp$;
+  };
+  Logger$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  var Logger$Companion_instance = null;
+  function Logger$Companion_getInstance() {
+    if (Logger$Companion_instance === null) {
+      new Logger$Companion();
+    }
+    return Logger$Companion_instance;
   }
-  ILogger.prototype.debug_s8jyv4$ = function (message) {
-    this.log_cypnoy$(message, ILogger$Companion_getInstance().DEBUG);
+  Logger.prototype.debug_s8jyv4$ = function (message) {
+    this.log_cypnoy$(message, Logger$Companion_getInstance().DEBUG);
   };
-  ILogger.prototype.debug_nq59yw$ = function (message) {
-    this.log_o4o5w6$(message, ILogger$Companion_getInstance().DEBUG);
+  Logger.prototype.debug_nq59yw$ = function (message) {
+    this.log_o4o5w6$(message, Logger$Companion_getInstance().DEBUG);
   };
-  ILogger.prototype.info_s8jyv4$ = function (message) {
-    this.log_cypnoy$(message, ILogger$Companion_getInstance().INFO);
+  Logger.prototype.info_s8jyv4$ = function (message) {
+    this.log_cypnoy$(message, Logger$Companion_getInstance().INFO);
   };
-  ILogger.prototype.info_nq59yw$ = function (message) {
-    this.log_o4o5w6$(message, ILogger$Companion_getInstance().INFO);
+  Logger.prototype.info_nq59yw$ = function (message) {
+    this.log_o4o5w6$(message, Logger$Companion_getInstance().INFO);
   };
-  ILogger.prototype.warn_s8jyv4$ = function (message) {
-    this.log_cypnoy$(message, ILogger$Companion_getInstance().WARN);
+  Logger.prototype.warn_s8jyv4$ = function (message) {
+    this.log_cypnoy$(message, Logger$Companion_getInstance().WARN);
   };
-  ILogger.prototype.warn_nq59yw$ = function (message) {
-    this.log_o4o5w6$(message, ILogger$Companion_getInstance().WARN);
+  Logger.prototype.warn_nq59yw$ = function (message) {
+    this.log_o4o5w6$(message, Logger$Companion_getInstance().WARN);
   };
-  ILogger.prototype.error_s8jyv4$ = function (message) {
-    this.log_cypnoy$(message, ILogger$Companion_getInstance().ERROR);
+  Logger.prototype.error_s8jyv4$ = function (message) {
+    this.log_cypnoy$(message, Logger$Companion_getInstance().ERROR);
   };
-  ILogger.prototype.error_a67anv$$default = function (e, message) {
+  Logger.prototype.error_a67anv$$default = function (e, message) {
     var str = '';
     if (message.length > 0)
       str += message + '\n';
     str += toString(e.message) + '\n';
-    this.log_cypnoy$(str, ILogger$Companion_getInstance().ERROR);
+    this.log_cypnoy$(str, Logger$Companion_getInstance().ERROR);
   };
-  ILogger.prototype.error_a67anv$ = function (e, message, callback$default) {
+  Logger.prototype.error_a67anv$ = function (e, message, callback$default) {
     if (message === void 0)
       message = '';
     callback$default ? callback$default(e, message) : this.error_a67anv$$default(e, message);
   };
-  ILogger.prototype.error_nq59yw$ = function (message) {
-    this.log_o4o5w6$(message, ILogger$Companion_getInstance().ERROR);
+  Logger.prototype.error_nq59yw$ = function (message) {
+    this.log_o4o5w6$(message, Logger$Companion_getInstance().ERROR);
   };
-  ILogger.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ILogger', interfaces: []};
+  Logger.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Logger', interfaces: []};
   function Log() {
     Log_instance = this;
     this.targets = arrayListOf([new PrintTarget()]);
-    this.level_l9mc19$_0 = ILogger$Companion_getInstance().DEBUG;
+    this.level_l9mc19$_0 = Logger$Companion_getInstance().DEBUG;
   }
   Object.defineProperty(Log.prototype, 'level', {get: function () {
     return this.level_l9mc19$_0;
@@ -3459,7 +3708,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       }
     }
   };
-  Log.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Log', interfaces: [ILogger]};
+  Log.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Log', interfaces: [Logger]};
   var Log_instance = null;
   function Log_getInstance() {
     if (Log_instance === null) {
@@ -3468,7 +3717,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Log_instance;
   }
   function PrintTarget() {
-    this.level_3ndz2r$_0 = ILogger$Companion_getInstance().DEBUG;
+    this.level_3ndz2r$_0 = Logger$Companion_getInstance().DEBUG;
     this.prefixes = ['[NONE] ', '[ERROR] ', '[WARN] ', '[INFO] ', '[DEBUG] '];
   }
   Object.defineProperty(PrintTarget.prototype, 'level', {get: function () {
@@ -3483,17 +3732,28 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   PrintTarget.prototype.log_o4o5w6$ = function (message, level) {
     this.log_cypnoy$(message(), level);
   };
-  PrintTarget.$metadata$ = {kind: Kind_CLASS, simpleName: 'PrintTarget', interfaces: [ILogger]};
+  PrintTarget.$metadata$ = {kind: Kind_CLASS, simpleName: 'PrintTarget', interfaces: [Logger]};
   function ArrayTarget() {
-    this.level_m6c0x3$_0 = ILogger$Companion_getInstance().DEBUG;
+    this.level_m6c0x3$_0 = Logger$Companion_getInstance().DEBUG;
     this.maxLogs = 1000;
     this.separator = lineSeparator;
     this.prefixes = ['[NONE] ', '[ERROR] ', '[WARN] ', '[INFO] ', '[DEBUG] '];
-    this.list = ArrayList_init();
+    this._list_0 = ArrayList_init();
+    this.list = this._list_0;
   }
   var BezierSegment$Companion_instance = null;
   function BoundsRo() {
   }
+  BoundsRo.prototype.copy_dleff0$$default = function (width, height) {
+    return new Bounds(width, height);
+  };
+  BoundsRo.prototype.copy_dleff0$ = function (width, height, callback$default) {
+    if (width === void 0)
+      width = this.width;
+    if (height === void 0)
+      height = this.height;
+    return callback$default ? callback$default(width, height) : this.copy_dleff0$$default(width, height);
+  };
   BoundsRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'BoundsRo', interfaces: []};
   function Bounds(width, height) {
     Bounds$Companion_getInstance();
@@ -3548,6 +3808,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Bounds.prototype.free = function () {
     Bounds$Companion_getInstance().pool_0.free_11rb$(this);
   };
+  Bounds.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, BoundsRo) ? tmp$ : throwCCE();
+    if (this.width !== other.width)
+      return false;
+    if (this.height !== other.height)
+      return false;
+    return true;
+  };
+  Bounds.prototype.hashCode = function () {
+    var result = hashCode(this.width);
+    result = (31 * result | 0) + hashCode(this.height) | 0;
+    return result;
+  };
+  Bounds.prototype.toString = function () {
+    return 'Bounds(width=' + this.width + ', height=' + this.height + ')';
+  };
   function Bounds$Companion() {
     Bounds$Companion_instance = this;
     this.pool_0 = ClearableObjectPool_init(Bounds$Companion$pool$lambda);
@@ -3570,33 +3849,22 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Bounds$Companion_instance;
   }
   Bounds.$metadata$ = {kind: Kind_CLASS, simpleName: 'Bounds', interfaces: [BoundsRo, Clearable]};
-  Bounds.prototype.component1 = function () {
-    return this.width;
-  };
-  Bounds.prototype.component2 = function () {
-    return this.height;
-  };
-  Bounds.prototype.copy_dleff0$ = function (width, height) {
-    return new Bounds(width === void 0 ? this.width : width, height === void 0 ? this.height : height);
-  };
-  Bounds.prototype.toString = function () {
-    return 'Bounds(width=' + Kotlin.toString(this.width) + (', height=' + Kotlin.toString(this.height)) + ')';
-  };
-  Bounds.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.width) | 0;
-    result = result * 31 + Kotlin.hashCode(this.height) | 0;
-    return result;
-  };
-  Bounds.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.width, other.width) && Kotlin.equals(this.height, other.height)))));
-  };
   function BoxRo() {
   }
   BoxRo.prototype.intersects_owlv2i$ = function (r, out, callback$default) {
     if (out === void 0)
       out = null;
     return callback$default ? callback$default(r, out) : this.intersects_owlv2i$$default(r, out);
+  };
+  BoxRo.prototype.copy_uwler8$$default = function (min, max) {
+    return new Box(min.copy_y2kzbl$(), max.copy_y2kzbl$());
+  };
+  BoxRo.prototype.copy_uwler8$ = function (min, max, callback$default) {
+    if (min === void 0)
+      min = this.min;
+    if (max === void 0)
+      max = this.max;
+    return callback$default ? callback$default(min, max) : this.copy_uwler8$$default(min, max);
   };
   BoxRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'BoxRo', interfaces: []};
   function Box(min, max) {
@@ -3686,8 +3954,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Box.prototype.set_uwler8$ = function (minimum, maximum) {
     this.min.set_y2kzbl$(minimum.x < maximum.x ? minimum.x : maximum.x, minimum.y < maximum.y ? minimum.y : maximum.y, minimum.z < maximum.z ? minimum.z : maximum.z);
     this.max.set_y2kzbl$(minimum.x > maximum.x ? minimum.x : maximum.x, minimum.y > maximum.y ? minimum.y : maximum.y, minimum.z > maximum.z ? minimum.z : maximum.z);
-    this._center_0.set_1fv2cb$(this.min).add_1fv2cb$(this.max).scl_mx4ult$(0.5);
-    this._dimensions_0.set_1fv2cb$(this.max).sub_1fv2cb$(this.min);
+    this.update();
     return this;
   };
   Box.prototype.set_w8lrqs$ = function (minX, minY, minZ, maxX, maxY, maxZ) {
@@ -3701,7 +3968,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.inf();
     tmp$ = get_lastIndex_0(points);
     for (var i = 0; i <= tmp$; i++)
-      this._ext_0(points[i]);
+      this.ext_1fv2cb$(points[i]);
     this.update();
     return this;
   };
@@ -3710,7 +3977,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.inf();
     tmp$ = get_lastIndex(points);
     for (var i = 0; i <= tmp$; i++)
-      this._ext_0(points.get_za3lpa$(i));
+      this.ext_1fv2cb$(points.get_za3lpa$(i));
     this.update();
     return this;
   };
@@ -3721,27 +3988,23 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this._dimensions_0.set_y2kzbl$(0.0, 0.0, 0.0);
     return this;
   };
-  Box.prototype.ext_esq9j2$ = function (point, update) {
-    if (update === void 0)
-      update = true;
-    this._ext_0(point);
-    if (update)
-      this.update();
-    return this;
+  Box.prototype.ext_1fv2cb$ = function (point) {
+    return this.ext_y2kzbl$(point.x, point.y, point.z);
   };
-  Box.prototype._ext_0 = function (point) {
-    if (point.x < this.min.x)
-      this.min.x = point.x;
-    if (point.y < this.min.y)
-      this.min.y = point.y;
-    if (point.z < this.min.z)
-      this.min.z = point.z;
-    if (point.x > this.max.x)
-      this.max.x = point.x;
-    if (point.y > this.max.y)
-      this.max.y = point.y;
-    if (point.z > this.max.z)
-      this.max.z = point.z;
+  Box.prototype.ext_y2kzbl$ = function (x, y, z) {
+    if (x < this.min.x)
+      this.min.x = x;
+    if (y < this.min.y)
+      this.min.y = y;
+    if (z < this.min.z)
+      this.min.z = z;
+    if (x > this.max.x)
+      this.max.x = x;
+    if (y > this.max.y)
+      this.max.y = y;
+    if (z > this.max.z)
+      this.max.z = z;
+    return this;
   };
   Box.prototype.isValid = function () {
     return this.min.x < this.max.x && this.min.y < this.max.y && this.min.z < this.max.z;
@@ -3772,15 +4035,15 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var v = Box$Companion_getInstance().tmpVec3_0;
     var min = bounds.min;
     var max = bounds.max;
-    this._ext_0(v.set_y2kzbl$(min.x, min.y, min.z).mul_pekf88$(transform));
-    this._ext_0(v.set_y2kzbl$(min.x, max.y, min.z).mul_pekf88$(transform));
-    this._ext_0(v.set_y2kzbl$(max.x, min.y, min.z).mul_pekf88$(transform));
-    this._ext_0(v.set_y2kzbl$(max.x, max.y, min.z).mul_pekf88$(transform));
+    this.ext_1fv2cb$(v.set_y2kzbl$(min.x, min.y, min.z).mul_pekf88$(transform));
+    this.ext_1fv2cb$(v.set_y2kzbl$(min.x, max.y, min.z).mul_pekf88$(transform));
+    this.ext_1fv2cb$(v.set_y2kzbl$(max.x, min.y, min.z).mul_pekf88$(transform));
+    this.ext_1fv2cb$(v.set_y2kzbl$(max.x, max.y, min.z).mul_pekf88$(transform));
     if (min.z !== max.z) {
-      this._ext_0(v.set_y2kzbl$(min.x, min.y, max.z).mul_pekf88$(transform));
-      this._ext_0(v.set_y2kzbl$(min.x, max.y, max.z).mul_pekf88$(transform));
-      this._ext_0(v.set_y2kzbl$(max.x, min.y, max.z).mul_pekf88$(transform));
-      this._ext_0(v.set_y2kzbl$(max.x, max.y, max.z).mul_pekf88$(transform));
+      this.ext_1fv2cb$(v.set_y2kzbl$(min.x, min.y, max.z).mul_pekf88$(transform));
+      this.ext_1fv2cb$(v.set_y2kzbl$(min.x, max.y, max.z).mul_pekf88$(transform));
+      this.ext_1fv2cb$(v.set_y2kzbl$(max.x, min.y, max.z).mul_pekf88$(transform));
+      this.ext_1fv2cb$(v.set_y2kzbl$(max.x, max.y, max.z).mul_pekf88$(transform));
     }
     this.update();
     return this;
@@ -3793,28 +4056,28 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var y1 = this.max.y;
     var z1 = this.max.z;
     this.inf();
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y0, z0)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y0, z0)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y1, z0)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y1, z0)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y0, z1)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y0, z1)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y1, z1)));
-    this._ext_0(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y1, z1)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y0, z0)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y0, z0)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y1, z0)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y1, z0)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y0, z1)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y0, z1)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x1, y1, z1)));
+    this.ext_1fv2cb$(transform.prj_9wm29k$(Box$Companion_getInstance().tmpVec3_0.set_y2kzbl$(x0, y1, z1)));
     this.update();
     return this;
   };
   Box.prototype.intersects_s3o7vk$ = function (b) {
     if (!this.isValid())
       return false;
-    var value = this.center.x - b.center.x;
-    var lX = value < 0.0 ? -value : value;
+    var x = this.center.x - b.center.x;
+    var lX = Math_0.abs(x);
     var sumX = this.dimensions.x * 0.5 + b.dimensions.x * 0.5;
-    var value_0 = this.center.y - b.center.y;
-    var lY = value_0 < 0.0 ? -value_0 : value_0;
+    var x_0 = this.center.y - b.center.y;
+    var lY = Math_0.abs(x_0);
     var sumY = this.dimensions.y * 0.5 + b.dimensions.y * 0.5;
-    var value_1 = this.center.z - b.center.z;
-    var lZ = value_1 < 0.0 ? -value_1 : value_1;
+    var x_1 = this.center.z - b.center.z;
+    var lZ = Math_0.abs(x_1);
     var sumZ = this.dimensions.z * 0.5 + b.dimensions.z * 0.5;
     return lX <= sumX && lY <= sumY && lZ <= sumZ;
   };
@@ -3871,21 +4134,21 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Box.prototype.toString = function () {
     return '[' + this.min + '|' + this.max + ']';
   };
-  Box.prototype.ext_y2kzbl$ = function (x, y, z) {
-    var tmp$ = this.min;
-    var a = this.min.x;
-    var tmp$_0 = Math_0.min(a, x);
-    var a_0 = this.min.y;
-    var tmp$_1 = Math_0.min(a_0, y);
-    var a_1 = this.min.z;
-    var tmp$_2 = tmp$.set_y2kzbl$(tmp$_0, tmp$_1, Math_0.min(a_1, z));
-    var tmp$_3 = this.max;
-    var a_2 = this.max.x;
-    var tmp$_4 = Math_0.max(a_2, x);
-    var a_3 = this.max.y;
-    var tmp$_5 = Math_0.max(a_3, y);
-    var a_4 = this.max.z;
-    return this.set_uwler8$(tmp$_2, tmp$_3.set_y2kzbl$(tmp$_4, tmp$_5, Math_0.max(a_4, z)));
+  Box.prototype.equals = function (other) {
+    var tmp$, tmp$_0, tmp$_1;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, BoxRo) ? tmp$ : throwCCE();
+    if (!((tmp$_0 = this.min) != null ? tmp$_0.equals(other.min) : null))
+      return false;
+    if (!((tmp$_1 = this.max) != null ? tmp$_1.equals(other.max) : null))
+      return false;
+    return true;
+  };
+  Box.prototype.hashCode = function () {
+    var result = this.min.hashCode();
+    result = (31 * result | 0) + this.max.hashCode() | 0;
+    return result;
   };
   function Box$Companion() {
     Box$Companion_instance = this;
@@ -3900,32 +4163,124 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Box$Companion_instance;
   }
   Box.$metadata$ = {kind: Kind_CLASS, simpleName: 'Box', interfaces: [BoxRo]};
-  Box.prototype.component1 = function () {
-    return this.min;
+  function ColorTransformationRo() {
+  }
+  ColorTransformationRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ColorTransformationRo', interfaces: []};
+  function ColorTransformation() {
+    ColorTransformation$Companion_getInstance();
+    this._matrix_0 = new Matrix4();
+    this._offset_0 = new Color_0();
+  }
+  Object.defineProperty(ColorTransformation.prototype, 'matrix', {get: function () {
+    return this._matrix_0;
+  }, set: function (value) {
+    this._matrix_0.set_pekf88$(value);
+  }});
+  Object.defineProperty(ColorTransformation.prototype, 'offset', {get: function () {
+    return this._offset_0;
+  }, set: function (value) {
+    this._offset_0.set_8suw10$(value);
+  }});
+  ColorTransformation.prototype.offset_7b5o5w$ = function (r, g, b, a) {
+    if (r === void 0)
+      r = 0.0;
+    if (g === void 0)
+      g = 0.0;
+    if (b === void 0)
+      b = 0.0;
+    if (a === void 0)
+      a = 0.0;
+    this._offset_0.set_7b5o5w$(r, g, b, a);
+    return this;
   };
-  Box.prototype.component2 = function () {
-    return this.max;
+  ColorTransformation.prototype.setTransformValues_q3cr5i$ = function (values) {
+    this._matrix_0.set_q3cr5i$(values);
   };
-  Box.prototype.copy_s18mjw$ = function (min, max) {
-    return new Box(min === void 0 ? this.min : min, max === void 0 ? this.max : max);
+  ColorTransformation.prototype.setTransformValues_hcyabg$ = function (values) {
+    this._matrix_0.set_hcyabg$(values);
   };
-  Box.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.min) | 0;
-    result = result * 31 + Kotlin.hashCode(this.max) | 0;
-    return result;
+  ColorTransformation.prototype.mul_8suw10$ = function (value) {
+    return this.mul_7b5o5w$(value.r, value.g, value.b, value.a);
   };
-  Box.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.min, other.min) && Kotlin.equals(this.max, other.max)))));
+  ColorTransformation.prototype.mul_7b5o5w$ = function (r, g, b, a) {
+    if (r === void 0)
+      r = 1.0;
+    if (g === void 0)
+      g = 1.0;
+    if (b === void 0)
+      b = 1.0;
+    if (a === void 0)
+      a = 1.0;
+    this._matrix_0.set_24o109$(0, this._matrix_0.get_za3lpa$(0) * r);
+    this._matrix_0.set_24o109$(5, this._matrix_0.get_za3lpa$(5) * g);
+    this._matrix_0.set_24o109$(10, this._matrix_0.get_za3lpa$(10) * b);
+    this._matrix_0.set_24o109$(15, this._matrix_0.get_za3lpa$(15) * a);
+    return this;
   };
+  ColorTransformation.prototype.mul_yjvc69$ = function (value) {
+    this._matrix_0.mul_pekf88$(value.matrix);
+    this._offset_0.add_8suw10$(value.offset);
+    return this;
+  };
+  ColorTransformation.prototype.tint_8suw10$ = function (value) {
+    return this.tint_7b5o5w$(value.r, value.g, value.b, value.a);
+  };
+  ColorTransformation.prototype.tint_7b5o5w$ = function (r, g, b, a) {
+    if (r === void 0)
+      r = 1.0;
+    if (g === void 0)
+      g = 1.0;
+    if (b === void 0)
+      b = 1.0;
+    if (a === void 0)
+      a = 1.0;
+    this._matrix_0.set_24o109$(0, r);
+    this._matrix_0.set_24o109$(5, g);
+    this._matrix_0.set_24o109$(10, b);
+    this._matrix_0.set_24o109$(15, a);
+    return this;
+  };
+  ColorTransformation.prototype.idt = function () {
+    this._matrix_0.idt();
+    this._offset_0.clear();
+    return this;
+  };
+  ColorTransformation.prototype.set_yjvc69$ = function (other) {
+    this._matrix_0.set_pekf88$(other.matrix);
+    this._offset_0.set_8suw10$(other.offset);
+    return this;
+  };
+  function ColorTransformation$Companion() {
+    ColorTransformation$Companion_instance = this;
+    this.IDENTITY = new ColorTransformation();
+  }
+  ColorTransformation$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var ColorTransformation$Companion_instance = null;
+  function ColorTransformation$Companion_getInstance() {
+    if (ColorTransformation$Companion_instance === null) {
+      new ColorTransformation$Companion();
+    }
+    return ColorTransformation$Companion_instance;
+  }
+  ColorTransformation.$metadata$ = {kind: Kind_CLASS, simpleName: 'ColorTransformation', interfaces: [ColorTransformationRo]};
   function CornersRo() {
   }
   CornersRo.prototype.isEmpty = function () {
-    return this.topLeft.x <= 0.0 && this.topLeft.y <= 0.0 && this.topRight.x <= 0.0 && this.topRight.y <= 0.0 && this.bottomRight.x <= 0.0 && this.bottomRight.y <= 0.0 && this.bottomLeft.x <= 0.0 && this.bottomLeft.y <= 0.0;
+    return this.topLeft.isZero() && this.topRight.isZero() && this.bottomRight.isZero() && this.bottomLeft.isZero();
   };
-  CornersRo.prototype.copy = function () {
-    return Corners_init(this.topLeft, this.topRight, this.bottomRight, this.bottomLeft);
+  CornersRo.prototype.copy_n34qss$$default = function (topLeft, topRight, bottomRight, bottomLeft) {
+    return Corners_init(topLeft.copy_dleff0$(), topRight.copy_dleff0$(), bottomRight.copy_dleff0$(), bottomLeft.copy_dleff0$());
+  };
+  CornersRo.prototype.copy_n34qss$ = function (topLeft, topRight, bottomRight, bottomLeft, callback$default) {
+    if (topLeft === void 0)
+      topLeft = this.topLeft;
+    if (topRight === void 0)
+      topRight = this.topRight;
+    if (bottomRight === void 0)
+      bottomRight = this.bottomRight;
+    if (bottomLeft === void 0)
+      bottomLeft = this.bottomLeft;
+    return callback$default ? callback$default(topLeft, topRight, bottomRight, bottomLeft) : this.copy_n34qss$$default(topLeft, topRight, bottomRight, bottomLeft);
   };
   CornersRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CornersRo', interfaces: []};
   function Corners() {
@@ -4078,51 +4433,68 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   Pow.prototype.apply_mx4ult$ = function (alpha) {
     if (alpha <= 0.5) {
-      return Math_0.pow(alpha * 2.0, this.power_0) / 2.0;
+      var $receiver = alpha * 2.0;
+      var x = this.power_0;
+      return Math_0.pow($receiver, x) * 0.5;
     }
-    return Math_0.pow((alpha - 1.0) * 2.0, this.power_0) / (this.power_0 % 2 === 0 ? -2.0 : 2.0) + 1.0;
+    var $receiver_0 = (alpha - 1.0) * 2.0;
+    var x_0 = this.power_0;
+    return Math_0.pow($receiver_0, x_0) / (this.power_0 % 2 === 0 ? -2.0 : 2.0) + 1.0;
   };
   Pow.$metadata$ = {kind: Kind_CLASS, simpleName: 'Pow', interfaces: [Interpolation]};
   function PowIn(power) {
     this.power_0 = power;
   }
   PowIn.prototype.apply_mx4ult$ = function (alpha) {
-    return Math_0.pow(alpha, this.power_0);
+    var x = this.power_0;
+    return Math_0.pow(alpha, x);
   };
   PowIn.$metadata$ = {kind: Kind_CLASS, simpleName: 'PowIn', interfaces: [Interpolation]};
   function PowOut(power) {
     this.power_0 = power;
   }
   PowOut.prototype.apply_mx4ult$ = function (alpha) {
-    return Math_0.pow(alpha - 1.0, this.power_0) * (this.power_0 % 2 === 0 ? -1.0 : 1.0) + 1.0;
+    var $receiver = alpha - 1.0;
+    var x = this.power_0;
+    return Math_0.pow($receiver, x) * (this.power_0 % 2 === 0 ? -1.0 : 1.0) + 1.0;
   };
   PowOut.$metadata$ = {kind: Kind_CLASS, simpleName: 'PowOut', interfaces: [Interpolation]};
   function Exp(value, power) {
     this.value = value;
     this.power = power;
-    this.min = Math_0.pow(this.value, -this.power);
+    var $receiver = this.value;
+    var x = -this.power;
+    this.min = Math_0.pow($receiver, x);
     this.scale = 0;
     this.scale = 1.0 / (1.0 - this.min);
   }
   Exp.prototype.apply_mx4ult$ = function (alpha) {
     if (alpha <= 0.5) {
-      return (Math_0.pow(this.value, this.power * (alpha * 2.0 - 1.0)) - this.min) * this.scale / 2.0;
+      var $receiver = this.value;
+      var x = this.power * (alpha * 2.0 - 1.0);
+      return (Math_0.pow($receiver, x) - this.min) * this.scale * 0.5;
     }
-    return (2.0 - (Math_0.pow(this.value, -this.power * (alpha * 2.0 - 1.0)) - this.min) * this.scale) / 2.0;
+    var $receiver_0 = this.value;
+    var x_0 = -this.power * (alpha * 2.0 - 1.0);
+    return (2.0 - (Math_0.pow($receiver_0, x_0) - this.min) * this.scale) * 0.5;
   };
   Exp.$metadata$ = {kind: Kind_CLASS, simpleName: 'Exp', interfaces: [Interpolation]};
   function ExpIn(value, power) {
     Exp.call(this, value, power);
   }
   ExpIn.prototype.apply_mx4ult$ = function (alpha) {
-    return (Math_0.pow(this.value, this.power * (alpha - 1.0)) - this.min) * this.scale;
+    var $receiver = this.value;
+    var x = this.power * (alpha - 1.0);
+    return (Math_0.pow($receiver, x) - this.min) * this.scale;
   };
   ExpIn.$metadata$ = {kind: Kind_CLASS, simpleName: 'ExpIn', interfaces: [Exp]};
   function ExpOut(value, power) {
     Exp.call(this, value, power);
   }
   ExpOut.prototype.apply_mx4ult$ = function (alpha) {
-    return 1.0 - (Math_0.pow(this.value, -this.power * alpha) - this.min) * this.scale;
+    var $receiver = this.value;
+    var x = -this.power * alpha;
+    return 1.0 - (Math_0.pow($receiver, x) - this.min) * this.scale;
   };
   ExpOut.$metadata$ = {kind: Kind_CLASS, simpleName: 'ExpOut', interfaces: [Exp]};
   function Elastic(value, power, bounces, scale) {
@@ -4136,29 +4508,21 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var a = alpha;
     if (a <= 0.5) {
       a *= 2.0;
-      return Math_0.pow(this.value, this.power * (a - 1.0)) * MathUtils_getInstance().sin_mx4ult$(a * this.bounces) * this.scale / 2.0;
+      var $receiver = this.value;
+      var x = this.power * (a - 1.0);
+      var tmp$ = Math_0.pow($receiver, x);
+      var x_0 = a * this.bounces;
+      return tmp$ * Math_0.sin(x_0) * this.scale * 0.5;
     }
     a = 1.0 - a;
     a *= 2.0;
-    return 1.0 - Math_0.pow(this.value, this.power * (a - 1.0)) * MathUtils_getInstance().sin_mx4ult$(a * this.bounces) * this.scale / 2.0;
+    var $receiver_0 = this.value;
+    var x_1 = this.power * (a - 1.0);
+    var tmp$_0 = Math_0.pow($receiver_0, x_1);
+    var x_2 = a * this.bounces;
+    return 1.0 - tmp$_0 * Math_0.sin(x_2) * this.scale * 0.5;
   };
   Elastic.$metadata$ = {kind: Kind_CLASS, simpleName: 'Elastic', interfaces: [Interpolation]};
-  function ElasticIn(value, power, bounces, scale) {
-    Elastic.call(this, value, power, bounces, scale);
-  }
-  ElasticIn.prototype.apply_mx4ult$ = function (alpha) {
-    return Math_0.pow(this.value, this.power * (alpha - 1.0)) * MathUtils_getInstance().sin_mx4ult$(alpha * this.bounces) * this.scale;
-  };
-  ElasticIn.$metadata$ = {kind: Kind_CLASS, simpleName: 'ElasticIn', interfaces: [Elastic]};
-  function ElasticOut(value, power, bounces, scale) {
-    Elastic.call(this, value, power, bounces, scale);
-  }
-  ElasticOut.prototype.apply_mx4ult$ = function (alpha) {
-    var a = alpha;
-    a = 1.0 - a;
-    return 1.0 - Math_0.pow(this.value, this.power * (a - 1.0)) * MathUtils_getInstance().sin_mx4ult$(a * this.bounces) * this.scale;
-  };
-  ElasticOut.$metadata$ = {kind: Kind_CLASS, simpleName: 'ElasticOut', interfaces: [Elastic]};
   function Swing(scale) {
     this.scale_w8y0m0$_0 = 0;
     this.scale_w8y0m0$_0 = scale * 2.0;
@@ -4167,11 +4531,11 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var a = alpha;
     if (a <= 0.5) {
       a *= 2.0;
-      return a * a * ((this.scale_w8y0m0$_0 + 1.0) * a - this.scale_w8y0m0$_0) / 2.0;
+      return a * a * ((this.scale_w8y0m0$_0 + 1.0) * a - this.scale_w8y0m0$_0) * 0.5;
     }
     a = a - 1;
     a *= 2.0;
-    return a * a * ((this.scale_w8y0m0$_0 + 1.0) * a + this.scale_w8y0m0$_0) / 2.0 + 1.0;
+    return a * a * ((this.scale_w8y0m0$_0 + 1.0) * a + this.scale_w8y0m0$_0) * 0.5 + 1.0;
   };
   Swing.$metadata$ = {kind: Kind_CLASS, simpleName: 'Swing', interfaces: [Interpolation]};
   function SwingOut(scale) {
@@ -4250,7 +4614,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Sine_instance = this;
   }
   Sine.prototype.apply_mx4ult$ = function (alpha) {
-    return (1.0 - MathUtils_getInstance().cos_mx4ult$(alpha * PI)) / 2.0;
+    var x = alpha * PI;
+    return (1.0 - Math_0.cos(x)) * 0.5;
   };
   Sine.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Sine', interfaces: [Interpolation]};
   var Sine_instance = null;
@@ -4264,7 +4629,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     SineIn_instance = this;
   }
   SineIn.prototype.apply_mx4ult$ = function (alpha) {
-    return 1.0 - MathUtils_getInstance().cos_mx4ult$(alpha * PI / 2.0);
+    var x = alpha * PI * 0.5;
+    return 1.0 - Math_0.cos(x);
   };
   SineIn.$metadata$ = {kind: Kind_OBJECT, simpleName: 'SineIn', interfaces: [Interpolation]};
   var SineIn_instance = null;
@@ -4278,7 +4644,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     SineOut_instance = this;
   }
   SineOut.prototype.apply_mx4ult$ = function (alpha) {
-    return MathUtils_getInstance().sin_mx4ult$(alpha * PI / 2.0);
+    var x = alpha * PI * 0.5;
+    return Math_0.sin(x);
   };
   SineOut.$metadata$ = {kind: Kind_OBJECT, simpleName: 'SineOut', interfaces: [Interpolation]};
   var SineOut_instance = null;
@@ -4292,6 +4659,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Circle_instance = this;
   }
   Circle.prototype.apply_mx4ult$ = function (alpha) {
+    var tmp$;
     var clamp_73gzaq$result;
     clamp_73gzaq$break: do {
       if (Kotlin.compareTo(alpha, 0.0) <= 0) {
@@ -4308,11 +4676,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var a = clamp_73gzaq$result;
     if (a <= 0.5) {
       a *= 2.0;
-      return (1 - Math_0.sqrt(1 - a * a)) / 2.0;
+      var x = 1.0 - a * a;
+      tmp$ = (1.0 - Math_0.sqrt(x)) * 0.5;
     }
-    a = a - 1;
-    a *= 2.0;
-    return (Math_0.sqrt(1.0 - a * a) + 1.0) / 2.0;
+     else {
+      a = a - 1;
+      a *= 2.0;
+      var x_0 = 1.0 - a * a;
+      tmp$ = (Math_0.sqrt(x_0) + 1.0) * 0.5;
+    }
+    return tmp$;
   };
   Circle.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Circle', interfaces: [Interpolation]};
   var Circle_instance = null;
@@ -4321,6 +4694,45 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       new Circle();
     }
     return Circle_instance;
+  }
+  function CircleInverse() {
+    CircleInverse_instance = this;
+  }
+  CircleInverse.prototype.apply_mx4ult$ = function (alpha) {
+    var tmp$;
+    var clamp_73gzaq$result;
+    clamp_73gzaq$break: do {
+      if (Kotlin.compareTo(alpha, 0.0) <= 0) {
+        clamp_73gzaq$result = 0.0;
+        break clamp_73gzaq$break;
+      }
+      if (Kotlin.compareTo(alpha, 1.0) >= 0) {
+        clamp_73gzaq$result = 1.0;
+        break clamp_73gzaq$break;
+      }
+      clamp_73gzaq$result = alpha;
+    }
+     while (false);
+    var a = clamp_73gzaq$result * 2.0;
+    if (a <= 1.0) {
+      a = a - 1;
+      var x = 1.0 - a * a;
+      tmp$ = Math_0.sqrt(x) * 0.5;
+    }
+     else {
+      a = a - 1;
+      var x_0 = 1.0 - a * a;
+      tmp$ = -Math_0.sqrt(x_0) * 0.5 + 1.0;
+    }
+    return tmp$;
+  };
+  CircleInverse.$metadata$ = {kind: Kind_OBJECT, simpleName: 'CircleInverse', interfaces: [Interpolation]};
+  var CircleInverse_instance = null;
+  function CircleInverse_getInstance() {
+    if (CircleInverse_instance === null) {
+      new CircleInverse();
+    }
+    return CircleInverse_instance;
   }
   function CircleIn() {
     CircleIn_instance = this;
@@ -4340,7 +4752,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
      while (false);
     var a = clamp_73gzaq$result;
-    return 1 - Math_0.sqrt(1.0 - a * a);
+    var x = 1.0 - a * a;
+    return 1.0 - Math_0.sqrt(x);
   };
   CircleIn.$metadata$ = {kind: Kind_OBJECT, simpleName: 'CircleIn', interfaces: [Interpolation]};
   var CircleIn_instance = null;
@@ -4369,7 +4782,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
      while (false);
     var a = clamp_73gzaq$result;
     a = a - 1;
-    return Math_0.sqrt(1.0 - a * a);
+    var x = 1.0 - a * a;
+    return Math_0.sqrt(x);
   };
   CircleOut.$metadata$ = {kind: Kind_OBJECT, simpleName: 'CircleOut', interfaces: [Interpolation]};
   var CircleOut_instance = null;
@@ -4378,6 +4792,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       new CircleOut();
     }
     return CircleOut_instance;
+  }
+  function Hermite() {
+    Hermite_instance = this;
+  }
+  Hermite.prototype.apply_mx4ult$ = function (alpha) {
+    return alpha * alpha * (3.0 - 2.0 * alpha);
+  };
+  Hermite.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Hermite', interfaces: [Interpolation]};
+  var Hermite_instance = null;
+  function Hermite_getInstance() {
+    if (Hermite_instance === null) {
+      new Hermite();
+    }
+    return Hermite_instance;
   }
   function Reverse(inner) {
     this.inner = inner;
@@ -4429,7 +4857,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var tmp$_0;
     tmp$_0 = array_0.length - 1 | 0;
     for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
-      array_0[i_0] = Math_0.sqrt(this.decays_0[i_0]);
+      var x = this.decays_0[i_0];
+      array_0[i_0] = Math_0.sqrt(x);
     }
     this.intervals_0 = array_0;
     scl(this.intervals_0, 1.0 / sum(this.intervals_0));
@@ -4448,7 +4877,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function Bezier(points) {
     this.segments_0 = null;
     var tmp$;
-    var pts = plus(plus(listOf_0(new Vector2()), points), listOf_0(new Vector2(1.0, 1.0)));
+    var pts = plus(plus(listOf(new Vector2()), points), listOf(new Vector2(1.0, 1.0)));
     var segments = arrayListOf([new BezierSegment(pts.get_za3lpa$(0), pts.get_za3lpa$(1), pts.get_za3lpa$(2), pts.get_za3lpa$(3))]);
     tmp$ = get_lastIndex(pts) - 3 | 0;
     for (var i = 3; i <= tmp$; i += 3) {
@@ -4480,18 +4909,18 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.exp5In = new ExpIn(2.0, 5.0);
     this.exp5Out = new ExpOut(2.0, 5.0);
     this.circle = Circle_getInstance();
+    this.circleInverse = CircleInverse_getInstance();
     this.circleIn = CircleIn_getInstance();
     this.circleOut = CircleOut_getInstance();
     this.sine = Sine_getInstance();
     this.sineIn = SineIn_getInstance();
     this.sineOut = SineOut_getInstance();
     this.elastic = new Elastic(2.0, 10.0, 7, 1.0);
-    this.elasticIn = new ElasticIn(2.0, 10.0, 7, 1.0);
-    this.elasticOut = new ElasticOut(2.0, 10.0, 7, 1.0);
     this.swing = new Swing(1.5);
     this.swingIn = new SwingIn(2.0);
     this.swingOut = new SwingOut(2.0);
-    this.registry_0 = mutableMapOf([to('stepped', this.stepped), to('linear', this.linear), to('fade', this.fade), to('pow2', this.pow2), to('pow2In', this.pow2In), to('pow2Out', this.pow2Out), to('pow3', this.pow3), to('pow3In', this.pow3In), to('pow3Out', this.pow3Out), to('pow4', this.pow4), to('pow4In', this.pow4In), to('pow4Out', this.pow4Out), to('pow5', this.pow5), to('pow5In', this.pow5In), to('pow5Out', this.pow5Out), to('exp10', this.exp10), to('exp10In', this.exp10In), to('exp10Out', this.exp10Out), to('exp5', this.exp5), to('exp5In', this.exp5In), to('exp5Out', this.exp5Out), to('circle', this.circle), to('circleIn', this.circleIn), to('circleOut', this.circleOut), to('sine', this.sine), to('sineIn', this.sineIn), to('sineOut', this.sineOut), to('elastic', this.elastic), to('elasticIn', this.elasticIn), to('elasticOut', this.elasticOut), to('swing', this.swing), to('swingIn', this.swingIn), to('swingOut', this.swingOut)]);
+    this.hermite = Hermite_getInstance();
+    this.registry_0 = mutableMapOf([to('stepped', this.stepped), to('linear', this.linear), to('fade', this.fade), to('pow2', this.pow2), to('pow2In', this.pow2In), to('pow2Out', this.pow2Out), to('pow3', this.pow3), to('pow3In', this.pow3In), to('pow3Out', this.pow3Out), to('pow4', this.pow4), to('pow4In', this.pow4In), to('pow4Out', this.pow4Out), to('pow5', this.pow5), to('pow5In', this.pow5In), to('pow5Out', this.pow5Out), to('exp10', this.exp10), to('exp10In', this.exp10In), to('exp10Out', this.exp10Out), to('exp5', this.exp5), to('exp5In', this.exp5In), to('exp5Out', this.exp5Out), to('circle', this.circle), to('circleInverse', this.circleInverse), to('circleIn', this.circleIn), to('circleOut', this.circleOut), to('sine', this.sine), to('sineIn', this.sineIn), to('sineOut', this.sineOut), to('elastic', this.elastic), to('swing', this.swing), to('swingIn', this.swingIn), to('swingOut', this.swingOut), to('hermite', this.hermite)]);
   }
   Easing.prototype.registerInterpolation_3r991m$ = function (name, value) {
     this.registry_0.put_xwzc9p$(name, value);
@@ -4511,6 +4940,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return null;
   };
+  Easing.prototype.getRegistered = function () {
+    return toList_0(this.registry_0.values);
+  };
   Easing.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Easing', interfaces: []};
   var Easing_instance = null;
   function Easing_getInstance() {
@@ -4526,7 +4958,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Frustum$Companion_getInstance();
     if (planes === void 0) {
       var tmp$;
-      var a = ArrayList_init(6);
+      var a = ArrayList_init_0(6);
       tmp$ = 6 - 1 | 0;
       for (var i = 0; i <= tmp$; i++) {
         a.add_11rb$(new Plane(new Vector3(), 0.0));
@@ -4535,7 +4967,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     this.planes_yoscz3$_0 = planes;
     var tmp$_0;
-    var a_0 = ArrayList_init(8);
+    var a_0 = ArrayList_init_0(8);
     tmp$_0 = 8 - 1 | 0;
     for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
       a_0.add_11rb$(new Vector3());
@@ -4550,9 +4982,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.planePoints_y6rjm7$_0;
   }});
   Frustum.prototype.update_pekf88$ = function (inverseProjectionView) {
-    var tmp$;
-    tmp$ = 8 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
+    for (var i = 0; i <= 7; i++) {
       inverseProjectionView.prj_9wm29k$(this.planePoints.get_za3lpa$(i).set_1fv2cb$(Frustum$Companion_getInstance().clipSpacePlanePoints.get_za3lpa$(i)));
     }
     this.planes.get_za3lpa$(0).set_qeea63$(this.planePoints.get_za3lpa$(1), this.planePoints.get_za3lpa$(0), this.planePoints.get_za3lpa$(2));
@@ -4583,33 +5013,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return true;
   };
   Frustum.prototype.sphereInFrustum_pz1gqy$ = function (center, radius) {
-    var tmp$;
-    tmp$ = 6 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++)
+    for (var i = 0; i <= 5; i++)
       if (this.planes.get_za3lpa$(i).normal.x * center.x + this.planes.get_za3lpa$(i).normal.y * center.y + this.planes.get_za3lpa$(i).normal.z * center.z < -radius - this.planes.get_za3lpa$(i).d)
         return false;
     return true;
   };
   Frustum.prototype.sphereInFrustum_7b5o5w$ = function (x, y, z, radius) {
-    var tmp$;
-    tmp$ = 6 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++)
+    for (var i = 0; i <= 5; i++)
       if (this.planes.get_za3lpa$(i).normal.x * x + this.planes.get_za3lpa$(i).normal.y * y + this.planes.get_za3lpa$(i).normal.z * z < -radius - this.planes.get_za3lpa$(i).d)
         return false;
     return true;
   };
   Frustum.prototype.sphereInFrustumWithoutNearFar_wscm5v$ = function (center, radius) {
-    var tmp$;
-    tmp$ = 6 - 1 | 0;
-    for (var i = 2; i <= tmp$; i++)
+    for (var i = 2; i <= 5; i++)
       if (this.planes.get_za3lpa$(i).normal.x * center.x + this.planes.get_za3lpa$(i).normal.y * center.y + this.planes.get_za3lpa$(i).normal.z * center.z < -radius - this.planes.get_za3lpa$(i).d)
         return false;
     return true;
   };
   Frustum.prototype.sphereInFrustumWithoutNearFar_7b5o5w$ = function (x, y, z, radius) {
-    var tmp$;
-    tmp$ = 6 - 1 | 0;
-    for (var i = 2; i <= tmp$; i++)
+    for (var i = 2; i <= 5; i++)
       if (this.planes.get_za3lpa$(i).normal.x * x + this.planes.get_za3lpa$(i).normal.y * y + this.planes.get_za3lpa$(i).normal.z * z < -radius - this.planes.get_za3lpa$(i).d)
         return false;
     return true;
@@ -4664,7 +5086,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   function Frustum$Companion() {
     Frustum$Companion_instance = this;
-    this.clipSpacePlanePoints = listOf([new Vector3(-1.0, -1.0, -1.0), new Vector3(1.0, -1.0, -1.0), new Vector3(1.0, 1.0, -1.0), new Vector3(-1.0, 1.0, -1.0), new Vector3(-1.0, -1.0, 1.0), new Vector3(1.0, -1.0, 1.0), new Vector3(1.0, 1.0, 1.0), new Vector3(-1.0, 1.0, 1.0)]);
+    this.clipSpacePlanePoints = listOf_0([new Vector3(-1.0, -1.0, -1.0), new Vector3(1.0, -1.0, -1.0), new Vector3(1.0, 1.0, -1.0), new Vector3(-1.0, 1.0, -1.0), new Vector3(-1.0, -1.0, 1.0), new Vector3(1.0, -1.0, 1.0), new Vector3(1.0, 1.0, 1.0), new Vector3(-1.0, 1.0, 1.0)]);
   }
   Frustum$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Frustum$Companion_instance = null;
@@ -4676,7 +5098,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   function Frustum$corners$lambda() {
     var tmp$;
-    var a = ArrayList_init(8);
+    var a = ArrayList_init_0(8);
     tmp$ = 8 - 1 | 0;
     for (var i = 0; i <= tmp$; i++) {
       a.add_11rb$(new Vector3());
@@ -4702,10 +5124,197 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.planes, other.planes))));
   };
   var GeomUtils_instance = null;
+  var IntBounds$Companion_instance = null;
+  function IntPadRo() {
+  }
+  IntPadRo.prototype.isEmpty = function () {
+    return this.top === 0 && this.right === 0 && this.bottom === 0 && this.left === 0;
+  };
+  IntPadRo.prototype.isNotEmpty = function () {
+    return !this.isEmpty();
+  };
+  IntPadRo.prototype.reduceWidth_s8ev37$ = function (width) {
+    if (width == null)
+      return null;
+    return width - this.left - this.right | 0;
+  };
+  IntPadRo.prototype.reduceHeight_s8ev37$ = function (height) {
+    if (height == null)
+      return null;
+    return height - this.top - this.bottom | 0;
+  };
+  IntPadRo.prototype.reduceWidth2_za3lpa$ = function (width) {
+    return width - this.left - this.right | 0;
+  };
+  IntPadRo.prototype.reduceHeight2_za3lpa$ = function (height) {
+    return height - this.top - this.bottom | 0;
+  };
+  IntPadRo.prototype.expandWidth_s8ev37$ = function (width) {
+    if (width == null)
+      return null;
+    return width + this.left + this.right | 0;
+  };
+  IntPadRo.prototype.expandHeight_s8ev37$ = function (height) {
+    if (height == null)
+      return null;
+    return height + this.top + this.bottom | 0;
+  };
+  IntPadRo.prototype.expandWidth2_za3lpa$ = function (width) {
+    return width + this.left + this.right | 0;
+  };
+  IntPadRo.prototype.expandHeight2_za3lpa$ = function (height) {
+    return height + this.top + this.bottom | 0;
+  };
+  IntPadRo.prototype.toCssString = function () {
+    return this.top.toString() + 'px ' + this.right + 'px ' + this.bottom + 'px ' + this.left + 'px';
+  };
+  IntPadRo.prototype.copy_tjonv8$$default = function (top, right, bottom, left) {
+    return new IntPad(top, right, bottom, left);
+  };
+  IntPadRo.prototype.copy_tjonv8$ = function (top, right, bottom, left, callback$default) {
+    if (top === void 0)
+      top = this.top;
+    if (right === void 0)
+      right = this.right;
+    if (bottom === void 0)
+      bottom = this.bottom;
+    if (left === void 0)
+      left = this.left;
+    return callback$default ? callback$default(top, right, bottom, left) : this.copy_tjonv8$$default(top, right, bottom, left);
+  };
+  IntPadRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'IntPadRo', interfaces: []};
+  function IntPad(top, right, bottom, left) {
+    IntPad$Companion_getInstance();
+    this.top_f4emgp$_0 = top;
+    this.right_ro6uzk$_0 = right;
+    this.bottom_d8tp8z$_0 = bottom;
+    this.left_sam4up$_0 = left;
+  }
+  Object.defineProperty(IntPad.prototype, 'top', {get: function () {
+    return this.top_f4emgp$_0;
+  }, set: function (top) {
+    this.top_f4emgp$_0 = top;
+  }});
+  Object.defineProperty(IntPad.prototype, 'right', {get: function () {
+    return this.right_ro6uzk$_0;
+  }, set: function (right) {
+    this.right_ro6uzk$_0 = right;
+  }});
+  Object.defineProperty(IntPad.prototype, 'bottom', {get: function () {
+    return this.bottom_d8tp8z$_0;
+  }, set: function (bottom) {
+    this.bottom_d8tp8z$_0 = bottom;
+  }});
+  Object.defineProperty(IntPad.prototype, 'left', {get: function () {
+    return this.left_sam4up$_0;
+  }, set: function (left) {
+    this.left_sam4up$_0 = left;
+  }});
+  IntPad.prototype.set_za3lpa$ = function (all) {
+    this.top = all;
+    this.bottom = all;
+    this.right = all;
+    this.left = all;
+    return this;
+  };
+  IntPad.prototype.set_q22nrd$ = function (other) {
+    this.top = other.top;
+    this.bottom = other.bottom;
+    this.right = other.right;
+    this.left = other.left;
+    return this;
+  };
+  IntPad.prototype.set_tjonv8$ = function (left, top, right, bottom) {
+    if (left === void 0)
+      left = 0;
+    if (top === void 0)
+      top = 0;
+    if (right === void 0)
+      right = 0;
+    if (bottom === void 0)
+      bottom = 0;
+    this.top = top;
+    this.right = right;
+    this.bottom = bottom;
+    this.left = left;
+    return this;
+  };
+  IntPad.prototype.clear = function () {
+    this.top = 0;
+    this.right = 0;
+    this.bottom = 0;
+    this.left = 0;
+  };
+  IntPad.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!Kotlin.isType(other, IntPadRo))
+      return false;
+    if (this.top !== other.top)
+      return false;
+    if (this.right !== other.right)
+      return false;
+    if (this.bottom !== other.bottom)
+      return false;
+    if (this.left !== other.left)
+      return false;
+    return true;
+  };
+  IntPad.prototype.hashCode = function () {
+    var result = hashCode(this.top);
+    result = (31 * result | 0) + hashCode(this.right) | 0;
+    result = (31 * result | 0) + hashCode(this.bottom) | 0;
+    result = (31 * result | 0) + hashCode(this.left) | 0;
+    return result;
+  };
+  function IntPad$Companion() {
+    IntPad$Companion_instance = this;
+    this.EMPTY_PAD = IntPad_init();
+  }
+  IntPad$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  var IntPad$Companion_instance = null;
+  function IntPad$Companion_getInstance() {
+    if (IntPad$Companion_instance === null) {
+      new IntPad$Companion();
+    }
+    return IntPad$Companion_instance;
+  }
+  IntPad.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntPad', interfaces: [Clearable, IntPadRo]};
+  function IntPad_init($this) {
+    $this = $this || Object.create(IntPad.prototype);
+    IntPad.call($this, 0, 0, 0, 0);
+    return $this;
+  }
+  function IntPad_init_1(all, $this) {
+    $this = $this || Object.create(IntPad.prototype);
+    IntPad.call($this, all[0], all[1], all[2], all[3]);
+    return $this;
+  }
+  function IntPadSerializer() {
+    IntPadSerializer_instance = this;
+  }
+  var IntPadSerializer_instance = null;
   function IntRectangleRo() {
   }
-  IntRectangleRo.prototype.copy = function () {
-    return new IntRectangle(this.x, this.y, this.width, this.height);
+  IntRectangleRo.prototype.copy_tjonv8$$default = function (x, y, width, height) {
+    return new IntRectangle(x, y, width, height);
+  };
+  IntRectangleRo.prototype.copy_tjonv8$ = function (x, y, width, height, callback$default) {
+    if (x === void 0)
+      x = this.x;
+    if (y === void 0)
+      y = this.y;
+    if (width === void 0)
+      width = this.width;
+    if (height === void 0)
+      height = this.height;
+    return callback$default ? callback$default(x, y, width, height) : this.copy_tjonv8$$default(x, y, width, height);
+  };
+  IntRectangleRo.prototype.reduce_q22nrd$ = function (padding) {
+    return this.reduce_tjonv8$(padding.left, padding.top, padding.right, padding.bottom);
+  };
+  IntRectangleRo.prototype.reduce_tjonv8$ = function (left, top, right, bottom) {
+    return new IntRectangle(this.x + left | 0, this.y + left | 0, this.width - left - right | 0, this.height - top - bottom | 0);
   };
   IntRectangleRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'IntRectangleRo', interfaces: []};
   function IntRectangle(x, y, width, height) {
@@ -4854,6 +5463,31 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.width = Kotlin.imul(this.width, scalar);
     this.height = Kotlin.imul(this.height, scalar);
   };
+  IntRectangle.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, IntRectangleRo) ? tmp$ : throwCCE();
+    if (this.x !== other.x)
+      return false;
+    if (this.y !== other.y)
+      return false;
+    if (this.width !== other.width)
+      return false;
+    if (this.height !== other.height)
+      return false;
+    return true;
+  };
+  IntRectangle.prototype.hashCode = function () {
+    var result = this.x;
+    result = (31 * result | 0) + this.y | 0;
+    result = (31 * result | 0) + this.width | 0;
+    result = (31 * result | 0) + this.height | 0;
+    return result;
+  };
+  IntRectangle.prototype.toString = function () {
+    return 'IntRectangle(x=' + this.x + ', y=' + this.y + ', width=' + this.width + ', height=' + this.height + ')';
+  };
   function IntRectangle$Companion() {
     IntRectangle$Companion_instance = this;
     this.pool_0 = ClearableObjectPool_init(IntRectangle$Companion$pool$lambda);
@@ -4876,35 +5510,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return IntRectangle$Companion_instance;
   }
   IntRectangle.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntRectangle', interfaces: [Clearable, IntRectangleRo]};
-  IntRectangle.prototype.component1 = function () {
-    return this.x;
-  };
-  IntRectangle.prototype.component2 = function () {
-    return this.y;
-  };
-  IntRectangle.prototype.component3 = function () {
-    return this.width;
-  };
-  IntRectangle.prototype.component4 = function () {
-    return this.height;
-  };
-  IntRectangle.prototype.copy_tjonv8$ = function (x, y, width, height) {
-    return new IntRectangle(x === void 0 ? this.x : x, y === void 0 ? this.y : y, width === void 0 ? this.width : width, height === void 0 ? this.height : height);
-  };
-  IntRectangle.prototype.toString = function () {
-    return 'IntRectangle(x=' + Kotlin.toString(this.x) + (', y=' + Kotlin.toString(this.y)) + (', width=' + Kotlin.toString(this.width)) + (', height=' + Kotlin.toString(this.height)) + ')';
-  };
-  IntRectangle.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.x) | 0;
-    result = result * 31 + Kotlin.hashCode(this.y) | 0;
-    result = result * 31 + Kotlin.hashCode(this.width) | 0;
-    result = result * 31 + Kotlin.hashCode(this.height) | 0;
-    return result;
-  };
-  IntRectangle.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.width, other.width) && Kotlin.equals(this.height, other.height)))));
-  };
   function IntRectangleSerializer() {
     IntRectangleSerializer_instance = this;
   }
@@ -4930,165 +5535,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   var E;
   var TO_DEG;
   var TO_RAD;
-  function TrigLookup() {
-    TrigLookup_instance = this;
-    this.SIN_BITS = 14;
-    this.SIN_MASK = ~(-1 << this.SIN_BITS);
-    this.SIN_COUNT = this.SIN_MASK + 1 | 0;
-    this.radFull = PI * 2;
-    this.radToIndex = this.SIN_COUNT / this.radFull;
-    this.table = new Float32Array(this.SIN_COUNT);
-    var tmp$;
-    tmp$ = this.SIN_COUNT - 1 | 0;
-    for (var i = 1; i <= tmp$; i++) {
-      this.table[i] = Math.sin((i + 0.5) / this.SIN_COUNT * this.radFull);
-    }
-    for (var i_0 = 0; i_0 <= 16; i_0++) {
-      var theta = i_0 * PI2 / 16;
-      this.table[numberToInt(theta * this.radToIndex) & this.SIN_MASK] = Math.sin(theta);
-    }
-  }
-  TrigLookup.prototype.sin_mx4ult$ = function (radians) {
-    return this.table[numberToInt(radians * this.radToIndex) & this.SIN_MASK];
-  };
-  TrigLookup.prototype.cos_mx4ult$ = function (radians) {
-    return this.table[numberToInt((radians + PI / 2.0) * this.radToIndex) & this.SIN_MASK];
-  };
-  TrigLookup.prototype.tan_mx4ult$ = function (radians) {
-    return this.sin_mx4ult$(radians) / this.cos_mx4ult$(radians);
-  };
-  TrigLookup.$metadata$ = {kind: Kind_OBJECT, simpleName: 'TrigLookup', interfaces: []};
-  var TrigLookup_instance = null;
-  function TrigLookup_getInstance() {
-    if (TrigLookup_instance === null) {
-      new TrigLookup();
-    }
-    return TrigLookup_instance;
-  }
-  function Atan2() {
-    Atan2_instance = this;
-    this.ATAN2_BITS_0 = 7;
-    this.ATAN2_BITS2_0 = this.ATAN2_BITS_0 << 1;
-    this.ATAN2_MASK_0 = ~(-1 << this.ATAN2_BITS2_0);
-    this.ATAN2_COUNT_0 = this.ATAN2_MASK_0 + 1 | 0;
-    this.ATAN2_DIM_0 = numberToInt(Math.sqrt(this.ATAN2_COUNT_0));
-    this.INV_ATAN2_DIM_MINUS_1_0 = 1.0 / (this.ATAN2_DIM_0 - 1.0);
-    this.table_8be2vx$ = new Float32Array(this.ATAN2_COUNT_0);
-    var tmp$, tmp$_0;
-    tmp$ = this.ATAN2_DIM_0 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      tmp$_0 = this.ATAN2_DIM_0 - 1 | 0;
-      for (var j = 0; j <= tmp$_0; j++) {
-        var x0 = i / this.ATAN2_DIM_0;
-        var y0 = j / this.ATAN2_DIM_0;
-        this.table_8be2vx$[Kotlin.imul(j, this.ATAN2_DIM_0) + i | 0] = Math.atan2(y0, x0);
-      }
-    }
-  }
-  Atan2.prototype.atan2_dleff0$ = function (y, x) {
-    var yVar = y;
-    var xVar = x;
-    var add;
-    var mul;
-    if (xVar < 0) {
-      if (yVar < 0) {
-        yVar = -yVar;
-        mul = 1.0;
-      }
-       else
-        mul = -1.0;
-      xVar = -xVar;
-      add = -PI;
-    }
-     else {
-      if (yVar < 0) {
-        yVar = -yVar;
-        mul = -1.0;
-      }
-       else
-        mul = 1.0;
-      add = 0.0;
-    }
-    var invDiv = 1 / ((xVar < yVar ? yVar : xVar) * this.INV_ATAN2_DIM_MINUS_1_0);
-    var xi = numberToInt(xVar * invDiv);
-    var yi = numberToInt(yVar * invDiv);
-    return (Atan2_getInstance().table_8be2vx$[Kotlin.imul(yi, this.ATAN2_DIM_0) + xi | 0] + add) * mul;
-  };
-  Atan2.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Atan2', interfaces: []};
-  var Atan2_instance = null;
-  function Atan2_getInstance() {
-    if (Atan2_instance === null) {
-      new Atan2();
-    }
-    return Atan2_instance;
-  }
   function MathUtils() {
     MathUtils_instance = this;
-    this.nanoToSec = 1 / 1.0E9;
+    this.nanoToSec = 1.0 / 1.0E9;
     this.FLOAT_ROUNDING_ERROR = 1.0E-6;
     this.radDeg = 180.0 / PI;
     this.degRad = PI / 180.0;
-    this.rng = new Random();
   }
-  MathUtils.prototype.sin_mx4ult$ = function (radians) {
-    return TrigLookup_getInstance().sin_mx4ult$(radians);
-  };
-  MathUtils.prototype.cos_mx4ult$ = function (radians) {
-    return TrigLookup_getInstance().cos_mx4ult$(radians);
-  };
-  MathUtils.prototype.tan_mx4ult$ = function (radians) {
-    return TrigLookup_getInstance().tan_mx4ult$(radians);
-  };
-  MathUtils.prototype.atan2_dleff0$ = function (y, x) {
-    return Atan2_getInstance().atan2_dleff0$(y, x);
-  };
-  MathUtils.prototype.random_za3lpa$ = function (range) {
-    return this.rng.nextInt_za3lpa$(range + 1 | 0);
-  };
-  MathUtils.prototype.random_vux9f0$ = function (start, end) {
-    return start + this.rng.nextInt_za3lpa$(end - start + 1 | 0) | 0;
-  };
-  MathUtils.prototype.random_s8cxhz$ = function (range) {
-    return Kotlin.Long.fromNumber(this.rng.nextDouble() * range.toNumber());
-  };
-  MathUtils.prototype.random_3pjtqy$ = function (start, end) {
-    return start.add(Kotlin.Long.fromNumber(this.rng.nextDouble() * end.subtract(start).toNumber()));
-  };
-  MathUtils.prototype.randomBoolean = function () {
-    return this.rng.nextBoolean();
-  };
-  MathUtils.prototype.randomBoolean_mx4ult$ = function (chance) {
-    return this.random() < chance;
-  };
-  MathUtils.prototype.random = function () {
-    return this.rng.nextFloat();
-  };
-  MathUtils.prototype.random_mx4ult$ = function (range) {
-    return this.rng.nextFloat() * range;
-  };
-  MathUtils.prototype.random_dleff0$ = function (start, end) {
-    return start + this.rng.nextFloat() * (end - start);
-  };
-  MathUtils.prototype.randomSign = function () {
-    return 1 | this.rng.nextInt() >> 31;
-  };
-  MathUtils.prototype.randomTriangular = function () {
-    return this.rng.nextFloat() - this.rng.nextFloat();
-  };
-  MathUtils.prototype.randomTriangular_mx4ult$ = function (max) {
-    return (this.rng.nextFloat() - this.rng.nextFloat()) * max;
-  };
-  MathUtils.prototype.randomTriangular_dleff0$ = function (min, max) {
-    return this.randomTriangular_y2kzbl$(min, max, (max - min) * 0.5);
-  };
-  MathUtils.prototype.randomTriangular_y2kzbl$ = function (min, max, mode) {
-    var u = this.rng.nextFloat();
-    var d = max - min;
-    if (u <= (mode - min) / d) {
-      return min + Math_0.sqrt(u * d * (mode - min));
-    }
-    return max - Math_0.sqrt((1 - u) * d * (max - mode));
-  };
   MathUtils.prototype.nextPowerOfTwo_za3lpa$ = function (value) {
     var v = value;
     if (v === 0)
@@ -5107,41 +5560,27 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   MathUtils.prototype.lerp_y2kzbl$ = function (fromValue, toValue, progress) {
     return fromValue + (toValue - fromValue) * progress;
   };
-  MathUtils.prototype.abs_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.abs_mx4ult$', function (value) {
-    return value < 0.0 ? -value : value;
-  });
-  MathUtils.prototype.abs_14dthe$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.abs_14dthe$', function (value) {
-    return value < 0.0 ? -value : value;
-  });
-  MathUtils.prototype.abs_za3lpa$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.abs_za3lpa$', function (value) {
-    return value < 0.0 ? -value | 0 : value;
-  });
-  MathUtils.prototype.abs_s8cxhz$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.abs_s8cxhz$', function (value) {
-    return value.toNumber() < 0.0 ? value.unaryMinus() : value;
-  });
   MathUtils.prototype.isZero_dleff0$ = function (value, tolerance) {
     if (tolerance === void 0)
       tolerance = this.FLOAT_ROUNDING_ERROR;
-    return (value < 0.0 ? -value : value) <= tolerance;
+    return Math_0.abs(value) <= tolerance;
   };
   MathUtils.prototype.isZero_vcfc77$ = function (value, tolerance) {
     if (tolerance === void 0)
       tolerance = this.FLOAT_ROUNDING_ERROR;
-    return (value < 0.0 ? -value : value) <= tolerance;
+    return Math_0.abs(value) <= tolerance;
   };
   MathUtils.prototype.isEqual_dleff0$ = function (a, b) {
-    var value = a - b;
-    return (value < 0.0 ? -value : value) <= this.FLOAT_ROUNDING_ERROR;
+    var x = a - b;
+    return Math_0.abs(x) <= this.FLOAT_ROUNDING_ERROR;
   };
   MathUtils.prototype.isEqual_y2kzbl$ = function (a, b, tolerance) {
-    var value = a - b;
-    return (value < 0.0 ? -value : value) <= tolerance;
+    var x = a - b;
+    return Math_0.abs(x) <= tolerance;
   };
+  var log = Kotlin.kotlin.math.log_lu1900$;
   MathUtils.prototype.log_dleff0$ = function (x, base) {
-    return Math.log(x) / Math.log(base);
-  };
-  MathUtils.prototype.log2_mx4ult$ = function (x) {
-    return this.log_dleff0$(x, 2.0);
+    return log(x, base);
   };
   MathUtils.prototype.clamp_73gzaq$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.clamp_73gzaq$', function (value, min, max) {
     if (Kotlin.compareTo(value, min) <= 0)
@@ -5186,48 +5625,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var maxOf_0 = Kotlin.kotlin.comparisons.maxOf_73gzaq$;
     return function (w, x, y, z) {
       return maxOf_0(w, x, maxOf(y, z));
-    };
-  }));
-  MathUtils.prototype.ceil_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.ceil_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.ceil(v);
-    };
-  }));
-  MathUtils.prototype.floor_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.floor_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.floor(v);
-    };
-  }));
-  MathUtils.prototype.round_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.round_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.round(v);
-    };
-  }));
-  MathUtils.prototype.sqrt_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.sqrt_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.sqrt(v);
-    };
-  }));
-  MathUtils.prototype.pow_dleff0$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.pow_dleff0$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (a, b) {
-      return Math_0.pow(a, b);
-    };
-  }));
-  MathUtils.prototype.acos_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.acos_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.acos(v);
-    };
-  }));
-  MathUtils.prototype.asin_mx4ult$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.asin_mx4ult$', wrapFunction(function () {
-    var Math_0 = Math;
-    return function (v) {
-      return Math_0.asin(v);
     };
   }));
   MathUtils.prototype.signum_mx4ult$ = function (v) {
@@ -5305,15 +5702,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         out.add_11rb$(0.0);
       }
        else {
-        var theta = Math_0.acos(r / Math_0.sqrt(q3));
+        var x = r / Math_0.sqrt(q3);
+        var theta = Math_0.acos(x);
         var qSqrt = Math_0.sqrt(q);
-        out.add_11rb$(-2.0 * qSqrt * this.cos_mx4ult$(theta / 3.0) - b_0 / 3.0);
-        out.add_11rb$(-2.0 * qSqrt * this.cos_mx4ult$((theta + 2.0 * PI) / 3.0) - b_0 / 3.0);
-        out.add_11rb$(-2.0 * qSqrt * this.cos_mx4ult$((theta + 4.0 * PI) / 3.0) - b_0 / 3.0);
+        var tmp$ = -2.0 * qSqrt;
+        var x_0 = theta / 3.0;
+        out.add_11rb$(tmp$ * Math_0.cos(x_0) - b_0 / 3.0);
+        var tmp$_0 = -2.0 * qSqrt;
+        var x_1 = (theta + 2.0 * PI) / 3.0;
+        out.add_11rb$(tmp$_0 * Math_0.cos(x_1) - b_0 / 3.0);
+        var tmp$_1 = -2.0 * qSqrt;
+        var x_2 = (theta + 4.0 * PI) / 3.0;
+        out.add_11rb$(tmp$_1 * Math_0.cos(x_2) - b_0 / 3.0);
       }
     }
      else {
-      var tmp = Math_0.pow(Math_0.sqrt(-diff) + (r < 0.0 ? -r : r), 1.0 / 3.0);
+      var x_3 = -diff;
+      var $receiver = Math_0.sqrt(x_3) + Math_0.abs(r);
+      var x_4 = 1.0 / 3.0;
+      var tmp = Math_0.pow($receiver, x_4);
       var rSign = r > 0.0 ? 1.0 : r < 0.0 ? -1.0 : 0.0;
       out.add_11rb$(-rSign * (tmp + q / tmp) - b_0 / 3.0);
     }
@@ -5325,7 +5732,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return value;
     var v = value - offset;
     v /= snap;
-    v = Math_0.round(v);
+    v = round(v);
     v *= snap;
     return v + offset;
   };
@@ -5336,7 +5743,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return value;
     var v = value - offset;
     v /= snap;
-    v = Math_0.floor(v);
+    var x = v;
+    v = Math_0.floor(x);
     v *= snap;
     return v + offset;
   };
@@ -5347,10 +5755,19 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return value;
     var v = value - offset;
     v /= snap;
-    v = Math_0.ceil(v);
+    var x = v;
+    v = Math_0.ceil(x);
     v *= snap;
     return v + offset;
   };
+  MathUtils.prototype.offsetRound_dleff0$ = defineInlineFunction('AcornUtils.com.acornui.math.MathUtils.offsetRound_dleff0$', wrapFunction(function () {
+    var round = Kotlin.kotlin.math.round_14dthe$;
+    return function (x, offset) {
+      if (offset === void 0)
+        offset = -0.0136;
+      return round(x + offset);
+    };
+  }));
   MathUtils.$metadata$ = {kind: Kind_OBJECT, simpleName: 'MathUtils', interfaces: []};
   var MathUtils_instance = null;
   function MathUtils_getInstance() {
@@ -5362,28 +5779,28 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function Matrix3Ro() {
   }
   Matrix3Ro.prototype.copy = function () {
-    return new Matrix3(copy(this.values));
+    return new Matrix3(new FloatList(toFloatArray(this.values)));
   };
   Matrix3Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Matrix3Ro', interfaces: []};
   function Matrix3(values) {
     Matrix3$Companion_getInstance();
     if (values === void 0)
-      values = arrayListOf([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]);
+      values = new FloatList(new Float32Array([1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]));
     this.values_1wi4z8$_0 = values;
   }
   Object.defineProperty(Matrix3.prototype, 'values', {get: function () {
     return this.values_1wi4z8$_0;
   }});
   Matrix3.prototype.idt = function () {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, 1.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M10, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M20, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M01, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, 1.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M21, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, 0.0);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M22, 1.0);
+    this.values.set_24o109$(0, 1.0);
+    this.values.set_24o109$(1, 0.0);
+    this.values.set_24o109$(2, 0.0);
+    this.values.set_24o109$(3, 0.0);
+    this.values.set_24o109$(4, 1.0);
+    this.values.set_24o109$(5, 0.0);
+    this.values.set_24o109$(6, 0.0);
+    this.values.set_24o109$(7, 0.0);
+    this.values.set_24o109$(8, 1.0);
     return this;
   };
   Matrix3.prototype.mul_pekfyx$ = function (matrix) {
@@ -5394,24 +5811,24 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.copy().mul_pekfyx$(matrix);
   };
   Matrix3.prototype.mulLeft_pekfyx$ = function (m) {
-    var v00 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20);
-    var v01 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21);
-    var v02 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22);
-    var v10 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20);
-    var v11 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21);
-    var v12 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22);
-    var v20 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20);
-    var v21 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21);
-    var v22 = m.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) + m.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, v00);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M10, v10);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M20, v20);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M01, v01);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, v11);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M21, v21);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, v02);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, v12);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M22, v22);
+    var v00 = m.values.get_za3lpa$(0) * this.values.get_za3lpa$(0) + m.values.get_za3lpa$(3) * this.values.get_za3lpa$(1) + m.values.get_za3lpa$(6) * this.values.get_za3lpa$(2);
+    var v01 = m.values.get_za3lpa$(0) * this.values.get_za3lpa$(3) + m.values.get_za3lpa$(3) * this.values.get_za3lpa$(4) + m.values.get_za3lpa$(6) * this.values.get_za3lpa$(5);
+    var v02 = m.values.get_za3lpa$(0) * this.values.get_za3lpa$(6) + m.values.get_za3lpa$(3) * this.values.get_za3lpa$(7) + m.values.get_za3lpa$(6) * this.values.get_za3lpa$(8);
+    var v10 = m.values.get_za3lpa$(1) * this.values.get_za3lpa$(0) + m.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) + m.values.get_za3lpa$(7) * this.values.get_za3lpa$(2);
+    var v11 = m.values.get_za3lpa$(1) * this.values.get_za3lpa$(3) + m.values.get_za3lpa$(4) * this.values.get_za3lpa$(4) + m.values.get_za3lpa$(7) * this.values.get_za3lpa$(5);
+    var v12 = m.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) + m.values.get_za3lpa$(4) * this.values.get_za3lpa$(7) + m.values.get_za3lpa$(7) * this.values.get_za3lpa$(8);
+    var v20 = m.values.get_za3lpa$(2) * this.values.get_za3lpa$(0) + m.values.get_za3lpa$(5) * this.values.get_za3lpa$(1) + m.values.get_za3lpa$(8) * this.values.get_za3lpa$(2);
+    var v21 = m.values.get_za3lpa$(2) * this.values.get_za3lpa$(3) + m.values.get_za3lpa$(5) * this.values.get_za3lpa$(4) + m.values.get_za3lpa$(8) * this.values.get_za3lpa$(5);
+    var v22 = m.values.get_za3lpa$(2) * this.values.get_za3lpa$(6) + m.values.get_za3lpa$(5) * this.values.get_za3lpa$(7) + m.values.get_za3lpa$(8) * this.values.get_za3lpa$(8);
+    this.values.set_24o109$(0, v00);
+    this.values.set_24o109$(1, v10);
+    this.values.set_24o109$(2, v20);
+    this.values.set_24o109$(3, v01);
+    this.values.set_24o109$(4, v11);
+    this.values.set_24o109$(5, v21);
+    this.values.set_24o109$(6, v02);
+    this.values.set_24o109$(7, v12);
+    this.values.set_24o109$(8, v22);
     return this;
   };
   Matrix3.prototype.prj_9wm29l$ = function (vec) {
@@ -5426,149 +5843,173 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return '[' + toString(this.values.get_za3lpa$(0)) + '|' + toString(this.values.get_za3lpa$(3)) + '|' + toString(this.values.get_za3lpa$(6)) + ']\n' + '[' + toString(this.values.get_za3lpa$(1)) + '|' + toString(this.values.get_za3lpa$(4)) + '|' + toString(this.values.get_za3lpa$(7)) + ']\n' + '[' + toString(this.values.get_za3lpa$(2)) + '|' + toString(this.values.get_za3lpa$(5)) + '|' + toString(this.values.get_za3lpa$(8)) + ']';
   };
   Matrix3.prototype.det = function () {
-    return this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) + this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) + this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20);
+    return this.values.get_za3lpa$(0) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(8) + this.values.get_za3lpa$(3) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(2) + this.values.get_za3lpa$(6) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(5) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(5) - this.values.get_za3lpa$(3) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(8) - this.values.get_za3lpa$(6) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(2);
   };
   Matrix3.prototype.inv = function () {
     var det = this.det();
     if (det === 0.0)
       throw Exception_init("Can't invert a singular matrix");
     var invDet = 1.0 / det;
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M00, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M10, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M20, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M01, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M11, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M22) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M21, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M02, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M12, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12));
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M22, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) - this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M00));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M10, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M10));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M20, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M20));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M01, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M01));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M11));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M21, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M21));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M02));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M12));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M22, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(Matrix3$Companion_getInstance().M22));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(0, this.values.get_za3lpa$(4) * this.values.get_za3lpa$(8) - this.values.get_za3lpa$(5) * this.values.get_za3lpa$(7));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(1, this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(8));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(2, this.values.get_za3lpa$(1) * this.values.get_za3lpa$(5) - this.values.get_za3lpa$(2) * this.values.get_za3lpa$(4));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(3, this.values.get_za3lpa$(5) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(3) * this.values.get_za3lpa$(8));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(4, this.values.get_za3lpa$(0) * this.values.get_za3lpa$(8) - this.values.get_za3lpa$(2) * this.values.get_za3lpa$(6));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(5, this.values.get_za3lpa$(2) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(6, this.values.get_za3lpa$(3) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(6));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(7, this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(7));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(8, this.values.get_za3lpa$(0) * this.values.get_za3lpa$(4) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(3));
+    this.values.set_24o109$(0, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(0));
+    this.values.set_24o109$(1, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(1));
+    this.values.set_24o109$(2, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(2));
+    this.values.set_24o109$(3, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(3));
+    this.values.set_24o109$(4, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(4));
+    this.values.set_24o109$(5, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(5));
+    this.values.set_24o109$(6, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(6));
+    this.values.set_24o109$(7, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(7));
+    this.values.set_24o109$(8, invDet * Matrix3$Companion_getInstance().tmp_0.get_za3lpa$(8));
     return this;
   };
   Matrix3.prototype.set_pekfyx$ = function (mat) {
-    var tmp$;
-    tmp$ = 9 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      this.values.set_wxm5ur$(i, mat.values.get_za3lpa$(i));
+    for (var i = 0; i <= 8; i++) {
+      this.values.set_24o109$(i, mat.values.get_za3lpa$(i));
     }
     return this;
   };
   Matrix3.prototype.set_pekf88$ = function (mat) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, mat.values.get_za3lpa$(0));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M10, mat.values.get_za3lpa$(1));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M20, mat.values.get_za3lpa$(2));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M01, mat.values.get_za3lpa$(4));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, mat.values.get_za3lpa$(5));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M21, mat.values.get_za3lpa$(6));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, mat.values.get_za3lpa$(8));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, mat.values.get_za3lpa$(9));
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M22, mat.values.get_za3lpa$(10));
+    this.values.set_24o109$(0, mat.values.get_za3lpa$(0));
+    this.values.set_24o109$(1, mat.values.get_za3lpa$(1));
+    this.values.set_24o109$(2, mat.values.get_za3lpa$(2));
+    this.values.set_24o109$(3, mat.values.get_za3lpa$(4));
+    this.values.set_24o109$(4, mat.values.get_za3lpa$(5));
+    this.values.set_24o109$(5, mat.values.get_za3lpa$(6));
+    this.values.set_24o109$(6, mat.values.get_za3lpa$(8));
+    this.values.set_24o109$(7, mat.values.get_za3lpa$(9));
+    this.values.set_24o109$(8, mat.values.get_za3lpa$(10));
     return this;
   };
   Matrix3.prototype.set_hcyabg$ = function (values) {
-    var tmp$;
-    tmp$ = 9 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      this.values.set_wxm5ur$(i, values.get_za3lpa$(i));
+    for (var i = 0; i <= 8; i++) {
+      this.values.set_24o109$(i, values.get_za3lpa$(i));
     }
     return this;
   };
   Matrix3.prototype.setTranslation_dleff0$ = function (x, y) {
-    this.values.set_wxm5ur$(6, x);
-    this.values.set_wxm5ur$(7, y);
+    this.values.set_24o109$(6, x);
+    this.values.set_24o109$(7, y);
     return this;
   };
   Matrix3.prototype.trn_dleff0$ = function (x, y) {
-    this.values.set_wxm5ur$(6, this.values.get_za3lpa$(6) + x);
-    this.values.set_wxm5ur$(7, this.values.get_za3lpa$(7) + y);
+    this.values.set_24o109$(6, this.values.get_za3lpa$(6) + x);
+    this.values.set_24o109$(7, this.values.get_za3lpa$(7) + y);
     return this;
   };
   Matrix3.prototype.trn_9wm29l$ = function (vector) {
-    this.values.set_wxm5ur$(6, this.values.get_za3lpa$(6) + vector.x);
-    this.values.set_wxm5ur$(7, this.values.get_za3lpa$(7) + vector.y);
+    this.values.set_24o109$(6, this.values.get_za3lpa$(6) + vector.x);
+    this.values.set_24o109$(7, this.values.get_za3lpa$(7) + vector.y);
     return this;
   };
   Matrix3.prototype.trn_9wm29k$ = function (vector) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02) + vector.x);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12) + vector.y);
+    this.values.set_24o109$(6, this.values.get_za3lpa$(6) + vector.x);
+    this.values.set_24o109$(7, this.values.get_za3lpa$(7) + vector.y);
     return this;
   };
   Matrix3.prototype.rotate_mx4ult$ = function (radians) {
     if (radians === 0.0)
       return this;
-    var cos = MathUtils_getInstance().cos_mx4ult$(radians);
-    var sin = MathUtils_getInstance().sin_mx4ult$(radians);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M00, cos);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M10, sin);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M20, 0.0);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M01, -sin);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M11, cos);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M21, 0.0);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M02, 0.0);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M12, 0.0);
-    Matrix3$Companion_getInstance().tmp_0.set_wxm5ur$(Matrix3$Companion_getInstance().M22, 1.0);
+    var cos = Math_0.cos(radians);
+    var sin = Math_0.sin(radians);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(0, cos);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(1, sin);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(2, 0.0);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(3, -sin);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(4, cos);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(5, 0.0);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(6, 0.0);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(7, 0.0);
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(8, 1.0);
     Matrix3$Companion_getInstance().mul_0(this.values, Matrix3$Companion_getInstance().tmp_0);
     return this;
   };
+  Matrix3.prototype.tra = function () {
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(0, this.values.get_za3lpa$(0));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(3, this.values.get_za3lpa$(1));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(6, this.values.get_za3lpa$(2));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(1, this.values.get_za3lpa$(3));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(4, this.values.get_za3lpa$(4));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(7, this.values.get_za3lpa$(5));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(2, this.values.get_za3lpa$(6));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(5, this.values.get_za3lpa$(7));
+    Matrix3$Companion_getInstance().tmp_0.set_24o109$(8, this.values.get_za3lpa$(8));
+    return this.set_hcyabg$(Matrix3$Companion_getInstance().tmp_0);
+  };
   Matrix3.prototype.getTranslation_9wm29l$ = function (out) {
-    out.x = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02);
-    out.y = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12);
+    out.x = this.values.get_za3lpa$(6);
+    out.y = this.values.get_za3lpa$(7);
     return out;
   };
   Matrix3.prototype.getScale_9wm29l$ = function (out) {
-    out.x = Math.sqrt(this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) + this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01));
-    out.y = Math.sqrt(this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10) + this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11));
+    var x = this.values.get_za3lpa$(0) * this.values.get_za3lpa$(0) + this.values.get_za3lpa$(3) * this.values.get_za3lpa$(3);
+    out.x = Math_0.sqrt(x);
+    var x_0 = this.values.get_za3lpa$(1) * this.values.get_za3lpa$(1) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(4);
+    out.y = Math_0.sqrt(x_0);
     return out;
   };
   Matrix3.prototype.getRotation = function () {
-    return MathUtils_getInstance().atan2_dleff0$(this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10), this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00));
+    var y = this.values.get_za3lpa$(1);
+    var x = this.values.get_za3lpa$(0);
+    return Math_0.atan2(y, x);
   };
   Matrix3.prototype.scl_mx4ult$ = function (scale) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * scale);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * scale);
+    this.values.set_24o109$(0, this.values.get_za3lpa$(0) * scale);
+    this.values.set_24o109$(4, this.values.get_za3lpa$(4) * scale);
     return this;
   };
   Matrix3.prototype.scl_dleff0$ = function (scaleX, scaleY) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * scaleX);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * scaleY);
+    this.values.set_24o109$(0, this.values.get_za3lpa$(0) * scaleX);
+    this.values.set_24o109$(4, this.values.get_za3lpa$(4) * scaleY);
     return this;
   };
   Matrix3.prototype.scl_1fv330$ = function (scale) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * scale.x);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * scale.y);
+    this.values.set_24o109$(0, this.values.get_za3lpa$(0) * scale.x);
+    this.values.set_24o109$(4, this.values.get_za3lpa$(4) * scale.y);
     return this;
   };
   Matrix3.prototype.scl_1fv2cb$ = function (scale) {
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M00, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M00) * scale.x);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M11, this.values.get_za3lpa$(Matrix3$Companion_getInstance().M11) * scale.y);
+    this.values.set_24o109$(0, this.values.get_za3lpa$(0) * scale.x);
+    this.values.set_24o109$(4, this.values.get_za3lpa$(4) * scale.y);
     return this;
   };
   Matrix3.prototype.transpose = function () {
-    var v01 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M10);
-    var v02 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M20);
-    var v10 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M01);
-    var v12 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M21);
-    var v20 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M02);
-    var v21 = this.values.get_za3lpa$(Matrix3$Companion_getInstance().M12);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M01, v01);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M02, v02);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M10, v10);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M12, v12);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M20, v20);
-    this.values.set_wxm5ur$(Matrix3$Companion_getInstance().M21, v21);
+    var v01 = this.values.get_za3lpa$(1);
+    var v02 = this.values.get_za3lpa$(2);
+    var v10 = this.values.get_za3lpa$(3);
+    var v12 = this.values.get_za3lpa$(5);
+    var v20 = this.values.get_za3lpa$(6);
+    var v21 = this.values.get_za3lpa$(7);
+    this.values.set_24o109$(3, v01);
+    this.values.set_24o109$(6, v02);
+    this.values.set_24o109$(1, v10);
+    this.values.set_24o109$(7, v12);
+    this.values.set_24o109$(2, v20);
+    this.values.set_24o109$(5, v21);
     return this;
+  };
+  Matrix3.prototype.equals = function (other) {
+    var tmp$, tmp$_0;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Matrix3Ro) ? tmp$ : throwCCE();
+    if (!((tmp$_0 = this.values) != null ? tmp$_0.equals(other.values) : null))
+      return false;
+    return true;
+  };
+  Matrix3.prototype.hashCode = function () {
+    return this.values.hashCode();
   };
   function Matrix3$Companion() {
     Matrix3$Companion_instance = this;
-    this.tmp_0 = arrayListOf([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]);
+    this.tmp_0 = new FloatList(new Float32Array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]));
     this.IDENTITY = new Matrix3();
     this.M00 = 0;
     this.M01 = 3;
@@ -5590,15 +6031,15 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var v20 = matA.get_za3lpa$(2) * matB.get_za3lpa$(0) + matA.get_za3lpa$(5) * matB.get_za3lpa$(1) + matA.get_za3lpa$(8) * matB.get_za3lpa$(2);
     var v21 = matA.get_za3lpa$(2) * matB.get_za3lpa$(3) + matA.get_za3lpa$(5) * matB.get_za3lpa$(4) + matA.get_za3lpa$(8) * matB.get_za3lpa$(5);
     var v22 = matA.get_za3lpa$(2) * matB.get_za3lpa$(6) + matA.get_za3lpa$(5) * matB.get_za3lpa$(7) + matA.get_za3lpa$(8) * matB.get_za3lpa$(8);
-    matA.set_wxm5ur$(0, v00);
-    matA.set_wxm5ur$(1, v10);
-    matA.set_wxm5ur$(2, v20);
-    matA.set_wxm5ur$(3, v01);
-    matA.set_wxm5ur$(4, v11);
-    matA.set_wxm5ur$(5, v21);
-    matA.set_wxm5ur$(6, v02);
-    matA.set_wxm5ur$(7, v12);
-    matA.set_wxm5ur$(8, v22);
+    matA.set_24o109$(0, v00);
+    matA.set_24o109$(1, v10);
+    matA.set_24o109$(2, v20);
+    matA.set_24o109$(3, v01);
+    matA.set_24o109$(4, v11);
+    matA.set_24o109$(5, v21);
+    matA.set_24o109$(6, v02);
+    matA.set_24o109$(7, v12);
+    matA.set_24o109$(8, v22);
   };
   Matrix3$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Matrix3$Companion_instance = null;
@@ -5609,49 +6050,88 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Matrix3$Companion_instance;
   }
   Matrix3.$metadata$ = {kind: Kind_CLASS, simpleName: 'Matrix3', interfaces: [Matrix3Ro]};
-  Matrix3.prototype.component1 = function () {
-    return this.values;
-  };
-  Matrix3.prototype.copy_yn39w1$ = function (values) {
-    return new Matrix3(values === void 0 ? this.values : values);
-  };
-  Matrix3.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.values) | 0;
-    return result;
-  };
-  Matrix3.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.values, other.values))));
-  };
   function Matrix4Ro() {
   }
+  Matrix4Ro.prototype.get_za3lpa$ = function (index) {
+    return this.values.get_za3lpa$(index);
+  };
   Matrix4Ro.prototype.getRotation_tt8t29$ = function (out, normalizeAxes, callback$default) {
     if (normalizeAxes === void 0)
       normalizeAxes = false;
     return callback$default ? callback$default(out, normalizeAxes) : this.getRotation_tt8t29$$default(out, normalizeAxes);
   };
   Matrix4Ro.prototype.copy = function () {
-    return new Matrix4(copy(this.values));
+    return Matrix4_init_0(new FloatList(toFloatArray(this.values)));
   };
   Matrix4Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Matrix4Ro', interfaces: []};
-  function Matrix4(values) {
+  function Matrix4() {
     Matrix4$Companion_getInstance();
-    if (values === void 0)
-      values = arrayListOf([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]);
-    this.values_rzlvt7$_0 = values;
+    this._values_0 = new FloatList(new Float32Array([1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0]));
+    this._mode_0 = MatrixMode$IDENTITY_getInstance();
+    this.refreshMode_0();
   }
   Object.defineProperty(Matrix4.prototype, 'values', {get: function () {
-    return this.values_rzlvt7$_0;
+    return this._values_0;
   }});
-  Matrix4.prototype.set_pekf88$ = function (matrix) {
-    return this.set_hcyabg$(matrix.values);
+  Object.defineProperty(Matrix4.prototype, 'mode', {get: function () {
+    return this._mode_0;
+  }});
+  Matrix4.prototype.set_24o109$ = function (index, value) {
+    this._values_0.set_24o109$(index, value);
+  };
+  Matrix4.prototype.refreshMode_0 = function () {
+    var values = this._values_0;
+    if (values.get_za3lpa$(12) !== 0.0 || values.get_za3lpa$(13) !== 0.0 || values.get_za3lpa$(14) !== 0.0)
+      this._mode_0 = MatrixMode$TRANSLATION_getInstance();
+    if (values.get_za3lpa$(0) !== 1.0 || values.get_za3lpa$(5) !== 1.0 || values.get_za3lpa$(10) !== 1.0 || values.get_za3lpa$(15) !== 1.0)
+      this._mode_0 = MatrixMode$SCALE_getInstance();
+    if (values.get_za3lpa$(4) !== 0.0 || values.get_za3lpa$(8) !== 0.0 || values.get_za3lpa$(1) !== 0.0 || values.get_za3lpa$(9) !== 0.0 || values.get_za3lpa$(2) !== 0.0 || values.get_za3lpa$(6) !== 0.0 || values.get_za3lpa$(3) !== 0.0 || values.get_za3lpa$(7) !== 0.0 || values.get_za3lpa$(11) !== 0.0)
+      this._mode_0 = MatrixMode$FULL_getInstance();
+  };
+  Matrix4.prototype.set_pekf88$ = function (other) {
+    var mode = this._mode_0;
+    if (mode === other.mode && mode !== MatrixMode$FULL_getInstance()) {
+      switch (mode.name) {
+        case 'IDENTITY':
+          break;
+        case 'TRANSLATION':
+          this._values_0.set_24o109$(12, other.values.get_za3lpa$(12));
+          this._values_0.set_24o109$(13, other.values.get_za3lpa$(13));
+          this._values_0.set_24o109$(14, other.values.get_za3lpa$(14));
+          break;
+        case 'SCALE':
+          this._values_0.set_24o109$(12, other.values.get_za3lpa$(12));
+          this._values_0.set_24o109$(13, other.values.get_za3lpa$(13));
+          this._values_0.set_24o109$(14, other.values.get_za3lpa$(14));
+          this._values_0.set_24o109$(0, other.values.get_za3lpa$(0));
+          this._values_0.set_24o109$(5, other.values.get_za3lpa$(5));
+          this._values_0.set_24o109$(10, other.values.get_za3lpa$(10));
+          this._values_0.set_24o109$(15, other.values.get_za3lpa$(15));
+          break;
+        case 'FULL':
+          throw Exception_init('Unreachable');
+      }
+    }
+     else {
+      for (var i = 0; i <= 15; i++) {
+        this._values_0.set_24o109$(i, other.values.get_za3lpa$(i));
+      }
+      this._mode_0 = other.mode;
+    }
+    return this;
   };
   Matrix4.prototype.set_hcyabg$ = function (values) {
-    var tmp$;
-    tmp$ = 16 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      this.values.set_wxm5ur$(i, values.get_za3lpa$(i));
+    for (var i = 0; i <= 15; i++) {
+      this._values_0.set_24o109$(i, values.get_za3lpa$(i));
     }
+    this.refreshMode_0();
+    return this;
+  };
+  Matrix4.prototype.set_q3cr5i$ = function (values) {
+    for (var i = 0; i <= 15; i++) {
+      this._values_0.set_24o109$(i, values[i]);
+    }
+    this.refreshMode_0();
     return this;
   };
   Matrix4.prototype.set_qe7e4j$ = function (quaternion) {
@@ -5676,22 +6156,24 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var yy = quaternionY * ys;
     var yz = quaternionY * zs;
     var zz = quaternionZ * zs;
-    this.values.set_wxm5ur$(0, 1.0 - (yy + zz));
-    this.values.set_wxm5ur$(4, xy - wz);
-    this.values.set_wxm5ur$(8, xz + wy);
-    this.values.set_wxm5ur$(12, translationX);
-    this.values.set_wxm5ur$(1, xy + wz);
-    this.values.set_wxm5ur$(5, 1.0 - (xx + zz));
-    this.values.set_wxm5ur$(9, yz - wx);
-    this.values.set_wxm5ur$(13, translationY);
-    this.values.set_wxm5ur$(2, xz - wy);
-    this.values.set_wxm5ur$(6, yz + wx);
-    this.values.set_wxm5ur$(10, 1.0 - (xx + yy));
-    this.values.set_wxm5ur$(14, translationZ);
-    this.values.set_wxm5ur$(3, 0.0);
-    this.values.set_wxm5ur$(7, 0.0);
-    this.values.set_wxm5ur$(11, 0.0);
-    this.values.set_wxm5ur$(15, 1.0);
+    var values = this._values_0;
+    values.set_24o109$(0, 1.0 - (yy + zz));
+    values.set_24o109$(4, xy - wz);
+    values.set_24o109$(8, xz + wy);
+    values.set_24o109$(12, translationX);
+    values.set_24o109$(1, xy + wz);
+    values.set_24o109$(5, 1.0 - (xx + zz));
+    values.set_24o109$(9, yz - wx);
+    values.set_24o109$(13, translationY);
+    values.set_24o109$(2, xz - wy);
+    values.set_24o109$(6, yz + wx);
+    values.set_24o109$(10, 1.0 - (xx + yy));
+    values.set_24o109$(14, translationZ);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(15, 1.0);
+    this._mode_0 = MatrixMode$FULL_getInstance();
     return this;
   };
   Matrix4.prototype.set_4n9xua$ = function (position, orientation, scale) {
@@ -5710,161 +6192,426 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var yy = quaternionY * ys;
     var yz = quaternionY * zs;
     var zz = quaternionZ * zs;
-    this.values.set_wxm5ur$(0, scaleX * (1.0 - (yy + zz)));
-    this.values.set_wxm5ur$(4, scaleY * (xy - wz));
-    this.values.set_wxm5ur$(8, scaleZ * (xz + wy));
-    this.values.set_wxm5ur$(12, translationX);
-    this.values.set_wxm5ur$(1, scaleX * (xy + wz));
-    this.values.set_wxm5ur$(5, scaleY * (1.0 - (xx + zz)));
-    this.values.set_wxm5ur$(9, scaleZ * (yz - wx));
-    this.values.set_wxm5ur$(13, translationY);
-    this.values.set_wxm5ur$(2, scaleX * (xz - wy));
-    this.values.set_wxm5ur$(6, scaleY * (yz + wx));
-    this.values.set_wxm5ur$(10, scaleZ * (1.0 - (xx + yy)));
-    this.values.set_wxm5ur$(14, translationZ);
-    this.values.set_wxm5ur$(3, 0.0);
-    this.values.set_wxm5ur$(7, 0.0);
-    this.values.set_wxm5ur$(11, 0.0);
-    this.values.set_wxm5ur$(15, 1.0);
+    var values = this._values_0;
+    values.set_24o109$(0, scaleX * (1.0 - (yy + zz)));
+    values.set_24o109$(4, scaleY * (xy - wz));
+    values.set_24o109$(8, scaleZ * (xz + wy));
+    values.set_24o109$(12, translationX);
+    values.set_24o109$(1, scaleX * (xy + wz));
+    values.set_24o109$(5, scaleY * (1.0 - (xx + zz)));
+    values.set_24o109$(9, scaleZ * (yz - wx));
+    values.set_24o109$(13, translationY);
+    values.set_24o109$(2, scaleX * (xz - wy));
+    values.set_24o109$(6, scaleY * (yz + wx));
+    values.set_24o109$(10, scaleZ * (1.0 - (xx + yy)));
+    values.set_24o109$(14, translationZ);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(15, 1.0);
+    this._mode_0 = MatrixMode$FULL_getInstance();
     return this;
   };
   Matrix4.prototype.set_hcpy8k$ = function (xAxis, yAxis, zAxis, pos) {
-    this.values.set_wxm5ur$(0, xAxis.x);
-    this.values.set_wxm5ur$(4, xAxis.y);
-    this.values.set_wxm5ur$(8, xAxis.z);
-    this.values.set_wxm5ur$(1, yAxis.x);
-    this.values.set_wxm5ur$(5, yAxis.y);
-    this.values.set_wxm5ur$(9, yAxis.z);
-    this.values.set_wxm5ur$(2, zAxis.x);
-    this.values.set_wxm5ur$(6, zAxis.y);
-    this.values.set_wxm5ur$(10, zAxis.z);
-    this.values.set_wxm5ur$(12, pos.x);
-    this.values.set_wxm5ur$(13, pos.y);
-    this.values.set_wxm5ur$(14, pos.z);
-    this.values.set_wxm5ur$(3, 0.0);
-    this.values.set_wxm5ur$(7, 0.0);
-    this.values.set_wxm5ur$(11, 0.0);
-    this.values.set_wxm5ur$(15, 1.0);
+    var values = this._values_0;
+    values.set_24o109$(0, xAxis.x);
+    values.set_24o109$(4, xAxis.y);
+    values.set_24o109$(8, xAxis.z);
+    values.set_24o109$(1, yAxis.x);
+    values.set_24o109$(5, yAxis.y);
+    values.set_24o109$(9, yAxis.z);
+    values.set_24o109$(2, zAxis.x);
+    values.set_24o109$(6, zAxis.y);
+    values.set_24o109$(10, zAxis.z);
+    values.set_24o109$(12, pos.x);
+    values.set_24o109$(13, pos.y);
+    values.set_24o109$(14, pos.z);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(15, 1.0);
+    this.refreshMode_0();
+    return this;
+  };
+  Matrix4.prototype.setToOrtho_w8lrqs$ = function (left, right, bottom, top, near, far) {
+    var values = this._values_0;
+    var xOrth = 2.0 / (right - left);
+    var yOrth = 2.0 / (top - bottom);
+    var zOrth = -2.0 / (far - near);
+    var tx = -(right + left) / (right - left);
+    var ty = -(top + bottom) / (top - bottom);
+    var tz = -(far + near) / (far - near);
+    values.set_24o109$(0, xOrth);
+    values.set_24o109$(1, 0.0);
+    values.set_24o109$(2, 0.0);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(4, 0.0);
+    values.set_24o109$(5, yOrth);
+    values.set_24o109$(6, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(8, 0.0);
+    values.set_24o109$(9, 0.0);
+    values.set_24o109$(10, zOrth);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(12, tx);
+    values.set_24o109$(13, ty);
+    values.set_24o109$(14, tz);
+    values.set_24o109$(15, 1.0);
+    this._mode_0 = MatrixMode$SCALE_getInstance();
+    return this;
+  };
+  Matrix4.prototype.setToProjection_7b5o5w$ = function (near, far, fovy, aspectRatio) {
+    var values = this._values_0;
+    var x = fovy / 2.0;
+    var lFd = 1.0 / Math_0.tan(x);
+    var lA1 = (far + near) / (near - far);
+    var lA2 = 2.0 * far * near / (near - far);
+    values.set_24o109$(0, lFd / aspectRatio);
+    values.set_24o109$(1, 0.0);
+    values.set_24o109$(2, 0.0);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(4, 0.0);
+    values.set_24o109$(5, lFd);
+    values.set_24o109$(6, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(8, 0.0);
+    values.set_24o109$(9, 0.0);
+    values.set_24o109$(10, lA1);
+    values.set_24o109$(11, -1.0);
+    values.set_24o109$(12, 0.0);
+    values.set_24o109$(13, 0.0);
+    values.set_24o109$(14, lA2);
+    values.set_24o109$(15, 0.0);
+    this._mode_0 = MatrixMode$FULL_getInstance();
     return this;
   };
   Matrix4.prototype.trn_1fv2cb$ = function (vector) {
-    this.values.set_wxm5ur$(12, this.values.get_za3lpa$(12) + vector.x);
-    this.values.set_wxm5ur$(13, this.values.get_za3lpa$(13) + vector.y);
-    this.values.set_wxm5ur$(14, this.values.get_za3lpa$(14) + vector.z);
+    var values = this._values_0;
+    values.set_24o109$(12, values.get_za3lpa$(12) + vector.x);
+    values.set_24o109$(13, values.get_za3lpa$(13) + vector.y);
+    values.set_24o109$(14, values.get_za3lpa$(14) + vector.z);
+    if (this._mode_0 === MatrixMode$IDENTITY_getInstance())
+      this._mode_0 = MatrixMode$TRANSLATION_getInstance();
     return this;
   };
   Matrix4.prototype.trn_y2kzbl$ = function (x, y, z) {
-    this.values.set_wxm5ur$(12, this.values.get_za3lpa$(12) + x);
-    this.values.set_wxm5ur$(13, this.values.get_za3lpa$(13) + y);
-    this.values.set_wxm5ur$(14, this.values.get_za3lpa$(14) + z);
+    var values = this._values_0;
+    values.set_24o109$(12, values.get_za3lpa$(12) + x);
+    values.set_24o109$(13, values.get_za3lpa$(13) + y);
+    values.set_24o109$(14, values.get_za3lpa$(14) + z);
+    if (this._mode_0 === MatrixMode$IDENTITY_getInstance())
+      this._mode_0 = MatrixMode$TRANSLATION_getInstance();
     return this;
   };
   Matrix4.prototype.mul_pekf88$ = function (matrix) {
-    Matrix4$Companion_getInstance().mul_0(this.values, matrix.values);
+    var matA = this._values_0;
+    var matB = matrix.values;
+    switch (matrix.mode.name) {
+      case 'IDENTITY':
+        break;
+      case 'TRANSLATION':
+        switch (this._mode_0.name) {
+          case 'IDENTITY':
+            matA.set_24o109$(12, matB.get_za3lpa$(12));
+            matA.set_24o109$(13, matB.get_za3lpa$(13));
+            matA.set_24o109$(14, matB.get_za3lpa$(14));
+            this._mode_0 = MatrixMode$TRANSLATION_getInstance();
+            break;
+          case 'TRANSLATION':
+            matA.set_24o109$(12, matA.get_za3lpa$(12) + matB.get_za3lpa$(12));
+            matA.set_24o109$(13, matA.get_za3lpa$(13) + matB.get_za3lpa$(13));
+            matA.set_24o109$(14, matA.get_za3lpa$(14) + matB.get_za3lpa$(14));
+            break;
+          case 'SCALE':
+            var v03 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(12);
+            var v13 = matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(13);
+            var v23 = matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14);
+            var v33 = matA.get_za3lpa$(3) * matB.get_za3lpa$(12) + matA.get_za3lpa$(15);
+            matA.set_24o109$(12, v03);
+            matA.set_24o109$(13, v13);
+            matA.set_24o109$(14, v23);
+            matA.set_24o109$(15, v33);
+            break;
+          case 'FULL':
+            var v03_0 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(4) * matB.get_za3lpa$(13) + matA.get_za3lpa$(8) * matB.get_za3lpa$(14) + matA.get_za3lpa$(12);
+            var v13_0 = matA.get_za3lpa$(1) * matB.get_za3lpa$(12) + matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(9) * matB.get_za3lpa$(14) + matA.get_za3lpa$(13);
+            var v23_0 = matA.get_za3lpa$(2) * matB.get_za3lpa$(12) + matA.get_za3lpa$(6) * matB.get_za3lpa$(13) + matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14);
+            var v33_0 = matA.get_za3lpa$(3) * matB.get_za3lpa$(12) + matA.get_za3lpa$(7) * matB.get_za3lpa$(13) + matA.get_za3lpa$(11) * matB.get_za3lpa$(14) + matA.get_za3lpa$(15);
+            matA.set_24o109$(12, v03_0);
+            matA.set_24o109$(13, v13_0);
+            matA.set_24o109$(14, v23_0);
+            matA.set_24o109$(15, v33_0);
+            break;
+        }
+
+        break;
+      case 'SCALE':
+        switch (this._mode_0.name) {
+          case 'IDENTITY':
+            matA.set_24o109$(0, matB.get_za3lpa$(0));
+            matA.set_24o109$(12, matB.get_za3lpa$(12));
+            matA.set_24o109$(5, matB.get_za3lpa$(5));
+            matA.set_24o109$(13, matB.get_za3lpa$(13));
+            matA.set_24o109$(10, matB.get_za3lpa$(10));
+            matA.set_24o109$(14, matB.get_za3lpa$(14));
+            matA.set_24o109$(15, matB.get_za3lpa$(15));
+            this._mode_0 = MatrixMode$SCALE_getInstance();
+            break;
+          case 'TRANSLATION':
+            matA.set_24o109$(0, matB.get_za3lpa$(0));
+            matA.set_24o109$(12, matB.get_za3lpa$(12) + matA.get_za3lpa$(12));
+            matA.set_24o109$(5, matB.get_za3lpa$(5));
+            matA.set_24o109$(13, matB.get_za3lpa$(13) + matA.get_za3lpa$(13));
+            matA.set_24o109$(10, matB.get_za3lpa$(10));
+            matA.set_24o109$(14, matB.get_za3lpa$(14) + matA.get_za3lpa$(14));
+            matA.set_24o109$(15, matB.get_za3lpa$(15));
+            this._mode_0 = MatrixMode$SCALE_getInstance();
+            break;
+          case 'SCALE':
+            var v00 = matA.get_za3lpa$(0) * matB.get_za3lpa$(0);
+            var v03_1 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(12) * matB.get_za3lpa$(15);
+            var v11 = matA.get_za3lpa$(5) * matB.get_za3lpa$(5);
+            var v13_1 = matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(13) * matB.get_za3lpa$(15);
+            var v22 = matA.get_za3lpa$(10) * matB.get_za3lpa$(10);
+            var v23_1 = matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14) * matB.get_za3lpa$(15);
+            var v33_1 = matA.get_za3lpa$(15) * matB.get_za3lpa$(15);
+            matA.set_24o109$(0, v00);
+            matA.set_24o109$(12, v03_1);
+            matA.set_24o109$(5, v11);
+            matA.set_24o109$(13, v13_1);
+            matA.set_24o109$(10, v22);
+            matA.set_24o109$(14, v23_1);
+            matA.set_24o109$(15, v33_1);
+            break;
+          case 'FULL':
+            var v00_0 = matA.get_za3lpa$(0) * matB.get_za3lpa$(0);
+            var v01 = matA.get_za3lpa$(4) * matB.get_za3lpa$(5);
+            var v02 = matA.get_za3lpa$(8) * matB.get_za3lpa$(10);
+            var v03_2 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(4) * matB.get_za3lpa$(13) + matA.get_za3lpa$(8) * matB.get_za3lpa$(14) + matA.get_za3lpa$(12) * matB.get_za3lpa$(15);
+            var v10 = matA.get_za3lpa$(1) * matB.get_za3lpa$(0);
+            var v11_0 = matA.get_za3lpa$(5) * matB.get_za3lpa$(5);
+            var v12 = matA.get_za3lpa$(9) * matB.get_za3lpa$(10);
+            var v13_2 = matA.get_za3lpa$(1) * matB.get_za3lpa$(12) + matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(9) * matB.get_za3lpa$(14) + matA.get_za3lpa$(13) * matB.get_za3lpa$(15);
+            var v20 = matA.get_za3lpa$(2) * matB.get_za3lpa$(0);
+            var v21 = matA.get_za3lpa$(6) * matB.get_za3lpa$(5);
+            var v22_0 = matA.get_za3lpa$(10) * matB.get_za3lpa$(10);
+            var v23_2 = matA.get_za3lpa$(2) * matB.get_za3lpa$(12) + matA.get_za3lpa$(6) * matB.get_za3lpa$(13) + matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14) * matB.get_za3lpa$(15);
+            var v30 = matA.get_za3lpa$(3) * matB.get_za3lpa$(0);
+            var v31 = matA.get_za3lpa$(7) * matB.get_za3lpa$(5);
+            var v32 = matA.get_za3lpa$(11) * matB.get_za3lpa$(10);
+            var v33_2 = matA.get_za3lpa$(3) * matB.get_za3lpa$(12) + matA.get_za3lpa$(7) * matB.get_za3lpa$(13) + matA.get_za3lpa$(11) * matB.get_za3lpa$(14) + matA.get_za3lpa$(15) * matB.get_za3lpa$(15);
+            matA.set_24o109$(0, v00_0);
+            matA.set_24o109$(4, v01);
+            matA.set_24o109$(8, v02);
+            matA.set_24o109$(12, v03_2);
+            matA.set_24o109$(1, v10);
+            matA.set_24o109$(5, v11_0);
+            matA.set_24o109$(9, v12);
+            matA.set_24o109$(13, v13_2);
+            matA.set_24o109$(2, v20);
+            matA.set_24o109$(6, v21);
+            matA.set_24o109$(10, v22_0);
+            matA.set_24o109$(14, v23_2);
+            matA.set_24o109$(3, v30);
+            matA.set_24o109$(7, v31);
+            matA.set_24o109$(11, v32);
+            matA.set_24o109$(15, v33_2);
+            break;
+        }
+
+        break;
+      case 'FULL':
+        var v00_1 = matA.get_za3lpa$(0) * matB.get_za3lpa$(0) + matA.get_za3lpa$(4) * matB.get_za3lpa$(1) + matA.get_za3lpa$(8) * matB.get_za3lpa$(2) + matA.get_za3lpa$(12) * matB.get_za3lpa$(3);
+        var v01_0 = matA.get_za3lpa$(0) * matB.get_za3lpa$(4) + matA.get_za3lpa$(4) * matB.get_za3lpa$(5) + matA.get_za3lpa$(8) * matB.get_za3lpa$(6) + matA.get_za3lpa$(12) * matB.get_za3lpa$(7);
+        var v02_0 = matA.get_za3lpa$(0) * matB.get_za3lpa$(8) + matA.get_za3lpa$(4) * matB.get_za3lpa$(9) + matA.get_za3lpa$(8) * matB.get_za3lpa$(10) + matA.get_za3lpa$(12) * matB.get_za3lpa$(11);
+        var v03_3 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(4) * matB.get_za3lpa$(13) + matA.get_za3lpa$(8) * matB.get_za3lpa$(14) + matA.get_za3lpa$(12) * matB.get_za3lpa$(15);
+        var v10_0 = matA.get_za3lpa$(1) * matB.get_za3lpa$(0) + matA.get_za3lpa$(5) * matB.get_za3lpa$(1) + matA.get_za3lpa$(9) * matB.get_za3lpa$(2) + matA.get_za3lpa$(13) * matB.get_za3lpa$(3);
+        var v11_1 = matA.get_za3lpa$(1) * matB.get_za3lpa$(4) + matA.get_za3lpa$(5) * matB.get_za3lpa$(5) + matA.get_za3lpa$(9) * matB.get_za3lpa$(6) + matA.get_za3lpa$(13) * matB.get_za3lpa$(7);
+        var v12_0 = matA.get_za3lpa$(1) * matB.get_za3lpa$(8) + matA.get_za3lpa$(5) * matB.get_za3lpa$(9) + matA.get_za3lpa$(9) * matB.get_za3lpa$(10) + matA.get_za3lpa$(13) * matB.get_za3lpa$(11);
+        var v13_3 = matA.get_za3lpa$(1) * matB.get_za3lpa$(12) + matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(9) * matB.get_za3lpa$(14) + matA.get_za3lpa$(13) * matB.get_za3lpa$(15);
+        var v20_0 = matA.get_za3lpa$(2) * matB.get_za3lpa$(0) + matA.get_za3lpa$(6) * matB.get_za3lpa$(1) + matA.get_za3lpa$(10) * matB.get_za3lpa$(2) + matA.get_za3lpa$(14) * matB.get_za3lpa$(3);
+        var v21_0 = matA.get_za3lpa$(2) * matB.get_za3lpa$(4) + matA.get_za3lpa$(6) * matB.get_za3lpa$(5) + matA.get_za3lpa$(10) * matB.get_za3lpa$(6) + matA.get_za3lpa$(14) * matB.get_za3lpa$(7);
+        var v22_1 = matA.get_za3lpa$(2) * matB.get_za3lpa$(8) + matA.get_za3lpa$(6) * matB.get_za3lpa$(9) + matA.get_za3lpa$(10) * matB.get_za3lpa$(10) + matA.get_za3lpa$(14) * matB.get_za3lpa$(11);
+        var v23_3 = matA.get_za3lpa$(2) * matB.get_za3lpa$(12) + matA.get_za3lpa$(6) * matB.get_za3lpa$(13) + matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14) * matB.get_za3lpa$(15);
+        var v30_0 = matA.get_za3lpa$(3) * matB.get_za3lpa$(0) + matA.get_za3lpa$(7) * matB.get_za3lpa$(1) + matA.get_za3lpa$(11) * matB.get_za3lpa$(2) + matA.get_za3lpa$(15) * matB.get_za3lpa$(3);
+        var v31_0 = matA.get_za3lpa$(3) * matB.get_za3lpa$(4) + matA.get_za3lpa$(7) * matB.get_za3lpa$(5) + matA.get_za3lpa$(11) * matB.get_za3lpa$(6) + matA.get_za3lpa$(15) * matB.get_za3lpa$(7);
+        var v32_0 = matA.get_za3lpa$(3) * matB.get_za3lpa$(8) + matA.get_za3lpa$(7) * matB.get_za3lpa$(9) + matA.get_za3lpa$(11) * matB.get_za3lpa$(10) + matA.get_za3lpa$(15) * matB.get_za3lpa$(11);
+        var v33_3 = matA.get_za3lpa$(3) * matB.get_za3lpa$(12) + matA.get_za3lpa$(7) * matB.get_za3lpa$(13) + matA.get_za3lpa$(11) * matB.get_za3lpa$(14) + matA.get_za3lpa$(15) * matB.get_za3lpa$(15);
+        matA.set_24o109$(0, v00_1);
+        matA.set_24o109$(4, v01_0);
+        matA.set_24o109$(8, v02_0);
+        matA.set_24o109$(12, v03_3);
+        matA.set_24o109$(1, v10_0);
+        matA.set_24o109$(5, v11_1);
+        matA.set_24o109$(9, v12_0);
+        matA.set_24o109$(13, v13_3);
+        matA.set_24o109$(2, v20_0);
+        matA.set_24o109$(6, v21_0);
+        matA.set_24o109$(10, v22_1);
+        matA.set_24o109$(14, v23_3);
+        matA.set_24o109$(3, v30_0);
+        matA.set_24o109$(7, v31_0);
+        matA.set_24o109$(11, v32_0);
+        matA.set_24o109$(15, v33_3);
+        this._mode_0 = MatrixMode$FULL_getInstance();
+        break;
+    }
     return this;
   };
   Matrix4.prototype.mulLeft_pekf88$ = function (matrix) {
     Matrix4$Companion_getInstance().tmpMat_0.set_pekf88$(matrix);
-    Matrix4$Companion_getInstance().mul_0(Matrix4$Companion_getInstance().tmpMat_0.values, this.values);
+    Matrix4$Companion_getInstance().tmpMat_0.mul_pekf88$(this);
     return this.set_pekf88$(Matrix4$Companion_getInstance().tmpMat_0);
   };
   Matrix4.prototype.tra = function () {
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(0, this.values.get_za3lpa$(0));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(4, this.values.get_za3lpa$(1));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(8, this.values.get_za3lpa$(2));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(12, this.values.get_za3lpa$(3));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(1, this.values.get_za3lpa$(4));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(5, this.values.get_za3lpa$(5));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(9, this.values.get_za3lpa$(6));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(13, this.values.get_za3lpa$(7));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(2, this.values.get_za3lpa$(8));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(6, this.values.get_za3lpa$(9));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(10, this.values.get_za3lpa$(10));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(14, this.values.get_za3lpa$(11));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(3, this.values.get_za3lpa$(12));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(7, this.values.get_za3lpa$(13));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(11, this.values.get_za3lpa$(14));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(15, this.values.get_za3lpa$(15));
-    return this.set_hcyabg$(Matrix4$Companion_getInstance().tmp_0);
+    if (this._mode_0 === MatrixMode$IDENTITY_getInstance())
+      return this;
+    var tmp = Matrix4$Companion_getInstance().tmp_0;
+    tmp.set_24o109$(0, this.values.get_za3lpa$(0));
+    tmp.set_24o109$(4, this.values.get_za3lpa$(1));
+    tmp.set_24o109$(8, this.values.get_za3lpa$(2));
+    tmp.set_24o109$(12, this.values.get_za3lpa$(3));
+    tmp.set_24o109$(1, this.values.get_za3lpa$(4));
+    tmp.set_24o109$(5, this.values.get_za3lpa$(5));
+    tmp.set_24o109$(9, this.values.get_za3lpa$(6));
+    tmp.set_24o109$(13, this.values.get_za3lpa$(7));
+    tmp.set_24o109$(2, this.values.get_za3lpa$(8));
+    tmp.set_24o109$(6, this.values.get_za3lpa$(9));
+    tmp.set_24o109$(10, this.values.get_za3lpa$(10));
+    tmp.set_24o109$(14, this.values.get_za3lpa$(11));
+    tmp.set_24o109$(3, this.values.get_za3lpa$(12));
+    tmp.set_24o109$(7, this.values.get_za3lpa$(13));
+    tmp.set_24o109$(11, this.values.get_za3lpa$(14));
+    tmp.set_24o109$(15, this.values.get_za3lpa$(15));
+    return this.set_hcyabg$(tmp);
   };
   Matrix4.prototype.idt = function () {
-    this.values.set_wxm5ur$(0, 1.0);
-    this.values.set_wxm5ur$(4, 0.0);
-    this.values.set_wxm5ur$(8, 0.0);
-    this.values.set_wxm5ur$(12, 0.0);
-    this.values.set_wxm5ur$(1, 0.0);
-    this.values.set_wxm5ur$(5, 1.0);
-    this.values.set_wxm5ur$(9, 0.0);
-    this.values.set_wxm5ur$(13, 0.0);
-    this.values.set_wxm5ur$(2, 0.0);
-    this.values.set_wxm5ur$(6, 0.0);
-    this.values.set_wxm5ur$(10, 1.0);
-    this.values.set_wxm5ur$(14, 0.0);
-    this.values.set_wxm5ur$(3, 0.0);
-    this.values.set_wxm5ur$(7, 0.0);
-    this.values.set_wxm5ur$(11, 0.0);
-    this.values.set_wxm5ur$(15, 1.0);
+    if (this._mode_0 === MatrixMode$IDENTITY_getInstance())
+      return this;
+    var values = this._values_0;
+    values.set_24o109$(0, 1.0);
+    values.set_24o109$(4, 0.0);
+    values.set_24o109$(8, 0.0);
+    values.set_24o109$(12, 0.0);
+    values.set_24o109$(1, 0.0);
+    values.set_24o109$(5, 1.0);
+    values.set_24o109$(9, 0.0);
+    values.set_24o109$(13, 0.0);
+    values.set_24o109$(2, 0.0);
+    values.set_24o109$(6, 0.0);
+    values.set_24o109$(10, 1.0);
+    values.set_24o109$(14, 0.0);
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(15, 1.0);
+    this._mode_0 = MatrixMode$IDENTITY_getInstance();
     return this;
   };
   Matrix4.prototype.inv = function () {
-    var lDet = this.det();
-    if (lDet === 0.0)
-      throw RuntimeException_init('non-invertible matrix');
-    var invDet = 1.0 / lDet;
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(0, this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(13) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(13) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(5) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(9) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(4, this.values.get_za3lpa$(12) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(8, this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(12) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(12, this.values.get_za3lpa$(12) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(10) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(1, this.values.get_za3lpa$(13) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(13) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(9) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(5, this.values.get_za3lpa$(8) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(3) + this.values.get_za3lpa$(12) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(9, this.values.get_za3lpa$(12) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(13, this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(2) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(2) + this.values.get_za3lpa$(12) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(10) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(10) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(14) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(2, this.values.get_za3lpa$(5) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(13) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(3) + this.values.get_za3lpa$(13) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(5) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(6, this.values.get_za3lpa$(12) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(14) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(10, this.values.get_za3lpa$(4) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(3) + this.values.get_za3lpa$(12) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(15));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(14, this.values.get_za3lpa$(12) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(2) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(2) - this.values.get_za3lpa$(12) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(13) * this.values.get_za3lpa$(6) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(14));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(3, this.values.get_za3lpa$(9) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(9) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(5) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(7, this.values.get_za3lpa$(4) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(3) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(7) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(2) * this.values.get_za3lpa$(11) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(11, this.values.get_za3lpa$(8) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(3) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(7) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(11) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(11));
-    Matrix4$Companion_getInstance().tmp_0.set_wxm5ur$(15, this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(2) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(2) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(10) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10));
-    this.values.set_wxm5ur$(0, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(0) * invDet);
-    this.values.set_wxm5ur$(4, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(4) * invDet);
-    this.values.set_wxm5ur$(8, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(8) * invDet);
-    this.values.set_wxm5ur$(12, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(12) * invDet);
-    this.values.set_wxm5ur$(1, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(1) * invDet);
-    this.values.set_wxm5ur$(5, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(5) * invDet);
-    this.values.set_wxm5ur$(9, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(9) * invDet);
-    this.values.set_wxm5ur$(13, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(13) * invDet);
-    this.values.set_wxm5ur$(2, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(2) * invDet);
-    this.values.set_wxm5ur$(6, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(6) * invDet);
-    this.values.set_wxm5ur$(10, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(10) * invDet);
-    this.values.set_wxm5ur$(14, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(14) * invDet);
-    this.values.set_wxm5ur$(3, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(3) * invDet);
-    this.values.set_wxm5ur$(7, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(7) * invDet);
-    this.values.set_wxm5ur$(11, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(11) * invDet);
-    this.values.set_wxm5ur$(15, Matrix4$Companion_getInstance().tmp_0.get_za3lpa$(15) * invDet);
+    var values = this._values_0;
+    var tmp = Matrix4$Companion_getInstance().tmp_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        break;
+      case 'TRANSLATION':
+        values.set_24o109$(12, -values.get_za3lpa$(12));
+        values.set_24o109$(13, -values.get_za3lpa$(13));
+        values.set_24o109$(14, -values.get_za3lpa$(14));
+        break;
+      case 'SCALE':
+        var lDet = this.det();
+        if (lDet === 0.0)
+          throw Exception_init('non-invertible matrix');
+        var invDet = 1.0 / lDet;
+        tmp.set_24o109$(0, values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(12, -values.get_za3lpa$(12) * values.get_za3lpa$(5) * values.get_za3lpa$(10));
+        tmp.set_24o109$(5, values.get_za3lpa$(0) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(13, -values.get_za3lpa$(0) * values.get_za3lpa$(13) * values.get_za3lpa$(10));
+        tmp.set_24o109$(10, values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(15));
+        tmp.set_24o109$(14, -values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(14));
+        tmp.set_24o109$(15, values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(10));
+        values.set_24o109$(0, tmp.get_za3lpa$(0) * invDet);
+        values.set_24o109$(12, tmp.get_za3lpa$(12) * invDet);
+        values.set_24o109$(5, tmp.get_za3lpa$(5) * invDet);
+        values.set_24o109$(13, tmp.get_za3lpa$(13) * invDet);
+        values.set_24o109$(10, tmp.get_za3lpa$(10) * invDet);
+        values.set_24o109$(14, tmp.get_za3lpa$(14) * invDet);
+        values.set_24o109$(15, tmp.get_za3lpa$(15) * invDet);
+        break;
+      case 'FULL':
+        var lDet_0 = this.det();
+        if (lDet_0 === 0.0)
+          throw Exception_init('non-invertible matrix');
+        var invDet_0 = 1.0 / lDet_0;
+        tmp.set_24o109$(0, values.get_za3lpa$(9) * values.get_za3lpa$(14) * values.get_za3lpa$(7) - values.get_za3lpa$(13) * values.get_za3lpa$(10) * values.get_za3lpa$(7) + values.get_za3lpa$(13) * values.get_za3lpa$(6) * values.get_za3lpa$(11) - values.get_za3lpa$(5) * values.get_za3lpa$(14) * values.get_za3lpa$(11) - values.get_za3lpa$(9) * values.get_za3lpa$(6) * values.get_za3lpa$(15) + values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(4, values.get_za3lpa$(12) * values.get_za3lpa$(10) * values.get_za3lpa$(7) - values.get_za3lpa$(8) * values.get_za3lpa$(14) * values.get_za3lpa$(7) - values.get_za3lpa$(12) * values.get_za3lpa$(6) * values.get_za3lpa$(11) + values.get_za3lpa$(4) * values.get_za3lpa$(14) * values.get_za3lpa$(11) + values.get_za3lpa$(8) * values.get_za3lpa$(6) * values.get_za3lpa$(15) - values.get_za3lpa$(4) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(8, values.get_za3lpa$(8) * values.get_za3lpa$(13) * values.get_za3lpa$(7) - values.get_za3lpa$(12) * values.get_za3lpa$(9) * values.get_za3lpa$(7) + values.get_za3lpa$(12) * values.get_za3lpa$(5) * values.get_za3lpa$(11) - values.get_za3lpa$(4) * values.get_za3lpa$(13) * values.get_za3lpa$(11) - values.get_za3lpa$(8) * values.get_za3lpa$(5) * values.get_za3lpa$(15) + values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(15));
+        tmp.set_24o109$(12, values.get_za3lpa$(12) * values.get_za3lpa$(9) * values.get_za3lpa$(6) - values.get_za3lpa$(8) * values.get_za3lpa$(13) * values.get_za3lpa$(6) - values.get_za3lpa$(12) * values.get_za3lpa$(5) * values.get_za3lpa$(10) + values.get_za3lpa$(4) * values.get_za3lpa$(13) * values.get_za3lpa$(10) + values.get_za3lpa$(8) * values.get_za3lpa$(5) * values.get_za3lpa$(14) - values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(14));
+        tmp.set_24o109$(1, values.get_za3lpa$(13) * values.get_za3lpa$(10) * values.get_za3lpa$(3) - values.get_za3lpa$(9) * values.get_za3lpa$(14) * values.get_za3lpa$(3) - values.get_za3lpa$(13) * values.get_za3lpa$(2) * values.get_za3lpa$(11) + values.get_za3lpa$(1) * values.get_za3lpa$(14) * values.get_za3lpa$(11) + values.get_za3lpa$(9) * values.get_za3lpa$(2) * values.get_za3lpa$(15) - values.get_za3lpa$(1) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(5, values.get_za3lpa$(8) * values.get_za3lpa$(14) * values.get_za3lpa$(3) - values.get_za3lpa$(12) * values.get_za3lpa$(10) * values.get_za3lpa$(3) + values.get_za3lpa$(12) * values.get_za3lpa$(2) * values.get_za3lpa$(11) - values.get_za3lpa$(0) * values.get_za3lpa$(14) * values.get_za3lpa$(11) - values.get_za3lpa$(8) * values.get_za3lpa$(2) * values.get_za3lpa$(15) + values.get_za3lpa$(0) * values.get_za3lpa$(10) * values.get_za3lpa$(15));
+        tmp.set_24o109$(9, values.get_za3lpa$(12) * values.get_za3lpa$(9) * values.get_za3lpa$(3) - values.get_za3lpa$(8) * values.get_za3lpa$(13) * values.get_za3lpa$(3) - values.get_za3lpa$(12) * values.get_za3lpa$(1) * values.get_za3lpa$(11) + values.get_za3lpa$(0) * values.get_za3lpa$(13) * values.get_za3lpa$(11) + values.get_za3lpa$(8) * values.get_za3lpa$(1) * values.get_za3lpa$(15) - values.get_za3lpa$(0) * values.get_za3lpa$(9) * values.get_za3lpa$(15));
+        tmp.set_24o109$(13, values.get_za3lpa$(8) * values.get_za3lpa$(13) * values.get_za3lpa$(2) - values.get_za3lpa$(12) * values.get_za3lpa$(9) * values.get_za3lpa$(2) + values.get_za3lpa$(12) * values.get_za3lpa$(1) * values.get_za3lpa$(10) - values.get_za3lpa$(0) * values.get_za3lpa$(13) * values.get_za3lpa$(10) - values.get_za3lpa$(8) * values.get_za3lpa$(1) * values.get_za3lpa$(14) + values.get_za3lpa$(0) * values.get_za3lpa$(9) * values.get_za3lpa$(14));
+        tmp.set_24o109$(2, values.get_za3lpa$(5) * values.get_za3lpa$(14) * values.get_za3lpa$(3) - values.get_za3lpa$(13) * values.get_za3lpa$(6) * values.get_za3lpa$(3) + values.get_za3lpa$(13) * values.get_za3lpa$(2) * values.get_za3lpa$(7) - values.get_za3lpa$(1) * values.get_za3lpa$(14) * values.get_za3lpa$(7) - values.get_za3lpa$(5) * values.get_za3lpa$(2) * values.get_za3lpa$(15) + values.get_za3lpa$(1) * values.get_za3lpa$(6) * values.get_za3lpa$(15));
+        tmp.set_24o109$(6, values.get_za3lpa$(12) * values.get_za3lpa$(6) * values.get_za3lpa$(3) - values.get_za3lpa$(4) * values.get_za3lpa$(14) * values.get_za3lpa$(3) - values.get_za3lpa$(12) * values.get_za3lpa$(2) * values.get_za3lpa$(7) + values.get_za3lpa$(0) * values.get_za3lpa$(14) * values.get_za3lpa$(7) + values.get_za3lpa$(4) * values.get_za3lpa$(2) * values.get_za3lpa$(15) - values.get_za3lpa$(0) * values.get_za3lpa$(6) * values.get_za3lpa$(15));
+        tmp.set_24o109$(10, values.get_za3lpa$(4) * values.get_za3lpa$(13) * values.get_za3lpa$(3) - values.get_za3lpa$(12) * values.get_za3lpa$(5) * values.get_za3lpa$(3) + values.get_za3lpa$(12) * values.get_za3lpa$(1) * values.get_za3lpa$(7) - values.get_za3lpa$(0) * values.get_za3lpa$(13) * values.get_za3lpa$(7) - values.get_za3lpa$(4) * values.get_za3lpa$(1) * values.get_za3lpa$(15) + values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(15));
+        tmp.set_24o109$(14, values.get_za3lpa$(12) * values.get_za3lpa$(5) * values.get_za3lpa$(2) - values.get_za3lpa$(4) * values.get_za3lpa$(13) * values.get_za3lpa$(2) - values.get_za3lpa$(12) * values.get_za3lpa$(1) * values.get_za3lpa$(6) + values.get_za3lpa$(0) * values.get_za3lpa$(13) * values.get_za3lpa$(6) + values.get_za3lpa$(4) * values.get_za3lpa$(1) * values.get_za3lpa$(14) - values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(14));
+        tmp.set_24o109$(3, values.get_za3lpa$(9) * values.get_za3lpa$(6) * values.get_za3lpa$(3) - values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(3) - values.get_za3lpa$(9) * values.get_za3lpa$(2) * values.get_za3lpa$(7) + values.get_za3lpa$(1) * values.get_za3lpa$(10) * values.get_za3lpa$(7) + values.get_za3lpa$(5) * values.get_za3lpa$(2) * values.get_za3lpa$(11) - values.get_za3lpa$(1) * values.get_za3lpa$(6) * values.get_za3lpa$(11));
+        tmp.set_24o109$(7, values.get_za3lpa$(4) * values.get_za3lpa$(10) * values.get_za3lpa$(3) - values.get_za3lpa$(8) * values.get_za3lpa$(6) * values.get_za3lpa$(3) + values.get_za3lpa$(8) * values.get_za3lpa$(2) * values.get_za3lpa$(7) - values.get_za3lpa$(0) * values.get_za3lpa$(10) * values.get_za3lpa$(7) - values.get_za3lpa$(4) * values.get_za3lpa$(2) * values.get_za3lpa$(11) + values.get_za3lpa$(0) * values.get_za3lpa$(6) * values.get_za3lpa$(11));
+        tmp.set_24o109$(11, values.get_za3lpa$(8) * values.get_za3lpa$(5) * values.get_za3lpa$(3) - values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(3) - values.get_za3lpa$(8) * values.get_za3lpa$(1) * values.get_za3lpa$(7) + values.get_za3lpa$(0) * values.get_za3lpa$(9) * values.get_za3lpa$(7) + values.get_za3lpa$(4) * values.get_za3lpa$(1) * values.get_za3lpa$(11) - values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(11));
+        tmp.set_24o109$(15, values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(2) - values.get_za3lpa$(8) * values.get_za3lpa$(5) * values.get_za3lpa$(2) + values.get_za3lpa$(8) * values.get_za3lpa$(1) * values.get_za3lpa$(6) - values.get_za3lpa$(0) * values.get_za3lpa$(9) * values.get_za3lpa$(6) - values.get_za3lpa$(4) * values.get_za3lpa$(1) * values.get_za3lpa$(10) + values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(10));
+        values.set_24o109$(0, tmp.get_za3lpa$(0) * invDet_0);
+        values.set_24o109$(4, tmp.get_za3lpa$(4) * invDet_0);
+        values.set_24o109$(8, tmp.get_za3lpa$(8) * invDet_0);
+        values.set_24o109$(12, tmp.get_za3lpa$(12) * invDet_0);
+        values.set_24o109$(1, tmp.get_za3lpa$(1) * invDet_0);
+        values.set_24o109$(5, tmp.get_za3lpa$(5) * invDet_0);
+        values.set_24o109$(9, tmp.get_za3lpa$(9) * invDet_0);
+        values.set_24o109$(13, tmp.get_za3lpa$(13) * invDet_0);
+        values.set_24o109$(2, tmp.get_za3lpa$(2) * invDet_0);
+        values.set_24o109$(6, tmp.get_za3lpa$(6) * invDet_0);
+        values.set_24o109$(10, tmp.get_za3lpa$(10) * invDet_0);
+        values.set_24o109$(14, tmp.get_za3lpa$(14) * invDet_0);
+        values.set_24o109$(3, tmp.get_za3lpa$(3) * invDet_0);
+        values.set_24o109$(7, tmp.get_za3lpa$(7) * invDet_0);
+        values.set_24o109$(11, tmp.get_za3lpa$(11) * invDet_0);
+        values.set_24o109$(15, tmp.get_za3lpa$(15) * invDet_0);
+        break;
+    }
     return this;
   };
   Matrix4.prototype.det = function () {
-    return this.values.get_za3lpa$(3) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(12) - this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(12) - this.values.get_za3lpa$(3) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(12) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(12) + this.values.get_za3lpa$(2) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(12) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(12) - this.values.get_za3lpa$(3) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) + this.values.get_za3lpa$(2) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(13) + this.values.get_za3lpa$(3) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(13) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(13) - this.values.get_za3lpa$(2) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(13) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(13) + this.values.get_za3lpa$(3) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(3) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(7) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(14) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(11) * this.values.get_za3lpa$(14) - this.values.get_za3lpa$(2) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(8) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(2) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(6) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(15) - this.values.get_za3lpa$(1) * this.values.get_za3lpa$(4) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15) + this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) * this.values.get_za3lpa$(15);
-  };
-  Matrix4.prototype.det3x3 = function () {
-    return this.values.get_za3lpa$(0) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(10) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(2) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(0) * this.values.get_za3lpa$(9) * this.values.get_za3lpa$(6) - this.values.get_za3lpa$(4) * this.values.get_za3lpa$(1) * this.values.get_za3lpa$(10) - this.values.get_za3lpa$(8) * this.values.get_za3lpa$(5) * this.values.get_za3lpa$(2);
+    var tmp$;
+    var values = this._values_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+      case 'TRANSLATION':
+        tmp$ = 1.0;
+        break;
+      case 'SCALE':
+        tmp$ = values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(15);
+        break;
+      case 'FULL':
+        tmp$ = values.get_za3lpa$(3) * values.get_za3lpa$(6) * values.get_za3lpa$(9) * values.get_za3lpa$(12) - values.get_za3lpa$(2) * values.get_za3lpa$(7) * values.get_za3lpa$(9) * values.get_za3lpa$(12) - values.get_za3lpa$(3) * values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(12) + values.get_za3lpa$(1) * values.get_za3lpa$(7) * values.get_za3lpa$(10) * values.get_za3lpa$(12) + values.get_za3lpa$(2) * values.get_za3lpa$(5) * values.get_za3lpa$(11) * values.get_za3lpa$(12) - values.get_za3lpa$(1) * values.get_za3lpa$(6) * values.get_za3lpa$(11) * values.get_za3lpa$(12) - values.get_za3lpa$(3) * values.get_za3lpa$(6) * values.get_za3lpa$(8) * values.get_za3lpa$(13) + values.get_za3lpa$(2) * values.get_za3lpa$(7) * values.get_za3lpa$(8) * values.get_za3lpa$(13) + values.get_za3lpa$(3) * values.get_za3lpa$(4) * values.get_za3lpa$(10) * values.get_za3lpa$(13) - values.get_za3lpa$(0) * values.get_za3lpa$(7) * values.get_za3lpa$(10) * values.get_za3lpa$(13) - values.get_za3lpa$(2) * values.get_za3lpa$(4) * values.get_za3lpa$(11) * values.get_za3lpa$(13) + values.get_za3lpa$(0) * values.get_za3lpa$(6) * values.get_za3lpa$(11) * values.get_za3lpa$(13) + values.get_za3lpa$(3) * values.get_za3lpa$(5) * values.get_za3lpa$(8) * values.get_za3lpa$(14) - values.get_za3lpa$(1) * values.get_za3lpa$(7) * values.get_za3lpa$(8) * values.get_za3lpa$(14) - values.get_za3lpa$(3) * values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(14) + values.get_za3lpa$(0) * values.get_za3lpa$(7) * values.get_za3lpa$(9) * values.get_za3lpa$(14) + values.get_za3lpa$(1) * values.get_za3lpa$(4) * values.get_za3lpa$(11) * values.get_za3lpa$(14) - values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(11) * values.get_za3lpa$(14) - values.get_za3lpa$(2) * values.get_za3lpa$(5) * values.get_za3lpa$(8) * values.get_za3lpa$(15) + values.get_za3lpa$(1) * values.get_za3lpa$(6) * values.get_za3lpa$(8) * values.get_za3lpa$(15) + values.get_za3lpa$(2) * values.get_za3lpa$(4) * values.get_za3lpa$(9) * values.get_za3lpa$(15) - values.get_za3lpa$(0) * values.get_za3lpa$(6) * values.get_za3lpa$(9) * values.get_za3lpa$(15) - values.get_za3lpa$(1) * values.get_za3lpa$(4) * values.get_za3lpa$(10) * values.get_za3lpa$(15) + values.get_za3lpa$(0) * values.get_za3lpa$(5) * values.get_za3lpa$(10) * values.get_za3lpa$(15);
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
+    }
+    return tmp$;
   };
   Matrix4.prototype.setTranslation_1fv2cb$ = function (vector) {
-    this.values.set_wxm5ur$(12, vector.x);
-    this.values.set_wxm5ur$(13, vector.y);
-    this.values.set_wxm5ur$(14, vector.z);
-    return this;
+    return this.setTranslation_y2kzbl$(vector.x, vector.y, vector.z);
   };
   Matrix4.prototype.setTranslation_y2kzbl$ = function (x, y, z) {
-    this.values.set_wxm5ur$(12, x);
-    this.values.set_wxm5ur$(13, y);
-    this.values.set_wxm5ur$(14, z);
+    this._values_0.set_24o109$(12, x);
+    this._values_0.set_24o109$(13, y);
+    this._values_0.set_24o109$(14, z);
+    if (this._mode_0 === MatrixMode$IDENTITY_getInstance())
+      this._mode_0 = MatrixMode$TRANSLATION_getInstance();
     return this;
   };
   Matrix4.prototype.setFromEulerAnglesRad_y2kzbl$ = function (yaw, pitch, roll) {
-    Matrix4$Companion_getInstance().quat_0.setEulerAnglesRad_y2kzbl$(yaw, pitch, roll);
+    Matrix4$Companion_getInstance().quat_0.setEulerAngles_y2kzbl$(pitch, yaw, roll);
     return this.set_qe7e4j$(Matrix4$Companion_getInstance().quat_0);
   };
   Matrix4.prototype.setToLookAt_uwler8$ = function (direction, up) {
@@ -5873,21 +6620,23 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Matrix4$Companion_getInstance().l_vex_0.crs_1fv2cb$(up).nor();
     Matrix4$Companion_getInstance().l_vey_0.set_1fv2cb$(Matrix4$Companion_getInstance().l_vex_0).crs_1fv2cb$(Matrix4$Companion_getInstance().l_vez_0).nor();
     this.idt();
-    this.values.set_wxm5ur$(0, Matrix4$Companion_getInstance().l_vex_0.x);
-    this.values.set_wxm5ur$(4, Matrix4$Companion_getInstance().l_vex_0.y);
-    this.values.set_wxm5ur$(8, Matrix4$Companion_getInstance().l_vex_0.z);
-    this.values.set_wxm5ur$(1, Matrix4$Companion_getInstance().l_vey_0.x);
-    this.values.set_wxm5ur$(5, Matrix4$Companion_getInstance().l_vey_0.y);
-    this.values.set_wxm5ur$(9, Matrix4$Companion_getInstance().l_vey_0.z);
-    this.values.set_wxm5ur$(2, -Matrix4$Companion_getInstance().l_vez_0.x);
-    this.values.set_wxm5ur$(6, -Matrix4$Companion_getInstance().l_vez_0.y);
-    this.values.set_wxm5ur$(10, -Matrix4$Companion_getInstance().l_vez_0.z);
+    this._values_0.set_24o109$(0, Matrix4$Companion_getInstance().l_vex_0.x);
+    this._values_0.set_24o109$(4, Matrix4$Companion_getInstance().l_vex_0.y);
+    this._values_0.set_24o109$(8, Matrix4$Companion_getInstance().l_vex_0.z);
+    this._values_0.set_24o109$(1, Matrix4$Companion_getInstance().l_vey_0.x);
+    this._values_0.set_24o109$(5, Matrix4$Companion_getInstance().l_vey_0.y);
+    this._values_0.set_24o109$(9, Matrix4$Companion_getInstance().l_vey_0.z);
+    this._values_0.set_24o109$(2, -Matrix4$Companion_getInstance().l_vez_0.x);
+    this._values_0.set_24o109$(6, -Matrix4$Companion_getInstance().l_vez_0.y);
+    this._values_0.set_24o109$(10, -Matrix4$Companion_getInstance().l_vez_0.z);
+    this._mode_0 = MatrixMode$FULL_getInstance();
     return this;
   };
   Matrix4.prototype.setToLookAt_qeea63$ = function (position, target, up) {
     Matrix4$Companion_getInstance().tmpVec_0.set_1fv2cb$(target).sub_1fv2cb$(position);
     this.setToLookAt_uwler8$(Matrix4$Companion_getInstance().tmpVec_0, up);
     this.translate_y2kzbl$(-position.x, -position.y, -position.z);
+    this.refreshMode_0();
     return this;
   };
   Matrix4.prototype.setToGlobal_qeea63$ = function (position, forward, up) {
@@ -5898,113 +6647,137 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this;
   };
   Matrix4.prototype.toString = function () {
-    return '[' + toString(this.values.get_za3lpa$(0)) + '|' + toString(this.values.get_za3lpa$(4)) + '|' + toString(this.values.get_za3lpa$(8)) + '|' + toString(this.values.get_za3lpa$(12)) + ']\n' + '[' + toString(this.values.get_za3lpa$(1)) + '|' + toString(this.values.get_za3lpa$(5)) + '|' + toString(this.values.get_za3lpa$(9)) + '|' + toString(this.values.get_za3lpa$(13)) + ']\n' + '[' + toString(this.values.get_za3lpa$(2)) + '|' + toString(this.values.get_za3lpa$(6)) + '|' + toString(this.values.get_za3lpa$(10)) + '|' + toString(this.values.get_za3lpa$(14)) + ']\n' + '[' + toString(this.values.get_za3lpa$(3)) + '|' + toString(this.values.get_za3lpa$(7)) + '|' + toString(this.values.get_za3lpa$(11)) + '|' + toString(this.values.get_za3lpa$(15)) + ']\n';
+    var values = this._values_0;
+    return '[' + toString(values.get_za3lpa$(0)) + '|' + toString(values.get_za3lpa$(4)) + '|' + toString(values.get_za3lpa$(8)) + '|' + toString(values.get_za3lpa$(12)) + ']\n' + '[' + toString(values.get_za3lpa$(1)) + '|' + toString(values.get_za3lpa$(5)) + '|' + toString(values.get_za3lpa$(9)) + '|' + toString(values.get_za3lpa$(13)) + ']\n' + '[' + toString(values.get_za3lpa$(2)) + '|' + toString(values.get_za3lpa$(6)) + '|' + toString(values.get_za3lpa$(10)) + '|' + toString(values.get_za3lpa$(14)) + ']\n' + '[' + toString(values.get_za3lpa$(3)) + '|' + toString(values.get_za3lpa$(7)) + '|' + toString(values.get_za3lpa$(11)) + '|' + toString(values.get_za3lpa$(15)) + ']\n';
   };
   Matrix4.prototype.set_pekfyx$ = function (mat) {
-    this.values.set_wxm5ur$(0, mat.values.get_za3lpa$(0));
-    this.values.set_wxm5ur$(1, mat.values.get_za3lpa$(1));
-    this.values.set_wxm5ur$(2, mat.values.get_za3lpa$(2));
-    this.values.set_wxm5ur$(3, 0.0);
-    this.values.set_wxm5ur$(4, mat.values.get_za3lpa$(3));
-    this.values.set_wxm5ur$(5, mat.values.get_za3lpa$(4));
-    this.values.set_wxm5ur$(6, mat.values.get_za3lpa$(5));
-    this.values.set_wxm5ur$(7, 0.0);
-    this.values.set_wxm5ur$(8, 0.0);
-    this.values.set_wxm5ur$(9, 0.0);
-    this.values.set_wxm5ur$(10, 1.0);
-    this.values.set_wxm5ur$(11, 0.0);
-    this.values.set_wxm5ur$(12, mat.values.get_za3lpa$(6));
-    this.values.set_wxm5ur$(13, mat.values.get_za3lpa$(7));
-    this.values.set_wxm5ur$(14, 0.0);
-    this.values.set_wxm5ur$(15, mat.values.get_za3lpa$(8));
+    var values = this._values_0;
+    values.set_24o109$(0, mat.values.get_za3lpa$(0));
+    values.set_24o109$(1, mat.values.get_za3lpa$(1));
+    values.set_24o109$(2, mat.values.get_za3lpa$(2));
+    values.set_24o109$(3, 0.0);
+    values.set_24o109$(4, mat.values.get_za3lpa$(3));
+    values.set_24o109$(5, mat.values.get_za3lpa$(4));
+    values.set_24o109$(6, mat.values.get_za3lpa$(5));
+    values.set_24o109$(7, 0.0);
+    values.set_24o109$(8, 0.0);
+    values.set_24o109$(9, 0.0);
+    values.set_24o109$(10, 1.0);
+    values.set_24o109$(11, 0.0);
+    values.set_24o109$(12, mat.values.get_za3lpa$(6));
+    values.set_24o109$(13, mat.values.get_za3lpa$(7));
+    values.set_24o109$(14, 0.0);
+    values.set_24o109$(15, mat.values.get_za3lpa$(8));
+    this.refreshMode_0();
     return this;
   };
   Matrix4.prototype.scl_1fv2cb$ = function (scale) {
-    this.values.set_wxm5ur$(0, this.values.get_za3lpa$(0) * scale.x);
-    this.values.set_wxm5ur$(5, this.values.get_za3lpa$(5) * scale.y);
-    this.values.set_wxm5ur$(10, this.values.get_za3lpa$(10) * scale.z);
-    return this;
-  };
-  Matrix4.prototype.scl_y2kzbl$ = function (x, y, z) {
-    this.values.set_wxm5ur$(0, this.values.get_za3lpa$(0) * x);
-    this.values.set_wxm5ur$(5, this.values.get_za3lpa$(5) * y);
-    this.values.set_wxm5ur$(10, this.values.get_za3lpa$(10) * z);
-    return this;
+    return this.scl_y2kzbl$(scale.x, scale.y, scale.z);
   };
   Matrix4.prototype.scl_mx4ult$ = function (scale) {
-    this.values.set_wxm5ur$(0, this.values.get_za3lpa$(0) * scale);
-    this.values.set_wxm5ur$(5, this.values.get_za3lpa$(5) * scale);
-    this.values.set_wxm5ur$(10, this.values.get_za3lpa$(10) * scale);
+    return this.scl_y2kzbl$(scale, scale, scale);
+  };
+  Matrix4.prototype.scl_y2kzbl$ = function (x, y, z) {
+    this._values_0.set_24o109$(0, this._values_0.get_za3lpa$(0) * x);
+    this._values_0.set_24o109$(5, this._values_0.get_za3lpa$(5) * y);
+    this._values_0.set_24o109$(10, this._values_0.get_za3lpa$(10) * z);
+    if (this._mode_0.ordinal < MatrixMode$SCALE_getInstance().ordinal)
+      this._mode_0 = MatrixMode$SCALE_getInstance();
     return this;
   };
   Object.defineProperty(Matrix4.prototype, 'translationX', {get: function () {
-    return this.values.get_za3lpa$(12);
+    return this._values_0.get_za3lpa$(12);
   }});
   Object.defineProperty(Matrix4.prototype, 'translationY', {get: function () {
-    return this.values.get_za3lpa$(13);
+    return this._values_0.get_za3lpa$(13);
   }});
   Object.defineProperty(Matrix4.prototype, 'translationZ', {get: function () {
-    return this.values.get_za3lpa$(14);
+    return this._values_0.get_za3lpa$(14);
   }});
   Matrix4.prototype.getTranslation_9wm29k$ = function (out) {
-    out.x = this.values.get_za3lpa$(12);
-    out.y = this.values.get_za3lpa$(13);
-    out.z = this.values.get_za3lpa$(14);
+    var values = this._values_0;
+    out.x = values.get_za3lpa$(12);
+    out.y = values.get_za3lpa$(13);
+    out.z = values.get_za3lpa$(14);
     return out;
   };
   Matrix4.prototype.getRotation_tt8t29$$default = function (out, normalizeAxes) {
-    return out.setFromMatrix_e7v9es$(this, normalizeAxes);
+    return out.setFromMatrix_gkedup$(this, normalizeAxes);
   };
   Matrix4.prototype.getScaleXSquared = function () {
-    return this.values.get_za3lpa$(0) * this.values.get_za3lpa$(0) + this.values.get_za3lpa$(4) * this.values.get_za3lpa$(4) + this.values.get_za3lpa$(8) * this.values.get_za3lpa$(8);
+    var values = this._values_0;
+    return values.get_za3lpa$(0) * values.get_za3lpa$(0) + values.get_za3lpa$(4) * values.get_za3lpa$(4) + values.get_za3lpa$(8) * values.get_za3lpa$(8);
   };
   Matrix4.prototype.getScaleYSquared = function () {
-    return this.values.get_za3lpa$(1) * this.values.get_za3lpa$(1) + this.values.get_za3lpa$(5) * this.values.get_za3lpa$(5) + this.values.get_za3lpa$(9) * this.values.get_za3lpa$(9);
+    var values = this._values_0;
+    return values.get_za3lpa$(1) * values.get_za3lpa$(1) + values.get_za3lpa$(5) * values.get_za3lpa$(5) + values.get_za3lpa$(9) * values.get_za3lpa$(9);
   };
   Matrix4.prototype.getScaleZSquared = function () {
-    return this.values.get_za3lpa$(2) * this.values.get_za3lpa$(2) + this.values.get_za3lpa$(6) * this.values.get_za3lpa$(6) + this.values.get_za3lpa$(10) * this.values.get_za3lpa$(10);
+    var values = this._values_0;
+    return values.get_za3lpa$(2) * values.get_za3lpa$(2) + values.get_za3lpa$(6) * values.get_za3lpa$(6) + values.get_za3lpa$(10) * values.get_za3lpa$(10);
   };
   Matrix4.prototype.getScaleX = function () {
     var tmp$;
-    if (MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(4)) && MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(8))) {
-      var value = this.values.get_za3lpa$(0);
-      tmp$ = value < 0.0 ? -value : value;
-    }
-     else {
-      tmp$ = Math_0.sqrt(this.getScaleXSquared());
+    switch (this._mode_0.name) {
+      case 'TRANSLATION':
+      case 'IDENTITY':
+        tmp$ = 1.0;
+        break;
+      case 'SCALE':
+        var x = this.values.get_za3lpa$(0);
+        tmp$ = Math_0.abs(x);
+        break;
+      case 'FULL':
+        var x_0 = this.getScaleXSquared();
+        tmp$ = Math_0.sqrt(x_0);
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
     }
     return tmp$;
   };
   Matrix4.prototype.getScaleY = function () {
     var tmp$;
-    if (MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(1)) && MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(9))) {
-      var value = this.values.get_za3lpa$(5);
-      tmp$ = value < 0.0 ? -value : value;
-    }
-     else {
-      tmp$ = Math_0.sqrt(this.getScaleYSquared());
+    switch (this._mode_0.name) {
+      case 'TRANSLATION':
+      case 'IDENTITY':
+        tmp$ = 1.0;
+        break;
+      case 'SCALE':
+        var x = this.values.get_za3lpa$(5);
+        tmp$ = Math_0.abs(x);
+        break;
+      case 'FULL':
+        var x_0 = this.getScaleYSquared();
+        tmp$ = Math_0.sqrt(x_0);
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
     }
     return tmp$;
   };
   Matrix4.prototype.getScaleZ = function () {
     var tmp$;
-    if (MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(2)) && MathUtils_getInstance().isZero_dleff0$(this.values.get_za3lpa$(6))) {
-      var value = this.values.get_za3lpa$(10);
-      tmp$ = value < 0.0 ? -value : value;
-    }
-     else {
-      tmp$ = Math_0.sqrt(this.getScaleZSquared());
+    switch (this._mode_0.name) {
+      case 'TRANSLATION':
+      case 'IDENTITY':
+        tmp$ = 1.0;
+        break;
+      case 'SCALE':
+        var x = this.values.get_za3lpa$(10);
+        tmp$ = Math_0.abs(x);
+        break;
+      case 'FULL':
+        var x_0 = this.getScaleZSquared();
+        tmp$ = Math_0.sqrt(x_0);
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
     }
     return tmp$;
   };
   Matrix4.prototype.getScale_9wm29k$ = function (scale) {
     return scale.set_y2kzbl$(this.getScaleX(), this.getScaleY(), this.getScaleZ());
-  };
-  Matrix4.prototype.toNormalMatrix = function () {
-    this.values.set_wxm5ur$(12, 0.0);
-    this.values.set_wxm5ur$(13, 0.0);
-    this.values.set_wxm5ur$(14, 0.0);
-    return this.inv().tra();
   };
   Matrix4.prototype.translate_1fv2cb$ = function (translation) {
     return this.translate_y2kzbl$(translation.x, translation.y, translation.z);
@@ -6016,15 +6789,35 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       y = 0.0;
     if (z === void 0)
       z = 0.0;
-    var matA = this.values;
-    var v03 = matA.get_za3lpa$(0) * x + matA.get_za3lpa$(4) * y + matA.get_za3lpa$(8) * z + matA.get_za3lpa$(12);
-    var v13 = matA.get_za3lpa$(1) * x + matA.get_za3lpa$(5) * y + matA.get_za3lpa$(9) * z + matA.get_za3lpa$(13);
-    var v23 = matA.get_za3lpa$(2) * x + matA.get_za3lpa$(6) * y + matA.get_za3lpa$(10) * z + matA.get_za3lpa$(14);
-    var v33 = matA.get_za3lpa$(3) * x + matA.get_za3lpa$(7) * y + matA.get_za3lpa$(11) * z + matA.get_za3lpa$(15);
-    matA.set_wxm5ur$(12, v03);
-    matA.set_wxm5ur$(13, v13);
-    matA.set_wxm5ur$(14, v23);
-    matA.set_wxm5ur$(15, v33);
+    var mat = this._values_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        this._mode_0 = MatrixMode$TRANSLATION_getInstance();
+        mat.set_24o109$(12, mat.get_za3lpa$(12) + x);
+        mat.set_24o109$(13, mat.get_za3lpa$(13) + y);
+        mat.set_24o109$(14, mat.get_za3lpa$(14) + z);
+        break;
+      case 'TRANSLATION':
+        mat.set_24o109$(12, mat.get_za3lpa$(12) + x);
+        mat.set_24o109$(13, mat.get_za3lpa$(13) + y);
+        mat.set_24o109$(14, mat.get_za3lpa$(14) + z);
+        break;
+      case 'SCALE':
+        mat.set_24o109$(12, mat.get_za3lpa$(12) + mat.get_za3lpa$(0) * x);
+        mat.set_24o109$(13, mat.get_za3lpa$(13) + mat.get_za3lpa$(5) * y);
+        mat.set_24o109$(14, mat.get_za3lpa$(14) + mat.get_za3lpa$(10) * z);
+        break;
+      case 'FULL':
+        var v03 = mat.get_za3lpa$(0) * x + mat.get_za3lpa$(4) * y + mat.get_za3lpa$(8) * z + mat.get_za3lpa$(12);
+        var v13 = mat.get_za3lpa$(1) * x + mat.get_za3lpa$(5) * y + mat.get_za3lpa$(9) * z + mat.get_za3lpa$(13);
+        var v23 = mat.get_za3lpa$(2) * x + mat.get_za3lpa$(6) * y + mat.get_za3lpa$(10) * z + mat.get_za3lpa$(14);
+        var v33 = mat.get_za3lpa$(3) * x + mat.get_za3lpa$(7) * y + mat.get_za3lpa$(11) * z + mat.get_za3lpa$(15);
+        mat.set_24o109$(12, v03);
+        mat.set_24o109$(13, v13);
+        mat.set_24o109$(14, v23);
+        mat.set_24o109$(15, v33);
+        break;
+    }
     return this;
   };
   Matrix4.prototype.rotate_pz1gqy$ = function (axis, radians) {
@@ -6039,13 +6832,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Matrix4$Companion_getInstance().quat_0.setFromAxis_7b5o5w$(axisX, axisY, axisZ, radians);
     return this.rotate_qe7e4j$(Matrix4$Companion_getInstance().quat_0);
   };
-  Matrix4.prototype.rotate_qe7e4j$ = function (rotation) {
-    Matrix4$Companion_getInstance().tmpMat_0.set_qe7e4j$(rotation);
-    Matrix4$Companion_getInstance().mul_0(this.values, Matrix4$Companion_getInstance().tmpMat_0.values);
-    return this;
-  };
   Matrix4.prototype.rotate_uwler8$ = function (v1, v2) {
     return this.rotate_qe7e4j$(Matrix4$Companion_getInstance().quat_0.setFromCross_uwler8$(v1, v2));
+  };
+  Matrix4.prototype.rotate_qe7e4j$ = function (rotation) {
+    Matrix4$Companion_getInstance().tmpMat_0.set_qe7e4j$(rotation);
+    this.mul_pekf88$(Matrix4$Companion_getInstance().tmpMat_0);
+    return this;
   };
   Matrix4.prototype.scale_1fv2cb$ = function (scale) {
     return this.scale_y2kzbl$(scale.x, scale.y, scale.z);
@@ -6053,72 +6846,132 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Matrix4.prototype.scale_y2kzbl$ = function (scaleX, scaleY, scaleZ) {
     if (scaleX === 1.0 && scaleY === 1.0 && scaleZ === 1.0)
       return this;
+    if (this._mode_0.ordinal < MatrixMode$SCALE_getInstance().ordinal)
+      this._mode_0 = MatrixMode$SCALE_getInstance();
     Matrix4$Companion_getInstance().tmpMat_0.idt();
     Matrix4$Companion_getInstance().tmpMat_0.scl_y2kzbl$(scaleX, scaleY, scaleZ);
     return this.mul_pekf88$(Matrix4$Companion_getInstance().tmpMat_0);
   };
-  Matrix4.prototype.extract4x3Matrix_yn39w1$ = function (out) {
-    out.set_wxm5ur$(0, this.values.get_za3lpa$(0));
-    out.set_wxm5ur$(1, this.values.get_za3lpa$(1));
-    out.set_wxm5ur$(2, this.values.get_za3lpa$(2));
-    out.set_wxm5ur$(3, this.values.get_za3lpa$(4));
-    out.set_wxm5ur$(4, this.values.get_za3lpa$(5));
-    out.set_wxm5ur$(5, this.values.get_za3lpa$(6));
-    out.set_wxm5ur$(6, this.values.get_za3lpa$(8));
-    out.set_wxm5ur$(7, this.values.get_za3lpa$(9));
-    out.set_wxm5ur$(8, this.values.get_za3lpa$(10));
-    out.set_wxm5ur$(9, this.values.get_za3lpa$(12));
-    out.set_wxm5ur$(10, this.values.get_za3lpa$(13));
-    out.set_wxm5ur$(11, this.values.get_za3lpa$(14));
-    return out;
-  };
   Matrix4.prototype.prj_9wm29k$ = function (vec) {
-    var mat = this.values;
-    var inv_w = 1.0 / (vec.x * mat.get_za3lpa$(3) + vec.y * mat.get_za3lpa$(7) + vec.z * mat.get_za3lpa$(11) + mat.get_za3lpa$(15));
-    var x = (vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4) + vec.z * mat.get_za3lpa$(8) + mat.get_za3lpa$(12)) * inv_w;
-    var y = (vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5) + vec.z * mat.get_za3lpa$(9) + mat.get_za3lpa$(13)) * inv_w;
-    var z = (vec.x * mat.get_za3lpa$(2) + vec.y * mat.get_za3lpa$(6) + vec.z * mat.get_za3lpa$(10) + mat.get_za3lpa$(14)) * inv_w;
-    vec.x = x;
-    vec.y = y;
-    vec.z = z;
-    return vec;
-  };
-  Matrix4.prototype.prj_9wm29l$ = function (vec) {
-    var mat = this.values;
-    var inv_w = 1.0 / (vec.x * mat.get_za3lpa$(3) + vec.y * mat.get_za3lpa$(7) + mat.get_za3lpa$(15));
-    var x = (vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4) + mat.get_za3lpa$(12)) * inv_w;
-    var y = (vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5) + mat.get_za3lpa$(13)) * inv_w;
-    vec.x = x;
-    vec.y = y;
+    var mat = this._values_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        break;
+      case 'TRANSLATION':
+        vec.x = vec.x + mat.get_za3lpa$(12);
+        vec.y = vec.y + mat.get_za3lpa$(13);
+        vec.z = vec.z + mat.get_za3lpa$(14);
+        break;
+      case 'SCALE':
+        var invW = 1.0 / mat.get_za3lpa$(15);
+        vec.x = (vec.x * mat.get_za3lpa$(0) + mat.get_za3lpa$(12)) * invW;
+        vec.y = (vec.y * mat.get_za3lpa$(5) + mat.get_za3lpa$(13)) * invW;
+        vec.z = (vec.z * mat.get_za3lpa$(10) + mat.get_za3lpa$(14)) * invW;
+        break;
+      case 'FULL':
+        var invW_0 = 1.0 / (vec.x * mat.get_za3lpa$(3) + vec.y * mat.get_za3lpa$(7) + vec.z * mat.get_za3lpa$(11) + mat.get_za3lpa$(15));
+        var x = (vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4) + vec.z * mat.get_za3lpa$(8) + mat.get_za3lpa$(12)) * invW_0;
+        var y = (vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5) + vec.z * mat.get_za3lpa$(9) + mat.get_za3lpa$(13)) * invW_0;
+        var z = (vec.x * mat.get_za3lpa$(2) + vec.y * mat.get_za3lpa$(6) + vec.z * mat.get_za3lpa$(10) + mat.get_za3lpa$(14)) * invW_0;
+        vec.x = x;
+        vec.y = y;
+        vec.z = z;
+        break;
+    }
     return vec;
   };
   Matrix4.prototype.rot_9wm29k$ = function (vec) {
-    var mat = this.values;
-    var x = vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4) + vec.z * mat.get_za3lpa$(8);
-    var y = vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5) + vec.z * mat.get_za3lpa$(9);
-    var z = vec.x * mat.get_za3lpa$(2) + vec.y * mat.get_za3lpa$(6) + vec.z * mat.get_za3lpa$(10);
-    vec.x = x;
-    vec.y = y;
-    vec.z = z;
+    var mat = this._values_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        break;
+      case 'TRANSLATION':
+        break;
+      case 'SCALE':
+        vec.x = vec.x * mat.get_za3lpa$(0);
+        vec.y = vec.y * mat.get_za3lpa$(5);
+        vec.z = vec.z * mat.get_za3lpa$(10);
+        break;
+      case 'FULL':
+        var x = vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4) + vec.z * mat.get_za3lpa$(8);
+        var y = vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5) + vec.z * mat.get_za3lpa$(9);
+        var z = vec.x * mat.get_za3lpa$(2) + vec.y * mat.get_za3lpa$(6) + vec.z * mat.get_za3lpa$(10);
+        vec.x = x;
+        vec.y = y;
+        vec.z = z;
+        break;
+    }
     return vec;
   };
   Matrix4.prototype.rot_9wm29l$ = function (vec) {
-    var mat = this.values;
-    var x = vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4);
-    var y = vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5);
-    vec.x = x;
-    vec.y = y;
+    var mat = this._values_0;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        break;
+      case 'TRANSLATION':
+        break;
+      case 'SCALE':
+        vec.x = vec.x * mat.get_za3lpa$(0);
+        vec.y = vec.y * mat.get_za3lpa$(5);
+        break;
+      case 'FULL':
+        var x = vec.x * mat.get_za3lpa$(0) + vec.y * mat.get_za3lpa$(4);
+        var y = vec.x * mat.get_za3lpa$(1) + vec.y * mat.get_za3lpa$(5);
+        vec.x = x;
+        vec.y = y;
+        break;
+    }
     return vec;
+  };
+  Matrix4.prototype.shearZ_dleff0$ = function (shearXZ, shearYZ) {
+    if (shearXZ === void 0)
+      shearXZ = 0.0;
+    if (shearYZ === void 0)
+      shearYZ = 0.0;
+    if (shearXZ === 0.0 && shearYZ === 0.0)
+      return this;
+    var tmp0 = this._values_0.get_za3lpa$(0) + shearYZ * this._values_0.get_za3lpa$(4);
+    var tmp1 = this._values_0.get_za3lpa$(4) + shearXZ * this._values_0.get_za3lpa$(0);
+    this._values_0.set_24o109$(0, tmp0);
+    this._values_0.set_24o109$(4, tmp1);
+    tmp0 = this._values_0.get_za3lpa$(1) + shearYZ * this._values_0.get_za3lpa$(5);
+    tmp1 = this._values_0.get_za3lpa$(5) + shearXZ * this._values_0.get_za3lpa$(1);
+    this._values_0.set_24o109$(1, tmp0);
+    this._values_0.set_24o109$(5, tmp1);
+    this._mode_0 = MatrixMode$FULL_getInstance();
+    return this;
+  };
+  Matrix4.prototype.equals = function (other) {
+    var tmp$, tmp$_0, tmp$_1;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Matrix4Ro) ? tmp$ : throwCCE();
+    if (this._mode_0 !== other.mode)
+      return false;
+    switch (this._mode_0.name) {
+      case 'IDENTITY':
+        tmp$_1 = true;
+        break;
+      case 'TRANSLATION':
+        tmp$_1 = (this._values_0.get_za3lpa$(12) === other.values.get_za3lpa$(12) && this._values_0.get_za3lpa$(13) === other.values.get_za3lpa$(13) && this._values_0.get_za3lpa$(14) === other.values.get_za3lpa$(14));
+        break;
+      case 'SCALE':
+        tmp$_1 = (this._values_0.get_za3lpa$(12) === other.values.get_za3lpa$(12) && this._values_0.get_za3lpa$(13) === other.values.get_za3lpa$(13) && this._values_0.get_za3lpa$(14) === other.values.get_za3lpa$(14) && this._values_0.get_za3lpa$(0) === other.values.get_za3lpa$(0) && this._values_0.get_za3lpa$(5) === other.values.get_za3lpa$(5) && this._values_0.get_za3lpa$(10) === other.values.get_za3lpa$(10) && this._values_0.get_za3lpa$(15) === other.values.get_za3lpa$(15));
+        break;
+      case 'FULL':
+        tmp$_1 = (tmp$_0 = this._values_0) != null ? tmp$_0.equals(other.values) : null;
+        break;
+      default:tmp$_1 = Kotlin.noWhenBranchMatched();
+        break;
+    }
+    return tmp$_1;
+  };
+  Matrix4.prototype.hashCode = function () {
+    return this._values_0.hashCode();
   };
   function Matrix4$Companion() {
     Matrix4$Companion_instance = this;
-    var tmp$;
-    var a = ArrayList_init(16);
-    tmp$ = 16 - 1 | 0;
-    for (var i = 0; i <= tmp$; i++) {
-      a.add_11rb$(0.0);
-    }
-    this.tmp_0 = a;
+    this.tmp_0 = FloatList_init(16);
     this.M00 = 0;
     this.M01 = 4;
     this.M02 = 8;
@@ -6146,40 +6999,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.tmpForward_0 = new Vector3();
     this.tmpUp_0 = new Vector3();
   }
-  Matrix4$Companion.prototype.mul_0 = function (matA, matB) {
-    var v00 = matA.get_za3lpa$(0) * matB.get_za3lpa$(0) + matA.get_za3lpa$(4) * matB.get_za3lpa$(1) + matA.get_za3lpa$(8) * matB.get_za3lpa$(2) + matA.get_za3lpa$(12) * matB.get_za3lpa$(3);
-    var v01 = matA.get_za3lpa$(0) * matB.get_za3lpa$(4) + matA.get_za3lpa$(4) * matB.get_za3lpa$(5) + matA.get_za3lpa$(8) * matB.get_za3lpa$(6) + matA.get_za3lpa$(12) * matB.get_za3lpa$(7);
-    var v02 = matA.get_za3lpa$(0) * matB.get_za3lpa$(8) + matA.get_za3lpa$(4) * matB.get_za3lpa$(9) + matA.get_za3lpa$(8) * matB.get_za3lpa$(10) + matA.get_za3lpa$(12) * matB.get_za3lpa$(11);
-    var v03 = matA.get_za3lpa$(0) * matB.get_za3lpa$(12) + matA.get_za3lpa$(4) * matB.get_za3lpa$(13) + matA.get_za3lpa$(8) * matB.get_za3lpa$(14) + matA.get_za3lpa$(12) * matB.get_za3lpa$(15);
-    var v10 = matA.get_za3lpa$(1) * matB.get_za3lpa$(0) + matA.get_za3lpa$(5) * matB.get_za3lpa$(1) + matA.get_za3lpa$(9) * matB.get_za3lpa$(2) + matA.get_za3lpa$(13) * matB.get_za3lpa$(3);
-    var v11 = matA.get_za3lpa$(1) * matB.get_za3lpa$(4) + matA.get_za3lpa$(5) * matB.get_za3lpa$(5) + matA.get_za3lpa$(9) * matB.get_za3lpa$(6) + matA.get_za3lpa$(13) * matB.get_za3lpa$(7);
-    var v12 = matA.get_za3lpa$(1) * matB.get_za3lpa$(8) + matA.get_za3lpa$(5) * matB.get_za3lpa$(9) + matA.get_za3lpa$(9) * matB.get_za3lpa$(10) + matA.get_za3lpa$(13) * matB.get_za3lpa$(11);
-    var v13 = matA.get_za3lpa$(1) * matB.get_za3lpa$(12) + matA.get_za3lpa$(5) * matB.get_za3lpa$(13) + matA.get_za3lpa$(9) * matB.get_za3lpa$(14) + matA.get_za3lpa$(13) * matB.get_za3lpa$(15);
-    var v20 = matA.get_za3lpa$(2) * matB.get_za3lpa$(0) + matA.get_za3lpa$(6) * matB.get_za3lpa$(1) + matA.get_za3lpa$(10) * matB.get_za3lpa$(2) + matA.get_za3lpa$(14) * matB.get_za3lpa$(3);
-    var v21 = matA.get_za3lpa$(2) * matB.get_za3lpa$(4) + matA.get_za3lpa$(6) * matB.get_za3lpa$(5) + matA.get_za3lpa$(10) * matB.get_za3lpa$(6) + matA.get_za3lpa$(14) * matB.get_za3lpa$(7);
-    var v22 = matA.get_za3lpa$(2) * matB.get_za3lpa$(8) + matA.get_za3lpa$(6) * matB.get_za3lpa$(9) + matA.get_za3lpa$(10) * matB.get_za3lpa$(10) + matA.get_za3lpa$(14) * matB.get_za3lpa$(11);
-    var v23 = matA.get_za3lpa$(2) * matB.get_za3lpa$(12) + matA.get_za3lpa$(6) * matB.get_za3lpa$(13) + matA.get_za3lpa$(10) * matB.get_za3lpa$(14) + matA.get_za3lpa$(14) * matB.get_za3lpa$(15);
-    var v30 = matA.get_za3lpa$(3) * matB.get_za3lpa$(0) + matA.get_za3lpa$(7) * matB.get_za3lpa$(1) + matA.get_za3lpa$(11) * matB.get_za3lpa$(2) + matA.get_za3lpa$(15) * matB.get_za3lpa$(3);
-    var v31 = matA.get_za3lpa$(3) * matB.get_za3lpa$(4) + matA.get_za3lpa$(7) * matB.get_za3lpa$(5) + matA.get_za3lpa$(11) * matB.get_za3lpa$(6) + matA.get_za3lpa$(15) * matB.get_za3lpa$(7);
-    var v32 = matA.get_za3lpa$(3) * matB.get_za3lpa$(8) + matA.get_za3lpa$(7) * matB.get_za3lpa$(9) + matA.get_za3lpa$(11) * matB.get_za3lpa$(10) + matA.get_za3lpa$(15) * matB.get_za3lpa$(11);
-    var v33 = matA.get_za3lpa$(3) * matB.get_za3lpa$(12) + matA.get_za3lpa$(7) * matB.get_za3lpa$(13) + matA.get_za3lpa$(11) * matB.get_za3lpa$(14) + matA.get_za3lpa$(15) * matB.get_za3lpa$(15);
-    matA.set_wxm5ur$(0, v00);
-    matA.set_wxm5ur$(4, v01);
-    matA.set_wxm5ur$(8, v02);
-    matA.set_wxm5ur$(12, v03);
-    matA.set_wxm5ur$(1, v10);
-    matA.set_wxm5ur$(5, v11);
-    matA.set_wxm5ur$(9, v12);
-    matA.set_wxm5ur$(13, v13);
-    matA.set_wxm5ur$(2, v20);
-    matA.set_wxm5ur$(6, v21);
-    matA.set_wxm5ur$(10, v22);
-    matA.set_wxm5ur$(14, v23);
-    matA.set_wxm5ur$(3, v30);
-    matA.set_wxm5ur$(7, v31);
-    matA.set_wxm5ur$(11, v32);
-    matA.set_wxm5ur$(15, v33);
-  };
   Matrix4$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var Matrix4$Companion_instance = null;
   function Matrix4$Companion_getInstance() {
@@ -6188,36 +7007,65 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return Matrix4$Companion_instance;
   }
-  Matrix4.prototype.shearZ_dleff0$ = function (shearXZ, shearYZ) {
-    if (shearXZ === void 0)
-      shearXZ = 0.0;
-    if (shearYZ === void 0)
-      shearYZ = 0.0;
-    var tmp0 = this.values.get_za3lpa$(0) + shearYZ * this.values.get_za3lpa$(4);
-    var tmp1 = this.values.get_za3lpa$(4) + shearXZ * this.values.get_za3lpa$(0);
-    this.values.set_wxm5ur$(0, tmp0);
-    this.values.set_wxm5ur$(4, tmp1);
-    tmp0 = this.values.get_za3lpa$(1) + shearYZ * this.values.get_za3lpa$(5);
-    tmp1 = this.values.get_za3lpa$(5) + shearXZ * this.values.get_za3lpa$(1);
-    this.values.set_wxm5ur$(1, tmp0);
-    this.values.set_wxm5ur$(5, tmp1);
-    return this;
-  };
   Matrix4.$metadata$ = {kind: Kind_CLASS, simpleName: 'Matrix4', interfaces: [Matrix4Ro]};
-  Matrix4.prototype.component1 = function () {
-    return this.values;
-  };
-  Matrix4.prototype.copy_yn39w1$ = function (values) {
-    return new Matrix4(values === void 0 ? this.values : values);
-  };
-  Matrix4.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.values) | 0;
-    return result;
-  };
-  Matrix4.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.values, other.values))));
-  };
+  function Matrix4_init_0(values, $this) {
+    $this = $this || Object.create(Matrix4.prototype);
+    Matrix4.call($this);
+    $this.set_hcyabg$(values);
+    return $this;
+  }
+  function MatrixMode(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function MatrixMode_initFields() {
+    MatrixMode_initFields = function () {
+    };
+    MatrixMode$IDENTITY_instance = new MatrixMode('IDENTITY', 0);
+    MatrixMode$TRANSLATION_instance = new MatrixMode('TRANSLATION', 1);
+    MatrixMode$SCALE_instance = new MatrixMode('SCALE', 2);
+    MatrixMode$FULL_instance = new MatrixMode('FULL', 3);
+  }
+  var MatrixMode$IDENTITY_instance;
+  function MatrixMode$IDENTITY_getInstance() {
+    MatrixMode_initFields();
+    return MatrixMode$IDENTITY_instance;
+  }
+  var MatrixMode$TRANSLATION_instance;
+  function MatrixMode$TRANSLATION_getInstance() {
+    MatrixMode_initFields();
+    return MatrixMode$TRANSLATION_instance;
+  }
+  var MatrixMode$SCALE_instance;
+  function MatrixMode$SCALE_getInstance() {
+    MatrixMode_initFields();
+    return MatrixMode$SCALE_instance;
+  }
+  var MatrixMode$FULL_instance;
+  function MatrixMode$FULL_getInstance() {
+    MatrixMode_initFields();
+    return MatrixMode$FULL_instance;
+  }
+  MatrixMode.$metadata$ = {kind: Kind_CLASS, simpleName: 'MatrixMode', interfaces: [Enum]};
+  function MatrixMode$values() {
+    return [MatrixMode$IDENTITY_getInstance(), MatrixMode$TRANSLATION_getInstance(), MatrixMode$SCALE_getInstance(), MatrixMode$FULL_getInstance()];
+  }
+  MatrixMode.values = MatrixMode$values;
+  function MatrixMode$valueOf(name) {
+    switch (name) {
+      case 'IDENTITY':
+        return MatrixMode$IDENTITY_getInstance();
+      case 'TRANSLATION':
+        return MatrixMode$TRANSLATION_getInstance();
+      case 'SCALE':
+        return MatrixMode$SCALE_getInstance();
+      case 'FULL':
+        return MatrixMode$FULL_getInstance();
+      default:throwISE('No enum constant com.acornui.math.MatrixMode.' + name);
+    }
+  }
+  MatrixMode.valueOf_61zpoe$ = MatrixMode$valueOf;
   function MinMaxRo() {
     MinMaxRo$Companion_getInstance();
   }
@@ -6243,6 +7091,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (value.y > this.yMax)
       value.y = this.yMax;
     return value;
+  };
+  MinMaxRo.prototype.copy_7b5o5w$$default = function (xMin, xMax, yMin, yMax) {
+    return new MinMax(xMin, yMin, xMax, yMax);
+  };
+  MinMaxRo.prototype.copy_7b5o5w$ = function (xMin, xMax, yMin, yMax, callback$default) {
+    if (xMin === void 0)
+      xMin = this.xMin;
+    if (xMax === void 0)
+      xMax = this.xMax;
+    if (yMin === void 0)
+      yMin = this.yMin;
+    if (yMax === void 0)
+      yMax = this.yMax;
+    return callback$default ? callback$default(xMin, xMax, yMin, yMax) : this.copy_7b5o5w$$default(xMin, xMax, yMin, yMax);
   };
   function MinMaxRo$Companion() {
     MinMaxRo$Companion_instance = this;
@@ -6320,6 +7182,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.xMax = this.xMax + right;
     this.yMax = this.yMax + bottom;
   };
+  MinMax.prototype.inflate_rw8g7s$ = function (pad) {
+    this.inflate_7b5o5w$(pad.left, pad.top, pad.right, pad.bottom);
+  };
   Object.defineProperty(MinMax.prototype, 'width', {get: function () {
     return this.xMax - this.xMin;
   }});
@@ -6358,51 +7223,39 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.ext_dleff0$(other.xMin, other.yMin);
     this.ext_dleff0$(other.xMax, other.yMax);
   };
-  MinMax.$metadata$ = {kind: Kind_CLASS, simpleName: 'MinMax', interfaces: [MinMaxRo]};
-  MinMax.prototype.component1 = function () {
-    return this.xMin;
-  };
-  MinMax.prototype.component2 = function () {
-    return this.yMin;
-  };
-  MinMax.prototype.component3 = function () {
-    return this.xMax;
-  };
-  MinMax.prototype.component4 = function () {
-    return this.yMax;
-  };
-  MinMax.prototype.copy_7b5o5w$ = function (xMin, yMin, xMax, yMax) {
-    return new MinMax(xMin === void 0 ? this.xMin : xMin, yMin === void 0 ? this.yMin : yMin, xMax === void 0 ? this.xMax : xMax, yMax === void 0 ? this.yMax : yMax);
-  };
-  MinMax.prototype.toString = function () {
-    return 'MinMax(xMin=' + Kotlin.toString(this.xMin) + (', yMin=' + Kotlin.toString(this.yMin)) + (', xMax=' + Kotlin.toString(this.xMax)) + (', yMax=' + Kotlin.toString(this.yMax)) + ')';
+  MinMax.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, MinMaxRo) ? tmp$ : throwCCE();
+    if (this.xMin !== other.xMin)
+      return false;
+    if (this.yMin !== other.yMin)
+      return false;
+    if (this.xMax !== other.xMax)
+      return false;
+    if (this.yMax !== other.yMax)
+      return false;
+    return true;
   };
   MinMax.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.xMin) | 0;
-    result = result * 31 + Kotlin.hashCode(this.yMin) | 0;
-    result = result * 31 + Kotlin.hashCode(this.xMax) | 0;
-    result = result * 31 + Kotlin.hashCode(this.yMax) | 0;
+    var result = hashCode(this.xMin);
+    result = (31 * result | 0) + hashCode(this.yMin) | 0;
+    result = (31 * result | 0) + hashCode(this.xMax) | 0;
+    result = (31 * result | 0) + hashCode(this.yMax) | 0;
     return result;
   };
-  MinMax.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.xMin, other.xMin) && Kotlin.equals(this.yMin, other.yMin) && Kotlin.equals(this.xMax, other.xMax) && Kotlin.equals(this.yMax, other.yMax)))));
+  MinMax.prototype.toString = function () {
+    return 'MinMax(xMin=' + this.xMin + ', yMin=' + this.yMin + ', xMax=' + this.xMax + ', yMax=' + this.yMax + ')';
   };
+  MinMax.$metadata$ = {kind: Kind_CLASS, simpleName: 'MinMax', interfaces: [MinMaxRo]};
   function PadRo() {
   }
-  PadRo.prototype.copy_789ags$$default = function (top, right, bottom, left) {
-    return new Pad(top != null ? top : this.top, right != null ? right : this.right, bottom != null ? bottom : this.bottom, left != null ? left : this.left);
+  PadRo.prototype.isEmpty = function () {
+    return this.top === 0.0 && this.right === 0.0 && this.bottom === 0.0 && this.left === 0.0;
   };
-  PadRo.prototype.copy_789ags$ = function (top, right, bottom, left, callback$default) {
-    if (top === void 0)
-      top = null;
-    if (right === void 0)
-      right = null;
-    if (bottom === void 0)
-      bottom = null;
-    if (left === void 0)
-      left = null;
-    return callback$default ? callback$default(top, right, bottom, left) : this.copy_789ags$$default(top, right, bottom, left);
+  PadRo.prototype.isNotEmpty = function () {
+    return !this.isEmpty();
   };
   PadRo.prototype.reduceWidth_81sz4$ = function (width) {
     if (width == null)
@@ -6438,6 +7291,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   PadRo.prototype.toCssString = function () {
     return this.top.toString() + 'px ' + this.right + 'px ' + this.bottom + 'px ' + this.left + 'px';
+  };
+  PadRo.prototype.copy_7b5o5w$$default = function (top, right, bottom, left) {
+    return new Pad(top, right, bottom, left);
+  };
+  PadRo.prototype.copy_7b5o5w$ = function (top, right, bottom, left, callback$default) {
+    if (top === void 0)
+      top = this.top;
+    if (right === void 0)
+      right = this.right;
+    if (bottom === void 0)
+      bottom = this.bottom;
+    if (left === void 0)
+      left = this.left;
+    return callback$default ? callback$default(top, right, bottom, left) : this.copy_7b5o5w$$default(top, right, bottom, left);
   };
   PadRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'PadRo', interfaces: []};
   function Pad(top, right, bottom, left) {
@@ -6558,27 +7425,18 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   PlaneRo.prototype.testPoint_1fv2cb$ = function (point) {
     var dist = this.normal.dot_1fv2cb$(point) + this.d;
-    if (dist === 0.0)
-      return PlaneSide$ON_PLANE_getInstance();
-    else if (dist < 0)
-      return PlaneSide$BACK_getInstance();
-    else
-      return PlaneSide$FRONT_getInstance();
+    return dist === 0.0 ? PlaneSide$ON_PLANE_getInstance() : dist < 0 ? PlaneSide$BACK_getInstance() : PlaneSide$FRONT_getInstance();
   };
   PlaneRo.prototype.testPoint_y2kzbl$ = function (x, y, z) {
     var dist = this.normal.dot_y2kzbl$(x, y, z) + this.d;
-    if (dist === 0.0)
-      return PlaneSide$ON_PLANE_getInstance();
-    else if (dist < 0)
-      return PlaneSide$BACK_getInstance();
-    else
-      return PlaneSide$FRONT_getInstance();
+    return dist === 0.0 ? PlaneSide$ON_PLANE_getInstance() : dist < 0 ? PlaneSide$BACK_getInstance() : PlaneSide$FRONT_getInstance();
   };
   PlaneRo.prototype.isFrontFacing_1fv2cb$ = function (direction) {
     var dot = this.normal.dot_1fv2cb$(direction);
     return dot <= 0;
   };
   PlaneRo.prototype.intersects_y8xsj$$default = function (r, out) {
+    var tmp$;
     var m = r.direction.dot_1fv2cb$(this.normal);
     if (m === 0.0)
       return false;
@@ -6586,11 +7444,12 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (t >= 0) {
       if (out != null)
         out.set_1fv2cb$(r.direction).scl_mx4ult$(t).add_1fv2cb$(r.origin);
-      return true;
+      tmp$ = true;
     }
      else {
-      return false;
+      tmp$ = false;
     }
+    return tmp$;
   };
   PlaneRo.prototype.intersects_y8xsj$ = function (r, out, callback$default) {
     if (out === void 0)
@@ -6601,6 +7460,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var t = this.normal.dot_1fv2cb$(out) + this.d;
     out.set_y2kzbl$(t * -this.normal.x + out.x, t * -this.normal.y + out.y, t * -this.normal.z + out.z);
     return out;
+  };
+  PlaneRo.prototype.copy_pz1gqy$$default = function (normal, d) {
+    return new Plane(normal.copy_y2kzbl$(), d);
+  };
+  PlaneRo.prototype.copy_pz1gqy$ = function (normal, d, callback$default) {
+    if (normal === void 0)
+      normal = this.normal;
+    if (d === void 0)
+      d = this.d;
+    return callback$default ? callback$default(normal, d) : this.copy_pz1gqy$$default(normal, d);
   };
   PlaneRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'PlaneRo', interfaces: []};
   function Plane(normal, d) {
@@ -6647,6 +7516,22 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.normal.clear();
     this.d = 0.0;
   };
+  Plane.prototype.equals = function (other) {
+    var tmp$, tmp$_0;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, PlaneRo) ? tmp$ : throwCCE();
+    if (!((tmp$_0 = this.normal) != null ? tmp$_0.equals(other.normal) : null))
+      return false;
+    if (this.d !== other.d)
+      return false;
+    return true;
+  };
+  Plane.prototype.hashCode = function () {
+    var result = this.normal.hashCode();
+    result = (31 * result | 0) + hashCode(this.d) | 0;
+    return result;
+  };
   function Plane$Companion() {
     Plane$Companion_instance = this;
     this.pool_0 = ClearableObjectPool_init(Plane$Companion$pool$lambda);
@@ -6666,27 +7551,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Plane$Companion_instance;
   }
   Plane.$metadata$ = {kind: Kind_CLASS, simpleName: 'Plane', interfaces: [PlaneRo, Clearable]};
-  Plane.prototype.component1 = function () {
-    return this.normal;
-  };
-  Plane.prototype.component2 = function () {
-    return this.d;
-  };
-  Plane.prototype.copy_wscm5v$ = function (normal, d) {
-    return new Plane(normal === void 0 ? this.normal : normal, d === void 0 ? this.d : d);
-  };
-  Plane.prototype.toString = function () {
-    return 'Plane(normal=' + Kotlin.toString(this.normal) + (', d=' + Kotlin.toString(this.d)) + ')';
-  };
-  Plane.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.normal) | 0;
-    result = result * 31 + Kotlin.hashCode(this.d) | 0;
-    return result;
-  };
-  Plane.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.normal, other.normal) && Kotlin.equals(this.d, other.d)))));
-  };
   function PlaneSide(name, ordinal) {
     Enum.call(this);
     this.name$ = name;
@@ -6734,6 +7598,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function QuaternionRo() {
     QuaternionRo$Companion_getInstance();
   }
+  QuaternionRo.prototype.getAngleAround_1fv2cb$ = function (axis) {
+    return this.getAngleAround_y2kzbl$(axis.x, axis.y, axis.z);
+  };
   QuaternionRo.prototype.transform_9wm29k$ = function (v) {
     QuaternionRo$Companion_getInstance().tmp2_0.set_qe7e4j$(this);
     QuaternionRo$Companion_getInstance().tmp2_0.conjugate();
@@ -6752,6 +7619,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (epsilon === void 0)
       epsilon = 1.0E-4;
     return callback$default ? callback$default(other, epsilon) : this.closeTo_imyaox$$default(other, epsilon);
+  };
+  QuaternionRo.prototype.copy_7b5o5w$$default = function (x, y, z, w) {
+    return new Quaternion(x, y, z, w);
+  };
+  QuaternionRo.prototype.copy_7b5o5w$ = function (x, y, z, w, callback$default) {
+    if (x === void 0)
+      x = this.x;
+    if (y === void 0)
+      y = this.y;
+    if (z === void 0)
+      z = this.z;
+    if (w === void 0)
+      w = this.w;
+    return callback$default ? callback$default(x, y, z, w) : this.copy_7b5o5w$$default(x, y, z, w);
   };
   function QuaternionRo$Companion() {
     QuaternionRo$Companion_instance = this;
@@ -6813,21 +7694,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.set_7b5o5w$(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
   };
   Quaternion.prototype.len = function () {
-    return Math_0.sqrt(this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w);
+    var x = this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
+    return Math_0.sqrt(x);
   };
   Quaternion.prototype.toString = function () {
     return '[' + this.x + '|' + this.y + '|' + this.z + '|' + this.w + ']';
   };
   Quaternion.prototype.setEulerAnglesRad_y2kzbl$ = function (yaw, pitch, roll) {
+    return this.setEulerAngles_y2kzbl$(pitch, yaw, roll);
+  };
+  Quaternion.prototype.setEulerAngles_y2kzbl$ = function (pitch, yaw, roll) {
     var hr = roll * 0.5;
-    var shr = MathUtils_getInstance().sin_mx4ult$(hr);
-    var chr = MathUtils_getInstance().cos_mx4ult$(hr);
+    var shr = Math_0.sin(hr);
+    var chr = Math_0.cos(hr);
     var hp = pitch * 0.5;
-    var shp = MathUtils_getInstance().sin_mx4ult$(hp);
-    var chp = MathUtils_getInstance().cos_mx4ult$(hp);
+    var shp = Math_0.sin(hp);
+    var chp = Math_0.cos(hp);
     var hy = yaw * 0.5;
-    var shy = MathUtils_getInstance().sin_mx4ult$(hy);
-    var chy = MathUtils_getInstance().cos_mx4ult$(hy);
+    var shy = Math_0.sin(hy);
+    var chy = Math_0.cos(hy);
     var chy_shp = chy * shp;
     var shy_chp = shy * chp;
     var chy_chp = chy * chp;
@@ -6842,15 +7727,26 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var t = this.y * this.x + this.z * this.w;
     return t > 0.499 ? 1 : t < -0.499 ? -1 : 0;
   };
-  Quaternion.prototype.getRollRad = function () {
-    var pole = this.getGimbalPole();
-    return pole === 0 ? MathUtils_getInstance().atan2_dleff0$(2.0 * (this.w * this.z + this.y * this.x), 1.0 - 2.0 * (this.x * this.x + this.z * this.z)) : pole * 2.0 * MathUtils_getInstance().atan2_dleff0$(this.y, this.w);
-  };
-  Quaternion.prototype.getPitchRad = function () {
+  Quaternion.prototype.getRoll = function () {
     var pole = this.getGimbalPole();
     var tmp$;
     if (pole === 0) {
-      MathUtils_getInstance();
+      var y = 2.0 * (this.w * this.z + this.y * this.x);
+      var x = 1.0 - 2.0 * (this.x * this.x + this.z * this.z);
+      tmp$ = Math_0.atan2(y, x);
+    }
+     else {
+      var tmp$_0 = pole * 2.0;
+      var y_0 = this.y;
+      var x_0 = this.w;
+      tmp$ = tmp$_0 * Math_0.atan2(y_0, x_0);
+    }
+    return tmp$;
+  };
+  Quaternion.prototype.getPitch = function () {
+    var pole = this.getGimbalPole();
+    var tmp$;
+    if (pole === 0) {
       var value = 2.0 * (this.w * this.x - this.z * this.y);
       var min = -1.0;
       var clamp_73gzaq$result;
@@ -6866,14 +7762,23 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         clamp_73gzaq$result = value;
       }
        while (false);
-      tmp$ = Math_0.asin(clamp_73gzaq$result);
+      var x = clamp_73gzaq$result;
+      tmp$ = Math_0.asin(x);
     }
      else
       tmp$ = pole * PI * 0.5;
     return tmp$;
   };
-  Quaternion.prototype.getYawRad = function () {
-    return this.getGimbalPole() === 0 ? MathUtils_getInstance().atan2_dleff0$(2.0 * (this.y * this.w + this.x * this.z), 1.0 - 2.0 * (this.y * this.y + this.x * this.x)) : 0.0;
+  Quaternion.prototype.getYaw = function () {
+    var tmp$;
+    if (this.getGimbalPole() === 0) {
+      var y = 2.0 * (this.y * this.w + this.x * this.z);
+      var x = 1.0 - 2.0 * (this.y * this.y + this.x * this.x);
+      tmp$ = Math_0.atan2(y, x);
+    }
+     else
+      tmp$ = 0.0;
+    return tmp$;
   };
   Quaternion.prototype.len2 = function () {
     return this.x * this.x + this.y * this.y + this.z * this.z + this.w * this.w;
@@ -6881,7 +7786,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Quaternion.prototype.nor = function () {
     var len = this.len2();
     if (len !== 0.0 && !MathUtils_getInstance().isEqual_dleff0$(len, 1.0)) {
-      len = Math_0.sqrt(len);
+      var x = len;
+      len = Math_0.sqrt(x);
       this.w = this.w / len;
       this.x = this.x / len;
       this.y = this.y / len;
@@ -6977,20 +7883,21 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return this.idt();
     d = 1.0 / d;
     var l_ang = radians;
-    var l_sin = MathUtils_getInstance().sin_mx4ult$(l_ang / 2.0);
-    var l_cos = MathUtils_getInstance().cos_mx4ult$(l_ang / 2.0);
+    var x_0 = l_ang / 2.0;
+    var l_sin = Math_0.sin(x_0);
+    var x_1 = l_ang / 2.0;
+    var l_cos = Math_0.cos(x_1);
     return this.set_7b5o5w$(d * x * l_sin, d * y * l_sin, d * z * l_sin, l_cos).nor();
   };
-  Quaternion.prototype.setFromMatrix_e7v9es$ = function (matrix, normalizeAxes) {
+  Quaternion.prototype.setFromMatrix_gkedup$ = function (matrix, normalizeAxes) {
     if (normalizeAxes === void 0)
       normalizeAxes = false;
     return this.setFromAxes_p6y6nc$(matrix.values.get_za3lpa$(0), matrix.values.get_za3lpa$(4), matrix.values.get_za3lpa$(8), matrix.values.get_za3lpa$(1), matrix.values.get_za3lpa$(5), matrix.values.get_za3lpa$(9), matrix.values.get_za3lpa$(2), matrix.values.get_za3lpa$(6), matrix.values.get_za3lpa$(10), normalizeAxes);
   };
-  Quaternion.prototype.setFromMatrix_nytvwb$ = function (normalizeAxes, matrix) {
-    return this.setFromAxes_p6y6nc$(matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M00), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M01), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M02), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M10), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M11), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M12), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M20), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M21), matrix.values.get_za3lpa$(Matrix3$Companion_getInstance().M22), normalizeAxes);
-  };
-  Quaternion.prototype.setFromMatrix_1ktw3a$ = function (matrix) {
-    return this.setFromMatrix_nytvwb$(false, matrix);
+  Quaternion.prototype.setFromMatrix_2rnwg$ = function (matrix, normalizeAxes) {
+    if (normalizeAxes === void 0)
+      normalizeAxes = false;
+    return this.setFromAxes_p6y6nc$(matrix.values.get_za3lpa$(0), matrix.values.get_za3lpa$(3), matrix.values.get_za3lpa$(6), matrix.values.get_za3lpa$(1), matrix.values.get_za3lpa$(4), matrix.values.get_za3lpa$(7), matrix.values.get_za3lpa$(2), matrix.values.get_za3lpa$(5), matrix.values.get_za3lpa$(8), normalizeAxes);
   };
   Quaternion.prototype.setFromAxes_b32tf5$ = function (xx, xy, xz, yx, yy, yz, zx, zy, zz) {
     return this.setFromAxes_p6y6nc$(xx, xy, xz, yx, yy, yz, zx, zy, zz, false);
@@ -7022,7 +7929,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     var t = xx_0 + yy_0 + zz_0;
     if (t >= 0) {
-      var s = Math_0.sqrt(t + 1);
+      var x = t + 1;
+      var s = Math_0.sqrt(x);
       this.w = 0.5 * s;
       s = 0.5 / s;
       this.x = (zy_0 - yz_0) * s;
@@ -7030,7 +7938,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       this.z = (yx - xy_0) * s;
     }
      else if (xx_0 > yy_0 && xx_0 > zz_0) {
-      var s_0 = Math_0.sqrt(1.0 + xx_0 - yy_0 - zz_0);
+      var x_0 = 1.0 + xx_0 - yy_0 - zz_0;
+      var s_0 = Math_0.sqrt(x_0);
       this.x = s_0 * 0.5;
       s_0 = 0.5 / s_0;
       this.y = (yx + xy_0) * s_0;
@@ -7038,7 +7947,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       this.w = (zy_0 - yz_0) * s_0;
     }
      else if (yy_0 > zz_0) {
-      var s_1 = Math_0.sqrt(1.0 + yy_0 - xx_0 - zz_0);
+      var x_1 = 1.0 + yy_0 - xx_0 - zz_0;
+      var s_1 = Math_0.sqrt(x_1);
       this.y = s_1 * 0.5;
       s_1 = 0.5 / s_1;
       this.x = (yx + xy_0) * s_1;
@@ -7046,7 +7956,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       this.w = (xz_0 - zx_0) * s_1;
     }
      else {
-      var s_2 = Math_0.sqrt(1.0 + zz_0 - xx_0 - yy_0);
+      var x_2 = 1.0 + zz_0 - xx_0 - yy_0;
+      var s_2 = Math_0.sqrt(x_2);
       this.z = s_2 * 0.5;
       s_2 = 0.5 / s_2;
       this.x = (xz_0 + zx_0) * s_2;
@@ -7102,9 +8013,11 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var scale1 = alpha;
     if (1.0 - absDot > 0.1) {
       var angle = Math_0.acos(absDot);
-      var invSinTheta = 1.0 / MathUtils_getInstance().sin_mx4ult$(angle);
-      scale0 = MathUtils_getInstance().sin_mx4ult$((1.0 - alpha) * angle) * invSinTheta;
-      scale1 = MathUtils_getInstance().sin_mx4ult$(alpha * angle) * invSinTheta;
+      var invSinTheta = 1.0 / Math_0.sin(angle);
+      var x = (1.0 - alpha) * angle;
+      scale0 = Math_0.sin(x) * invSinTheta;
+      var x_0 = alpha * angle;
+      scale1 = Math_0.sin(x_0) * invSinTheta;
     }
     if (dot < 0.0)
       scale1 = -scale1;
@@ -7114,7 +8027,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.w = scale0 * this.w + scale1 * end.w;
     return this;
   };
-  Quaternion.prototype.slerp_2ccfco$ = function (q) {
+  Quaternion.prototype.slerp_lfwfm3$ = function (q) {
     var tmp$;
     var w = 1.0 / q.length;
     this.set_qe7e4j$(q[0]).exp_mx4ult$(w);
@@ -7124,7 +8037,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.nor();
     return this;
   };
-  Quaternion.prototype.slerp_48tmu2$ = function (q, w) {
+  Quaternion.prototype.slerp_u4o4yx$ = function (q, w) {
     var tmp$;
     this.set_qe7e4j$(q[0]).exp_mx4ult$(w[0]);
     tmp$ = get_lastIndex_0(q);
@@ -7136,13 +8049,17 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Quaternion.prototype.exp_mx4ult$ = function (alpha) {
     var norm = this.len();
     var normExp = Math_0.pow(norm, alpha);
-    var theta = Math_0.acos(this.w / norm);
+    var x = this.w / norm;
+    var theta = Math_0.acos(x);
     var coeff;
-    if ((theta < 0.0 ? -theta : theta) < 0.001)
+    if (Math_0.abs(theta) < 0.001)
       coeff = normExp * alpha / norm;
-    else
-      coeff = normExp * MathUtils_getInstance().sin_mx4ult$(alpha * theta) / (norm * MathUtils_getInstance().sin_mx4ult$(theta));
-    this.w = normExp * MathUtils_getInstance().cos_mx4ult$(alpha * theta);
+    else {
+      var x_0 = alpha * theta;
+      coeff = normExp * Math_0.sin(x_0) / (norm * Math_0.sin(theta));
+    }
+    var x_1 = alpha * theta;
+    this.w = normExp * Math_0.cos(x_1);
     this.x = this.x * coeff;
     this.y = this.y * coeff;
     this.z = this.z * coeff;
@@ -7165,11 +8082,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Quaternion.prototype.times_mx4ult$ = function (scalar) {
     return this.copy_7b5o5w$().mul_mx4ult$(scalar);
   };
-  Quaternion.prototype.getAxisAngleRad_9wm29k$ = function (axis) {
+  Quaternion.prototype.getAxisAngle_9wm29k$ = function (axis) {
     if (this.w > 1.0)
       this.nor();
-    var angle = 2.0 * Math_0.acos(this.w);
-    var s = Math_0.sqrt(1.0 - this.w * this.w);
+    var x = this.w;
+    var angle = 2.0 * Math_0.acos(x);
+    var x_0 = 1.0 - this.w * this.w;
+    var s = Math_0.sqrt(x_0);
     if (s < MathUtils_getInstance().FLOAT_ROUNDING_ERROR) {
       axis.x = this.x;
       axis.y = this.y;
@@ -7182,25 +8101,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return angle;
   };
-  Quaternion.prototype.getAngleRad = function () {
-    return 2.0 * Math_0.acos(this.w > 1 ? this.w / this.len() : this.w);
+  Quaternion.prototype.getAngle = function () {
+    var x = this.w > 1.0 ? this.w / this.len() : this.w;
+    return 2.0 * Math_0.acos(x);
   };
   Quaternion.prototype.getSwingTwist_rd6wrh$ = function (axisX, axisY, axisZ, swing, twist) {
     var d = Vector3$Companion_getInstance().dot_w8lrqs$(this.x, this.y, this.z, axisX, axisY, axisZ);
     twist.set_7b5o5w$(axisX * d, axisY * d, axisZ * d, this.w).nor();
     swing.set_qe7e4j$(twist).conjugate().mulLeft_qe7e4j$(this);
   };
-  Quaternion.prototype.getSwingTwist_bqqzr0$ = function (axis, swing, twist) {
+  Quaternion.prototype.getSwingTwist_p6b4fb$ = function (axis, swing, twist) {
     this.getSwingTwist_rd6wrh$(axis.x, axis.y, axis.z, swing, twist);
   };
-  Quaternion.prototype.getAngleAroundRad_y2kzbl$ = function (axisX, axisY, axisZ) {
+  Quaternion.prototype.getAngleAround_y2kzbl$ = function (axisX, axisY, axisZ) {
     var d = Vector3$Companion_getInstance().dot_w8lrqs$(this.x, this.y, this.z, axisX, axisY, axisZ);
     var l2 = Quaternion$Companion_getInstance().len2_7b5o5w$(axisX * d, axisY * d, axisZ * d, this.w);
     var tmp$;
     if (MathUtils_getInstance().isZero_dleff0$(l2))
       tmp$ = 0.0;
     else {
-      MathUtils_getInstance();
       MathUtils_getInstance();
       var value = this.w / Math_0.sqrt(l2);
       var min = -1.0;
@@ -7217,20 +8136,40 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
         clamp_73gzaq$result = value;
       }
        while (false);
-      tmp$ = 2.0 * Math_0.acos(clamp_73gzaq$result);
+      var x = clamp_73gzaq$result;
+      tmp$ = 2.0 * Math_0.acos(x);
     }
     return tmp$;
   };
-  Quaternion.prototype.getAngleAroundRad_9wm29k$ = function (axis) {
-    return this.getAngleAroundRad_y2kzbl$(axis.x, axis.y, axis.z);
+  Quaternion.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, QuaternionRo) ? tmp$ : throwCCE();
+    if (this.x !== other.x)
+      return false;
+    if (this.y !== other.y)
+      return false;
+    if (this.z !== other.z)
+      return false;
+    if (this.w !== other.w)
+      return false;
+    return true;
+  };
+  Quaternion.prototype.hashCode = function () {
+    var result = hashCode(this.x);
+    result = (31 * result | 0) + hashCode(this.y) | 0;
+    result = (31 * result | 0) + hashCode(this.z) | 0;
+    result = (31 * result | 0) + hashCode(this.w) | 0;
+    return result;
   };
   function Quaternion$Companion() {
     Quaternion$Companion_instance = this;
     this.tmp1_0 = new Quaternion(0.0, 0.0, 0.0, 0.0);
-    this.tmp2_0 = new Quaternion(0.0, 0.0, 0.0, 0.0);
   }
   Quaternion$Companion.prototype.len_7b5o5w$ = function (x, y, z, w) {
-    return Math_0.sqrt(x * x + y * y + z * z + w * w);
+    var x_0 = x * x + y * y + z * z + w * w;
+    return Math_0.sqrt(x_0);
   };
   Quaternion$Companion.prototype.len2_7b5o5w$ = function (x, y, z, w) {
     return x * x + y * y + z * z + w * w;
@@ -7247,127 +8186,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Quaternion$Companion_instance;
   }
   Quaternion.$metadata$ = {kind: Kind_CLASS, simpleName: 'Quaternion', interfaces: [QuaternionRo]};
-  Quaternion.prototype.component1 = function () {
-    return this.x;
-  };
-  Quaternion.prototype.component2 = function () {
-    return this.y;
-  };
-  Quaternion.prototype.component3 = function () {
-    return this.z;
-  };
-  Quaternion.prototype.component4 = function () {
-    return this.w;
-  };
-  Quaternion.prototype.copy_7b5o5w$ = function (x, y, z, w) {
-    return new Quaternion(x === void 0 ? this.x : x, y === void 0 ? this.y : y, z === void 0 ? this.z : z, w === void 0 ? this.w : w);
-  };
-  Quaternion.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.x) | 0;
-    result = result * 31 + Kotlin.hashCode(this.y) | 0;
-    result = result * 31 + Kotlin.hashCode(this.z) | 0;
-    result = result * 31 + Kotlin.hashCode(this.w) | 0;
-    return result;
-  };
-  Quaternion.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.z, other.z) && Kotlin.equals(this.w, other.w)))));
-  };
-  function Random(seed0, seed1) {
-    Random$Companion_getInstance();
-    if (seed0 === void 0)
-      seed0 = Kotlin.Long.ZERO;
-    if (seed1 === void 0)
-      seed1 = Kotlin.Long.ZERO;
-    this.seed0 = seed0;
-    this.seed1 = seed1;
-    if (equals(this.seed0, Kotlin.Long.ZERO)) {
-      this.setSeed_s8cxhz$(Kotlin.Long.fromNumber(Math.random() * (new Kotlin.Long(-1, 2097151)).toNumber()));
-    }
-     else if (equals(this.seed1, Kotlin.Long.ZERO)) {
-      this.setSeed_s8cxhz$(this.seed0);
-    }
-  }
-  function Random$Companion() {
-    Random$Companion_instance = this;
-    this.NORM_DOUBLE_0 = 1.0 / (1 << 53);
-    this.NORM_FLOAT_0 = 1.0 / (1 << 24);
-  }
-  Random$Companion.prototype.murmurHash3_0 = function (x) {
-    var xV = x;
-    xV = xV.xor(xV.shiftRightUnsigned(33));
-    xV = xV.multiply(new Kotlin.Long(-313160499, -11423785));
-    xV = xV.xor(xV.shiftRightUnsigned(33));
-    xV = xV.multiply(new Kotlin.Long(444984403, -993084930));
-    xV = xV.xor(xV.shiftRightUnsigned(33));
-    return xV;
-  };
-  Random$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
-  var Random$Companion_instance = null;
-  function Random$Companion_getInstance() {
-    if (Random$Companion_instance === null) {
-      new Random$Companion();
-    }
-    return Random$Companion_instance;
-  }
-  Random.prototype.nextLong = function () {
-    var s1 = this.seed0;
-    var s0 = this.seed1;
-    this.seed0 = s0;
-    s1 = s1.xor(s1.shiftLeft(23));
-    this.seed1 = s1.xor(s0).xor(s1.shiftRightUnsigned(17)).xor(s0.shiftRightUnsigned(26));
-    return this.seed1.add(s0);
-  };
-  Random.prototype.next_za3lpa$ = function (bits) {
-    return this.nextLong().and(Kotlin.Long.fromInt((1 << bits) - 1 | 0)).toInt();
-  };
-  Random.prototype.nextInt = function () {
-    return this.nextLong().toInt();
-  };
-  Random.prototype.nextInt_za3lpa$ = function (n) {
-    return this.nextLong_s8cxhz$(Kotlin.Long.fromInt(n)).toInt();
-  };
-  Random.prototype.nextLong_s8cxhz$ = function (n) {
-    if (n.compareTo_11rb$(Kotlin.Long.fromInt(0)) <= 0)
-      throw IllegalArgumentException_init('n must be positive');
-    while (true) {
-      var bits = this.nextLong().shiftRightUnsigned(1);
-      var value = bits.modulo(n);
-      if (bits.subtract(value).add(n.subtract(Kotlin.Long.fromInt(1))).compareTo_11rb$(Kotlin.Long.fromInt(0)) >= 0)
-        return value;
-    }
-  };
-  Random.prototype.nextDouble = function () {
-    return this.nextLong().shiftRightUnsigned(11).toNumber() * Random$Companion_getInstance().NORM_DOUBLE_0;
-  };
-  Random.prototype.nextFloat = function () {
-    return this.nextLong().shiftRightUnsigned(40).toNumber() * Random$Companion_getInstance().NORM_FLOAT_0;
-  };
-  Random.prototype.nextBoolean = function () {
-    return !equals(this.nextLong().and(Kotlin.Long.ONE), Kotlin.Long.ZERO);
-  };
-  Random.prototype.nextBytes_fqrh44$ = function (bytes) {
-    var tmp$;
-    var i = bytes.length;
-    while (i !== 0) {
-      var a = i;
-      var n = Math_0.min(a, 8);
-      var bits = this.nextLong();
-      while ((tmp$ = n, n = tmp$ - 1 | 0, tmp$) !== 0) {
-        bytes[i = i - 1 | 0, i] = toByte(bits.toInt());
-        bits = bits.shiftRight(8);
-      }
-    }
-  };
-  Random.prototype.setSeed_s8cxhz$ = function (seed) {
-    var seed0 = Random$Companion_getInstance().murmurHash3_0(equals(seed, Kotlin.Long.ZERO) ? new Kotlin.Long(0, -2097152) : seed);
-    this.setState_3pjtqy$(seed0, Random$Companion_getInstance().murmurHash3_0(seed0));
-  };
-  Random.prototype.setState_3pjtqy$ = function (seed0, seed1) {
-    this.seed0 = seed0;
-    this.seed1 = seed1;
-  };
-  Random.$metadata$ = {kind: Kind_CLASS, simpleName: 'Random', interfaces: []};
   function Range2Ro() {
   }
   Range2Ro.prototype.contains_mef7kx$ = function (value) {
@@ -7392,6 +8210,16 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.max != null && Kotlin.compareTo(value, ensureNotNull(this.max)) > 0)
       return ensureNotNull(this.max);
     return value;
+  };
+  Range2Ro.prototype.copy_n65qkk$$default = function (min, max) {
+    return new Range2(min, max);
+  };
+  Range2Ro.prototype.copy_n65qkk$ = function (min, max, callback$default) {
+    if (min === void 0)
+      min = this.min;
+    if (max === void 0)
+      max = this.max;
+    return callback$default ? callback$default(min, max) : this.copy_n65qkk$$default(min, max);
   };
   Range2Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Range2Ro', interfaces: []};
   function Range2(min, max) {
@@ -7431,44 +8259,71 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.min = null;
     this.max = null;
   };
-  Range2.$metadata$ = {kind: Kind_CLASS, simpleName: 'Range2', interfaces: [Range2Ro, Clearable]};
-  Range2.prototype.component1 = function () {
-    return this.min;
-  };
-  Range2.prototype.component2 = function () {
-    return this.max;
-  };
-  Range2.prototype.copy_n65qkk$ = function (min, max) {
-    return new Range2(min === void 0 ? this.min : min, max === void 0 ? this.max : max);
-  };
-  Range2.prototype.toString = function () {
-    return 'Range2(min=' + Kotlin.toString(this.min) + (', max=' + Kotlin.toString(this.max)) + ')';
+  Range2.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Range2Ro) ? tmp$ : throwCCE();
+    if (!equals(this.min, other.min))
+      return false;
+    if (!equals(this.max, other.max))
+      return false;
+    return true;
   };
   Range2.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.min) | 0;
-    result = result * 31 + Kotlin.hashCode(this.max) | 0;
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    var result = (tmp$_0 = (tmp$ = this.min) != null ? hashCode(tmp$) : null) != null ? tmp$_0 : 0;
+    result = (31 * result | 0) + ((tmp$_2 = (tmp$_1 = this.max) != null ? hashCode(tmp$_1) : null) != null ? tmp$_2 : 0) | 0;
     return result;
   };
-  Range2.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.min, other.min) && Kotlin.equals(this.max, other.max)))));
-  };
+  Range2.$metadata$ = {kind: Kind_CLASS, simpleName: 'Range2', interfaces: [Range2Ro, Clearable]};
   function RayRo() {
   }
+  RayRo.prototype.intersectsRay_owlv2i$ = function (ray, out, callback$default) {
+    if (out === void 0)
+      out = null;
+    return callback$default ? callback$default(ray, out) : this.intersectsRay_owlv2i$$default(ray, out);
+  };
+  RayRo.prototype.intersects_owlv2i$$default = function (ray, out) {
+    return this.intersectsRay_owlv2i$(ray, out);
+  };
   RayRo.prototype.intersects_owlv2i$ = function (ray, out, callback$default) {
     if (out === void 0)
       out = null;
     return callback$default ? callback$default(ray, out) : this.intersects_owlv2i$$default(ray, out);
+  };
+  RayRo.prototype.intersects_w3gmro$ = function (plane, out) {
+    return this.intersectsPlane_w3gmro$(plane, out);
+  };
+  RayRo.prototype.intersectsTriangle_6bb61c$ = function (v1, v2, v3, out, callback$default) {
+    if (out === void 0)
+      out = null;
+    return callback$default ? callback$default(v1, v2, v3, out) : this.intersectsTriangle_6bb61c$$default(v1, v2, v3, out);
+  };
+  RayRo.prototype.intersects_6bb61c$$default = function (v1, v2, v3, out) {
+    return this.intersectsTriangle_6bb61c$(v1, v2, v3, out);
   };
   RayRo.prototype.intersects_6bb61c$ = function (v1, v2, v3, out, callback$default) {
     if (out === void 0)
       out = null;
     return callback$default ? callback$default(v1, v2, v3, out) : this.intersects_6bb61c$$default(v1, v2, v3, out);
   };
-  RayRo.prototype.copy = function () {
-    var r = new Ray(this.origin.copy(), this.direction.copy());
+  RayRo.prototype.intersectSphere_iyq1vj$ = function (center, radius, intersection, callback$default) {
+    if (intersection === void 0)
+      intersection = null;
+    return callback$default ? callback$default(center, radius, intersection) : this.intersectSphere_iyq1vj$$default(center, radius, intersection);
+  };
+  RayRo.prototype.copy_uwler8$$default = function (origin, direction) {
+    var r = new Ray(origin.copy_y2kzbl$(), direction.copy_y2kzbl$());
     r.update();
     return r;
+  };
+  RayRo.prototype.copy_uwler8$ = function (origin, direction, callback$default) {
+    if (origin === void 0)
+      origin = this.origin;
+    if (direction === void 0)
+      direction = this.direction;
+    return callback$default ? callback$default(origin, direction) : this.copy_uwler8$$default(origin, direction);
   };
   RayRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'RayRo', interfaces: []};
   function Ray(origin, direction) {
@@ -7528,7 +8383,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.direction.set_1fv2cb$(ray.direction);
     return this;
   };
-  Ray.prototype.intersects_owlv2i$$default = function (ray, out) {
+  Ray.prototype.intersectsRay_owlv2i$$default = function (ray, out) {
     var tmp$;
     if ((tmp$ = this.origin) != null ? tmp$.equals(ray.origin) : null) {
       out != null ? out.set_1fv2cb$(this.origin) : null;
@@ -7555,7 +8410,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     Vector3$Companion_getInstance().free_9wm29k$(perp1);
     return true;
   };
-  Ray.prototype.intersects_w3gmro$ = function (plane, out) {
+  Ray.prototype.intersectsPlane_w3gmro$ = function (plane, out) {
     var tmp$, tmp$_0;
     var denom = this.direction.dot_1fv2cb$(plane.normal);
     if (denom !== 0.0) {
@@ -7573,10 +8428,10 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       tmp$_0 = false;
     return tmp$_0;
   };
-  Ray.prototype.intersects_6bb61c$$default = function (v1, v2, v3, out) {
+  Ray.prototype.intersectsTriangle_6bb61c$$default = function (v1, v2, v3, out) {
     var tmp$;
     Ray$Companion_getInstance().plane_0.set_qeea63$(v1, v2, v3);
-    if (!this.intersects_w3gmro$(Ray$Companion_getInstance().plane_0, Ray$Companion_getInstance().v3_3_0))
+    if (!this.intersectsPlane_w3gmro$(Ray$Companion_getInstance().plane_0, Ray$Companion_getInstance().v3_3_0))
       return false;
     Ray$Companion_getInstance().v3_0_0.set_1fv2cb$(v3).sub_1fv2cb$(v1);
     Ray$Companion_getInstance().v3_1_0.set_1fv2cb$(v2).sub_1fv2cb$(v1);
@@ -7600,10 +8455,48 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return tmp$;
   };
+  Ray.prototype.intersectSphere_iyq1vj$$default = function (center, radius, intersection) {
+    var tmp$, tmp$_0;
+    var len = this.direction.dot_y2kzbl$(center.x - this.origin.x, center.y - this.origin.y, center.z - this.origin.z);
+    if (len < 0.0)
+      return false;
+    var dst2 = center.dst2_y2kzbl$(this.origin.x + this.direction.x * len, this.origin.y + this.direction.y * len, this.origin.z + this.direction.z * len);
+    var r2 = radius * radius;
+    if (dst2 > r2)
+      return false;
+    var tmp$_1;
+    if ((tmp$ = intersection != null ? intersection.set_1fv2cb$(this.direction) : null) != null) {
+      var x = r2 - dst2;
+      tmp$_1 = tmp$.scl_mx4ult$(len - Math_0.sqrt(x));
+    }
+     else
+      tmp$_1 = null;
+    (tmp$_0 = tmp$_1) != null ? tmp$_0.add_1fv2cb$(this.origin) : null;
+    return true;
+  };
   Ray.prototype.clear = function () {
     this.origin.clear();
     this.direction.clear();
     this.directionInv.clear();
+  };
+  Ray.prototype.equals = function (other) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, RayRo) ? tmp$ : throwCCE();
+    if (!((tmp$_0 = this.origin) != null ? tmp$_0.equals(other.origin) : null))
+      return false;
+    if (!((tmp$_1 = this.direction) != null ? tmp$_1.equals(other.direction) : null))
+      return false;
+    if (!((tmp$_2 = this.directionInv) != null ? tmp$_2.equals(other.directionInv) : null))
+      return false;
+    return true;
+  };
+  Ray.prototype.hashCode = function () {
+    var result = this.origin.hashCode();
+    result = (31 * result | 0) + this.direction.hashCode() | 0;
+    result = (31 * result | 0) + this.directionInv.hashCode() | 0;
+    return result;
   };
   function Ray$Companion() {
     Ray$Companion_instance = this;
@@ -7633,29 +8526,18 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Ray$Companion_instance;
   }
   Ray.$metadata$ = {kind: Kind_CLASS, simpleName: 'Ray', interfaces: [RayRo, Clearable]};
-  Ray.prototype.component1 = function () {
-    return this.origin;
-  };
-  Ray.prototype.component2 = function () {
-    return this.direction;
-  };
-  Ray.prototype.copy_s18mjw$ = function (origin, direction) {
-    return new Ray(origin === void 0 ? this.origin : origin, direction === void 0 ? this.direction : direction);
-  };
-  Ray.prototype.toString = function () {
-    return 'Ray(origin=' + Kotlin.toString(this.origin) + (', direction=' + Kotlin.toString(this.direction)) + ')';
-  };
-  Ray.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.origin) | 0;
-    result = result * 31 + Kotlin.hashCode(this.direction) | 0;
-    return result;
-  };
-  Ray.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.origin, other.origin) && Kotlin.equals(this.direction, other.direction)))));
-  };
   function Ray2Ro() {
   }
+  Ray2Ro.prototype.copy_v3bz2s$$default = function (origin, direction) {
+    return new Ray2(origin.copy_dleff0$(), direction.copy_dleff0$());
+  };
+  Ray2Ro.prototype.copy_v3bz2s$ = function (origin, direction, callback$default) {
+    if (origin === void 0)
+      origin = this.origin;
+    if (direction === void 0)
+      direction = this.direction;
+    return callback$default ? callback$default(origin, direction) : this.copy_v3bz2s$$default(origin, direction);
+  };
   Ray2Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Ray2Ro', interfaces: []};
   function Ray2(origin, direction) {
     Ray2$Companion_getInstance();
@@ -7681,6 +8563,22 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Ray2.prototype.clear = function () {
     this.origin.clear();
     this.direction.clear();
+  };
+  Ray2.prototype.equals = function (other) {
+    var tmp$, tmp$_0, tmp$_1;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Ray2Ro) ? tmp$ : throwCCE();
+    if (!((tmp$_0 = this.origin) != null ? tmp$_0.equals(other.origin) : null))
+      return false;
+    if (!((tmp$_1 = this.direction) != null ? tmp$_1.equals(other.direction) : null))
+      return false;
+    return true;
+  };
+  Ray2.prototype.hashCode = function () {
+    var result = this.origin.hashCode();
+    result = (31 * result | 0) + this.direction.hashCode() | 0;
+    return result;
   };
   function Ray2$Companion() {
     Ray2$Companion_instance = this;
@@ -7728,34 +8626,46 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Ray2$Companion_instance;
   }
   Ray2.$metadata$ = {kind: Kind_CLASS, simpleName: 'Ray2', interfaces: [Ray2Ro, Clearable]};
-  Ray2.prototype.component1 = function () {
-    return this.origin;
-  };
-  Ray2.prototype.component2 = function () {
-    return this.direction;
-  };
-  Ray2.prototype.copy_rirrik$ = function (origin, direction) {
-    return new Ray2(origin === void 0 ? this.origin : origin, direction === void 0 ? this.direction : direction);
-  };
-  Ray2.prototype.toString = function () {
-    return 'Ray2(origin=' + Kotlin.toString(this.origin) + (', direction=' + Kotlin.toString(this.direction)) + ')';
-  };
-  Ray2.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.origin) | 0;
-    result = result * 31 + Kotlin.hashCode(this.direction) | 0;
-    return result;
-  };
-  Ray2.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.origin, other.origin) && Kotlin.equals(this.direction, other.direction)))));
-  };
   function RectangleRo() {
+    RectangleRo$Companion_getInstance();
   }
-  RectangleRo.prototype.intersects_y8xsj$ = function (r, out, callback$default) {
+  RectangleRo.prototype.intersects_owlv2i$ = function (r, out, callback$default) {
     if (out === void 0)
       out = null;
-    return callback$default ? callback$default(r, out) : this.intersects_y8xsj$$default(r, out);
+    return callback$default ? callback$default(r, out) : this.intersects_owlv2i$$default(r, out);
   };
+  RectangleRo.prototype.copy_7b5o5w$$default = function (x, y, width, height) {
+    return new Rectangle(x, y, width, height);
+  };
+  RectangleRo.prototype.copy_7b5o5w$ = function (x, y, width, height, callback$default) {
+    if (x === void 0)
+      x = this.x;
+    if (y === void 0)
+      y = this.y;
+    if (width === void 0)
+      width = this.width;
+    if (height === void 0)
+      height = this.height;
+    return callback$default ? callback$default(x, y, width, height) : this.copy_7b5o5w$$default(x, y, width, height);
+  };
+  RectangleRo.prototype.reduce_rw8g7s$ = function (padding) {
+    return this.reduce_7b5o5w$(padding.left, padding.top, padding.right, padding.bottom);
+  };
+  RectangleRo.prototype.reduce_7b5o5w$ = function (left, top, right, bottom) {
+    return new Rectangle(this.x + left, this.y + left, this.width - left - right, this.height - top - bottom);
+  };
+  function RectangleRo$Companion() {
+    RectangleRo$Companion_instance = this;
+    this.EMPTY = new Rectangle();
+  }
+  RectangleRo$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  var RectangleRo$Companion_instance = null;
+  function RectangleRo$Companion_getInstance() {
+    if (RectangleRo$Companion_instance === null) {
+      new RectangleRo$Companion();
+    }
+    return RectangleRo$Companion_instance;
+  }
   RectangleRo.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'RectangleRo', interfaces: []};
   function Rectangle(x, y, width, height) {
     Rectangle$Companion_getInstance();
@@ -7794,15 +8704,23 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }});
   Object.defineProperty(Rectangle.prototype, 'left', {get: function () {
     return this.x;
+  }, set: function (value) {
+    this.x = value;
   }});
   Object.defineProperty(Rectangle.prototype, 'top', {get: function () {
     return this.y;
+  }, set: function (value) {
+    this.y = value;
   }});
   Object.defineProperty(Rectangle.prototype, 'right', {get: function () {
     return this.x + this.width;
+  }, set: function (value) {
+    this.width = value - this.x;
   }});
   Object.defineProperty(Rectangle.prototype, 'bottom', {get: function () {
     return this.y + this.height;
+  }, set: function (value) {
+    this.height = value - this.y;
   }});
   Rectangle.prototype.isEmpty = function () {
     return this.width === 0.0 || this.height === 0.0;
@@ -7826,8 +8744,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.width = 0.0;
     this.height = 0.0;
   };
-  Rectangle.prototype.getPosition_9wm29l$ = function (position) {
-    return position.set_dleff0$(this.x, this.y);
+  Rectangle.prototype.getPosition_9wm29l$ = function (out) {
+    return out.set_dleff0$(this.x, this.y);
   };
   Rectangle.prototype.setPosition_9wm29l$ = function (position) {
     this.x = position.x;
@@ -7850,10 +8768,10 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Rectangle.prototype.intersects_dleff0$ = function (x, y) {
     return this.x <= x && this.x + this.width >= x && this.y <= y && this.y + this.height >= y;
   };
-  Rectangle.prototype.intersects_9wm29l$ = function (point) {
+  Rectangle.prototype.intersects_1fv330$ = function (point) {
     return this.intersects_dleff0$(point.x, point.y);
   };
-  Rectangle.prototype.intersects_y8xsj$$default = function (r, out) {
+  Rectangle.prototype.intersects_owlv2i$$default = function (r, out) {
     if (r.direction.z === 0.0)
       return false;
     var m = -r.origin.z * r.directionInv.z;
@@ -7890,20 +8808,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Rectangle.prototype.getAspectRatio = function () {
     return this.height === 0.0 ? 0.0 : this.width / this.height;
   };
-  Rectangle.prototype.getCenter_9wm29l$ = function (vector) {
-    vector.x = this.x + this.width * 0.5;
-    vector.y = this.y + this.height * 0.5;
-    return vector;
+  Rectangle.prototype.getCenter_9wm29l$ = function (out) {
+    out.x = this.x + this.width * 0.5;
+    out.y = this.y + this.height * 0.5;
+    return out;
   };
   Rectangle.prototype.setCenter_dleff0$ = function (x, y) {
     this.setPosition_dleff0$(x - this.width * 0.5, y - this.height * 0.5);
     return this;
   };
-  Rectangle.prototype.setCenter_9wm29l$ = function (position) {
+  Rectangle.prototype.setCenter_1fv330$ = function (position) {
     this.setPosition_dleff0$(position.x - this.width * 0.5, position.y - this.height * 0.5);
     return this;
   };
-  Rectangle.prototype.fitOutside_o5do7t$ = function (rect) {
+  Rectangle.prototype.fitOutside_jhujlw$ = function (rect) {
     var ratio = this.getAspectRatio();
     if (ratio > rect.getAspectRatio()) {
       this.setSize_dleff0$(rect.height * ratio, rect.height);
@@ -7914,7 +8832,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.setPosition_dleff0$(rect.x + rect.width * 0.5 - this.width * 0.5, rect.y + rect.height * 0.5 - this.height * 0.5);
     return this;
   };
-  Rectangle.prototype.fitInside_o5do7t$ = function (rect) {
+  Rectangle.prototype.fitInside_jhujlw$ = function (rect) {
     var ratio = this.getAspectRatio();
     if (ratio < rect.getAspectRatio()) {
       this.setSize_dleff0$(rect.height * ratio, rect.height);
@@ -7978,6 +8896,31 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.width = this.width * scalar;
     this.height = this.height * scalar;
   };
+  Rectangle.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, RectangleRo) ? tmp$ : throwCCE();
+    if (this.x !== other.x)
+      return false;
+    if (this.y !== other.y)
+      return false;
+    if (this.width !== other.width)
+      return false;
+    if (this.height !== other.height)
+      return false;
+    return true;
+  };
+  Rectangle.prototype.hashCode = function () {
+    var result = hashCode(this.x);
+    result = (31 * result | 0) + hashCode(this.y) | 0;
+    result = (31 * result | 0) + hashCode(this.width) | 0;
+    result = (31 * result | 0) + hashCode(this.height) | 0;
+    return result;
+  };
+  Rectangle.prototype.toString = function () {
+    return 'Rectangle(x=' + this.x + ', y=' + this.y + ', width=' + this.width + ', height=' + this.height + ')';
+  };
   function Rectangle$Companion() {
     Rectangle$Companion_instance = this;
     this.pool_0 = ClearableObjectPool_init(Rectangle$Companion$pool$lambda);
@@ -8000,35 +8943,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Rectangle$Companion_instance;
   }
   Rectangle.$metadata$ = {kind: Kind_CLASS, simpleName: 'Rectangle', interfaces: [RectangleRo, Clearable]};
-  Rectangle.prototype.component1 = function () {
-    return this.x;
-  };
-  Rectangle.prototype.component2 = function () {
-    return this.y;
-  };
-  Rectangle.prototype.component3 = function () {
-    return this.width;
-  };
-  Rectangle.prototype.component4 = function () {
-    return this.height;
-  };
-  Rectangle.prototype.copy_7b5o5w$ = function (x, y, width, height) {
-    return new Rectangle(x === void 0 ? this.x : x, y === void 0 ? this.y : y, width === void 0 ? this.width : width, height === void 0 ? this.height : height);
-  };
-  Rectangle.prototype.toString = function () {
-    return 'Rectangle(x=' + Kotlin.toString(this.x) + (', y=' + Kotlin.toString(this.y)) + (', width=' + Kotlin.toString(this.width)) + (', height=' + Kotlin.toString(this.height)) + ')';
-  };
-  Rectangle.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.x) | 0;
-    result = result * 31 + Kotlin.hashCode(this.y) | 0;
-    result = result * 31 + Kotlin.hashCode(this.width) | 0;
-    result = result * 31 + Kotlin.hashCode(this.height) | 0;
-    return result;
-  };
-  Rectangle.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.width, other.width) && Kotlin.equals(this.height, other.height)))));
-  };
   function RectangleSerializer() {
     RectangleSerializer_instance = this;
   }
@@ -8041,8 +8955,40 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Vector2Ro.prototype.component2 = function () {
     return this.y;
   };
-  Vector2Ro.prototype.copy = function () {
-    return new Vector2(this.x, this.y);
+  Object.defineProperty(Vector2Ro.prototype, 'angle', {get: function () {
+    var y = this.y;
+    var x = this.x;
+    return Math_0.atan2(y, x);
+  }});
+  Vector2Ro.prototype.plus_1fv330$ = function (other) {
+    return new Vector2(this.x + other.x, this.y + other.y);
+  };
+  Vector2Ro.prototype.minus_1fv330$ = function (other) {
+    return new Vector2(this.x - other.x, this.y - other.y);
+  };
+  Vector2Ro.prototype.times_1fv330$ = function (other) {
+    return new Vector2(this.x * other.x, this.y * other.y);
+  };
+  Vector2Ro.prototype.times_mx4ult$ = function (other) {
+    return new Vector2(this.x * other, this.y * other);
+  };
+  Vector2Ro.prototype.copy_dleff0$$default = function (x, y) {
+    return new Vector2(x, y);
+  };
+  Vector2Ro.prototype.copy_dleff0$ = function (x, y, callback$default) {
+    if (x === void 0)
+      x = this.x;
+    if (y === void 0)
+      y = this.y;
+    return callback$default ? callback$default(x, y) : this.copy_dleff0$$default(x, y);
+  };
+  Vector2Ro.prototype.toVec3_mx4ult$$default = function (z) {
+    return new Vector3(this.x, this.y, z);
+  };
+  Vector2Ro.prototype.toVec3_mx4ult$ = function (z, callback$default) {
+    if (z === void 0)
+      z = 0.0;
+    return callback$default ? callback$default(z) : this.toVec3_mx4ult$$default(z);
   };
   Vector2Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Vector2Ro', interfaces: []};
   function Vector2(x, y) {
@@ -8065,7 +9011,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.y_qdbnzc$_0 = y;
   }});
   Vector2.prototype.len = function () {
-    return Math_0.sqrt(this.x * this.x + this.y * this.y);
+    var x = this.x * this.x + this.y * this.y;
+    return Math_0.sqrt(x);
   };
   Vector2.prototype.len2 = function () {
     return this.x * this.x + this.y * this.y;
@@ -8130,29 +9077,31 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this;
   };
   Vector2.prototype.dst_1fv330$ = function (v) {
-    var x_d = v.x - this.x;
-    var y_d = v.y - this.y;
-    return Math_0.sqrt(x_d * x_d + y_d * y_d);
+    var xD = v.x - this.x;
+    var yD = v.y - this.y;
+    var x = xD * xD + yD * yD;
+    return Math_0.sqrt(x);
   };
   Vector2.prototype.dst_dleff0$ = function (x, y) {
-    var x_d = x - this.x;
-    var y_d = y - this.y;
-    return Math_0.sqrt(x_d * x_d + y_d * y_d);
+    var xD = x - this.x;
+    var yD = y - this.y;
+    var x_0 = xD * xD + yD * yD;
+    return Math_0.sqrt(x_0);
   };
   Vector2.prototype.dst2_1fv330$ = function (v) {
-    var x_d = v.x - this.x;
-    var y_d = v.y - this.y;
-    return x_d * x_d + y_d * y_d;
+    var xD = v.x - this.x;
+    var yD = v.y - this.y;
+    return xD * xD + yD * yD;
   };
   Vector2.prototype.dst2_dleff0$ = function (x, y) {
-    var x_d = x - this.x;
-    var y_d = y - this.y;
-    return x_d * x_d + y_d * y_d;
+    var xD = x - this.x;
+    var yD = y - this.y;
+    return xD * xD + yD * yD;
   };
   Vector2.prototype.manhattanDst_1fv330$ = function (v) {
-    var x_d = v.x - this.x;
-    var y_d = v.y - this.y;
-    return (x_d < 0.0 ? -x_d : x_d) + (y_d < 0.0 ? -y_d : y_d);
+    var xD = v.x - this.x;
+    var yD = v.y - this.y;
+    return Math_0.abs(xD) + Math_0.abs(yD);
   };
   Vector2.prototype.limit_mx4ult$ = function (limit) {
     if (this.len2() > limit * limit) {
@@ -8162,8 +9111,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this;
   };
   Vector2.prototype.random = function () {
-    this.x = MathUtils_getInstance().random() * 2.0 - 1.0;
-    this.y = MathUtils_getInstance().random() * 2.0 - 1.0;
+    this.x = Random.Default.nextFloat() * 2.0 - 1.0;
+    this.y = Random.Default.nextFloat() * 2.0 - 1.0;
     return this;
   };
   Vector2.prototype.clamp_dleff0$ = function (min, max) {
@@ -8190,20 +9139,22 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Vector2.prototype.crs_dleff0$ = function (x, y) {
     return this.x * y - this.y * x;
   };
-  Vector2.prototype.angleRad = function () {
-    return MathUtils_getInstance().atan2_dleff0$(this.y, this.x);
-  };
-  Vector2.prototype.angleRad_1fv330$ = function (reference) {
-    return MathUtils_getInstance().atan2_dleff0$(this.crs_1fv330$(reference), this.dot_1fv330$(reference));
+  Vector2.prototype.angle_1fv330$ = function (reference) {
+    var y = this.crs_1fv330$(reference);
+    var x = this.dot_1fv330$(reference);
+    return Math_0.atan2(y, x);
   };
   Vector2.prototype.setAngleRad_mx4ult$ = function (radians) {
     this.set_dleff0$(this.len(), 0.0);
-    this.rotateRad_mx4ult$(radians);
+    this.rotate_mx4ult$(radians);
     return this;
   };
   Vector2.prototype.rotateRad_mx4ult$ = function (radians) {
-    var cos = MathUtils_getInstance().cos_mx4ult$(radians);
-    var sin = MathUtils_getInstance().sin_mx4ult$(radians);
+    return this.rotate_mx4ult$(radians);
+  };
+  Vector2.prototype.rotate_mx4ult$ = function (radians) {
+    var cos = Math_0.cos(radians);
+    var sin = Math_0.sin(radians);
     var newX = this.x * cos - this.y * sin;
     var newY = this.x * sin + this.y * cos;
     this.x = newX;
@@ -8228,20 +9179,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Vector2.prototype.epsilonEquals_f37ny8$ = function (other, epsilon) {
     if (other == null)
       return false;
-    var value = other.x - this.x;
-    if ((value < 0.0 ? -value : value) > epsilon)
+    var x = other.x - this.x;
+    if (Math_0.abs(x) > epsilon)
       return false;
-    var value_0 = other.y - this.y;
-    if ((value_0 < 0.0 ? -value_0 : value_0) > epsilon)
+    var x_0 = other.y - this.y;
+    if (Math_0.abs(x_0) > epsilon)
       return false;
     return true;
   };
   Vector2.prototype.epsilonEquals_y2kzbl$ = function (x, y, epsilon) {
-    var value = x - this.x;
-    if ((value < 0.0 ? -value : value) > epsilon)
+    var x_0 = x - this.x;
+    if (Math_0.abs(x_0) > epsilon)
       return false;
-    var value_0 = y - this.y;
-    if ((value_0 < 0.0 ? -value_0 : value_0) > epsilon)
+    var x_1 = y - this.y;
+    if (Math_0.abs(x_1) > epsilon)
       return false;
     return true;
   };
@@ -8249,8 +9200,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.isUnit_mx4ult$(1.0E-9);
   };
   Vector2.prototype.isUnit_mx4ult$ = function (margin) {
-    var value = this.len2() - 1.0;
-    return (value < 0.0 ? -value : value) < margin;
+    var x = this.len2() - 1.0;
+    return Math_0.abs(x) < margin;
   };
   Vector2.prototype.isZero = function () {
     return this.x === 0.0 && this.y === 0.0;
@@ -8301,6 +9252,25 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Vector2.prototype.free = function () {
     Vector2$Companion_getInstance().pool_0.free_11rb$(this);
   };
+  Vector2.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Vector2Ro) ? tmp$ : throwCCE();
+    if (this.x !== other.x)
+      return false;
+    if (this.y !== other.y)
+      return false;
+    return true;
+  };
+  Vector2.prototype.hashCode = function () {
+    var result = hashCode(this.x);
+    result = (31 * result | 0) + hashCode(this.y) | 0;
+    return result;
+  };
+  Vector2.prototype.toString = function () {
+    return 'Vector2(x=' + this.x + ', y=' + this.y + ')';
+  };
   function Vector2$Companion() {
     Vector2$Companion_instance = this;
     this.X = new Vector2(1.0, 0.0);
@@ -8309,7 +9279,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.pool_0 = ClearableObjectPool_init(Vector2$Companion$pool$lambda);
   }
   Vector2$Companion.prototype.len_dleff0$ = function (x, y) {
-    return Math_0.sqrt(x * x + y * y);
+    var x_0 = x * x + y * y;
+    return Math_0.sqrt(x_0);
   };
   Vector2$Companion.prototype.len2_dleff0$ = function (x, y) {
     return x * x + y * y;
@@ -8318,14 +9289,20 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return x1 * x2 + y1 * y2;
   };
   Vector2$Companion.prototype.dst_7b5o5w$ = function (x1, y1, x2, y2) {
-    var x_d = x2 - x1;
-    var y_d = y2 - y1;
-    return Math_0.sqrt(x_d * x_d + y_d * y_d);
+    var xD = x2 - x1;
+    var yD = y2 - y1;
+    var x = xD * xD + yD * yD;
+    return Math_0.sqrt(x);
+  };
+  Vector2$Companion.prototype.manhattanDst_7b5o5w$ = function (x1, y1, x2, y2) {
+    var xD = x2 - x1;
+    var yD = y2 - y1;
+    return Math_0.abs(xD) + Math_0.abs(yD);
   };
   Vector2$Companion.prototype.dst2_7b5o5w$ = function (x1, y1, x2, y2) {
-    var x_d = x2 - x1;
-    var y_d = y2 - y1;
-    return x_d * x_d + y_d * y_d;
+    var xD = x2 - x1;
+    var yD = y2 - y1;
+    return xD * xD + yD * yD;
   };
   Vector2$Companion.prototype.obtain = function () {
     return this.pool_0.obtain();
@@ -8345,27 +9322,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Vector2$Companion_instance;
   }
   Vector2.$metadata$ = {kind: Kind_CLASS, simpleName: 'Vector2', interfaces: [Vector2Ro, Clearable]};
-  Vector2.prototype.component1 = function () {
-    return this.x;
-  };
-  Vector2.prototype.component2 = function () {
-    return this.y;
-  };
-  Vector2.prototype.copy_dleff0$ = function (x, y) {
-    return new Vector2(x === void 0 ? this.x : x, y === void 0 ? this.y : y);
-  };
-  Vector2.prototype.toString = function () {
-    return 'Vector2(x=' + Kotlin.toString(this.x) + (', y=' + Kotlin.toString(this.y)) + ')';
-  };
-  Vector2.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.x) | 0;
-    result = result * 31 + Kotlin.hashCode(this.y) | 0;
-    return result;
-  };
-  Vector2.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y)))));
-  };
   function Vector2Serializer() {
     Vector2Serializer_instance = this;
   }
@@ -8396,8 +9352,32 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       epsilon = 1.0E-4;
     return callback$default ? callback$default(x, y, z, epsilon) : this.closeTo_7b5o5w$$default(x, y, z, epsilon);
   };
-  Vector3Ro.prototype.copy = function () {
-    return new Vector3(this.x, this.y, this.z);
+  Vector3Ro.prototype.plus_1fv2cb$ = function (other) {
+    return new Vector3(this.x + other.x, this.y + other.y, this.z + other.z);
+  };
+  Vector3Ro.prototype.minus_1fv2cb$ = function (other) {
+    return new Vector3(this.x - other.x, this.y - other.y, this.z - other.z);
+  };
+  Vector3Ro.prototype.times_1fv2cb$ = function (other) {
+    return new Vector3(this.x * other.x, this.y * other.y, this.z * other.z);
+  };
+  Vector3Ro.prototype.times_mx4ult$ = function (other) {
+    return new Vector3(this.x * other, this.y * other, this.z * other);
+  };
+  Vector3Ro.prototype.copy_y2kzbl$$default = function (x, y, z) {
+    return new Vector3(x, y, z);
+  };
+  Vector3Ro.prototype.copy_y2kzbl$ = function (x, y, z, callback$default) {
+    if (x === void 0)
+      x = this.x;
+    if (y === void 0)
+      y = this.y;
+    if (z === void 0)
+      z = this.z;
+    return callback$default ? callback$default(x, y, z) : this.copy_y2kzbl$$default(x, y, z);
+  };
+  Vector3Ro.prototype.toVec2 = function () {
+    return new Vector2(this.x, this.y);
   };
   Vector3Ro.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Vector3Ro', interfaces: []};
   function Vector3(x, y, z) {
@@ -8472,7 +9452,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.set_y2kzbl$(this.x * vx, this.y * vy, this.z * vz);
   };
   Vector3.prototype.len = function () {
-    return Math_0.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+    var x = this.x * this.x + this.y * this.y + this.z * this.z;
+    return Math_0.sqrt(x);
   };
   Vector3.prototype.len_mx4ult$ = function (value) {
     return this.nor().scl_mx4ult$(value);
@@ -8487,13 +9468,15 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var a = vector.x - this.x;
     var b = vector.y - this.y;
     var c = vector.z - this.z;
-    return Math_0.sqrt(a * a + b * b + c * c);
+    var x = a * a + b * b + c * c;
+    return Math_0.sqrt(x);
   };
   Vector3.prototype.dst_y2kzbl$ = function (x, y, z) {
     var a = x - this.x;
     var b = y - this.y;
     var c = z - this.z;
-    return Math_0.sqrt(a * a + b * b + c * c);
+    var x_0 = a * a + b * b + c * c;
+    return Math_0.sqrt(x_0);
   };
   Vector3.prototype.dst2_1fv2cb$ = function (point) {
     var a = point.x - this.x;
@@ -8538,11 +9521,11 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   Vector3.prototype.mul_pekfyx$ = function (matrix) {
     var lMat = matrix.values;
-    return this.set_y2kzbl$(this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M00) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M01) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M02), this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M10) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M11) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M12), this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M20) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M21) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M22));
+    return this.set_y2kzbl$(this.x * lMat.get_za3lpa$(0) + this.y * lMat.get_za3lpa$(3) + this.z * lMat.get_za3lpa$(6), this.x * lMat.get_za3lpa$(1) + this.y * lMat.get_za3lpa$(4) + this.z * lMat.get_za3lpa$(7), this.x * lMat.get_za3lpa$(2) + this.y * lMat.get_za3lpa$(5) + this.z * lMat.get_za3lpa$(8));
   };
   Vector3.prototype.traMul_pekfyx$ = function (matrix) {
     var lMat = matrix.values;
-    return this.set_y2kzbl$(this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M00) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M10) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M20), this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M01) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M11) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M21), this.x * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M02) + this.y * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M12) + this.z * lMat.get_za3lpa$(Matrix3$Companion_getInstance().M22));
+    return this.set_y2kzbl$(this.x * lMat.get_za3lpa$(0) + this.y * lMat.get_za3lpa$(1) + this.z * lMat.get_za3lpa$(2), this.x * lMat.get_za3lpa$(3) + this.y * lMat.get_za3lpa$(4) + this.z * lMat.get_za3lpa$(5), this.x * lMat.get_za3lpa$(6) + this.y * lMat.get_za3lpa$(7) + this.z * lMat.get_za3lpa$(8));
   };
   Vector3.prototype.mul_qe7e4j$ = function (quat) {
     return quat.transform_9wm29k$(this);
@@ -8570,8 +9553,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.mul_pekf88$(Vector3$Companion_getInstance().tmpMat_0);
   };
   Vector3.prototype.isUnit_mx4ult$$default = function (margin) {
-    var value = this.len2() - 1.0;
-    return (value < 0.0 ? -value : value) < margin;
+    var x = this.len2() - 1.0;
+    return Math_0.abs(x) < margin;
   };
   Vector3.prototype.isZero = function () {
     return this.x === 0.0 && this.y === 0.0 && this.z === 0.0;
@@ -8623,13 +9606,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return this.lerp_pz1gqy$(target, alpha);
     var theta0 = Math_0.acos(dot);
     var theta = theta0 * alpha;
-    var st = MathUtils_getInstance().sin_mx4ult$(theta);
+    var st = Math_0.sin(theta);
     var tx = target.x - this.x * dot;
     var ty = target.y - this.y * dot;
     var tz = target.z - this.z * dot;
     var l2 = tx * tx + ty * ty + tz * tz;
     var dl = st * (l2 < 1.0E-4 ? 1.0 : 1.0 / Math_0.sqrt(l2));
-    return this.scl_mx4ult$(MathUtils_getInstance().cos_mx4ult$(theta)).add_y2kzbl$(tx * dl, ty * dl, tz * dl).nor();
+    return this.scl_mx4ult$(Math_0.cos(theta)).add_y2kzbl$(tx * dl, ty * dl, tz * dl).nor();
   };
   Vector3.prototype.limit_mx4ult$ = function (limit) {
     if (this.len2() > limit * limit)
@@ -8637,9 +9620,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this;
   };
   Vector3.prototype.random = function () {
-    this.x = MathUtils_getInstance().random() * 2.0 - 1.0;
-    this.y = MathUtils_getInstance().random() * 2.0 - 1.0;
-    this.z = MathUtils_getInstance().random() * 2.0 - 1.0;
+    this.x = Random.Default.nextFloat() * 2.0 - 1.0;
+    this.y = Random.Default.nextFloat() * 2.0 - 1.0;
+    this.z = Random.Default.nextFloat() * 2.0 - 1.0;
     return this;
   };
   Vector3.prototype.clamp_dleff0$ = function (min, max) {
@@ -8655,26 +9638,26 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Vector3.prototype.closeTo_7aight$$default = function (other, epsilon) {
     if (other == null)
       return false;
-    var value = other.x - this.x;
-    if ((value < 0.0 ? -value : value) > epsilon)
+    var x = other.x - this.x;
+    if (Math_0.abs(x) > epsilon)
       return false;
-    var value_0 = other.y - this.y;
-    if ((value_0 < 0.0 ? -value_0 : value_0) > epsilon)
+    var x_0 = other.y - this.y;
+    if (Math_0.abs(x_0) > epsilon)
       return false;
-    var value_1 = other.z - this.z;
-    if ((value_1 < 0.0 ? -value_1 : value_1) > epsilon)
+    var x_1 = other.z - this.z;
+    if (Math_0.abs(x_1) > epsilon)
       return false;
     return true;
   };
   Vector3.prototype.closeTo_7b5o5w$$default = function (x, y, z, epsilon) {
-    var value = x - this.x;
-    if ((value < 0.0 ? -value : value) > epsilon)
+    var x_0 = x - this.x;
+    if (Math_0.abs(x_0) > epsilon)
       return false;
-    var value_0 = y - this.y;
-    if ((value_0 < 0.0 ? -value_0 : value_0) > epsilon)
+    var x_1 = y - this.y;
+    if (Math_0.abs(x_1) > epsilon)
       return false;
-    var value_1 = z - this.z;
-    if ((value_1 < 0.0 ? -value_1 : value_1) > epsilon)
+    var x_2 = z - this.z;
+    if (Math_0.abs(x_2) > epsilon)
       return false;
     return true;
   };
@@ -8685,6 +9668,28 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   };
   Vector3.prototype.free = function () {
     Vector3$Companion_getInstance().pool_0.free_11rb$(this);
+  };
+  Vector3.prototype.equals = function (other) {
+    var tmp$;
+    if (this === other)
+      return true;
+    alwaysTrue(tmp$ = other, Vector3Ro) ? tmp$ : throwCCE();
+    if (this.x !== other.x)
+      return false;
+    if (this.y !== other.y)
+      return false;
+    if (this.z !== other.z)
+      return false;
+    return true;
+  };
+  Vector3.prototype.hashCode = function () {
+    var result = hashCode(this.x);
+    result = (31 * result | 0) + hashCode(this.y) | 0;
+    result = (31 * result | 0) + hashCode(this.z) | 0;
+    return result;
+  };
+  Vector3.prototype.toString = function () {
+    return 'Vector3(x=' + this.x + ', y=' + this.y + ', z=' + this.z + ')';
   };
   function Vector3$Companion() {
     Vector3$Companion_instance = this;
@@ -8700,7 +9705,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.pool_0 = ClearableObjectPool_init(Vector3$Companion$pool$lambda);
   }
   Vector3$Companion.prototype.len_y2kzbl$ = function (x, y, z) {
-    return Math_0.sqrt(x * x + y * y + z * z);
+    var x_0 = x * x + y * y + z * z;
+    return Math_0.sqrt(x_0);
   };
   Vector3$Companion.prototype.len2_y2kzbl$ = function (x, y, z) {
     return x * x + y * y + z * z;
@@ -8709,7 +9715,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var a = x2 - x1;
     var b = y2 - y1;
     var c = z2 - z1;
-    return Math_0.sqrt(a * a + b * b + c * c);
+    var x = a * a + b * b + c * c;
+    return Math_0.sqrt(x);
   };
   Vector3$Companion.prototype.dst2_w8lrqs$ = function (x1, y1, z1, x2, y2, z2) {
     var a = x2 - x1;
@@ -8738,31 +9745,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return Vector3$Companion_instance;
   }
   Vector3.$metadata$ = {kind: Kind_CLASS, simpleName: 'Vector3', interfaces: [Vector3Ro, Clearable]};
-  Vector3.prototype.component1 = function () {
-    return this.x;
-  };
-  Vector3.prototype.component2 = function () {
-    return this.y;
-  };
-  Vector3.prototype.component3 = function () {
-    return this.z;
-  };
-  Vector3.prototype.copy_y2kzbl$ = function (x, y, z) {
-    return new Vector3(x === void 0 ? this.x : x, y === void 0 ? this.y : y, z === void 0 ? this.z : z);
-  };
-  Vector3.prototype.toString = function () {
-    return 'Vector3(x=' + Kotlin.toString(this.x) + (', y=' + Kotlin.toString(this.y)) + (', z=' + Kotlin.toString(this.z)) + ')';
-  };
-  Vector3.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.x) | 0;
-    result = result * 31 + Kotlin.hashCode(this.y) | 0;
-    result = result * 31 + Kotlin.hashCode(this.z) | 0;
-    return result;
-  };
-  Vector3.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.z, other.z)))));
-  };
   function Vector3Serializer() {
     Vector3Serializer_instance = this;
   }
@@ -8788,7 +9770,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return table;
   };
   Crc32.prototype.getValue = function () {
-    return Kotlin.Long.fromInt(this.crc_0).and(new Kotlin.Long(-1, 0));
+    return Kotlin.Long.fromInt(this.crc_0).and(L4294967295);
   };
   Crc32.prototype.reset = function () {
     this.crc_0 = 0;
@@ -8872,7 +9854,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   }
   ModTagImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ModTagImpl', interfaces: [ModTag]};
   function ModTagWatch() {
-    this.crc_0 = Kotlin.Long.NEG_ONE;
+    this.crc_0 = L_1;
   }
   ModTagWatch.prototype.set_i0o3f$ = function (target) {
     if (equals(this.crc_0, target.crc))
@@ -8895,410 +9877,36 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return true;
   };
   ModTagWatch.prototype.clear = function () {
-    this.crc_0 = Kotlin.Long.NEG_ONE;
+    this.crc_0 = L_1;
   };
   ModTagWatch.$metadata$ = {kind: Kind_CLASS, simpleName: 'ModTagWatch', interfaces: [Clearable]};
   function Observable() {
   }
-  Observable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Observable', interfaces: []};
-  function bind($receiver, callback) {
-    return new ObservableListBinding($receiver, callback);
-  }
-  function ObservableListBinding(list, callback) {
-    this.list_0 = list;
-    this.callback_0 = callback;
-    this.list_0.added.add_trkh7z$(getCallableRef('addedHandler', function ($receiver, index, element) {
-      return $receiver.addedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.removed.add_trkh7z$(getCallableRef('removedHandler', function ($receiver, index, element) {
-      return $receiver.removedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.changed.add_trkh7z$(getCallableRef('changedHandler', function ($receiver, index, old, new_0) {
-      return $receiver.changedHandler_0(index, old, new_0), Unit;
-    }.bind(null, this)));
-    this.list_0.modified.add_trkh7z$(getCallableRef('elementModifiedHandler', function ($receiver, index, element) {
-      return $receiver.elementModifiedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.reset.add_trkh7z$(this.callback_0);
-    this.callback_0();
-  }
-  ObservableListBinding.prototype.addedHandler_0 = function (index, element) {
-    this.callback_0();
+  Observable.prototype.addBinding_o14v8n$ = function (callback) {
+    this.changed.addBinding_o14v8n$(callback);
   };
-  ObservableListBinding.prototype.removedHandler_0 = function (index, element) {
-    this.callback_0();
+  Observable.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.changed.removeBinding_o14v8n$(callback);
   };
-  ObservableListBinding.prototype.changedHandler_0 = function (index, old, new_0) {
-    this.callback_0();
-  };
-  ObservableListBinding.prototype.elementModifiedHandler_0 = function (index, element) {
-    this.callback_0();
-  };
-  ObservableListBinding.prototype.dispose = function () {
-    this.list_0.added.remove_trkh7z$(getCallableRef('addedHandler', function ($receiver, index, element) {
-      return $receiver.addedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.removed.remove_trkh7z$(getCallableRef('removedHandler', function ($receiver, index, element) {
-      return $receiver.removedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.changed.remove_trkh7z$(getCallableRef('changedHandler', function ($receiver, index, old, new_0) {
-      return $receiver.changedHandler_0(index, old, new_0), Unit;
-    }.bind(null, this)));
-    this.list_0.modified.remove_trkh7z$(getCallableRef('elementModifiedHandler', function ($receiver, index, element) {
-      return $receiver.elementModifiedHandler_0(index, element), Unit;
-    }.bind(null, this)));
-    this.list_0.reset.remove_trkh7z$(this.callback_0);
-  };
-  ObservableListBinding.$metadata$ = {kind: Kind_CLASS, simpleName: 'ObservableListBinding', interfaces: [Disposable]};
-  function JsonSerializer() {
-    JsonSerializer_instance = this;
-  }
-  JsonSerializer.prototype.read_11rb$ = function (data) {
-    return new JsonNode(data, 0, data.length);
-  };
-  JsonSerializer.prototype.write_ma9gy0$ = function (callback) {
-    return this.write_9nik4k$(callback, '\t', '\n');
-  };
-  JsonSerializer.prototype.write_9nik4k$ = function (callback, tabStr, returnStr) {
-    var buffer = new StringBuilder();
-    var writer = new JsonWriter(buffer, '', tabStr, returnStr);
-    callback(writer);
-    return buffer.toString();
-  };
-  function JsonSerializer$write$lambda$lambda(closure$to, closure$value) {
-    return function (it) {
-      closure$to.write2_6l37rg$(closure$value, it);
-      return Unit;
-    };
-  }
-  function JsonSerializer$write$lambda(closure$to, closure$value) {
-    return function (it) {
-      it.obj_qpf9uf$(true, JsonSerializer$write$lambda$lambda(closure$to, closure$value));
-      return Unit;
-    };
-  }
-  JsonSerializer.prototype.write_p3gpkk$ = function (value, to, tabStr, returnStr) {
-    return this.write_9nik4k$(JsonSerializer$write$lambda(to, value), tabStr, returnStr);
-  };
-  JsonSerializer.$metadata$ = {kind: Kind_OBJECT, simpleName: 'JsonSerializer', interfaces: [Serializer]};
-  var JsonSerializer_instance = null;
-  function JsonSerializer_getInstance() {
-    if (JsonSerializer_instance === null) {
-      new JsonSerializer();
-    }
-    return JsonSerializer_instance;
-  }
-  function JsonNode(source, fromIndex, toIndex) {
-    this.source_0 = source;
-    this._properties_0 = HashMap_init();
-    this._elements_0 = ArrayList_init();
-    this.isParsed_0 = false;
-    this.fromIndex_0 = 0;
-    this.toIndex_0 = 0;
-    this.subStr_0 = null;
-    var fromTrimmed = fromIndex;
-    var toTrimmed = toIndex;
-    while (fromTrimmed < toTrimmed && isWhitespace(this.source_0.charCodeAt(fromTrimmed))) {
-      fromTrimmed = fromTrimmed + 1 | 0;
-    }
-    while (fromTrimmed < toTrimmed && isWhitespace(this.source_0.charCodeAt(toTrimmed - 1 | 0))) {
-      toTrimmed = toTrimmed - 1 | 0;
-    }
-    this.fromIndex_0 = fromTrimmed;
-    this.toIndex_0 = toTrimmed;
-    this.subStr_0 = new SubString(this.source_0, fromTrimmed, toTrimmed);
-    this.marker_0 = 0;
-  }
-  JsonNode.prototype.parseObject_0 = function () {
-    var tmp$, tmp$_0, tmp$_1;
-    if (this.isParsed_0)
-      return;
-    this.isParsed_0 = true;
-    if (this.source_0.length === 0)
-      return;
-    var isObject = this.source_0.charCodeAt(this.fromIndex_0) === 123;
-    if (!isObject && this.source_0.charCodeAt(this.fromIndex_0) !== 91)
-      return;
-    this.marker_0 = this.fromIndex_0 + 1 | 0;
-    var tagStack = ArrayList_init();
-    while (this.marker_0 < this.toIndex_0) {
-      this.consumeWhitespace_0();
-      while (this.source_0.charCodeAt(this.marker_0) === 44) {
-        this.marker_0 = this.marker_0 + 1 | 0;
-        this.consumeWhitespace_0();
-      }
-      var char = this.source_0.charCodeAt(this.marker_0);
-      if (char === 125 || char === 93)
-        break;
-      if (!isObject || char === 34) {
-        var identifier = null;
-        if (isObject) {
-          this.marker_0 = this.marker_0 + 1 | 0;
-          var identifierStartIndex = this.marker_0;
-          while (!(this.source_0.charCodeAt(this.marker_0) === 34 && this.source_0.charCodeAt(this.marker_0 - 1 | 0) !== 92)) {
-            if (this.marker_0 >= this.toIndex_0)
-              throw Exception_init("Expected '\"', but reached end of stream");
-            this.marker_0 = this.marker_0 + 1 | 0;
-          }
-          identifier = new SubString(this.source_0, identifierStartIndex, (tmp$ = this.marker_0, this.marker_0 = tmp$ + 1 | 0, tmp$));
-        }
-        this.consumeWhitespace_0();
-        if (isObject) {
-          if (this.source_0.charCodeAt((tmp$_0 = this.marker_0, this.marker_0 = tmp$_0 + 1 | 0, tmp$_0)) !== 58)
-            throw Exception_init("Expected ':', but instead found: " + this.source_0.substring(this.marker_0, this.marker_0 + 20 | 0));
-        }
-        var valueStartIndex = this.marker_0;
-        tagStack.clear();
-        var isString = false;
-        while (this.marker_0 < this.toIndex_0) {
-          var vC = this.source_0.charCodeAt(this.marker_0);
-          if (tagStack.isEmpty() && (vC === 125 || vC === 93)) {
-            break;
-          }
-          var last = unboxChar(peek(tagStack));
-          if (last != null && vC === last && (!isString || this.source_0.charCodeAt(this.marker_0 - 1 | 0) !== 92)) {
-            pop(tagStack);
-            isString = false;
-          }
-           else if (!isString) {
-            if (vC === 123) {
-              tagStack.add_11rb$(toBoxedChar(125));
-            }
-             else if (vC === 91) {
-              tagStack.add_11rb$(toBoxedChar(93));
-            }
-             else if (vC === 39) {
-              tagStack.add_11rb$(toBoxedChar(39));
-              isString = true;
-            }
-             else if (vC === 34) {
-              tagStack.add_11rb$(toBoxedChar(34));
-              isString = true;
-            }
-          }
-          if (tagStack.isEmpty() && vC === 44) {
-            break;
-          }
-          this.marker_0 = this.marker_0 + 1 | 0;
-        }
-        if (!tagStack.isEmpty()) {
-          throw Exception_init('Expected ' + ((tmp$_1 = unboxChar(peek(tagStack))) === null ? null : String.fromCharCode(tmp$_1)) + ', but reached end of stream');
-        }
-        if (isObject) {
-          var $receiver = this._properties_0;
-          var key = ensureNotNull(identifier).toString();
-          var value = new JsonNode(this.source_0, valueStartIndex, this.marker_0);
-          $receiver.put_xwzc9p$(key, value);
-        }
-         else {
-          this._elements_0.add_11rb$(new JsonNode(this.source_0, valueStartIndex, this.marker_0));
-        }
-      }
-       else {
-        if (isObject)
-          throw Exception_init('Expected ' + '"' + ', but instead found: ' + this.source_0.substring(this.marker_0, this.marker_0 + 20 | 0));
-        else
-          throw Exception_init('Unexpected character ' + String.fromCharCode(this.source_0.charCodeAt(this.marker_0)) + '.  ' + this.source_0.substring(this.marker_0, this.marker_0 + 20 | 0));
-      }
-    }
-  };
-  JsonNode.prototype.consumeWhitespace_0 = function () {
-    while (this.marker_0 < this.toIndex_0 && isWhitespace(this.source_0.charCodeAt(this.marker_0))) {
-      this.marker_0 = this.marker_0 + 1 | 0;
-    }
-  };
-  var Map = Kotlin.kotlin.collections.Map;
-  JsonNode.prototype.contains_61zpoe$ = function (name) {
-    this.parseObject_0();
-    var $receiver = this._properties_0;
-    var tmp$;
-    return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : throwCCE()).containsKey_11rb$(name);
-  };
-  JsonNode.prototype.contains_za3lpa$ = function (index) {
-    this.parseObject_0();
-    return index < this._elements_0.size;
-  };
-  JsonNode.prototype.properties = function () {
-    this.parseObject_0();
-    return this._properties_0;
-  };
-  JsonNode.prototype.elements = function () {
-    this.parseObject_0();
-    return this._elements_0;
-  };
-  JsonNode.prototype.entries = function () {
-    this.parseObject_0();
-    return this._properties_0.entries;
-  };
-  Object.defineProperty(JsonNode.prototype, 'isNull', {get: function () {
-    return this.subStr_0.equalsStr_61zpoe$('null');
-  }});
-  JsonNode.prototype.bool = function () {
-    if (this.isNull)
-      return null;
-    return this.subStr_0.equalsStr_61zpoe$('true') || this.subStr_0.equalsStr_61zpoe$('1');
-  };
-  JsonNode.prototype.char = function () {
-    if (this.isNull)
-      return null;
-    return this.subStr_0.charAt_za3lpa$(1);
-  };
-  JsonNode.prototype.string = function () {
-    if (this.isNull)
-      return null;
-    return removeBackslashes(this.subStr_0.subSequence_vux9f0$(1, this.subStr_0.length - 1 | 0).toString());
-  };
-  JsonNode.prototype.short = function () {
-    if (this.isNull)
-      return null;
-    return toShortOrNull(this.subStr_0.toString());
-  };
-  JsonNode.prototype.int = function () {
-    if (this.isNull)
-      return null;
-    return toIntOrNull(this.subStr_0.toString());
-  };
-  JsonNode.prototype.long = function () {
-    if (this.isNull)
-      return null;
-    return toLongOrNull(this.subStr_0.toString());
-  };
-  JsonNode.prototype.float = function () {
-    var tmp$;
-    return (tmp$ = this.double()) != null ? tmp$ : null;
-  };
-  JsonNode.prototype.double = function () {
-    if (this.isNull)
-      return null;
-    return toDoubleOrNull(this.subStr_0.toString());
-  };
-  JsonNode.prototype.toString = function () {
-    return this.subStr_0.toString();
-  };
-  JsonNode.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsonNode', interfaces: [Reader]};
-  function JsonWriter(builder, indentStr, tabStr, returnStr) {
-    this.builder = builder;
-    this.indentStr = indentStr;
-    this.tabStr = tabStr;
-    this.returnStr = returnStr;
-    this.size_0 = 0;
-  }
-  JsonWriter.prototype.property_61zpoe$ = function (name) {
-    var tmp$;
-    if ((tmp$ = this.size_0, this.size_0 = tmp$ + 1 | 0, tmp$) > 0)
-      this.builder.append_gw00v9$(',' + this.returnStr);
-    this.builder.append_gw00v9$(this.indentStr);
-    this.builder.append_s8itvh$(34);
-    this.builder.append_gw00v9$(name);
-    this.builder.append_gw00v9$('": ');
-    return new JsonWriter(this.builder, this.indentStr, this.tabStr, this.returnStr);
-  };
-  JsonWriter.prototype.element = function () {
-    var tmp$;
-    if ((tmp$ = this.size_0, this.size_0 = tmp$ + 1 | 0, tmp$) > 0)
-      this.builder.append_gw00v9$(',' + this.returnStr);
-    this.builder.append_gw00v9$(this.indentStr);
-    return new JsonWriter(this.builder, this.indentStr, this.tabStr, this.returnStr);
-  };
-  JsonWriter.prototype.bool_1v8dbw$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    if (value)
-      this.builder.append_gw00v9$('true');
-    else
-      this.builder.append_gw00v9$('false');
-  };
-  JsonWriter.prototype.string_pdl1vj$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8itvh$(34);
-    this.builder.append_gw00v9$(this.escape_0(value));
-    this.builder.append_s8itvh$(34);
-  };
-  JsonWriter.prototype.int_s8ev37$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8jyv4$(value);
-  };
-  JsonWriter.prototype.long_mts6q2$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8jyv4$(value);
-  };
-  JsonWriter.prototype.float_81sz4$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8jyv4$(value);
-  };
-  JsonWriter.prototype.double_yrwdxb$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8jyv4$(value);
-  };
-  JsonWriter.prototype.char_myv2ck$ = function (value) {
-    if (value == null)
-      return this.writeNull();
-    this.builder.append_s8itvh$(34);
-    this.builder.append_s8itvh$(value);
-    this.builder.append_s8itvh$(34);
-  };
-  JsonWriter.prototype.obj_qpf9uf$ = function (complex, contents) {
-    var r = complex ? this.returnStr : ' ';
-    this.builder.append_gw00v9$('{' + r);
-    var childIndent = complex ? this.indentStr + this.tabStr : '';
-    var childWriter = new JsonWriter(this.builder, childIndent, this.tabStr, r);
-    contents(childWriter);
-    if (childWriter.size_0 > 0) {
-      this.builder.append_gw00v9$(r);
-    }
-    if (complex)
-      this.builder.append_gw00v9$(this.indentStr);
-    this.builder.append_s8itvh$(125);
-  };
-  JsonWriter.prototype.array_qpf9uf$ = function (complex, contents) {
-    var r = complex ? this.returnStr : ' ';
-    this.builder.append_gw00v9$('[' + r);
-    var childIndent = complex ? this.indentStr + this.tabStr : '';
-    var childWriter = new JsonWriter(this.builder, childIndent, this.tabStr, r);
-    contents(childWriter);
-    if (childWriter.size_0 > 0) {
-      this.builder.append_gw00v9$(r);
-    }
-    if (complex)
-      this.builder.append_gw00v9$(this.indentStr);
-    this.builder.append_s8itvh$(93);
-  };
-  JsonWriter.prototype.writeNull = function () {
-    this.builder.append_gw00v9$('null');
-  };
-  JsonWriter.prototype.escape_0 = function (value) {
-    return replace2(replace2(replace2(replace2(replace2(value, '\\', '\\\\'), '\r', '\\r'), '\n', '\\n'), '\t', '\\t'), '"', '\\"');
-  };
-  JsonWriter.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsonWriter', interfaces: [Writer]};
+  Observable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Observable', interfaces: [Bindable]};
   function Serializer() {
   }
   Serializer.prototype.read_awjrhg$ = function (data, factory) {
     var reader = this.read_11rb$(data);
     return ensureNotNull(obj(reader, factory));
   };
-  function Serializer$write$lambda$lambda(closure$to, closure$value) {
-    return function (it) {
-      closure$to.write2_6l37rg$(closure$value, it);
-      return Unit;
-    };
-  }
-  function Serializer$write$lambda(closure$to, closure$value) {
-    return function (it) {
-      it.obj_qpf9uf$(true, Serializer$write$lambda$lambda(closure$to, closure$value));
-      return Unit;
-    };
-  }
-  Serializer.prototype.write_hzsrf4$ = function (value, to) {
-    return this.write_ma9gy0$(Serializer$write$lambda(to, value));
-  };
   Serializer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Serializer', interfaces: []};
   function Reader() {
   }
+  var Map = Kotlin.kotlin.collections.Map;
+  Reader.prototype.contains_61zpoe$ = function (name) {
+    var $receiver = this.properties();
+    var tmp$;
+    return (alwaysTrue(tmp$ = $receiver, Map) ? tmp$ : throwCCE()).containsKey_11rb$(name);
+  };
+  Reader.prototype.contains_za3lpa$ = function (index) {
+    return index < this.elements().size;
+  };
   Reader.prototype.get_61zpoe$ = function (name) {
     return this.properties().get_11rb$(name);
   };
@@ -9342,8 +9950,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function arrayList_0($receiver, itemFactory) {
     var tmp$;
     var e = $receiver.elements();
-    var b = e.size;
-    var list = ArrayList_init(Math_0.max(16, b));
+    var list = ArrayList_init_0(e.size);
     tmp$ = get_lastIndex(e);
     for (var i = 0; i <= tmp$; i++) {
       list.add_11rb$(itemFactory.read_gax0m7$(e.get_za3lpa$(i)));
@@ -9395,8 +10002,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
   }
   function array$lambda$lambda(closure$to, closure$v) {
-    return function (it) {
-      closure$to.write2_6l37rg$(closure$v, it);
+    return function (it2) {
+      closure$to.write2_6l37rg$(closure$v, it2);
       return Unit;
     };
   }
@@ -9510,7 +10117,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.fromIndex = fromIndex;
     this.toIndex = toIndex;
     this.parent = parent;
-    this._properties_0 = HashMap_init();
+    this._properties_0 = stringMapOf_0([]);
     this._elements_0 = ArrayList_init();
     this.isParsed_0 = false;
     this.subStr_0 = new SubString(this.source_0, this.fromIndex, this.toIndex);
@@ -9520,6 +10127,38 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   var ElementType$COMMENT_instance;
   var ElementType$ELEMENT_instance;
   var ElementType$INSTRUCTION_instance;
+  function Bindable() {
+  }
+  Bindable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Bindable', interfaces: []};
+  function bind$ObjectLiteral(closure$callback, this$bind) {
+    this.closure$callback = closure$callback;
+    this.this$bind = this$bind;
+  }
+  bind$ObjectLiteral.prototype.dispose = function () {
+    this.this$bind.removeBinding_o14v8n$(this.closure$callback);
+  };
+  bind$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Disposable]};
+  function bind($receiver, callback) {
+    $receiver.addBinding_o14v8n$(callback);
+    callback();
+    return new bind$ObjectLiteral(callback, $receiver);
+  }
+  function MergedBinding(bindableA, bindableB) {
+    this.bindableA_0 = bindableA;
+    this.bindableB_0 = bindableB;
+  }
+  MergedBinding.prototype.addBinding_o14v8n$ = function (callback) {
+    this.bindableA_0.addBinding_o14v8n$(callback);
+    this.bindableB_0.addBinding_o14v8n$(callback);
+  };
+  MergedBinding.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.bindableA_0.removeBinding_o14v8n$(callback);
+    this.bindableB_0.removeBinding_o14v8n$(callback);
+  };
+  MergedBinding.$metadata$ = {kind: Kind_CLASS, simpleName: 'MergedBinding', interfaces: [Bindable]};
+  function or($receiver, other) {
+    return new MergedBinding($receiver, other);
+  }
   function Signal() {
   }
   Signal.prototype.add_trkh7z$ = function (handler) {
@@ -9528,7 +10167,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Signal.prototype.addOnce_trkh7z$ = function (handler) {
     this.add_onkqg$(handler, true);
   };
-  Signal.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Signal', interfaces: []};
+  Signal.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Signal', interfaces: [Bindable]};
   function SignalBase() {
     this.handlers = ArrayList_init();
     this.isOnces = ArrayList_init();
@@ -9561,9 +10200,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     return this.handlers.contains_11rb$(handler);
   };
   SignalBase.prototype.halt = function () {
-    if (this.cursor === -1)
-      throw Exception_init('This signal is not currently dispatching.');
-    this.cursor = 999999999;
+    if (this.cursor !== -1)
+      this.cursor = 999999999;
   };
   Object.defineProperty(SignalBase.prototype, 'isDispatching', {get: function () {
     return this.cursor !== -1;
@@ -9574,49 +10212,53 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       if (this.cursor !== -1)
         throw Exception_init('This signal is currently dispatching.');
       this.cursor = 0;
-      if (this.handlers.size <= 4) {
-        if (this.cursor < this.handlers.size) {
-          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-          var handler1 = this.handlers.get_za3lpa$(this.cursor);
-          if (isOnce1)
-            this.removeAt_za3lpa$(this.cursor);
-          executor(handler1);
-          this.cursor = this.cursor + 1 | 0;
+      try {
+        if (this.handlers.size <= 4) {
+          if (this.cursor < this.handlers.size) {
+            var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+            var handler1 = this.handlers.get_za3lpa$(this.cursor);
+            if (isOnce1)
+              this.removeAt_za3lpa$(this.cursor);
+            executor(handler1);
+            this.cursor = this.cursor + 1 | 0;
+          }
+          if (this.cursor < this.handlers.size) {
+            var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+            var handler2 = this.handlers.get_za3lpa$(this.cursor);
+            if (isOnce2)
+              this.removeAt_za3lpa$(this.cursor);
+            executor(handler2);
+            this.cursor = this.cursor + 1 | 0;
+          }
+          if (this.cursor < this.handlers.size) {
+            var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+            var handler3 = this.handlers.get_za3lpa$(this.cursor);
+            if (isOnce3)
+              this.removeAt_za3lpa$(this.cursor);
+            executor(handler3);
+            this.cursor = this.cursor + 1 | 0;
+          }
+          if (this.cursor < this.handlers.size) {
+            var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+            var handler4 = this.handlers.get_za3lpa$(this.cursor);
+            if (isOnce4)
+              this.removeAt_za3lpa$(this.cursor);
+            executor(handler4);
+            this.cursor = this.cursor + 1 | 0;
+          }
         }
-        if (this.cursor < this.handlers.size) {
-          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-          var handler2 = this.handlers.get_za3lpa$(this.cursor);
-          if (isOnce2)
+        while (this.cursor < this.handlers.size) {
+          var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+          var handler = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce)
             this.removeAt_za3lpa$(this.cursor);
-          executor(handler2);
-          this.cursor = this.cursor + 1 | 0;
-        }
-        if (this.cursor < this.handlers.size) {
-          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-          var handler3 = this.handlers.get_za3lpa$(this.cursor);
-          if (isOnce3)
-            this.removeAt_za3lpa$(this.cursor);
-          executor(handler3);
-          this.cursor = this.cursor + 1 | 0;
-        }
-        if (this.cursor < this.handlers.size) {
-          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-          var handler4 = this.handlers.get_za3lpa$(this.cursor);
-          if (isOnce4)
-            this.removeAt_za3lpa$(this.cursor);
-          executor(handler4);
+          executor(handler);
           this.cursor = this.cursor + 1 | 0;
         }
       }
-      while (this.cursor < this.handlers.size) {
-        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-        var handler = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce)
-          this.removeAt_za3lpa$(this.cursor);
-        executor(handler);
-        this.cursor = this.cursor + 1 | 0;
+      finally {
+        this.cursor = -1;
       }
-      this.cursor = -1;
     };
   }));
   SignalBase.prototype.clear = function () {
@@ -9634,49 +10276,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.cursor !== -1)
       throw Exception_init('This signal is currently dispatching.');
     this.cursor = 0;
-    if (this.handlers.size <= 4) {
-      if (this.cursor < this.handlers.size) {
-        var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler1 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce1)
-          this.removeAt_za3lpa$(this.cursor);
-        handler1();
-        this.cursor = this.cursor + 1 | 0;
+    try {
+      if (this.handlers.size <= 4) {
+        if (this.cursor < this.handlers.size) {
+          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler1 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce1)
+            this.removeAt_za3lpa$(this.cursor);
+          handler1();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler2 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce2)
+            this.removeAt_za3lpa$(this.cursor);
+          handler2();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler3 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce3)
+            this.removeAt_za3lpa$(this.cursor);
+          handler3();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler4 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce4)
+            this.removeAt_za3lpa$(this.cursor);
+          handler4();
+          this.cursor = this.cursor + 1 | 0;
+        }
       }
-      if (this.cursor < this.handlers.size) {
-        var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler2 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce2)
+      while (this.cursor < this.handlers.size) {
+        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+        var handler = this.handlers.get_za3lpa$(this.cursor);
+        if (isOnce)
           this.removeAt_za3lpa$(this.cursor);
-        handler2();
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler3 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce3)
-          this.removeAt_za3lpa$(this.cursor);
-        handler3();
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler4 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce4)
-          this.removeAt_za3lpa$(this.cursor);
-        handler4();
+        handler();
         this.cursor = this.cursor + 1 | 0;
       }
     }
-    while (this.cursor < this.handlers.size) {
-      var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-      var handler = this.handlers.get_za3lpa$(this.cursor);
-      if (isOnce)
-        this.removeAt_za3lpa$(this.cursor);
-      handler();
-      this.cursor = this.cursor + 1 | 0;
+    finally {
+      this.cursor = -1;
     }
-    this.cursor = -1;
+  };
+  Signal0.prototype.addBinding_o14v8n$ = function (callback) {
+    this.add_trkh7z$(callback);
+  };
+  Signal0.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.remove_trkh7z$(callback);
+  };
+  Signal0.prototype.asRo = function () {
+    return this;
   };
   Signal0.$metadata$ = {kind: Kind_CLASS, simpleName: 'Signal0', interfaces: [SignalBase]};
   function Signal1() {
@@ -9686,49 +10341,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.cursor !== -1)
       throw Exception_init('This signal is currently dispatching.');
     this.cursor = 0;
-    if (this.handlers.size <= 4) {
-      if (this.cursor < this.handlers.size) {
-        var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler1 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce1)
-          this.removeAt_za3lpa$(this.cursor);
-        handler1(p1);
-        this.cursor = this.cursor + 1 | 0;
+    try {
+      if (this.handlers.size <= 4) {
+        if (this.cursor < this.handlers.size) {
+          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler1 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce1)
+            this.removeAt_za3lpa$(this.cursor);
+          handler1(p1);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler2 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce2)
+            this.removeAt_za3lpa$(this.cursor);
+          handler2(p1);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler3 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce3)
+            this.removeAt_za3lpa$(this.cursor);
+          handler3(p1);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler4 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce4)
+            this.removeAt_za3lpa$(this.cursor);
+          handler4(p1);
+          this.cursor = this.cursor + 1 | 0;
+        }
       }
-      if (this.cursor < this.handlers.size) {
-        var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler2 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce2)
+      while (this.cursor < this.handlers.size) {
+        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+        var handler = this.handlers.get_za3lpa$(this.cursor);
+        if (isOnce)
           this.removeAt_za3lpa$(this.cursor);
-        handler2(p1);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler3 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce3)
-          this.removeAt_za3lpa$(this.cursor);
-        handler3(p1);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler4 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce4)
-          this.removeAt_za3lpa$(this.cursor);
-        handler4(p1);
+        handler(p1);
         this.cursor = this.cursor + 1 | 0;
       }
     }
-    while (this.cursor < this.handlers.size) {
-      var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-      var handler = this.handlers.get_za3lpa$(this.cursor);
-      if (isOnce)
-        this.removeAt_za3lpa$(this.cursor);
-      handler(p1);
-      this.cursor = this.cursor + 1 | 0;
+    finally {
+      this.cursor = -1;
     }
-    this.cursor = -1;
+  };
+  Signal1.prototype.addBinding_o14v8n$ = function (callback) {
+    this.add_trkh7z$(get_as1(callback));
+  };
+  Signal1.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.remove_trkh7z$(get_as1(callback));
+  };
+  Signal1.prototype.asRo = function () {
+    return this;
   };
   Signal1.$metadata$ = {kind: Kind_CLASS, simpleName: 'Signal1', interfaces: [SignalBase]};
   function Signal2() {
@@ -9738,49 +10406,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.cursor !== -1)
       throw Exception_init('This signal is currently dispatching.');
     this.cursor = 0;
-    if (this.handlers.size <= 4) {
-      if (this.cursor < this.handlers.size) {
-        var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler1 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce1)
-          this.removeAt_za3lpa$(this.cursor);
-        handler1(p1, p2);
-        this.cursor = this.cursor + 1 | 0;
+    try {
+      if (this.handlers.size <= 4) {
+        if (this.cursor < this.handlers.size) {
+          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler1 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce1)
+            this.removeAt_za3lpa$(this.cursor);
+          handler1(p1, p2);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler2 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce2)
+            this.removeAt_za3lpa$(this.cursor);
+          handler2(p1, p2);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler3 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce3)
+            this.removeAt_za3lpa$(this.cursor);
+          handler3(p1, p2);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler4 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce4)
+            this.removeAt_za3lpa$(this.cursor);
+          handler4(p1, p2);
+          this.cursor = this.cursor + 1 | 0;
+        }
       }
-      if (this.cursor < this.handlers.size) {
-        var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler2 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce2)
+      while (this.cursor < this.handlers.size) {
+        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+        var handler = this.handlers.get_za3lpa$(this.cursor);
+        if (isOnce)
           this.removeAt_za3lpa$(this.cursor);
-        handler2(p1, p2);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler3 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce3)
-          this.removeAt_za3lpa$(this.cursor);
-        handler3(p1, p2);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler4 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce4)
-          this.removeAt_za3lpa$(this.cursor);
-        handler4(p1, p2);
+        handler(p1, p2);
         this.cursor = this.cursor + 1 | 0;
       }
     }
-    while (this.cursor < this.handlers.size) {
-      var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-      var handler = this.handlers.get_za3lpa$(this.cursor);
-      if (isOnce)
-        this.removeAt_za3lpa$(this.cursor);
-      handler(p1, p2);
-      this.cursor = this.cursor + 1 | 0;
+    finally {
+      this.cursor = -1;
     }
-    this.cursor = -1;
+  };
+  Signal2.prototype.addBinding_o14v8n$ = function (callback) {
+    this.add_trkh7z$(get_as2(callback));
+  };
+  Signal2.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.remove_trkh7z$(get_as2(callback));
+  };
+  Signal2.prototype.asRo = function () {
+    return this;
   };
   Signal2.$metadata$ = {kind: Kind_CLASS, simpleName: 'Signal2', interfaces: [SignalBase]};
   function Signal3() {
@@ -9790,49 +10471,62 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.cursor !== -1)
       throw Exception_init('This signal is currently dispatching.');
     this.cursor = 0;
-    if (this.handlers.size <= 4) {
-      if (this.cursor < this.handlers.size) {
-        var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler1 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce1)
-          this.removeAt_za3lpa$(this.cursor);
-        handler1(p1, p2, p3);
-        this.cursor = this.cursor + 1 | 0;
+    try {
+      if (this.handlers.size <= 4) {
+        if (this.cursor < this.handlers.size) {
+          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler1 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce1)
+            this.removeAt_za3lpa$(this.cursor);
+          handler1(p1, p2, p3);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler2 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce2)
+            this.removeAt_za3lpa$(this.cursor);
+          handler2(p1, p2, p3);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler3 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce3)
+            this.removeAt_za3lpa$(this.cursor);
+          handler3(p1, p2, p3);
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler4 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce4)
+            this.removeAt_za3lpa$(this.cursor);
+          handler4(p1, p2, p3);
+          this.cursor = this.cursor + 1 | 0;
+        }
       }
-      if (this.cursor < this.handlers.size) {
-        var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler2 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce2)
+      while (this.cursor < this.handlers.size) {
+        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+        var handler = this.handlers.get_za3lpa$(this.cursor);
+        if (isOnce)
           this.removeAt_za3lpa$(this.cursor);
-        handler2(p1, p2, p3);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler3 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce3)
-          this.removeAt_za3lpa$(this.cursor);
-        handler3(p1, p2, p3);
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler4 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce4)
-          this.removeAt_za3lpa$(this.cursor);
-        handler4(p1, p2, p3);
+        handler(p1, p2, p3);
         this.cursor = this.cursor + 1 | 0;
       }
     }
-    while (this.cursor < this.handlers.size) {
-      var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-      var handler = this.handlers.get_za3lpa$(this.cursor);
-      if (isOnce)
-        this.removeAt_za3lpa$(this.cursor);
-      handler(p1, p2, p3);
-      this.cursor = this.cursor + 1 | 0;
+    finally {
+      this.cursor = -1;
     }
-    this.cursor = -1;
+  };
+  Signal3.prototype.addBinding_o14v8n$ = function (callback) {
+    this.add_trkh7z$(get_as3(callback));
+  };
+  Signal3.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.remove_trkh7z$(get_as3(callback));
+  };
+  Signal3.prototype.asRo = function () {
+    return this;
   };
   Signal3.$metadata$ = {kind: Kind_CLASS, simpleName: 'Signal3', interfaces: [SignalBase]};
   function Stoppable() {
@@ -9841,9 +10535,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   function Cancel() {
     this._canceled_ckkemm$_0 = false;
   }
-  Cancel.prototype.canceled = function () {
+  Object.defineProperty(Cancel.prototype, 'canceled', {get: function () {
     return this._canceled_ckkemm$_0;
-  };
+  }});
   Cancel.prototype.cancel = function () {
     this._canceled_ckkemm$_0 = true;
   };
@@ -9862,76 +10556,105 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     if (this.cursor !== -1)
       throw Exception_init('This signal is currently dispatching.');
     this.cursor = 0;
-    if (this.handlers.size <= 4) {
-      if (this.cursor < this.handlers.size) {
-        var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler1 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce1)
-          this.removeAt_za3lpa$(this.cursor);
-        handler1(p1);
-        if (p1.isStopped())
-          this.halt();
-        this.cursor = this.cursor + 1 | 0;
+    try {
+      if (this.handlers.size <= 4) {
+        if (this.cursor < this.handlers.size) {
+          var isOnce1 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler1 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce1)
+            this.removeAt_za3lpa$(this.cursor);
+          handler1(p1);
+          if (p1.isStopped())
+            this.halt();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler2 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce2)
+            this.removeAt_za3lpa$(this.cursor);
+          handler2(p1);
+          if (p1.isStopped())
+            this.halt();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler3 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce3)
+            this.removeAt_za3lpa$(this.cursor);
+          handler3(p1);
+          if (p1.isStopped())
+            this.halt();
+          this.cursor = this.cursor + 1 | 0;
+        }
+        if (this.cursor < this.handlers.size) {
+          var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
+          var handler4 = this.handlers.get_za3lpa$(this.cursor);
+          if (isOnce4)
+            this.removeAt_za3lpa$(this.cursor);
+          handler4(p1);
+          if (p1.isStopped())
+            this.halt();
+          this.cursor = this.cursor + 1 | 0;
+        }
       }
-      if (this.cursor < this.handlers.size) {
-        var isOnce2 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler2 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce2)
+      while (this.cursor < this.handlers.size) {
+        var isOnce = this.isOnces.get_za3lpa$(this.cursor);
+        var handler = this.handlers.get_za3lpa$(this.cursor);
+        if (isOnce)
           this.removeAt_za3lpa$(this.cursor);
-        handler2(p1);
-        if (p1.isStopped())
-          this.halt();
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce3 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler3 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce3)
-          this.removeAt_za3lpa$(this.cursor);
-        handler3(p1);
-        if (p1.isStopped())
-          this.halt();
-        this.cursor = this.cursor + 1 | 0;
-      }
-      if (this.cursor < this.handlers.size) {
-        var isOnce4 = this.isOnces.get_za3lpa$(this.cursor);
-        var handler4 = this.handlers.get_za3lpa$(this.cursor);
-        if (isOnce4)
-          this.removeAt_za3lpa$(this.cursor);
-        handler4(p1);
+        handler(p1);
         if (p1.isStopped())
           this.halt();
         this.cursor = this.cursor + 1 | 0;
       }
     }
-    while (this.cursor < this.handlers.size) {
-      var isOnce = this.isOnces.get_za3lpa$(this.cursor);
-      var handler = this.handlers.get_za3lpa$(this.cursor);
-      if (isOnce)
-        this.removeAt_za3lpa$(this.cursor);
-      handler(p1);
-      if (p1.isStopped())
-        this.halt();
-      this.cursor = this.cursor + 1 | 0;
+    finally {
+      this.cursor = -1;
     }
-    this.cursor = -1;
+  };
+  StoppableSignalImpl.prototype.addBinding_o14v8n$ = function (callback) {
+    this.add_trkh7z$(get_as1(callback));
+  };
+  StoppableSignalImpl.prototype.removeBinding_o14v8n$ = function (callback) {
+    this.remove_trkh7z$(get_as1(callback));
   };
   StoppableSignalImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'StoppableSignalImpl', interfaces: [StoppableSignal, SignalBase]};
-  function StringParser(data) {
+  function isDigit2($receiver) {
+    return $receiver >= 48 && $receiver <= 57;
+  }
+  function isLetter2($receiver) {
+    return $receiver >= 97 && $receiver <= 122 || ($receiver >= 65 && $receiver <= 90);
+  }
+  function isLetterOrDigit2($receiver) {
+    return isLetter2($receiver) || isDigit2($receiver);
+  }
+  var breakingChars;
+  function isBreaking($receiver) {
+    return indexOf_1(breakingChars, $receiver) >= 0;
+  }
+  function StringReader(data) {
     this.data = data;
     this.position = 0;
     this.length = this.data.length;
   }
-  Object.defineProperty(StringParser.prototype, 'hasNext', {get: function () {
+  Object.defineProperty(StringReader.prototype, 'hasNext', {get: function () {
     return this.position < this.length;
   }});
-  function StringParser$white$lambda(it) {
-    return isWhitespace(unboxChar(it));
+  function StringReader$white$lambda(it) {
+    return isWhitespace2(unboxChar(it));
   }
-  StringParser.prototype.white = function () {
-    return this.getString_akknk2$(StringParser$white$lambda);
+  StringReader.prototype.white = function () {
+    return this.getString_akknk2$(StringReader$white$lambda);
   };
-  StringParser.prototype.getBoolean = function () {
+  function StringReader$notWhite$lambda(it) {
+    return !isWhitespace2(unboxChar(it));
+  }
+  StringReader.prototype.notWhite = function () {
+    return this.getString_akknk2$(StringReader$notWhite$lambda);
+  };
+  StringReader.prototype.getBool = function () {
     var char = this.data.charCodeAt(this.position);
     if (char === 49) {
       this.position = this.position + 1 | 0;
@@ -9957,13 +10680,14 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return null;
   };
-  function StringParser$getString$lambda(it) {
+  function StringReader$getString$lambda(it) {
     return isLetterOrDigit2(unboxChar(it));
   }
-  StringParser.prototype.getString = function () {
-    return this.getString_akknk2$(StringParser$getString$lambda);
+  StringReader.prototype.getString = function () {
+    return this.getString_akknk2$(StringReader$getString$lambda);
   };
-  StringParser.prototype.getQuotedString = function () {
+  StringReader.prototype.getQuotedString = function () {
+    var tmp$;
     var foundQuoteEnd = false;
     var quoteStart = null;
     var escaped = false;
@@ -9971,7 +10695,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     while (p < this.length) {
       var it = this.data.charCodeAt(p);
       if (quoteStart == null) {
-        if (!isWhitespace(it))
+        if (!isWhitespace2(it))
           if (it === 34 || it === 39) {
             quoteStart = it;
           }
@@ -10000,13 +10724,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       var endIndex = p - 1 | 0;
       var subString = $receiver.substring(startIndex, endIndex);
       this.position = p;
-      return subString;
+      tmp$ = subString;
     }
-     else {
-      return null;
-    }
+     else
+      tmp$ = null;
+    return tmp$;
   };
-  StringParser.prototype.getString_akknk2$ = function (predicate) {
+  StringReader.prototype.getString_akknk2$ = function (predicate) {
     var tmp$ = this.data;
     var mark = this.position;
     while (this.position < this.length && predicate(toBoxedChar(this.data.charCodeAt(this.position)))) {
@@ -10015,7 +10739,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     var endIndex = this.position;
     return tmp$.substring(mark, endIndex);
   };
-  StringParser.prototype.getDouble = function () {
+  StringReader.prototype.getDouble = function () {
     var p = this.position;
     var foundDecimalMark = false;
     while (p < this.length) {
@@ -10041,11 +10765,11 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.position = p;
     return toDoubleOrNull(subString);
   };
-  StringParser.prototype.getFloat = function () {
+  StringReader.prototype.getFloat = function () {
     var tmp$;
     return (tmp$ = this.getDouble()) != null ? tmp$ : null;
   };
-  StringParser.prototype.getInt = function () {
+  StringReader.prototype.getInt = function () {
     var p = this.position;
     while (p < this.length) {
       var it = this.data.charCodeAt(p);
@@ -10065,13 +10789,13 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.position = p;
     return toIntOrNull(subString);
   };
-  StringParser.prototype.getChar = function () {
+  StringReader.prototype.getChar = function () {
     var tmp$;
     if (this.position >= this.length)
       return null;
     return toBoxedChar(this.data.charCodeAt((tmp$ = this.position, this.position = tmp$ + 1 | 0, tmp$)));
   };
-  StringParser.prototype.consumeString_ivxn3r$ = function (string, ignoreCase) {
+  StringReader.prototype.consumeString_ivxn3r$ = function (string, ignoreCase) {
     if (ignoreCase === void 0)
       ignoreCase = false;
     var n = string.length;
@@ -10104,30 +10828,30 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     this.position = p;
     return true;
   };
-  StringParser.prototype.consumeThrough_61zpoe$ = function (string) {
+  StringReader.prototype.consumeThrough_61zpoe$ = function (string) {
     var index = indexOf(this.data, string, this.position);
     if (index === -1)
       return false;
     this.position = index + string.length | 0;
     return true;
   };
-  StringParser.prototype.consumeThrough_s8itvh$ = function (char) {
+  StringReader.prototype.consumeThrough_s8itvh$ = function (char) {
     var index = indexOf_0(this.data, char, this.position);
     if (index === -1)
       return false;
     this.position = index + 1 | 0;
     return true;
   };
-  function StringParser$readLine$lambda(it) {
+  function StringReader$readLine$lambda(it) {
     return unboxChar(it) !== 13 && unboxChar(it) !== 10;
   }
-  StringParser.prototype.readLine = function () {
-    var str = this.getString_akknk2$(StringParser$readLine$lambda);
+  StringReader.prototype.readLine = function () {
+    var str = this.getString_akknk2$(StringReader$readLine$lambda);
     this.consumeChar_s8itvh$(13);
     this.consumeChar_s8itvh$(10);
     return str;
   };
-  StringParser.prototype.consumeChar_s8itvh$ = function (char) {
+  StringReader.prototype.consumeChar_s8itvh$ = function (char) {
     var mark = this.position;
     while (true) {
       var tmp$ = this.position < this.length;
@@ -10140,7 +10864,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return mark < this.position;
   };
-  StringParser.prototype.consumeChars_61zpoe$ = function (chars) {
+  StringReader.prototype.consumeChars_61zpoe$ = function (chars) {
     var mark = this.position;
     while (true) {
       var tmp$ = this.position < this.length;
@@ -10153,7 +10877,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
     }
     return mark < this.position;
   };
-  StringParser.prototype.consumeWhile_akknk2$ = defineInlineFunction('AcornUtils.com.acornui.string.StringParser.consumeWhile_akknk2$', wrapFunction(function () {
+  StringReader.prototype.consumeWhile_akknk2$ = defineInlineFunction('AcornUtils.com.acornui.string.StringReader.consumeWhile_akknk2$', wrapFunction(function () {
     var toBoxedChar = Kotlin.toBoxedChar;
     return function (predicate) {
       var mark = this.position;
@@ -10163,302 +10887,43 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
       return mark;
     };
   }));
-  StringParser.prototype.reset = function () {
+  StringReader.prototype.reset = function () {
     this.position = 0;
   };
-  StringParser.$metadata$ = {kind: Kind_CLASS, simpleName: 'StringParser', interfaces: []};
-  function SubString(target, from, to) {
-    SubString$Companion_getInstance();
-    if (from === void 0)
-      from = 0;
-    if (to === void 0)
-      to = target.length;
-    this.target_0 = target;
-    this.from_0 = from;
-    this.to_0 = to;
-    this.hashCode_j41gqr$_0 = lazy(SubString$hashCode$lambda(this));
-  }
-  Object.defineProperty(SubString.prototype, 'length', {get: function () {
-    return this.to_0 - this.from_0 | 0;
-  }});
-  SubString.prototype.charAt_za3lpa$ = function (index) {
-    return toBoxedChar(this.target_0.charCodeAt(index + this.from_0 | 0));
-  };
-  SubString.prototype.subSequence_vux9f0$ = function (start, end) {
-    var tmp$ = this.target_0;
-    var tmp$_0 = start + this.from_0 | 0;
-    var b = this.length;
-    return new SubString(tmp$, tmp$_0, Math_0.min(end, b) + this.from_0 | 0);
-  };
-  SubString.prototype.endsWith_61zpoe$ = function (suffix) {
-    return this.startsWith_bm4lxs$(suffix, this.length - suffix.length | 0);
-  };
-  SubString.prototype.startsWith_bm4lxs$ = function (prefix, offset) {
-    if (offset === void 0)
-      offset = 0;
-    var tmp$, tmp$_0;
-    var to = offset;
-    var po = 0;
-    var pc = prefix.length;
-    if (offset < 0 || offset > (this.length - pc | 0)) {
-      return false;
-    }
-    while ((pc = pc - 1 | 0, pc) >= 0) {
-      if (unboxChar(this.charAt_za3lpa$((tmp$ = to, to = tmp$ + 1 | 0, tmp$))) !== prefix.charCodeAt((tmp$_0 = po, po = tmp$_0 + 1 | 0, tmp$_0))) {
-        return false;
-      }
-    }
-    return true;
-  };
-  SubString.prototype.indexOf_s9u7hn$ = function (ch, fromIndex) {
-    if (fromIndex === void 0)
-      fromIndex = 0;
-    var tmp$;
-    var f = fromIndex;
-    var max = this.length;
-    if (f < 0) {
-      f = 0;
-    }
-     else if (f >= max) {
-      return -1;
-    }
-    tmp$ = max - 1 | 0;
-    for (var i = f; i <= tmp$; i++) {
-      if (unboxChar(this.charAt_za3lpa$(i)) === ch) {
-        return i;
-      }
-    }
-    return -1;
-  };
-  SubString.prototype.lastIndexOf_s9u7hn$ = function (ch, fromIndex) {
-    if (fromIndex === void 0)
-      fromIndex = this.length - 1 | 0;
-    var b = this.length - 1 | 0;
-    var i = Math_0.min(fromIndex, b);
-    while (i >= 0) {
-      if (unboxChar(this.charAt_za3lpa$(i)) === ch) {
-        return i;
-      }
-      i = i - 1 | 0;
-    }
-    return -1;
-  };
-  SubString.prototype.indexOf_61zpoe$ = function (str) {
-    return this.indexOf_bm4lxs$(str, 0);
-  };
-  SubString.prototype.indexOf_bm4lxs$ = function (str, fromIndex) {
-    return SubString$Companion_getInstance().indexOf_a1f306$(this, 0, this.length, str, 0, str.length, fromIndex);
-  };
-  SubString.prototype.lastIndexOf_61zpoe$ = function (str) {
-    return this.lastIndexOf_bm4lxs$(str, this.length);
-  };
-  SubString.prototype.lastIndexOf_bm4lxs$ = function (str, fromIndex) {
-    return SubString$Companion_getInstance().lastIndexOf_a1f306$(this, 0, this.length, str, 0, str.length, fromIndex);
-  };
-  SubString.prototype.compareTo_61zpoe$ = function (other) {
-    var len1 = this.to_0 - this.from_0 | 0;
-    var len2 = other.length;
-    var lim = Math_0.min(len1, len2);
-    var k = 0;
-    while (k < lim) {
-      var c1 = this.target_0.charCodeAt(k + this.from_0 | 0);
-      var c2 = other.charCodeAt(k);
-      if (c1 !== c2) {
-        return (c1 | 0) - (c2 | 0) | 0;
-      }
-      k = k + 1 | 0;
-    }
-    return len1 - len2 | 0;
-  };
-  SubString.prototype.compareTo_11rb$ = function (other) {
-    var len1 = this.to_0 - this.from_0 | 0;
-    var len2 = other.length;
-    var lim = Math_0.min(len1, len2);
-    var k = 0;
-    while (k < lim) {
-      var c1 = this.target_0.charCodeAt(k + this.from_0 | 0);
-      var c2 = unboxChar(other.charAt_za3lpa$(k));
-      if (c1 !== c2) {
-        return (c1 | 0) - (c2 | 0) | 0;
-      }
-      k = k + 1 | 0;
-    }
-    return len1 - len2 | 0;
-  };
-  SubString.prototype.equalsStr_61zpoe$ = function (other) {
-    var tmp$;
-    var n = this.to_0 - this.from_0 | 0;
-    if (n === other.length) {
-      var i = 0;
-      while ((tmp$ = n, n = tmp$ - 1 | 0, tmp$) > 0) {
-        if (this.target_0.charCodeAt(i + this.from_0 | 0) !== other.charCodeAt(i))
-          return false;
-        i = i + 1 | 0;
-      }
-      return true;
-    }
-    return false;
-  };
-  SubString.prototype.equals = function (other) {
-    var tmp$;
-    if (!Kotlin.isType(other, SubString))
-      return false;
-    var n = this.to_0 - this.from_0 | 0;
-    if (n === other.length) {
-      var i = 0;
-      while ((tmp$ = n, n = tmp$ - 1 | 0, tmp$) > 0) {
-        if (this.target_0.charCodeAt(i + this.from_0 | 0) !== unboxChar(other.charAt_za3lpa$(i)))
-          return false;
-        i = i + 1 | 0;
-      }
-      return true;
-    }
-    return false;
-  };
-  Object.defineProperty(SubString.prototype, 'hashCode_0', {get: function () {
-    return this.hashCode_j41gqr$_0.value;
-  }});
-  SubString.prototype.hashCode = function () {
-    return this.hashCode_0;
-  };
-  SubString.prototype.toString = function () {
-    var $receiver = this.target_0;
-    var startIndex = this.from_0;
-    var endIndex = this.to_0;
-    return $receiver.substring(startIndex, endIndex);
-  };
-  function SubString$Companion() {
-    SubString$Companion_instance = this;
-  }
-  SubString$Companion.prototype.indexOf_a1f306$ = function (source, sourceOffset, sourceCount, target, targetOffset, targetCount, fromIndex) {
-    var fI = fromIndex;
-    if (fI >= sourceCount) {
-      return targetCount === 0 ? sourceCount : -1;
-    }
-    if (fI < 0) {
-      fI = 0;
-    }
-    if (targetCount === 0) {
-      return fI;
-    }
-    var first = target.charCodeAt(targetOffset);
-    var max = sourceOffset + (sourceCount - targetCount) | 0;
-    var i = sourceOffset + fI | 0;
-    while (i <= max) {
-      if (unboxChar(source.charAt_za3lpa$(i)) !== first) {
-        while ((i = i + 1 | 0, i) <= max && unboxChar(source.charAt_za3lpa$(i)) !== first) {
-        }
-      }
-      if (i <= max) {
-        var j = i + 1 | 0;
-        var end = j + targetCount - 1 | 0;
-        var k = targetOffset + 1 | 0;
-        while (j < end && unboxChar(source.charAt_za3lpa$(j)) === target.charCodeAt(k)) {
-          j = j + 1 | 0;
-          k = k + 1 | 0;
-        }
-        if (j === end) {
-          return i - sourceOffset | 0;
-        }
-      }
-      i = i + 1 | 0;
-    }
-    return -1;
-  };
-  SubString$Companion.prototype.lastIndexOf_a1f306$ = function (source, sourceOffset, sourceCount, target, targetOffset, targetCount, fromIndex) {
-    var tmp$, tmp$_0;
-    var fI = fromIndex;
-    var rightIndex = sourceCount - targetCount | 0;
-    if (fI < 0) {
-      return -1;
-    }
-    if (fI > rightIndex) {
-      fI = rightIndex;
-    }
-    if (targetCount === 0) {
-      return fI;
-    }
-    var strLastIndex = targetOffset + targetCount - 1 | 0;
-    var strLastChar = target.charCodeAt(strLastIndex);
-    var min = sourceOffset + targetCount - 1 | 0;
-    var i = min + fI | 0;
-    startSearchForLastChar: while (true) {
-      while (i >= min && unboxChar(source.charAt_za3lpa$(i)) !== strLastChar) {
-        i = i - 1 | 0;
-      }
-      if (i < min) {
-        return -1;
-      }
-      var j = i - 1 | 0;
-      var start = j - (targetCount - 1) | 0;
-      var k = strLastIndex - 1 | 0;
-      while (j > start) {
-        if (unboxChar(source.charAt_za3lpa$((tmp$ = j, j = tmp$ - 1 | 0, tmp$))) !== target.charCodeAt((tmp$_0 = k, k = tmp$_0 - 1 | 0, tmp$_0))) {
-          i = i - 1 | 0;
-          continue startSearchForLastChar;
-        }
-      }
-      return start - sourceOffset + 1 | 0;
-    }
-  };
-  SubString$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
+  StringReader.$metadata$ = {kind: Kind_CLASS, simpleName: 'StringReader', interfaces: []};
   var SubString$Companion_instance = null;
-  function SubString$Companion_getInstance() {
-    if (SubString$Companion_instance === null) {
-      new SubString$Companion();
-    }
-    return SubString$Companion_instance;
-  }
-  function SubString$hashCode$lambda(this$SubString) {
-    return function () {
-      var tmp$, tmp$_0;
-      var h = 0;
-      tmp$ = this$SubString.from_0;
-      tmp$_0 = this$SubString.to_0 - 1 | 0;
-      for (var i = tmp$; i <= tmp$_0; i++) {
-        h = (31 * h | 0) + (this$SubString.target_0.charCodeAt(i) | 0) | 0;
-      }
-      return h;
-    };
-  }
-  SubString.$metadata$ = {kind: Kind_CLASS, simpleName: 'SubString', interfaces: [Comparable]};
-  function isDigit2($receiver) {
-    return $receiver >= 48 && $receiver <= 57;
-  }
-  function isLetter2($receiver) {
-    return $receiver >= 97 && $receiver <= 122 || ($receiver >= 65 && $receiver <= 90);
-  }
-  function isLetterOrDigit2($receiver) {
-    return isLetter2($receiver) || isDigit2($receiver);
-  }
-  var breakingChars;
-  function isBreaking($receiver) {
-    return indexOf_2(breakingChars, $receiver) >= 0;
-  }
   var package$com = _.com || (_.com = {});
   var package$acornui = package$com.acornui || (package$com.acornui = {});
+  var package$error = package$acornui.error || (package$acornui.error = {});
+  package$error.getStack = getStack;
   var package$function = package$acornui.function || (package$acornui.function = {});
   package$function.get_as1_yo2cq0$ = get_as1;
+  package$function.get_as2_yo2cq0$ = get_as2;
+  package$function.get_as3_yo2cq0$ = get_as3;
+  var package$serialization = package$acornui.serialization || (package$acornui.serialization = {});
+  Object.defineProperty(package$serialization, 'JsonSerializer', {get: JsonSerializer_getInstance});
+  package$serialization.JsonNode = JsonNode;
+  package$serialization.JsonWriter = JsonWriter;
   var package$string = package$acornui.string || (package$acornui.string = {});
   package$string.toRadix_dqglrj$ = toRadix;
   var package$action = package$acornui.action || (package$acornui.action = {});
   package$action.Decorator = Decorator;
-  package$action.noopDecorator_287e2$ = noopDecorator;
   package$action.Progress = Progress;
   var package$async = package$acornui.async || (package$acornui.async = {});
   package$async.launch_g2bo5h$ = launch;
   package$async.async_lnyleu$ = async;
   package$async.BasicContinuationImpl = BasicContinuationImpl;
   Object.defineProperty(package$async, 'PendingDisposablesRegistry', {get: PendingDisposablesRegistry_getInstance});
+  Object.defineProperty(Deferred$Status, 'PENDING', {get: Deferred$Status$PENDING_getInstance});
+  Object.defineProperty(Deferred$Status, 'SUCCESSFUL', {get: Deferred$Status$SUCCESSFUL_getInstance});
+  Object.defineProperty(Deferred$Status, 'FAILED', {get: Deferred$Status$FAILED_getInstance});
+  Deferred.Status = Deferred$Status;
   package$async.Deferred = Deferred;
   package$async.awaitOrNull_uirwv7$ = awaitOrNull;
   package$async.CancelableDeferred = CancelableDeferred;
   package$async.then_7jcrga$ = then;
+  package$async.then_1eax44$ = then_0;
   package$async.LateValue = LateValue;
-  Object.defineProperty(Promise$Status, 'PENDING', {get: Promise$Status$PENDING_getInstance});
-  Object.defineProperty(Promise$Status, 'SUCCESSFUL', {get: Promise$Status$SUCCESSFUL_getInstance});
-  Object.defineProperty(Promise$Status, 'FAILED', {get: Promise$Status$FAILED_getInstance});
-  Promise.Status = Promise$Status;
   package$async.Promise = Promise;
   package$async.awaitAll_4nl6bg$ = awaitAll;
   package$async.awaitAll_qff8ei$ = awaitAll_0;
@@ -10474,8 +10939,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$collection.ActiveList = ActiveList;
   package$collection.pop_vvxzk3$ = pop;
   package$collection.poll_vvxzk3$ = poll;
-  package$collection.peek_2p1efm$ = peek;
+  package$collection.shift_vvxzk3$ = shift;
   package$collection.ConcurrentListImpl = ConcurrentListImpl;
+  package$collection.ConcurrentListImplIterator = ConcurrentListImplIterator;
   package$collection.ConcurrentList = ConcurrentList;
   package$collection.MutableConcurrentList = MutableConcurrentList;
   package$collection.ConcurrentListIterator = ConcurrentListIterator;
@@ -10484,31 +10950,36 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$collection.ConcurrentListIteratorImpl = ConcurrentListIteratorImpl_0;
   package$collection.MutableConcurrentListIterator = MutableConcurrentListIterator;
   package$collection.MutableConcurrentListIteratorImpl = MutableConcurrentListIteratorImpl_0;
-  package$collection.CyclicList = CyclicList;
-  Object.defineProperty(package$collection, 'cyclicListPool', {get: function () {
-    return cyclicListPool;
-  }});
-  package$collection.cyclicListObtain_287e2$ = cyclicListObtain;
   package$collection.DualHashMap = DualHashMap;
-  package$collection.arrayCopy_hd6cw9$ = arrayCopy_2;
-  package$collection.copy_2p1efm$ = copy;
-  package$collection.sortedInsertionIndex_hdciot$ = sortedInsertionIndex;
-  package$collection.sortedInsertionIndex_jmmqv6$ = sortedInsertionIndex_0;
-  package$collection.addSorted_jll88o$ = addSorted;
-  package$collection.addSorted_bdlxpq$ = addSorted_0;
+  package$collection.FloatList_init_za3lpa$ = FloatList_init;
+  package$collection.FloatList = FloatList;
   package$collection.ListBase = ListBase;
   package$collection.MutableListBase = MutableListBase;
-  package$collection.ListIteratorImpl = ListIteratorImpl;
   package$collection.MutableListIteratorImpl = MutableListIteratorImpl;
   package$collection.SubList = SubList;
   package$collection.MutableSubList = MutableSubList;
+  package$collection.arrayCopy_hd6cw9$ = arrayCopy_4;
+  package$collection.copy_2p1efm$ = copy;
+  package$collection.copy_4c7yge$ = copy_0;
+  package$collection.sortedInsertionIndex_jmmqv6$ = sortedInsertionIndex;
+  package$collection.sortedInsertionIndex_hdciot$ = sortedInsertionIndex_0;
+  package$collection.sortedInsertionIndex_bro91x$ = sortedInsertionIndex_1;
+  package$collection.addSorted_jll88o$ = addSorted;
+  package$collection.addSorted_bdlxpq$ = addSorted_0;
+  package$collection.ListIteratorImpl = ListIteratorImpl;
   Object.defineProperty(package$collection, 'arrayListPool', {get: function () {
     return arrayListPool;
   }});
   package$collection.arrayListObtain_287e2$ = arrayListObtain;
   package$collection.addOrSet_yd8n6p$ = addOrSet;
   package$collection.ListView = ListView;
-  package$collection.copy_go3l1a$ = copy_0;
+  package$collection.copy_go3l1a$ = copy_1;
+  Object.defineProperty(package$collection, '_stringMap', {get: function () {
+    return _stringMap;
+  }, set: function (value) {
+    _stringMap = value;
+  }});
+  package$collection.stringMapOf_gkrhic$ = stringMapOf_0;
   package$collection.ObservableConcatList = ObservableConcatList;
   package$collection.ObservableList = ObservableList;
   package$collection.MutableObservableList = MutableObservableList;
@@ -10520,15 +10991,14 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$collection.ClearableObjectPool_init_y83ar3$ = ClearableObjectPool_init;
   package$collection.ClearableObjectPool = ClearableObjectPool;
   package$collection.LimitedPoolImpl = LimitedPoolImpl;
+  package$collection.tuple_ujzrz7$ = tuple_1;
   var package$core = package$acornui.core || (package$acornui.core = {});
   package$core.Disposable = Disposable;
-  Object.defineProperty(package$core, 'INT_MAX_VALUE', {get: function () {
-    return INT_MAX_VALUE;
-  }});
   package$core.floor_81szk$ = floor;
-  package$core.round_81szk$ = round;
   package$core.notCloseTo_wj6e7o$ = notCloseTo;
   package$core.closeTo_wj6e7o$ = closeTo;
+  package$core.zeroPadding_ce333h$ = zeroPadding;
+  package$core.zeroPadding_qgyqat$ = zeroPadding_0;
   package$core.replace2_90ijwr$ = replace2;
   package$core.replace2_c4eoeh$ = replace2_0;
   package$core.join2_urp9b0$ = join2;
@@ -10536,34 +11006,42 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$core.join2_1mip39$ = join2_0;
   package$core.split2_rjktp$ = split2_0;
   package$core.repeat2_94bcnn$ = repeat2;
-  package$core.removeBackslashes_61zpoe$ = removeBackslashes;
+  package$core.isWhitespace2_myv2d0$ = isWhitespace2;
   var package$factory = package$acornui.factory || (package$acornui.factory = {});
   package$factory.LazyInstance = LazyInstance;
   package$factory.disposeInstance_f0dkla$ = disposeInstance;
-  var package$graphics = package$acornui.graphics || (package$acornui.graphics = {});
-  package$graphics.ColorRo = ColorRo;
-  package$graphics.Color_s8cxhz$ = Color;
+  var package$graphic = package$acornui.graphic || (package$acornui.graphic = {});
+  package$graphic.ColorRo = ColorRo;
+  package$graphic.Color_s8cxhz$ = Color;
   Object.defineProperty(Color_0, 'Companion', {get: Color$Companion_getInstance});
-  package$graphics.Color = Color_0;
-  package$graphics.HsvRo = HsvRo;
-  package$graphics.Hsv = Hsv;
-  var package$io = package$acornui.io || (package$acornui.io = {});
+  package$graphic.Color = Color_0;
+  package$graphic.HsvRo = HsvRo;
+  package$graphic.Hsv = Hsv;
   Object.defineProperty(BufferBase, 'Companion', {get: BufferBase$Companion_getInstance});
+  var package$io = package$acornui.io || (package$acornui.io = {});
   package$io.BufferBase = BufferBase;
   package$io.InvalidMarkException = InvalidMarkException;
+  package$io.BufferUnderflowException = BufferUnderflowException;
   package$io.Buffer = Buffer;
   package$io.ReadBuffer = ReadBuffer;
+  package$io.ReadByteBuffer = ReadByteBuffer;
   package$io.WriteBuffer = WriteBuffer;
+  package$io.put_2i9db4$ = put;
+  package$io.WriteByteBuffer = WriteByteBuffer;
   package$io.ReadWriteBuffer = ReadWriteBuffer;
-  package$io.NativeBuffer = NativeBuffer;
+  package$io.ReadWriteByteBuffer = ReadWriteByteBuffer;
+  package$io.NativeReadBuffer = NativeReadBuffer;
+  package$io.NativeReadByteBuffer = NativeReadByteBuffer;
+  package$io.NativeReadWriteBuffer = NativeReadWriteBuffer;
+  package$io.NativeReadWriteByteBuffer = NativeReadWriteByteBuffer;
   var package$file = package$io.file || (package$io.file = {});
   package$file.FilesManifest = FilesManifest;
   Object.defineProperty(package$file, 'FilesManifestSerializer', {get: FilesManifestSerializer_getInstance});
   package$file.ManifestEntry = ManifestEntry;
   Object.defineProperty(package$file, 'ManifestEntrySerializer', {get: ManifestEntrySerializer_getInstance});
-  Object.defineProperty(ILogger, 'Companion', {get: ILogger$Companion_getInstance});
+  Object.defineProperty(Logger, 'Companion', {get: Logger$Companion_getInstance});
   var package$logging = package$acornui.logging || (package$acornui.logging = {});
-  package$logging.ILogger = ILogger;
+  package$logging.Logger = Logger;
   Object.defineProperty(package$logging, 'Log', {get: Log_getInstance});
   package$logging.PrintTarget = PrintTarget;
   package$logging.ArrayTarget = ArrayTarget;
@@ -10574,6 +11052,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$math.BoxRo = BoxRo;
   Object.defineProperty(Box, 'Companion', {get: Box$Companion_getInstance});
   package$math.Box = Box;
+  package$math.ColorTransformationRo = ColorTransformationRo;
+  Object.defineProperty(ColorTransformation, 'Companion', {get: ColorTransformation$Companion_getInstance});
+  package$math.ColorTransformation = ColorTransformation;
   package$math.CornersRo = CornersRo;
   package$math.Corners_init_n34qss$ = Corners_init;
   package$math.Corners_init_mx4ult$ = Corners_init_0;
@@ -10588,8 +11069,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$math.ExpIn = ExpIn;
   package$math.ExpOut = ExpOut;
   package$math.Elastic = Elastic;
-  package$math.ElasticIn = ElasticIn;
-  package$math.ElasticOut = ElasticOut;
   package$math.Swing = Swing;
   package$math.SwingOut = SwingOut;
   package$math.SwingIn = SwingIn;
@@ -10600,8 +11079,10 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Object.defineProperty(package$math, 'SineIn', {get: SineIn_getInstance});
   Object.defineProperty(package$math, 'SineOut', {get: SineOut_getInstance});
   Object.defineProperty(package$math, 'Circle', {get: Circle_getInstance});
+  Object.defineProperty(package$math, 'CircleInverse', {get: CircleInverse_getInstance});
   Object.defineProperty(package$math, 'CircleIn', {get: CircleIn_getInstance});
   Object.defineProperty(package$math, 'CircleOut', {get: CircleOut_getInstance});
+  Object.defineProperty(package$math, 'Hermite', {get: Hermite_getInstance});
   package$math.Reverse = Reverse;
   package$math.ToFro = ToFro;
   package$math.YoYo = YoYo;
@@ -10613,6 +11094,11 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$math.FrustumRo = FrustumRo;
   Object.defineProperty(Frustum, 'Companion', {get: Frustum$Companion_getInstance});
   package$math.Frustum = Frustum;
+  package$math.IntPadRo = IntPadRo;
+  Object.defineProperty(IntPad, 'Companion', {get: IntPad$Companion_getInstance});
+  package$math.IntPad_init = IntPad_init;
+  package$math.IntPad_init_9mvhws$ = IntPad_init_1;
+  package$math.IntPad = IntPad;
   package$math.IntRectangleRo = IntRectangleRo;
   Object.defineProperty(IntRectangle, 'Companion', {get: IntRectangle$Companion_getInstance});
   package$math.IntRectangle = IntRectangle;
@@ -10620,15 +11106,19 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Object.defineProperty(package$math, 'PI', {get: function () {
     return PI;
   }});
-  Object.defineProperty(package$math, 'TrigLookup', {get: TrigLookup_getInstance});
-  Object.defineProperty(package$math, 'Atan2', {get: Atan2_getInstance});
   Object.defineProperty(package$math, 'MathUtils', {get: MathUtils_getInstance});
   package$math.Matrix3Ro = Matrix3Ro;
   Object.defineProperty(Matrix3, 'Companion', {get: Matrix3$Companion_getInstance});
   package$math.Matrix3 = Matrix3;
   package$math.Matrix4Ro = Matrix4Ro;
   Object.defineProperty(Matrix4, 'Companion', {get: Matrix4$Companion_getInstance});
+  package$math.Matrix4_init_2jqbh4$ = Matrix4_init_0;
   package$math.Matrix4 = Matrix4;
+  Object.defineProperty(MatrixMode, 'IDENTITY', {get: MatrixMode$IDENTITY_getInstance});
+  Object.defineProperty(MatrixMode, 'TRANSLATION', {get: MatrixMode$TRANSLATION_getInstance});
+  Object.defineProperty(MatrixMode, 'SCALE', {get: MatrixMode$SCALE_getInstance});
+  Object.defineProperty(MatrixMode, 'FULL', {get: MatrixMode$FULL_getInstance});
+  package$math.MatrixMode = MatrixMode;
   Object.defineProperty(MinMaxRo, 'Companion', {get: MinMaxRo$Companion_getInstance});
   package$math.MinMaxRo = MinMaxRo;
   package$math.MinMax = MinMax;
@@ -10648,8 +11138,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$math.QuaternionRo = QuaternionRo;
   Object.defineProperty(Quaternion, 'Companion', {get: Quaternion$Companion_getInstance});
   package$math.Quaternion = Quaternion;
-  Object.defineProperty(Random, 'Companion', {get: Random$Companion_getInstance});
-  package$math.Random = Random;
   package$math.Range2Ro = Range2Ro;
   package$math.Range2 = Range2;
   package$math.RayRo = RayRo;
@@ -10658,6 +11146,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$math.Ray2Ro = Ray2Ro;
   Object.defineProperty(Ray2, 'Companion', {get: Ray2$Companion_getInstance});
   package$math.Ray2 = Ray2;
+  Object.defineProperty(RectangleRo, 'Companion', {get: RectangleRo$Companion_getInstance});
   package$math.RectangleRo = RectangleRo;
   Object.defineProperty(Rectangle, 'Companion', {get: Rectangle$Companion_getInstance});
   package$math.Rectangle = Rectangle;
@@ -10676,11 +11165,6 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$observe.ModTagImpl = ModTagImpl;
   package$observe.ModTagWatch = ModTagWatch;
   package$observe.Observable = Observable;
-  package$observe.bind_6tqvwa$ = bind;
-  var package$serialization = package$acornui.serialization || (package$acornui.serialization = {});
-  Object.defineProperty(package$serialization, 'JsonSerializer', {get: JsonSerializer_getInstance});
-  package$serialization.JsonNode = JsonNode;
-  package$serialization.JsonWriter = JsonWriter;
   package$serialization.Serializer = Serializer;
   package$serialization.Reader = Reader;
   package$serialization.obj_gbx3af$ = obj;
@@ -10713,6 +11197,9 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$serialization.StringNode = StringNode;
   package$serialization.XmlNode = XmlNode;
   var package$signal = package$acornui.signal || (package$acornui.signal = {});
+  package$signal.Bindable = Bindable;
+  package$signal.bind_3tpvqv$ = bind;
+  package$signal.or_v81b3j$ = or;
   package$signal.Signal = Signal;
   package$signal.SignalBase = SignalBase;
   package$signal.Signal0 = Signal0;
@@ -10723,89 +11210,102 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   package$signal.Cancel = Cancel;
   package$signal.StoppableSignal = StoppableSignal;
   package$signal.StoppableSignalImpl = StoppableSignalImpl;
-  package$string.StringParser = StringParser;
-  Object.defineProperty(SubString, 'Companion', {get: SubString$Companion_getInstance});
-  package$string.SubString = SubString;
   package$string.isDigit2_myv2d0$ = isDigit2;
   package$string.isLetter2_myv2d0$ = isLetter2;
   package$string.isLetterOrDigit2_myv2d0$ = isLetterOrDigit2;
   package$string.isBreaking_myv2d0$ = isBreaking;
+  package$string.StringReader = StringReader;
+  JsonSerializer.prototype.read_awjrhg$ = Serializer.prototype.read_awjrhg$;
+  JsonNode.prototype.contains_61zpoe$ = Reader.prototype.contains_61zpoe$;
+  JsonNode.prototype.contains_za3lpa$ = Reader.prototype.contains_za3lpa$;
+  JsonNode.prototype.get_61zpoe$ = Reader.prototype.get_61zpoe$;
+  JsonNode.prototype.get_za3lpa$ = Reader.prototype.get_za3lpa$;
   UrlParamsImpl_0.prototype.toQueryString = UrlParams.prototype.toQueryString;
-  ObservableList.prototype.iterate_nhjr8t$ = ConcurrentList.prototype.iterate_nhjr8t$;
-  MutableConcurrentList.prototype.iterate_nhjr8t$ = ConcurrentList.prototype.iterate_nhjr8t$;
-  MutableObservableList.prototype.iterate_nhjr8t$ = ObservableList.prototype.iterate_nhjr8t$;
-  ActiveList.prototype.iterate_nhjr8t$ = MutableObservableList.prototype.iterate_nhjr8t$;
-  ConcurrentListImpl.prototype.iterate_nhjr8t$ = MutableConcurrentList.prototype.iterate_nhjr8t$;
+  MutableObservableList.prototype.addBinding_o14v8n$ = ObservableList.prototype.addBinding_o14v8n$;
+  MutableObservableList.prototype.removeBinding_o14v8n$ = ObservableList.prototype.removeBinding_o14v8n$;
+  ActiveList.prototype.addBinding_o14v8n$ = MutableObservableList.prototype.addBinding_o14v8n$;
+  ActiveList.prototype.removeBinding_o14v8n$ = MutableObservableList.prototype.removeBinding_o14v8n$;
   ObjectPool.prototype.freeAll_4ezy5m$ = Pool.prototype.freeAll_4ezy5m$;
-  ListView.prototype.iterate_nhjr8t$ = ObservableList.prototype.iterate_nhjr8t$;
-  ObservableConcatList.prototype.iterate_nhjr8t$ = ObservableList.prototype.iterate_nhjr8t$;
+  ListView.prototype.addBinding_o14v8n$ = ObservableList.prototype.addBinding_o14v8n$;
+  ListView.prototype.removeBinding_o14v8n$ = ObservableList.prototype.removeBinding_o14v8n$;
+  ObservableConcatList.prototype.addBinding_o14v8n$ = ObservableList.prototype.addBinding_o14v8n$;
+  ObservableConcatList.prototype.removeBinding_o14v8n$ = ObservableList.prototype.removeBinding_o14v8n$;
   LimitedPoolImpl.prototype.freeAll_4ezy5m$ = Pool.prototype.freeAll_4ezy5m$;
   Color_0.prototype.times_mx4ult$ = ColorRo.prototype.times_mx4ult$;
-  Color_0.prototype.plus_xksl39$ = ColorRo.prototype.plus_xksl39$;
-  Color_0.prototype.minus_xksl39$ = ColorRo.prototype.minus_xksl39$;
+  Color_0.prototype.plus_8suw10$ = ColorRo.prototype.plus_8suw10$;
+  Color_0.prototype.minus_8suw10$ = ColorRo.prototype.minus_8suw10$;
   Color_0.prototype.toCssString = ColorRo.prototype.toCssString;
   Color_0.prototype.toRgbString = ColorRo.prototype.toRgbString;
   Color_0.prototype.toRgbaString = ColorRo.prototype.toRgbaString;
-  Color_0.prototype.toHsl_y02iys$ = ColorRo.prototype.toHsl_y02iys$;
-  Color_0.prototype.toHsv_y02iyi$ = ColorRo.prototype.toHsv_y02iyi$;
-  Color_0.prototype.closeTo_c3ty5c$$default = ColorRo.prototype.closeTo_c3ty5c$$default;
+  Color_0.prototype.toHsl_3f6jmr$ = ColorRo.prototype.toHsl_3f6jmr$;
+  Color_0.prototype.toHsv_3f6jmh$ = ColorRo.prototype.toHsv_3f6jmh$;
+  Color_0.prototype.closeTo_xc6en5$$default = ColorRo.prototype.closeTo_xc6en5$$default;
   Color_0.prototype.copy = ColorRo.prototype.copy;
-  Color_0.prototype.closeTo_c3ty5c$ = ColorRo.prototype.closeTo_c3ty5c$;
+  Color_0.prototype.closeTo_xc6en5$ = ColorRo.prototype.closeTo_xc6en5$;
   Hsv.prototype.copy = HsvRo.prototype.copy;
-  Hsv.prototype.toRgb_1qghwi$$default = HsvRo.prototype.toRgb_1qghwi$$default;
-  Hsv.prototype.toRgb_1qghwi$ = HsvRo.prototype.toRgb_1qghwi$;
+  Hsv.prototype.toRgb_kxczlt$$default = HsvRo.prototype.toRgb_kxczlt$$default;
+  Hsv.prototype.toRgb_kxczlt$ = HsvRo.prototype.toRgb_kxczlt$;
+  Object.defineProperty(BufferBase.prototype, 'remaining', Object.getOwnPropertyDescriptor(Buffer.prototype, 'remaining'));
   Object.defineProperty(ReadBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(Buffer.prototype, 'remaining'));
+  Object.defineProperty(ReadByteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadBuffer.prototype, 'remaining'));
   Object.defineProperty(WriteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(Buffer.prototype, 'remaining'));
+  Object.defineProperty(WriteByteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(WriteBuffer.prototype, 'remaining'));
   Object.defineProperty(ReadWriteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadBuffer.prototype, 'remaining'));
-  ReadWriteBuffer.prototype.put_kcizie$ = WriteBuffer.prototype.put_kcizie$;
-  ReadWriteBuffer.prototype.put_p1ys8y$ = WriteBuffer.prototype.put_p1ys8y$;
-  ReadWriteBuffer.prototype.put_1phuh2$ = WriteBuffer.prototype.put_1phuh2$;
-  ReadWriteBuffer.prototype.fill_11rb$ = WriteBuffer.prototype.fill_11rb$;
-  Object.defineProperty(BufferBase.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadWriteBuffer.prototype, 'remaining'));
-  BufferBase.prototype.put_kcizie$ = ReadWriteBuffer.prototype.put_kcizie$;
-  BufferBase.prototype.put_p1ys8y$ = ReadWriteBuffer.prototype.put_p1ys8y$;
-  BufferBase.prototype.put_1phuh2$ = ReadWriteBuffer.prototype.put_1phuh2$;
-  BufferBase.prototype.fill_11rb$ = ReadWriteBuffer.prototype.fill_11rb$;
-  Object.defineProperty(NativeBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadWriteBuffer.prototype, 'remaining'));
-  NativeBuffer.prototype.put_kcizie$ = ReadWriteBuffer.prototype.put_kcizie$;
-  NativeBuffer.prototype.put_p1ys8y$ = ReadWriteBuffer.prototype.put_p1ys8y$;
-  NativeBuffer.prototype.put_1phuh2$ = ReadWriteBuffer.prototype.put_1phuh2$;
-  NativeBuffer.prototype.fill_11rb$ = ReadWriteBuffer.prototype.fill_11rb$;
+  Object.defineProperty(ReadWriteByteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadWriteBuffer.prototype, 'remaining'));
+  ReadWriteByteBuffer.prototype.putChar8_s8itvh$ = WriteByteBuffer.prototype.putChar8_s8itvh$;
+  ReadWriteByteBuffer.prototype.putChar16_s8itvh$ = WriteByteBuffer.prototype.putChar16_s8itvh$;
+  ReadWriteByteBuffer.prototype.getChar8 = ReadByteBuffer.prototype.getChar8;
+  ReadWriteByteBuffer.prototype.getChar16 = ReadByteBuffer.prototype.getChar16;
+  Object.defineProperty(NativeReadBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(ReadBuffer.prototype, 'remaining'));
+  Object.defineProperty(NativeReadByteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(NativeReadBuffer.prototype, 'remaining'));
+  NativeReadByteBuffer.prototype.getChar8 = ReadByteBuffer.prototype.getChar8;
+  NativeReadByteBuffer.prototype.getChar16 = ReadByteBuffer.prototype.getChar16;
+  Object.defineProperty(NativeReadWriteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(NativeReadBuffer.prototype, 'remaining'));
+  Object.defineProperty(NativeReadWriteByteBuffer.prototype, 'remaining', Object.getOwnPropertyDescriptor(NativeReadByteBuffer.prototype, 'remaining'));
+  NativeReadWriteByteBuffer.prototype.getChar8 = NativeReadByteBuffer.prototype.getChar8;
+  NativeReadWriteByteBuffer.prototype.getChar16 = NativeReadByteBuffer.prototype.getChar16;
+  NativeReadWriteByteBuffer.prototype.putChar8_s8itvh$ = ReadWriteByteBuffer.prototype.putChar8_s8itvh$;
+  NativeReadWriteByteBuffer.prototype.putChar16_s8itvh$ = ReadWriteByteBuffer.prototype.putChar16_s8itvh$;
   FilesManifestSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
   ManifestEntrySerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
-  Log.prototype.debug_s8jyv4$ = ILogger.prototype.debug_s8jyv4$;
-  Log.prototype.debug_nq59yw$ = ILogger.prototype.debug_nq59yw$;
-  Log.prototype.info_s8jyv4$ = ILogger.prototype.info_s8jyv4$;
-  Log.prototype.info_nq59yw$ = ILogger.prototype.info_nq59yw$;
-  Log.prototype.warn_s8jyv4$ = ILogger.prototype.warn_s8jyv4$;
-  Log.prototype.warn_nq59yw$ = ILogger.prototype.warn_nq59yw$;
-  Log.prototype.error_s8jyv4$ = ILogger.prototype.error_s8jyv4$;
-  Log.prototype.error_a67anv$$default = ILogger.prototype.error_a67anv$$default;
-  Log.prototype.error_nq59yw$ = ILogger.prototype.error_nq59yw$;
-  Log.prototype.error_a67anv$ = ILogger.prototype.error_a67anv$;
-  PrintTarget.prototype.debug_s8jyv4$ = ILogger.prototype.debug_s8jyv4$;
-  PrintTarget.prototype.debug_nq59yw$ = ILogger.prototype.debug_nq59yw$;
-  PrintTarget.prototype.info_s8jyv4$ = ILogger.prototype.info_s8jyv4$;
-  PrintTarget.prototype.info_nq59yw$ = ILogger.prototype.info_nq59yw$;
-  PrintTarget.prototype.warn_s8jyv4$ = ILogger.prototype.warn_s8jyv4$;
-  PrintTarget.prototype.warn_nq59yw$ = ILogger.prototype.warn_nq59yw$;
-  PrintTarget.prototype.error_s8jyv4$ = ILogger.prototype.error_s8jyv4$;
-  PrintTarget.prototype.error_a67anv$$default = ILogger.prototype.error_a67anv$$default;
-  PrintTarget.prototype.error_nq59yw$ = ILogger.prototype.error_nq59yw$;
-  PrintTarget.prototype.error_a67anv$ = ILogger.prototype.error_a67anv$;
-  ArrayTarget.prototype.debug_s8jyv4$ = ILogger.prototype.debug_s8jyv4$;
-  ArrayTarget.prototype.debug_nq59yw$ = ILogger.prototype.debug_nq59yw$;
-  ArrayTarget.prototype.info_s8jyv4$ = ILogger.prototype.info_s8jyv4$;
-  ArrayTarget.prototype.info_nq59yw$ = ILogger.prototype.info_nq59yw$;
-  ArrayTarget.prototype.warn_s8jyv4$ = ILogger.prototype.warn_s8jyv4$;
-  ArrayTarget.prototype.warn_nq59yw$ = ILogger.prototype.warn_nq59yw$;
-  ArrayTarget.prototype.error_s8jyv4$ = ILogger.prototype.error_s8jyv4$;
-  ArrayTarget.prototype.error_a67anv$$default = ILogger.prototype.error_a67anv$$default;
-  ArrayTarget.prototype.error_nq59yw$ = ILogger.prototype.error_nq59yw$;
-  ArrayTarget.prototype.error_a67anv$ = ILogger.prototype.error_a67anv$;
+  Log.prototype.debug_s8jyv4$ = Logger.prototype.debug_s8jyv4$;
+  Log.prototype.debug_nq59yw$ = Logger.prototype.debug_nq59yw$;
+  Log.prototype.info_s8jyv4$ = Logger.prototype.info_s8jyv4$;
+  Log.prototype.info_nq59yw$ = Logger.prototype.info_nq59yw$;
+  Log.prototype.warn_s8jyv4$ = Logger.prototype.warn_s8jyv4$;
+  Log.prototype.warn_nq59yw$ = Logger.prototype.warn_nq59yw$;
+  Log.prototype.error_s8jyv4$ = Logger.prototype.error_s8jyv4$;
+  Log.prototype.error_a67anv$$default = Logger.prototype.error_a67anv$$default;
+  Log.prototype.error_nq59yw$ = Logger.prototype.error_nq59yw$;
+  Log.prototype.error_a67anv$ = Logger.prototype.error_a67anv$;
+  PrintTarget.prototype.debug_s8jyv4$ = Logger.prototype.debug_s8jyv4$;
+  PrintTarget.prototype.debug_nq59yw$ = Logger.prototype.debug_nq59yw$;
+  PrintTarget.prototype.info_s8jyv4$ = Logger.prototype.info_s8jyv4$;
+  PrintTarget.prototype.info_nq59yw$ = Logger.prototype.info_nq59yw$;
+  PrintTarget.prototype.warn_s8jyv4$ = Logger.prototype.warn_s8jyv4$;
+  PrintTarget.prototype.warn_nq59yw$ = Logger.prototype.warn_nq59yw$;
+  PrintTarget.prototype.error_s8jyv4$ = Logger.prototype.error_s8jyv4$;
+  PrintTarget.prototype.error_a67anv$$default = Logger.prototype.error_a67anv$$default;
+  PrintTarget.prototype.error_nq59yw$ = Logger.prototype.error_nq59yw$;
+  PrintTarget.prototype.error_a67anv$ = Logger.prototype.error_a67anv$;
+  ArrayTarget.prototype.debug_s8jyv4$ = Logger.prototype.debug_s8jyv4$;
+  ArrayTarget.prototype.debug_nq59yw$ = Logger.prototype.debug_nq59yw$;
+  ArrayTarget.prototype.info_s8jyv4$ = Logger.prototype.info_s8jyv4$;
+  ArrayTarget.prototype.info_nq59yw$ = Logger.prototype.info_nq59yw$;
+  ArrayTarget.prototype.warn_s8jyv4$ = Logger.prototype.warn_s8jyv4$;
+  ArrayTarget.prototype.warn_nq59yw$ = Logger.prototype.warn_nq59yw$;
+  ArrayTarget.prototype.error_s8jyv4$ = Logger.prototype.error_s8jyv4$;
+  ArrayTarget.prototype.error_a67anv$$default = Logger.prototype.error_a67anv$$default;
+  ArrayTarget.prototype.error_nq59yw$ = Logger.prototype.error_nq59yw$;
+  ArrayTarget.prototype.error_a67anv$ = Logger.prototype.error_a67anv$;
+  Bounds.prototype.copy_dleff0$$default = BoundsRo.prototype.copy_dleff0$$default;
+  Bounds.prototype.copy_dleff0$ = BoundsRo.prototype.copy_dleff0$;
+  Box.prototype.copy_uwler8$$default = BoxRo.prototype.copy_uwler8$$default;
   Box.prototype.intersects_owlv2i$ = BoxRo.prototype.intersects_owlv2i$;
+  Box.prototype.copy_uwler8$ = BoxRo.prototype.copy_uwler8$;
   Corners.prototype.isEmpty = CornersRo.prototype.isEmpty;
-  Corners.prototype.copy = CornersRo.prototype.copy;
+  Corners.prototype.copy_n34qss$$default = CornersRo.prototype.copy_n34qss$$default;
+  Corners.prototype.copy_n34qss$ = CornersRo.prototype.copy_n34qss$;
   CornersSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
   Constant.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   Pow.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
@@ -10823,8 +11323,10 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   SineIn.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   SineOut.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   Circle.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
+  CircleInverse.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   CircleIn.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   CircleOut.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
+  Hermite.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   Reverse.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   ToFro.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   YoYo.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
@@ -10833,9 +11335,27 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   BounceInPlace.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   Clamp.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
   Bezier.prototype.apply_y2kzbl$ = Interpolation.prototype.apply_y2kzbl$;
-  IntRectangle.prototype.copy = IntRectangleRo.prototype.copy;
+  IntPad.prototype.isEmpty = IntPadRo.prototype.isEmpty;
+  IntPad.prototype.isNotEmpty = IntPadRo.prototype.isNotEmpty;
+  IntPad.prototype.reduceWidth_s8ev37$ = IntPadRo.prototype.reduceWidth_s8ev37$;
+  IntPad.prototype.reduceHeight_s8ev37$ = IntPadRo.prototype.reduceHeight_s8ev37$;
+  IntPad.prototype.reduceWidth2_za3lpa$ = IntPadRo.prototype.reduceWidth2_za3lpa$;
+  IntPad.prototype.reduceHeight2_za3lpa$ = IntPadRo.prototype.reduceHeight2_za3lpa$;
+  IntPad.prototype.expandWidth_s8ev37$ = IntPadRo.prototype.expandWidth_s8ev37$;
+  IntPad.prototype.expandHeight_s8ev37$ = IntPadRo.prototype.expandHeight_s8ev37$;
+  IntPad.prototype.expandWidth2_za3lpa$ = IntPadRo.prototype.expandWidth2_za3lpa$;
+  IntPad.prototype.expandHeight2_za3lpa$ = IntPadRo.prototype.expandHeight2_za3lpa$;
+  IntPad.prototype.toCssString = IntPadRo.prototype.toCssString;
+  IntPad.prototype.copy_tjonv8$$default = IntPadRo.prototype.copy_tjonv8$$default;
+  IntPad.prototype.copy_tjonv8$ = IntPadRo.prototype.copy_tjonv8$;
+  IntPadSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
+  IntRectangle.prototype.copy_tjonv8$$default = IntRectangleRo.prototype.copy_tjonv8$$default;
+  IntRectangle.prototype.reduce_q22nrd$ = IntRectangleRo.prototype.reduce_q22nrd$;
+  IntRectangle.prototype.reduce_tjonv8$ = IntRectangleRo.prototype.reduce_tjonv8$;
+  IntRectangle.prototype.copy_tjonv8$ = IntRectangleRo.prototype.copy_tjonv8$;
   IntRectangleSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
   Matrix3.prototype.copy = Matrix3Ro.prototype.copy;
+  Matrix4.prototype.get_za3lpa$ = Matrix4Ro.prototype.get_za3lpa$;
   Matrix4.prototype.copy = Matrix4Ro.prototype.copy;
   Matrix4.prototype.getRotation_tt8t29$ = Matrix4Ro.prototype.getRotation_tt8t29$;
   MinMax.prototype.isEmpty = MinMaxRo.prototype.isEmpty;
@@ -10843,7 +11363,10 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   MinMax.prototype.intersects_5yfmeh$ = MinMaxRo.prototype.intersects_5yfmeh$;
   MinMax.prototype.contains_dleff0$ = MinMaxRo.prototype.contains_dleff0$;
   MinMax.prototype.clampPoint_9wm29l$ = MinMaxRo.prototype.clampPoint_9wm29l$;
-  Pad.prototype.copy_789ags$$default = PadRo.prototype.copy_789ags$$default;
+  MinMax.prototype.copy_7b5o5w$$default = MinMaxRo.prototype.copy_7b5o5w$$default;
+  MinMax.prototype.copy_7b5o5w$ = MinMaxRo.prototype.copy_7b5o5w$;
+  Pad.prototype.isEmpty = PadRo.prototype.isEmpty;
+  Pad.prototype.isNotEmpty = PadRo.prototype.isNotEmpty;
   Pad.prototype.reduceWidth_81sz4$ = PadRo.prototype.reduceWidth_81sz4$;
   Pad.prototype.reduceHeight_81sz4$ = PadRo.prototype.reduceHeight_81sz4$;
   Pad.prototype.reduceWidth2_mx4ult$ = PadRo.prototype.reduceWidth2_mx4ult$;
@@ -10853,7 +11376,8 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Pad.prototype.expandWidth2_mx4ult$ = PadRo.prototype.expandWidth2_mx4ult$;
   Pad.prototype.expandHeight2_mx4ult$ = PadRo.prototype.expandHeight2_mx4ult$;
   Pad.prototype.toCssString = PadRo.prototype.toCssString;
-  Pad.prototype.copy_789ags$ = PadRo.prototype.copy_789ags$;
+  Pad.prototype.copy_7b5o5w$$default = PadRo.prototype.copy_7b5o5w$$default;
+  Pad.prototype.copy_7b5o5w$ = PadRo.prototype.copy_7b5o5w$;
   PadSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
   Plane.prototype.distance_1fv2cb$ = PlaneRo.prototype.distance_1fv2cb$;
   Plane.prototype.testPoint_1fv2cb$ = PlaneRo.prototype.testPoint_1fv2cb$;
@@ -10861,51 +11385,85 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   Plane.prototype.isFrontFacing_1fv2cb$ = PlaneRo.prototype.isFrontFacing_1fv2cb$;
   Plane.prototype.intersects_y8xsj$$default = PlaneRo.prototype.intersects_y8xsj$$default;
   Plane.prototype.prj_9wm29k$ = PlaneRo.prototype.prj_9wm29k$;
+  Plane.prototype.copy_pz1gqy$$default = PlaneRo.prototype.copy_pz1gqy$$default;
   Plane.prototype.intersects_y8xsj$ = PlaneRo.prototype.intersects_y8xsj$;
+  Plane.prototype.copy_pz1gqy$ = PlaneRo.prototype.copy_pz1gqy$;
+  Quaternion.prototype.getAngleAround_1fv2cb$ = QuaternionRo.prototype.getAngleAround_1fv2cb$;
   Quaternion.prototype.transform_9wm29k$ = QuaternionRo.prototype.transform_9wm29k$;
   Quaternion.prototype.closeTo_imyaox$$default = QuaternionRo.prototype.closeTo_imyaox$$default;
+  Quaternion.prototype.copy_7b5o5w$$default = QuaternionRo.prototype.copy_7b5o5w$$default;
   Quaternion.prototype.closeTo_imyaox$ = QuaternionRo.prototype.closeTo_imyaox$;
+  Quaternion.prototype.copy_7b5o5w$ = QuaternionRo.prototype.copy_7b5o5w$;
   Range2.prototype.contains_mef7kx$ = Range2Ro.prototype.contains_mef7kx$;
   Range2.prototype.clamp_mef7kx$ = Range2Ro.prototype.clamp_mef7kx$;
   Range2.prototype.clamp2_mef7kx$ = Range2Ro.prototype.clamp2_mef7kx$;
-  Ray.prototype.copy = RayRo.prototype.copy;
+  Range2.prototype.copy_n65qkk$$default = Range2Ro.prototype.copy_n65qkk$$default;
+  Range2.prototype.copy_n65qkk$ = Range2Ro.prototype.copy_n65qkk$;
+  Ray.prototype.intersects_owlv2i$$default = RayRo.prototype.intersects_owlv2i$$default;
+  Ray.prototype.intersects_w3gmro$ = RayRo.prototype.intersects_w3gmro$;
+  Ray.prototype.intersects_6bb61c$$default = RayRo.prototype.intersects_6bb61c$$default;
+  Ray.prototype.copy_uwler8$$default = RayRo.prototype.copy_uwler8$$default;
+  Ray.prototype.intersectsRay_owlv2i$ = RayRo.prototype.intersectsRay_owlv2i$;
+  Ray.prototype.intersectsTriangle_6bb61c$ = RayRo.prototype.intersectsTriangle_6bb61c$;
+  Ray.prototype.intersectSphere_iyq1vj$ = RayRo.prototype.intersectSphere_iyq1vj$;
   Ray.prototype.intersects_owlv2i$ = RayRo.prototype.intersects_owlv2i$;
   Ray.prototype.intersects_6bb61c$ = RayRo.prototype.intersects_6bb61c$;
-  Rectangle.prototype.intersects_y8xsj$ = RectangleRo.prototype.intersects_y8xsj$;
+  Ray.prototype.copy_uwler8$ = RayRo.prototype.copy_uwler8$;
+  Ray2.prototype.copy_v3bz2s$$default = Ray2Ro.prototype.copy_v3bz2s$$default;
+  Ray2.prototype.copy_v3bz2s$ = Ray2Ro.prototype.copy_v3bz2s$;
+  Rectangle.prototype.copy_7b5o5w$$default = RectangleRo.prototype.copy_7b5o5w$$default;
+  Rectangle.prototype.reduce_rw8g7s$ = RectangleRo.prototype.reduce_rw8g7s$;
+  Rectangle.prototype.reduce_7b5o5w$ = RectangleRo.prototype.reduce_7b5o5w$;
+  Rectangle.prototype.intersects_owlv2i$ = RectangleRo.prototype.intersects_owlv2i$;
+  Rectangle.prototype.copy_7b5o5w$ = RectangleRo.prototype.copy_7b5o5w$;
   RectangleSerializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
-  Vector2.prototype.copy = Vector2Ro.prototype.copy;
+  Vector2.prototype.component1 = Vector2Ro.prototype.component1;
+  Vector2.prototype.component2 = Vector2Ro.prototype.component2;
+  Object.defineProperty(Vector2.prototype, 'angle', Object.getOwnPropertyDescriptor(Vector2Ro.prototype, 'angle'));
+  Vector2.prototype.plus_1fv330$ = Vector2Ro.prototype.plus_1fv330$;
+  Vector2.prototype.minus_1fv330$ = Vector2Ro.prototype.minus_1fv330$;
+  Vector2.prototype.times_1fv330$ = Vector2Ro.prototype.times_1fv330$;
+  Vector2.prototype.times_mx4ult$ = Vector2Ro.prototype.times_mx4ult$;
+  Vector2.prototype.copy_dleff0$$default = Vector2Ro.prototype.copy_dleff0$$default;
+  Vector2.prototype.toVec3_mx4ult$$default = Vector2Ro.prototype.toVec3_mx4ult$$default;
+  Vector2.prototype.copy_dleff0$ = Vector2Ro.prototype.copy_dleff0$;
+  Vector2.prototype.toVec3_mx4ult$ = Vector2Ro.prototype.toVec3_mx4ult$;
   Vector2Serializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
-  Vector3.prototype.copy = Vector3Ro.prototype.copy;
+  Vector3.prototype.component1 = Vector3Ro.prototype.component1;
+  Vector3.prototype.component2 = Vector3Ro.prototype.component2;
+  Vector3.prototype.component3 = Vector3Ro.prototype.component3;
+  Vector3.prototype.plus_1fv2cb$ = Vector3Ro.prototype.plus_1fv2cb$;
+  Vector3.prototype.minus_1fv2cb$ = Vector3Ro.prototype.minus_1fv2cb$;
+  Vector3.prototype.times_1fv2cb$ = Vector3Ro.prototype.times_1fv2cb$;
+  Vector3.prototype.times_mx4ult$ = Vector3Ro.prototype.times_mx4ult$;
+  Vector3.prototype.copy_y2kzbl$$default = Vector3Ro.prototype.copy_y2kzbl$$default;
+  Vector3.prototype.toVec2 = Vector3Ro.prototype.toVec2;
   Vector3.prototype.isUnit_mx4ult$ = Vector3Ro.prototype.isUnit_mx4ult$;
   Vector3.prototype.closeTo_7aight$ = Vector3Ro.prototype.closeTo_7aight$;
   Vector3.prototype.closeTo_7b5o5w$ = Vector3Ro.prototype.closeTo_7b5o5w$;
+  Vector3.prototype.copy_y2kzbl$ = Vector3Ro.prototype.copy_y2kzbl$;
   Vector3Serializer.prototype.write2_6l37rg$ = To.prototype.write2_6l37rg$;
-  JsonSerializer.prototype.read_awjrhg$ = Serializer.prototype.read_awjrhg$;
-  JsonSerializer.prototype.write_hzsrf4$ = Serializer.prototype.write_hzsrf4$;
-  JsonNode.prototype.get_61zpoe$ = Reader.prototype.get_61zpoe$;
-  JsonNode.prototype.get_za3lpa$ = Reader.prototype.get_za3lpa$;
   StringNode.prototype.get_61zpoe$ = Reader.prototype.get_61zpoe$;
   StringNode.prototype.get_za3lpa$ = Reader.prototype.get_za3lpa$;
   NullNode.prototype.get_61zpoe$ = Reader.prototype.get_61zpoe$;
   NullNode.prototype.get_za3lpa$ = Reader.prototype.get_za3lpa$;
   XmlSerializer.prototype.read_awjrhg$ = Serializer.prototype.read_awjrhg$;
-  XmlSerializer.prototype.write_hzsrf4$ = Serializer.prototype.write_hzsrf4$;
   XmlNode.prototype.get_61zpoe$ = Reader.prototype.get_61zpoe$;
   XmlNode.prototype.get_za3lpa$ = Reader.prototype.get_za3lpa$;
   SignalBase.prototype.add_trkh7z$ = Signal.prototype.add_trkh7z$;
   SignalBase.prototype.addOnce_trkh7z$ = Signal.prototype.addOnce_trkh7z$;
   StoppableSignal.prototype.add_trkh7z$ = Signal.prototype.add_trkh7z$;
   StoppableSignal.prototype.addOnce_trkh7z$ = Signal.prototype.addOnce_trkh7z$;
-  encodeUriComponent2 = properties.Delegates.notNull_30y1fr$();
-  decodeUriComponent2 = properties.Delegates.notNull_30y1fr$();
-  cyclicListPool = ClearableObjectPool_init(cyclicListPool$lambda);
+  coroutineDebugMode = false;
+  activeCoroutines = HashMap_init();
+  activeCoroutinesStr = '';
   arrayListPool = new arrayListPool$ObjectLiteral(8, arrayListPool$arrayListPool$ObjectLiteral_init$lambda);
   mapPool = new mapPool$ObjectLiteral(8, mapPool$mapPool$ObjectLiteral_init$lambda);
-  LONG_MAX_VALUE = new Kotlin.Long(-1, 2097151);
+  _stringMap = _stringMap$lambda;
   INT_MAX_VALUE = 2147483647;
   INT_MIN_VALUE = -2147483648;
-  LONG_MIN_VALUE = new Kotlin.Long(0, -2097152);
   lineSeparator = '\n';
+  whitespaceChars = mapOf([to(toBoxedChar(toChar(9)), true), to(toBoxedChar(toChar(10)), true), to(toBoxedChar(toChar(11)), true), to(toBoxedChar(toChar(12)), true), to(toBoxedChar(toChar(13)), true), to(toBoxedChar(toChar(32)), true), to(toBoxedChar(toChar(133)), true), to(toBoxedChar(toChar(160)), true), to(toBoxedChar(toChar(5760)), true), to(toBoxedChar(toChar(6158)), true), to(toBoxedChar(toChar(8192)), true), to(toBoxedChar(toChar(8193)), true), to(toBoxedChar(toChar(8194)), true), to(toBoxedChar(toChar(8195)), true), to(toBoxedChar(toChar(8196)), true), to(toBoxedChar(toChar(8197)), true), to(toBoxedChar(toChar(8198)), true), to(toBoxedChar(toChar(8199)), true), to(toBoxedChar(toChar(8200)), true), to(toBoxedChar(toChar(8201)), true), to(toBoxedChar(toChar(8202)), true), to(toBoxedChar(toChar(8232)), true), to(toBoxedChar(toChar(8233)), true), to(toBoxedChar(toChar(8239)), true), to(toBoxedChar(toChar(8287)), true), to(toBoxedChar(toChar(12288)), true)]);
   PI = 3.1415927;
   PI2 = PI * 2.0;
   E = 2.7182817;
@@ -10913,6 +11471,7 @@ define(['exports', 'kotlin'], function (_, Kotlin) {
   TO_RAD = PI / 180.0;
   breakingChars = Kotlin.charArrayOf(45, 32, 10, 9);
   return _;
-});
+}));
 
 //# sourceMappingURL=AcornUtils.js.map
+function alwaysTrue() { return true; }
