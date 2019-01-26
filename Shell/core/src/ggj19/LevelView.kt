@@ -33,9 +33,11 @@ import com.acornui.component.text.text
 import com.acornui.core.di.Owned
 import com.acornui.core.di.own
 import com.acornui.core.graphic.orthographicCamera
+import com.acornui.core.input.Ascii
 import com.acornui.core.input.interaction.dragAttachment
 import com.acornui.core.input.interaction.pinch
 import com.acornui.core.input.interaction.pinchStart
+import com.acornui.core.input.keyDown
 import com.acornui.core.input.wheel
 import com.acornui.core.observe.dataBinding
 import com.acornui.core.tween.TweenRegistry
@@ -167,29 +169,37 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 			+container {
 
+				for (row in 0 until GameLevel.MAX_ROWS) {
+					for (col in 0 until GameLevel.MAX_COLS) {
+						+tileViews[row][col]
+						tileViews[row][col].moveTo(Isometric.twoDToIso(col * TILE_SIZE, row * TILE_SIZE))
+					}
+				}
+
+				// Debug lines
 				+staticMeshC {
+					visible = false
+					stage.keyDown().add {
+						if (it.ctrlKey && it.keyCode == Ascii.D) {
+							visible = !visible
+						}
+					}
 					mesh = staticMesh {
 						buildMesh {
-							MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 1f)
+							//							MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 1f)
+							MeshBuilderStyle.lineStyle.colorTint = Color.RED
 
-							for (row in 0..GameLevel.MAX_ROWS) {
+							for (row in 0 until GameLevel.MAX_ROWS) {
 								val ptA = Isometric.twoDToIso(Vector2(0f, row * TILE_SIZE))
 								val ptB = Isometric.twoDToIso(Vector2(GameLevel.MAX_ROWS * TILE_SIZE, row * TILE_SIZE))
 								line(ptA.x, ptA.y, ptB.x, ptB.y)
 							}
-							for (col in 0..GameLevel.MAX_COLS) {
+							for (col in 0 until GameLevel.MAX_COLS) {
 								val ptA = Isometric.twoDToIso(Vector2(col * TILE_SIZE, 0f))
 								val ptB = Isometric.twoDToIso(Vector2(col * TILE_SIZE, GameLevel.MAX_ROWS * TILE_SIZE))
 								line(ptA.x, ptA.y, ptB.x, ptB.y)
 							}
 						}
-					}
-				}
-
-				for (row in 0 until GameLevel.MAX_ROWS) {
-					for (col in 0 until GameLevel.MAX_COLS) {
-						+tileViews[row][col]
-						tileViews[row][col].moveTo(Isometric.twoDToIso(col * TILE_SIZE + padding, row * TILE_SIZE + padding))
 					}
 				}
 			}

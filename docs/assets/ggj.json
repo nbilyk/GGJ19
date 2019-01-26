@@ -2,12 +2,12 @@
 	"pages": [
 		{
 			"texturePath": "ggj0.png",
-			"width": 256,
-			"height": 128,
+			"width": 1024,
+			"height": 256,
 			"pixelFormat": "RGBA",
 			"premultipliedAlpha": false,
 			"filterMin": "LINEAR_MIPMAP_LINEAR",
-			"filterMag": "NEAREST",
+			"filterMag": "LINEAR",
 			"regions": [
 				{
 					"name": "EmptyTile.png",
@@ -15,19 +15,19 @@
 					"bounds": {
 						"x": 3,
 						"y": 0,
-						"width": 64,
-						"height": 64
+						"width": 256,
+						"height": 128
 					},
-					"padding": [ 0, 0, 0, 0 ]
+					"padding": [ 0, 64, 0, 0 ]
 				},
 				{
 					"name": "Room.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 69,
+						"x": 261,
 						"y": 0,
-						"width": 63,
-						"height": 63
+						"width": 256,
+						"height": 193
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
@@ -35,7 +35,7 @@
 					"name": "smiley-cry.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 134,
+						"x": 519,
 						"y": 0,
 						"width": 15,
 						"height": 15
@@ -46,7 +46,7 @@
 					"name": "smiley.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 134,
+						"x": 519,
 						"y": 17,
 						"width": 15,
 						"height": 15

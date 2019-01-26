@@ -29,7 +29,8 @@ class TileView(owner: Owned) : ContainerImpl(owner) {
 	val data = dataBinding(Tile())
 
 	private val atlas = addChild(atlas(atlasPath, "EmptyTile") {
-		originY = 128f
+		originY = 64f
+		originX = 128f
 		setScaling(0.5f, 0.5f)
 	})
 

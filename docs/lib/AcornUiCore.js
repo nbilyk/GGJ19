@@ -6435,6 +6435,9 @@
     callback$default ? callback$default(x, y, z) : this.setPosition_y2kzbl$$default(x, y, z);
   };
   Positionable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Positionable', interfaces: [PositionableRo]};
+  function moveTo_0($receiver, value) {
+    $receiver.moveTo_y2kzbl$(value.x, value.y);
+  }
   function VirtualLayoutContainer() {
   }
   function VirtualList(owner, layoutAlgorithm, layoutStyle) {
@@ -14334,6 +14337,9 @@
     return AssetManager$Companion_instance;
   }
   AssetManager.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'AssetManager', interfaces: [Progress, Disposable]};
+  function load($receiver, path, type) {
+    return inject($receiver, AssetManager$Companion_getInstance()).load_9yajmz$(path, type);
+  }
   function AssetManagerImpl(rootPath, files, loaderFactories, appendVersion) {
     if (rootPath === void 0)
       rootPath = '';
@@ -27977,6 +27983,7 @@
   package$layout.Transformable = Transformable;
   package$layout.PositionableRo = PositionableRo;
   package$layout.Positionable = Positionable;
+  package$layout.moveTo_jveujf$ = moveTo_0;
   package$layout.VirtualLayoutContainer = VirtualLayoutContainer;
   package$layout.VirtualList = VirtualList;
   package$layout.ListRendererRo = ListRendererRo;
@@ -28209,6 +28216,7 @@
   package$asset.AssetLoadingException = AssetLoadingException;
   Object.defineProperty(AssetManager, 'Companion', {get: AssetManager$Companion_getInstance});
   package$asset.AssetManager = AssetManager;
+  package$asset.load_k5bt3m$ = load;
   package$asset.AssetManagerImpl = AssetManagerImpl;
   Object.defineProperty(AssetType, 'Companion', {get: AssetType$Companion_getInstance});
   package$asset.AssetType = AssetType;
