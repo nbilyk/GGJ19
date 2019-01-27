@@ -18,7 +18,6 @@ package ggj19
 
 import com.acornui.collection.ArrayList
 import com.acornui.collection.replace
-import com.acornui.collection.replaceAt
 import com.acornui.component.*
 import com.acornui.component.drawing.MeshBuilderStyle
 import com.acornui.component.drawing.line
@@ -27,8 +26,6 @@ import com.acornui.component.drawing.staticMeshC
 import com.acornui.component.layout.moveTo
 import com.acornui.core.Disposable
 import com.acornui.core.cache.recycle
-import com.acornui.core.cursor.StandardCursors
-import com.acornui.core.cursor.cursor
 import com.acornui.core.di.Owned
 import com.acornui.core.input.Ascii
 import com.acornui.core.input.interaction.dragEnd
@@ -41,17 +38,21 @@ import com.acornui.graphic.Color
 import com.acornui.math.RayRo
 import com.acornui.math.Vector2
 import com.acornui.signal.bind
-import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
 import ggj19.model.emptyCharacter
 import ggj19.util.Isometric
 
-class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val controlsState: DataBinding<UiControlsStateVo>) : ElementContainerImpl<UiComponent>(owner) {
+class GameStage(
+		owner: Owned,
+		private val currentLevel: DataBinding<GameLevel>,
+		private val controlsState: DataBinding<UiControlsStateVo>,
+		private val characterHappiness: DataBinding<Map<String, Boolean>>
+) : ElementContainerImpl<UiComponent>(owner) {
 
 	private val tileViews: List<List<TileView>> = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { TileView(this) } }
 	private val characterViews = ArrayList<GameCharacterView>()
 
-	private val dragView = GameCharacterView(owner, emptyCharacter)
+	private val dragView = GameCharacterView(owner)
 
 	init {
 		interactivityMode = InteractivityMode.ALWAYS
@@ -68,19 +69,8 @@ class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val cont
 	private fun initTileViews() {
 		for (row in 0 until GameLevel.MAX_ROWS) {
 			for (col in 0 until GameLevel.MAX_COLS) {
-				+tileViews[row][col]
-				tileViews[row][col].moveTo(Isometric.twoDToIso(col * TileView.TILE_SIZE, row * TileView.TILE_SIZE))
-			}
-		}
-
-		for (row in 0 until GameLevel.MAX_ROWS) {
-			for (col in 0 until GameLevel.MAX_COLS) {
-				tileViews[row][col].data.bind { newTile ->
-					currentLevel.change {
-						it.copy(
-								grid = it.grid.replaceAt(row, it.grid[row].replaceAt(col, newTile))
-						)
-					}
+				+tileViews[row][col].apply {
+					moveTo(Isometric.twoDToIso(col * TileView.TILE_SIZE, row * TileView.TILE_SIZE))
 				}
 			}
 		}
@@ -101,7 +91,7 @@ class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val cont
 			recycle(
 					data = placedCharacters,
 					existingElements = characterViews,
-					factory = { item, index -> +createGameCharacterView(item) },
+					factory = { item, index -> +createGameCharacterView() },
 					configure = { element, item, index -> element.data.value = item },
 					disposer = { element -> element.dispose() },
 					retriever = { element -> element.data.value },
@@ -165,8 +155,8 @@ class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val cont
 		}
 	}
 
-	private fun createGameCharacterView(character: GameCharacter): GameCharacterView {
-		return GameCharacterView(this, character).apply {
+	private fun createGameCharacterView(): GameCharacterView {
+		return GameCharacterView(this).apply {
 			setScaling(0.6f, 0.6f) // TODO: TEMP
 			data.changed.add { old, new ->
 				currentLevel.change {
@@ -178,7 +168,9 @@ class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val cont
 			(data or currentLevel).bind {
 				val isLocked = currentLevel.value.isLocked(data.value)
 				interactivityMode = if (isLocked) InteractivityMode.NONE else InteractivityMode.ALL
+				// TODO: Make pretty
 				colorTint = if (isLocked) Color.GRAY else Color.WHITE
+				alpha = if (isLocked) 0.5f else 1f
 			}
 
 			dragStart().add { _ ->
@@ -191,6 +183,10 @@ class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val cont
 				val gameCharacter = data.value
 				currentLevel.placeCharacter(gameCharacter, canvasToGrid(mouse.canvasX, mouse.canvasY, GridPosition()))
 				controlsState.change { it.copy(dragging = null) }
+			}
+
+			characterHappiness.bind {
+				isHappy.value = it[data.value.id] ?: true
 			}
 		}
 	}

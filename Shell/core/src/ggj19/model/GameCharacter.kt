@@ -31,8 +31,9 @@ data class GameCharacter(
 
 enum class GameCharacterType(val char: Char) {
 	MUSICIAN('M'),
-	GRANDMA('G'),
-	ARTIST('A'),
+	OLD_PERSON('G'),
+	PARENT('P'),
+	COOK('C'),
 	UNKNOWN('U');
 
 	companion object {

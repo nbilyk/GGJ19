@@ -26,9 +26,6 @@ import com.acornui.core.asset.AssetType
 import com.acornui.core.asset.load
 import com.acornui.core.di.Owned
 import com.acornui.core.nav.NavBindable
-import com.acornui.core.observe.dataBinding
-import com.acornui.core.observe.or
-import com.acornui.signal.bind
 import ggj19.model.*
 
 /**
@@ -36,42 +33,13 @@ import ggj19.model.*
  */
 class GGJ19(owner: Owned) : CanvasLayoutContainer(owner), NavBindable {
 
-	private val atlasPath = "assets/ggj.json"
-
-	private val levels = dataBinding(listOf(GameLevel()))
-	private val currentLevel = dataBinding(0)
-
 	init {
 		Skin(stage).apply()
-
-		load("assets/levelData.txt", AssetType.TEXT).then {
-			levels.value = parseGameData(it)
-		}
-
-		val levelView = +LevelView(this).apply {
-			(levels or currentLevel).bind {
-				originalData.value = levels.value.getOrNull(currentLevel.value) ?: emptyLevel
+		+GameView(this).apply {
+			load("assets/levelData.txt", AssetType.TEXT).then {
+				levels.value = parseGameData(it)
 			}
 		} layout { fill() }
-
-		(levels or currentLevel).bind {
-			if (levels.value.isNotEmpty() && currentLevel.value >= levels.value.size) {
-				levelView.visible = false
-				+text("Victory!!!") layout { center() }
-			}
-		}
-
-//		+rect {
-//			style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
-//		} layout { widthPercent = 1f; height = 40f }
-//		+hGroup {
-//			+text {
-//				currentLevel.bind {
-//					text = "Level $it"
-//				}
-//			}
-//		} layout { left = 10f; top = 10f }
-
 	}
 }
 

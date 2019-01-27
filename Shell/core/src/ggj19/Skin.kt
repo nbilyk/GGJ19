@@ -17,8 +17,11 @@
 package ggj19
 
 import com.acornui.async.launch
+import com.acornui.component.Button
 import com.acornui.component.UiComponent
 import com.acornui.component.style.addStyleRule
+import com.acornui.component.style.withAncestor
+import com.acornui.component.text.CharStyle
 import com.acornui.component.text.charStyle
 import com.acornui.component.text.loadFontFromAtlas
 import com.acornui.core.asset.cachedGroup
@@ -29,6 +32,19 @@ class Skin(stage: UiComponent) : BasicUiSkin(stage) {
 
 	override fun initTheme() {
 		theme.textColor = Color(1f, 1f, 1f, 1f)
+		theme.panelBgColor = Color.DARK_GRAY
+		theme.controlBarBgColor = Color(0.3f, 0.3f, 0.3f, 1f)
+	}
+
+	override fun apply() {
+		super.apply()
+
+		target.addStyleRule(charStyle { selectable = false })
+
+		val charStyle = CharStyle()
+		charStyle.colorTint = Color.DARK_GRAY
+		charStyle.selectable = false
+		target.addStyleRule(charStyle, withAncestor(Button))
 	}
 
 	override fun loadBitmapFonts() {

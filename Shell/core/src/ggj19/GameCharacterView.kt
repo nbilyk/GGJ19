@@ -26,16 +26,18 @@ import com.acornui.core.di.Owned
 import com.acornui.core.observe.dataBinding
 import com.acornui.math.Vector2
 import ggj19.TileView.Companion.TILE_SIZE
-import ggj19.model.GameCharacter
+import ggj19.model.emptyCharacter
 import ggj19.util.Isometric
 
-class GameCharacterView(owner: Owned, initialCharacter: GameCharacter) : ContainerImpl(owner) {
+class GameCharacterView(owner: Owned) : ContainerImpl(owner) {
 
 	private val atlasPath = "assets/ggj.json"
 
-	val data = dataBinding(initialCharacter)
+	val data = dataBinding(emptyCharacter)
+	val isHappy = dataBinding(true)
 
 	private val icon = addChild(atlas { setOrigin(32f, 32f) })
+	private val happyStateIcon = addChild(atlas())
 
 	init {
 		cursor(StandardCursors.HAND)
@@ -45,6 +47,9 @@ class GameCharacterView(owner: Owned, initialCharacter: GameCharacter) : Contain
 					(it.row + 0.5f) * TILE_SIZE
 			)))
 			icon.setRegion(atlasPath, it.type.char.toString())
+		}
+		isHappy.bind {
+			happyStateIcon.setRegion(atlasPath, if (it) "smiley" else "smiley-cry")
 		}
 	}
 }

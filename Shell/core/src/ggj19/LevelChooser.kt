@@ -16,37 +16,29 @@
 
 package ggj19
 
-import com.acornui.component.ContainerImpl
-import com.acornui.component.atlas
+import com.acornui.component.WindowPanel
+import com.acornui.component.button
+import com.acornui.component.layout.algorithm.vGroup
 import com.acornui.core.di.Owned
-import com.acornui.core.observe.dataBinding
-import ggj19.model.RoomType
-import ggj19.model.Tile
+import com.acornui.core.input.interaction.click
+import com.acornui.core.observe.DataBinding
 
-class TileView(owner: Owned) : ContainerImpl(owner) {
-
-	private val atlasPath = "assets/ggj.json"
-	val data = dataBinding(Tile())
-
-	private val atlas = addChild(atlas {
-		originY = 64f
-		originX = 128f
-		setScaling(0.5f, 0.5f)
-	})
+class LevelChooser(owner: Owned, levels: Int, levelBinding: DataBinding<Int>) : WindowPanel(owner) {
 
 	init {
-		data.bind {
-			val region = when (it.roomType) {
-				RoomType.NONE -> "EmptyTile"
-				RoomType.STANDARD -> "Room"
+		+vGroup {
+			for (i in 1..levels) {
+				+button("Level $i") {
+					levelBinding.bind {
+						toggled = i == it + 1
+					}
+					click().add {
+						levelBinding.value = i - 1
+//						close()
+					}
+				}
 			}
-			atlas.setRegion(atlasPath, region)
 		}
-
-
 	}
 
-	companion object {
-		const val TILE_SIZE = 64f
-	}
 }

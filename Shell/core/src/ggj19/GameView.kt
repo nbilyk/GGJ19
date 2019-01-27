@@ -42,14 +42,21 @@ import com.acornui.core.input.interaction.*
 import com.acornui.core.input.wheel
 import com.acornui.core.observe.DataBinding
 import com.acornui.core.observe.dataBinding
+import com.acornui.core.observe.or
 import com.acornui.core.persistance.Persistence
+import com.acornui.core.popup.PopUpInfo
+import com.acornui.core.popup.addPopUp
 import com.acornui.core.tween.TweenRegistry
 import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
 import com.acornui.core.userInfo
 import com.acornui.graphic.Color
 import com.acornui.logging.Log
-import com.acornui.math.*
+import com.acornui.math.Easing
+import com.acornui.math.Interpolation
+import com.acornui.math.MathUtils
+import com.acornui.math.Pad
+import com.acornui.signal.bind
 import com.acornui.skins.Theme
 import ggj19.TileView.Companion.TILE_SIZE
 import ggj19.model.GameCharacter
@@ -57,14 +64,19 @@ import ggj19.model.GameLevel
 import ggj19.model.RoomType
 import ggj19.model.emptyLevel
 
-class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
+class GameView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 	private val controlsState = dataBinding(UiControlsStateVo())
 
-	val originalData = dataBinding(emptyLevel)
-	private val currentLevel = dataBinding(originalData.value)
+	val levels = dataBinding(listOf(emptyLevel))
+	val currentLevelNumber = dataBinding(0)
 
-	private val gameStage = GameStage(this, currentLevel, controlsState)
+	// Character id -> isHappy
+	val characterHappiness = dataBinding(mapOf<String, Boolean>())
+
+	private val currentLevel = dataBinding(emptyLevel)
+
+	private val gameStage = GameStage(this, currentLevel, controlsState, characterHappiness)
 
 	// Camera and toss scrolling properties.
 	private val overviewCam = orthographicCamera(true)
@@ -87,50 +99,19 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private val persistence = inject(Persistence)
 
 	init {
-		originalData.bind { currentLevel.value = it }
+		(levels or currentLevelNumber).bind {
+			currentLevel.value = levels.value.getOrNull(currentLevelNumber.value) ?: emptyLevel
+		}
+
 		interactivityMode = InteractivityMode.ALWAYS
 
 		initCameraControls()
 		initStageView()
 		initCharacterQueue()
+		initCharacterRules()
 		initMusic()
-	}
-
-	private fun initMusic() {
-		+iconButton {
-			iconMap(mapOf(ButtonState.UP to atlas(theme.atlasPath, "speaker-volume-control-mute"), ButtonState.TOGGLED_UP to atlas(theme.atlasPath, "speaker-volume")))
-			toggleOnClick = true
-			controlsState.bind { toggled = !it.isMuted }
-			toggledChanged.add { _ ->
-				controlsState.change {
-					it.copy(isMuted = !toggled)
-				}
-			}
-		} layout { bottom = 5f; left = 5f }
-
-		if (userInfo.isDesktop && persistence.getItem("muted") != "true") {
-			// On desktop we can start unmuted.
-			controlsState.change { it.copy(isMuted = false) }
-		}
-
-		controlsState.bind {
-			if (it.isMuted) {
-				mainMusic?.stop()
-				persistence.setItem("muted", "true")
-				persistence.flush()
-			} else {
-				if (mainMusic == null) {
-					load("assets/music/background.mp3", AssetType.MUSIC).then {
-						it.loop = true
-						it.play()
-						mainMusic = it
-					}
-				}
-				mainMusic?.play()
-				persistence.setItem("muted", "false")
-				persistence.flush()
-			}
-		}
+		initNextLevelButton()
+		initVictoryScreen()
 	}
 
 	private fun initCharacterQueue() {
@@ -142,11 +123,27 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 				interactivityMode = InteractivityMode.CHILDREN
 				style.background = {
 					rect {
-						style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
+						style.backgroundColor = Color(0f, 0f, 0f, 0.6f)
 					}
 				}
 				style.padding = Pad(5f)
 				+hGroup {
+					+text {
+						currentLevelNumber.bind {
+							text = "Level $it"
+						}
+						click().add { e ->
+							if (e.count == 2) {
+								addPopUp(PopUpInfo(LevelChooser(this, levels.value.size, currentLevelNumber)))
+							}
+						}
+					}
+					+iconButton(theme.atlasPath, "burn") {
+						label = "Restart"
+						click().add {
+							resetLevel()
+						}
+					}
 					+spacer() layout { widthPercent = 1f }
 					val upNextLbl = +text("Up next:")
 					currentLevel.bind { newData ->
@@ -198,6 +195,12 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 				} layout { width = 64f; height = 64f; center() }
 			} layout { width = 106f; height = 106f }
 		} layout { widthPercent = 1f }
+	}
+
+	private fun initCharacterRules() {
+		currentLevel.bind { level ->
+			characterHappiness.change { GameRules.calculateHappiness(level.characters) }
+		}
 	}
 
 	private fun initCameraControls() {
@@ -293,8 +296,81 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 	}
 
-	fun resetLevel() {
-		currentLevel.value = originalData.value
+	private fun resetLevel() {
+		currentLevel.value = levels.value.getOrNull(currentLevelNumber.value) ?: emptyLevel
+	}
+
+	private fun initMusic() {
+		+iconButton {
+			iconMap(mapOf(ButtonState.UP to atlas(theme.atlasPath, "speaker-volume-control-mute"), ButtonState.TOGGLED_UP to atlas(theme.atlasPath, "speaker-volume")))
+			toggleOnClick = true
+			controlsState.bind { toggled = !it.isMuted }
+			toggledChanged.add { _ ->
+				controlsState.change {
+					it.copy(isMuted = !toggled)
+				}
+			}
+		} layout { bottom = 5f; left = 5f }
+
+		if (userInfo.isDesktop && persistence.getItem("muted") != "true") {
+			// On desktop we can start unmuted.
+			controlsState.change { it.copy(isMuted = false) }
+		}
+
+		controlsState.bind {
+			if (it.isMuted) {
+				mainMusic?.stop()
+				persistence.setItem("muted", "true")
+				persistence.flush()
+			} else {
+				if (mainMusic == null) {
+					load("assets/music/background.mp3", AssetType.MUSIC).then {
+						it.loop = true
+						it.play()
+						mainMusic = it
+					}
+				}
+				mainMusic?.play()
+				persistence.setItem("muted", "false")
+				persistence.flush()
+			}
+		}
+	}
+
+	private fun initNextLevelButton() {
+		// Next level button
+		+iconButton(atlasPath, "smiley") {
+			label = "Next Level!"
+			(currentLevel or characterHappiness).bind {
+				var showButton = false
+				if (currentLevel.value.characters.isNotEmpty()) {
+					val nextUnplaced = currentLevel.value.characters.find { !it.isPlaced }
+					println("nextUnplaced $nextUnplaced")
+					if (nextUnplaced == null) {
+						println("All placed")
+						// All placed
+						if (!characterHappiness.value.containsValue(false)) {
+							// All happy
+						println("All Happy")
+							showButton = true
+						}
+					}
+				}
+				visible = showButton
+			}
+			click().add {
+				currentLevelNumber.change { it + 1 }
+			}
+		} layout { bottom = 10f; horizontalCenter = 0f }
+	}
+
+	private fun initVictoryScreen() {
+		(levels or currentLevelNumber).bind {
+			if (levels.value.isNotEmpty() && currentLevelNumber.value >= levels.value.size) {
+				visible = false
+				addPopUp(popUpInfo = PopUpInfo(VictoryView(this)))
+			}
+		}
 	}
 
 	// Utility

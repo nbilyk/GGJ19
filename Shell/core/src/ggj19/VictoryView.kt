@@ -16,37 +16,14 @@
 
 package ggj19
 
-import com.acornui.component.ContainerImpl
-import com.acornui.component.atlas
+import com.acornui.component.Panel
+import com.acornui.component.text.text
 import com.acornui.core.di.Owned
-import com.acornui.core.observe.dataBinding
-import ggj19.model.RoomType
-import ggj19.model.Tile
 
-class TileView(owner: Owned) : ContainerImpl(owner) {
-
-	private val atlasPath = "assets/ggj.json"
-	val data = dataBinding(Tile())
-
-	private val atlas = addChild(atlas {
-		originY = 64f
-		originX = 128f
-		setScaling(0.5f, 0.5f)
-	})
+class VictoryView(owner: Owned): Panel(owner) {
 
 	init {
-		data.bind {
-			val region = when (it.roomType) {
-				RoomType.NONE -> "EmptyTile"
-				RoomType.STANDARD -> "Room"
-			}
-			atlas.setRegion(atlasPath, region)
-		}
-
-
+		+text("Victory!!!")
 	}
 
-	companion object {
-		const val TILE_SIZE = 64f
-	}
 }
