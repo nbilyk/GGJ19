@@ -35,7 +35,7 @@ class GameCharacterIconView(owner: Owned) : StackLayoutContainer(owner) {
 		data.bind {
 			if (it != null) {
 				visible = true
-				icon.contentsAtlas(atlasPath, it.type.char.toString())
+				icon.contentsAtlas(atlasPath, "icon_" + it.type.toString().toLowerCase())
 			} else {
 				visible = false
 			}

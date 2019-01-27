@@ -33,19 +33,15 @@ class TileView(owner: Owned) : ContainerImpl(owner) {
 
 	private val grass = addChild(piece("floor_grass_a"))
 	private val floor = addChild(piece("floor${Random.nextInt(3)}"))
-	private val rightWall = addChild(piece("right_wall${Random.nextInt(3)}"))
-	private val leftWall = addChild(piece("left_wall${Random.nextInt(3)}"))
+	private val rightWall = addChild(piece("right_wall${Random.nextInt(3)}") { alpha = 0.7f })
+	private val leftWall = addChild(piece("left_wall${Random.nextInt(3)}"){ alpha = 0.7f })
 
-	init {
-		data.bind {
-			val isRoom = it.roomType == RoomType.STANDARD
-			grass.visible = !isRoom
-		}
-	}
 
 	fun renderGround(clip: MinMaxRo) {
-		floor.render(clip)
-		grass.render(clip)
+		val isRoom = data.value.roomType == RoomType.STANDARD
+
+		if (isRoom) floor.render(clip)
+		else grass.render(clip)
 	}
 
 	fun renderRightWall(clip: MinMaxRo) {
@@ -56,12 +52,13 @@ class TileView(owner: Owned) : ContainerImpl(owner) {
 		leftWall.render(clip)
 	}
 
-	private fun piece(region: String): AtlasComponent {
+	private fun piece(region: String, init: AtlasComponent.() -> Unit = {}): AtlasComponent {
 		return atlas(atlasPath, region) {
 			visible = false
 			originY = 64f
 			originX = 128f
 			setScaling(0.5f, 0.5f)
+			init()
 		}
 	}
 

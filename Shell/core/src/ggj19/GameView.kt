@@ -345,7 +345,6 @@ class GameView(owner: Owned) : CanvasLayoutContainer(owner) {
 				var showButton = false
 				if (currentLevel.value.characters.isNotEmpty()) {
 					val nextUnplaced = currentLevel.value.characters.find { !it.isPlaced }
-					println("nextUnplaced $nextUnplaced")
 					if (nextUnplaced == null) {
 						println("All placed")
 						// All placed

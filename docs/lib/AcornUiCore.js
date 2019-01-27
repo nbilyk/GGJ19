@@ -26997,9 +26997,6 @@
     var infoMessageStyle = new CharStyle();
     infoMessageStyle.colorTint = this.theme.infoColor;
     addStyleRule(this.target, infoMessageStyle, withAncestor(TextStyleTags_getInstance().info));
-    var charStyle_0 = new CharStyle();
-    charStyle_0.selectable = false;
-    addStyleRule(this.target, charStyle_0, withAncestor(Button$Companion_getInstance()));
   };
   function BasicUiSkin$loadBitmapFonts$lambda$lambda($receiver) {
     $receiver.fontKey = 'assets/uiskin/verdana_14.fnt';
@@ -28154,6 +28151,7 @@
     this.textField.text = value;
   }});
   function CheckboxSkinPart_init$lambda($receiver) {
+    set_selectable_1($receiver, false);
     $receiver.includeInLayout = false;
     return Unit;
   }

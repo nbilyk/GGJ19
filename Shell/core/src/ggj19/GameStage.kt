@@ -161,21 +161,21 @@ class GameStage(
 
 			}
 
-			(data or currentLevel).bind {
-				val isLocked = currentLevel.value.isLocked(data.value)
-				interactivityMode = if (isLocked) InteractivityMode.NONE else InteractivityMode.ALL
-				// TODO: Make pretty
-				colorTint = if (isLocked) Color.GRAY else Color.WHITE
-				alpha = if (isLocked) 0.5f else 1f
-			}
+//			(data or currentLevel).bind {
+//				val isLocked = currentLevel.value.isLocked(data.value)
+//				interactivityMode = if (isLocked) InteractivityMode.NONE else InteractivityMode.ALL
+//				// TODO: Make pretty
+//				colorTint = if (isLocked) Color.GRAY else Color.WHITE
+//				alpha = if (isLocked) 0.5f else 1f
+//			}
 
 			dragStart().add { _ ->
-				visible = false
+				alpha = 0f
 				controlsState.change { it.copy(dragging = data.value) }
 			}
 
 			dragEnd().add { _ ->
-				visible = true
+				alpha = 1f
 				val gameCharacter = data.value
 				currentLevel.placeCharacter(gameCharacter, canvasToGrid(mouse.canvasX, mouse.canvasY, GridPosition()))
 				controlsState.change { it.copy(dragging = null) }

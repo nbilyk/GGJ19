@@ -26,7 +26,6 @@
   var dataBinding = $module$AcornUiCore.com.acornui.core.observe.dataBinding_7pofm6$;
   var image = $module$AcornUiCore.com.acornui.component.image_e3xjfr$;
   var Unit = Kotlin.kotlin.Unit;
-  var unboxChar = Kotlin.unboxChar;
   var contentsAtlas = $module$AcornUiCore.com.acornui.component.contentsAtlas_7bypn$;
   var Kind_CLASS = Kotlin.Kind.CLASS;
   var ContainerImpl = $module$AcornUiCore.com.acornui.component.ContainerImpl;
@@ -44,19 +43,15 @@
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var ensureNotNull = Kotlin.ensureNotNull;
   var recycle = $module$AcornUiCore.com.acornui.core.cache.recycle_xjf92d$;
-  var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
-  var keyDown = $module$AcornUiCore.com.acornui.core.input.keyDown_w26x3n$;
   var drawing = $module$AcornUiCore.com.acornui.component.drawing;
   var line = $module$AcornUiCore.com.acornui.component.drawing.line_5nybxc$;
   var staticMesh = $module$AcornUiCore.com.acornui.component.drawing.staticMesh_mkeht6$;
   var staticMeshC = $module$AcornUiCore.com.acornui.component.drawing.staticMeshC_ig2bzk$;
   var onTick = $module$AcornUiCore.com.acornui.core.time.onTick_1ilr4g$;
   var replace = $module$AcornUtils.com.acornui.collection.replace_3odih2$;
-  var or = $module$AcornUiCore.com.acornui.core.observe.or_x919w3$;
-  var InteractivityMode = $module$AcornUiCore.com.acornui.component.InteractivityMode;
-  var bind = $module$AcornUtils.com.acornui.signal.bind_3tpvqv$;
   var dragStart = $module$AcornUiCore.com.acornui.core.input.interaction.dragStart_jz45q0$;
   var dragEnd = $module$AcornUiCore.com.acornui.core.input.interaction.dragEnd_jz45q0$;
+  var InteractivityMode = $module$AcornUiCore.com.acornui.component.InteractivityMode;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var numberToInt = Kotlin.numberToInt;
   var ElementContainerImpl = $module$AcornUiCore.com.acornui.component.ElementContainerImpl;
@@ -93,6 +88,8 @@
   var AssetType = $module$AcornUiCore.com.acornui.core.asset.AssetType;
   var load = $module$AcornUiCore.com.acornui.core.asset.load_k5bt3m$;
   var then = $module$AcornUtils.com.acornui.async.then_7jcrga$;
+  var or = $module$AcornUiCore.com.acornui.core.observe.or_x919w3$;
+  var bind = $module$AcornUtils.com.acornui.signal.bind_3tpvqv$;
   var CanvasLayoutContainer = $module$AcornUiCore.com.acornui.component.layout.algorithm.CanvasLayoutContainer;
   var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var orthographicCamera = $module$AcornUiCore.com.acornui.core.graphic.orthographicCamera_fsqvpo$;
@@ -105,6 +102,7 @@
   var inject = $module$AcornUiCore.com.acornui.core.di.inject_y3a68v$;
   var Persistence = $module$AcornUiCore.com.acornui.core.persistance.Persistence;
   var logging = $module$AcornUtils.com.acornui.logging;
+  var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
   var NavBindable = $module$AcornUiCore.com.acornui.core.nav.NavBindable;
   var split = Kotlin.kotlin.text.split_ip8yn$;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
@@ -113,6 +111,7 @@
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var WindowPanel = $module$AcornUiCore.com.acornui.component.WindowPanel;
   var button = $module$AcornUiCore.com.acornui.component.button_l5thvq$;
+  var unboxChar = Kotlin.unboxChar;
   var Enum = Kotlin.kotlin.Enum;
   var toBoxedChar = Kotlin.toBoxedChar;
   var throwISE = Kotlin.throwISE;
@@ -129,6 +128,7 @@
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var launch = $module$AcornUtils.com.acornui.async.launch_g2bo5h$;
+  var Random = Kotlin.kotlin.random.Random;
   var Panel = $module$AcornUiCore.com.acornui.component.Panel;
   GameCharacterIconView.prototype = Object.create(StackLayoutContainer.prototype);
   GameCharacterIconView.prototype.constructor = GameCharacterIconView;
@@ -168,7 +168,7 @@
     return function (it) {
       if (it != null) {
         this$GameCharacterIconView.visible = true;
-        contentsAtlas(this$GameCharacterIconView.icon_0, this$GameCharacterIconView.atlasPath_0, String.fromCharCode(unboxChar(it.type.char)));
+        contentsAtlas(this$GameCharacterIconView.icon_0, this$GameCharacterIconView.atlasPath_0, 'icon_' + it.type.toString().toLowerCase());
       }
        else {
         this$GameCharacterIconView.visible = false;
@@ -183,7 +183,7 @@
     this.data = dataBinding(this, emptyCharacter);
     this.isHappy = dataBinding(this, true);
     this.icon_0 = this.addChild_mxweac$(atlas(this, GameCharacterView$icon$lambda));
-    this.happyStateIcon_0 = this.addChild_mxweac$(atlas(this));
+    this.happyStateIcon_0 = this.addChild_mxweac$(atlas(this, GameCharacterView$happyStateIcon$lambda));
     cursor_0(this, cursor.StandardCursors.HAND);
     this.data.bind_qlkmfe$(GameCharacterView_init$lambda(this));
     this.isHappy.bind_qlkmfe$(GameCharacterView_init$lambda_0(this));
@@ -192,10 +192,15 @@
     $receiver.setOrigin_y2kzbl$(32.0, 32.0);
     return Unit;
   }
+  function GameCharacterView$happyStateIcon$lambda($receiver) {
+    $receiver.setScaling_y2kzbl$(1.5, 1.5);
+    $receiver.moveTo_y2kzbl$(10.0, 0.0);
+    return Unit;
+  }
   function GameCharacterView_init$lambda(this$GameCharacterView) {
     return function (it) {
-      moveTo(this$GameCharacterView, Isometric_getInstance().twoDToIso_9wm29l$(new Vector2((it.col + 0.5) * TileView$Companion_getInstance().TILE_SIZE, (it.row + 0.5) * TileView$Companion_getInstance().TILE_SIZE)));
-      this$GameCharacterView.icon_0.setRegion_puj7f4$(this$GameCharacterView.atlasPath_0, String.fromCharCode(unboxChar(it.type.char)));
+      moveTo(this$GameCharacterView, Isometric_getInstance().twoDToIso_9wm29l$(new Vector2((it.col + 0.3) * TileView$Companion_getInstance().TILE_SIZE, (it.row + 0.3) * TileView$Companion_getInstance().TILE_SIZE)));
+      this$GameCharacterView.icon_0.setRegion_puj7f4$(this$GameCharacterView.atlasPath_0, it.type.toString().toLowerCase());
       return Unit;
     };
   }
@@ -208,7 +213,7 @@
   GameCharacterView.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterView', interfaces: [ContainerImpl]};
   function GameRules() {
     GameRules_instance = this;
-    this.dislikeRules_0 = mapOf([to(GameCharacterType$MUSICIAN_getInstance(), listOf([GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$PARENT_getInstance()])), to(GameCharacterType$OLD_PERSON_getInstance(), listOf([GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$COOK_getInstance()])), to(GameCharacterType$PARENT_getInstance(), listOf([GameCharacterType$PARENT_getInstance(), GameCharacterType$MUSICIAN_getInstance()])), to(GameCharacterType$COOK_getInstance(), listOf([GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$COOK_getInstance()]))]);
+    this.dislikeRules_0 = mapOf([to(GameCharacterType$MUSICIAN_getInstance(), listOf([GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$PARENT_getInstance()])), to(GameCharacterType$GRANDPA_getInstance(), listOf([GameCharacterType$GRANDPA_getInstance(), GameCharacterType$COOK_getInstance()])), to(GameCharacterType$PARENT_getInstance(), listOf([GameCharacterType$PARENT_getInstance(), GameCharacterType$MUSICIAN_getInstance()])), to(GameCharacterType$COOK_getInstance(), listOf([GameCharacterType$GRANDPA_getInstance(), GameCharacterType$COOK_getInstance()]))]);
   }
   GameRules.prototype.calculateHappiness_lpv8jf$ = function (characters) {
     var tmp$, tmp$_0, tmp$_1;
@@ -325,7 +330,7 @@
     for (var row = 0; row < 20; row++) {
       for (var col = 0; col < 20; col++) {
         var $receiver = this.tileViews_0.get_za3lpa$(row).get_za3lpa$(col);
-        moveTo($receiver, Isometric_getInstance().twoDToIso_dleff0$(col * TileView$Companion_getInstance().TILE_SIZE, row * TileView$Companion_getInstance().TILE_SIZE));
+        moveTo($receiver, Isometric_getInstance().twoDToIso_dleff0$(col * TileView$Companion_getInstance().TILE_SIZE + 1.0, row * TileView$Companion_getInstance().TILE_SIZE + 1.0));
         this.unaryPlus_b3a6qy$($receiver);
       }
     }
@@ -369,16 +374,8 @@
   GameStage.prototype.initCharacters_0 = function () {
     this.currentLevel_0.bind_qlkmfe$(GameStage$initCharacters$lambda(this));
   };
-  function GameStage$initDebugLines$lambda$lambda(this$) {
-    return function (it) {
-      if (it.ctrlKey && it.keyCode === 68) {
-        this$.visible = !this$.visible;
-      }
-      return Unit;
-    };
-  }
   function GameStage$initDebugLines$lambda$lambda$lambda($receiver) {
-    drawing.MeshBuilderStyle.lineStyle.colorTint = Color.Companion.RED;
+    drawing.MeshBuilderStyle.lineStyle.colorTint = new Color(0.25, 0.25, 0.25, 0.5);
     for (var row = 0; row <= 20; row++) {
       var ptA = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2(0.0, row * TileView$Companion_getInstance().TILE_SIZE));
       var ptB = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2(20 * TileView$Companion_getInstance().TILE_SIZE, row * TileView$Companion_getInstance().TILE_SIZE));
@@ -391,14 +388,12 @@
     }
     return Unit;
   }
-  function GameStage$initDebugLines$lambda$lambda_0($receiver) {
+  function GameStage$initDebugLines$lambda$lambda($receiver) {
     $receiver.buildMesh_dmwms7$(GameStage$initDebugLines$lambda$lambda$lambda);
     return Unit;
   }
   function GameStage$initDebugLines$lambda($receiver) {
-    $receiver.visible = false;
-    keyDown(get_stage($receiver)).add_trkh7z$(GameStage$initDebugLines$lambda$lambda($receiver));
-    $receiver.mesh = staticMesh($receiver, GameStage$initDebugLines$lambda$lambda_0);
+    $receiver.mesh = staticMesh($receiver, GameStage$initDebugLines$lambda$lambda);
     return Unit;
   }
   GameStage.prototype.initDebugLines_0 = function () {
@@ -448,23 +443,14 @@
       return Unit;
     };
   }
-  function GameStage$createGameCharacterView$lambda$lambda_0(this$GameStage, this$) {
-    return function () {
-      var isLocked = this$GameStage.currentLevel_0.value.isLocked_44icga$(this$.data.value);
-      this$.interactivityMode = isLocked ? InteractivityMode.NONE : InteractivityMode.ALL;
-      this$.colorTint = isLocked ? Color.Companion.GRAY : Color.Companion.WHITE;
-      this$.alpha = isLocked ? 0.5 : 1.0;
-      return Unit;
-    };
-  }
   function GameStage$createGameCharacterView$lambda$lambda$lambda_0(this$) {
     return function (it) {
       return it.copy_6sjg8m$(void 0, void 0, this$.data.value);
     };
   }
-  function GameStage$createGameCharacterView$lambda$lambda_1(this$, this$GameStage) {
+  function GameStage$createGameCharacterView$lambda$lambda_0(this$, this$GameStage) {
     return function (f) {
-      this$.visible = false;
+      this$.alpha = 0.0;
       this$GameStage.controlsState_0.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_0(this$));
       return Unit;
     };
@@ -472,16 +458,16 @@
   function GameStage$createGameCharacterView$lambda$lambda$lambda_1(it) {
     return it.copy_6sjg8m$(void 0, void 0, null);
   }
-  function GameStage$createGameCharacterView$lambda$lambda_2(this$, this$GameStage) {
+  function GameStage$createGameCharacterView$lambda$lambda_1(this$, this$GameStage) {
     return function (f) {
-      this$.visible = true;
+      this$.alpha = 1.0;
       var gameCharacter = this$.data.value;
       placeCharacter(this$GameStage.currentLevel_0, gameCharacter, this$GameStage.canvasToGrid_ewdjp1$(this$GameStage.mouse.canvasX, this$GameStage.mouse.canvasY, new GridPosition()));
       this$GameStage.controlsState_0.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_1);
       return Unit;
     };
   }
-  function GameStage$createGameCharacterView$lambda$lambda_3(this$) {
+  function GameStage$createGameCharacterView$lambda$lambda_2(this$) {
     return function (it) {
       var tmp$;
       this$.isHappy.value = (tmp$ = it.get_11rb$(this$.data.value.id)) != null ? tmp$ : true;
@@ -492,10 +478,9 @@
     var $receiver = new GameCharacterView(this);
     $receiver.setScaling_y2kzbl$(0.6, 0.6);
     $receiver.data.changed.add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda(this));
-    bind(or($receiver.data, this.currentLevel_0), GameStage$createGameCharacterView$lambda$lambda_0(this, $receiver));
-    dragStart($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_1($receiver, this));
-    dragEnd($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_2($receiver, this));
-    this.characterHappiness_0.bind_qlkmfe$(GameStage$createGameCharacterView$lambda$lambda_3($receiver));
+    dragStart($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_0($receiver, this));
+    dragEnd($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_1($receiver, this));
+    this.characterHappiness_0.bind_qlkmfe$(GameStage$createGameCharacterView$lambda$lambda_2($receiver));
     return $receiver;
   };
   GameStage.prototype.getChildrenUnderPoint_88w43d$$default = function (canvasX, canvasY, onlyInteractive, returnAll, out, rayCache) {
@@ -525,6 +510,47 @@
     out.col = numberToInt(this.tmpVec2_0.x / TileView$Companion_getInstance().TILE_SIZE);
     out.row = numberToInt(this.tmpVec2_0.y / TileView$Companion_getInstance().TILE_SIZE);
     return out;
+  };
+  GameStage.prototype.render_5yfmeh$ = function (clip) {
+    for (var row = 0; row < 20; row++) {
+      for (var col = 0; col < 20; col++) {
+        var tile = this.tileViews_0.get_za3lpa$(row).get_za3lpa$(col);
+        tile.renderGround_5yfmeh$(clip);
+      }
+    }
+    ElementContainerImpl.prototype.render_5yfmeh$.call(this, clip);
+    var characterViews = this.characterViews_0;
+    var grid = this.currentLevel_0.value.grid;
+    for (var row_0 = 0; row_0 < 20; row_0++) {
+      loop_label: for (var col_0 = 0; col_0 < 20; col_0++) {
+        var tile_0 = this.tileViews_0.get_za3lpa$(row_0).get_za3lpa$(col_0);
+        if (grid.get_za3lpa$(row_0).get_za3lpa$(col_0).roomType !== RoomType$NONE_getInstance()) {
+          tile_0.renderRightWall_5yfmeh$(clip);
+          tile_0.renderLeftWall_5yfmeh$(clip);
+          var firstOrNull$result;
+          firstOrNull$break: do {
+            var tmp$;
+            tmp$ = characterViews.iterator();
+            while (tmp$.hasNext()) {
+              var element = tmp$.next();
+              if (element.data.value.row === row_0 && element.data.value.col === col_0) {
+                firstOrNull$result = element;
+                break firstOrNull$break;
+              }
+            }
+            firstOrNull$result = null;
+          }
+           while (false);
+          var char = firstOrNull$result;
+          char != null ? (char.render_5yfmeh$(clip), Unit) : null;
+        }
+        if (row_0 > 0 && grid.get_za3lpa$(row_0 - 1 | 0).get_za3lpa$(col_0).roomType !== RoomType$NONE_getInstance())
+          tile_0.renderRightWall_5yfmeh$(clip);
+        if (col_0 > 0 && grid.get_za3lpa$(row_0).get_za3lpa$(col_0 - 1 | 0).roomType !== RoomType$NONE_getInstance())
+          tile_0.renderLeftWall_5yfmeh$(clip);
+      }
+    }
+    this.dragView_0.render_5yfmeh$(clip);
   };
   GameStage.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameStage', interfaces: [ElementContainerImpl]};
   var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
@@ -1029,7 +1055,6 @@
         }
          while (false);
         var nextUnplaced = firstOrNull$result;
-        println('nextUnplaced ' + toString(nextUnplaced));
         if (nextUnplaced == null) {
           println('All placed');
           if (!this$GameView.characterHappiness.value.containsValue_11rc$(false)) {
@@ -1396,7 +1421,7 @@
     GameCharacterType_initFields = function () {
     };
     GameCharacterType$MUSICIAN_instance = new GameCharacterType('MUSICIAN', 0, 77);
-    GameCharacterType$OLD_PERSON_instance = new GameCharacterType('OLD_PERSON', 1, 71);
+    GameCharacterType$GRANDPA_instance = new GameCharacterType('GRANDPA', 1, 71);
     GameCharacterType$PARENT_instance = new GameCharacterType('PARENT', 2, 80);
     GameCharacterType$COOK_instance = new GameCharacterType('COOK', 3, 67);
     GameCharacterType$UNKNOWN_instance = new GameCharacterType('UNKNOWN', 4, 85);
@@ -1407,10 +1432,10 @@
     GameCharacterType_initFields();
     return GameCharacterType$MUSICIAN_instance;
   }
-  var GameCharacterType$OLD_PERSON_instance;
-  function GameCharacterType$OLD_PERSON_getInstance() {
+  var GameCharacterType$GRANDPA_instance;
+  function GameCharacterType$GRANDPA_getInstance() {
     GameCharacterType_initFields();
-    return GameCharacterType$OLD_PERSON_instance;
+    return GameCharacterType$GRANDPA_instance;
   }
   var GameCharacterType$PARENT_instance;
   function GameCharacterType$PARENT_getInstance() {
@@ -1432,6 +1457,8 @@
   }
   GameCharacterType$Companion.prototype.fromLetter_s8itvh$ = function (char) {
     var tmp$, tmp$_0;
+    if (char === 79)
+      return GameCharacterType$GRANDPA_getInstance();
     tmp$ = GameCharacterType$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var value = tmp$[tmp$_0];
@@ -1451,15 +1478,15 @@
   }
   GameCharacterType.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterType', interfaces: [Enum]};
   function GameCharacterType$values() {
-    return [GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$PARENT_getInstance(), GameCharacterType$COOK_getInstance(), GameCharacterType$UNKNOWN_getInstance()];
+    return [GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$GRANDPA_getInstance(), GameCharacterType$PARENT_getInstance(), GameCharacterType$COOK_getInstance(), GameCharacterType$UNKNOWN_getInstance()];
   }
   GameCharacterType.values = GameCharacterType$values;
   function GameCharacterType$valueOf(name) {
     switch (name) {
       case 'MUSICIAN':
         return GameCharacterType$MUSICIAN_getInstance();
-      case 'OLD_PERSON':
-        return GameCharacterType$OLD_PERSON_getInstance();
+      case 'GRANDPA':
+        return GameCharacterType$GRANDPA_getInstance();
       case 'PARENT':
         return GameCharacterType$PARENT_getInstance();
       case 'COOK':
@@ -1735,9 +1762,42 @@
     ContainerImpl.call(this, owner);
     this.atlasPath_0 = 'assets/ggj.json';
     this.data = dataBinding(this, new Tile());
-    this.atlas_0 = this.addChild_mxweac$(atlas(this, TileView$atlas$lambda));
-    this.data.bind_qlkmfe$(TileView_init$lambda(this));
+    this.grass_0 = this.addChild_mxweac$(this.piece_0('floor_grass_a'));
+    this.floor_0 = this.addChild_mxweac$(this.piece_0('floor' + Random.Default.nextInt_za3lpa$(3)));
+    this.rightWall_0 = this.addChild_mxweac$(this.piece_0('right_wall' + Random.Default.nextInt_za3lpa$(3), TileView$rightWall$lambda));
+    this.leftWall_0 = this.addChild_mxweac$(this.piece_0('left_wall' + Random.Default.nextInt_za3lpa$(3), TileView$leftWall$lambda));
   }
+  TileView.prototype.renderGround_5yfmeh$ = function (clip) {
+    var isRoom = this.data.value.roomType === RoomType$STANDARD_getInstance();
+    if (isRoom)
+      this.floor_0.render_5yfmeh$(clip);
+    else
+      this.grass_0.render_5yfmeh$(clip);
+  };
+  TileView.prototype.renderRightWall_5yfmeh$ = function (clip) {
+    this.rightWall_0.render_5yfmeh$(clip);
+  };
+  TileView.prototype.renderLeftWall_5yfmeh$ = function (clip) {
+    this.leftWall_0.render_5yfmeh$(clip);
+  };
+  function TileView$piece$lambda($receiver) {
+    return Unit;
+  }
+  function TileView$piece$lambda_0(closure$init) {
+    return function ($receiver) {
+      $receiver.visible = false;
+      $receiver.originY = 64.0;
+      $receiver.originX = 128.0;
+      $receiver.setScaling_y2kzbl$(0.5, 0.5);
+      closure$init($receiver);
+      return Unit;
+    };
+  }
+  TileView.prototype.piece_0 = function (region, init) {
+    if (init === void 0)
+      init = TileView$piece$lambda;
+    return atlas_0(this, this.atlasPath_0, region, TileView$piece$lambda_0(init));
+  };
   function TileView$Companion() {
     TileView$Companion_instance = this;
     this.TILE_SIZE = 64.0;
@@ -1750,29 +1810,13 @@
     }
     return TileView$Companion_instance;
   }
-  function TileView$atlas$lambda($receiver) {
-    $receiver.originY = 64.0;
-    $receiver.originX = 128.0;
-    $receiver.setScaling_y2kzbl$(0.5, 0.5);
+  function TileView$rightWall$lambda($receiver) {
+    $receiver.alpha = 0.7;
     return Unit;
   }
-  function TileView_init$lambda(this$TileView) {
-    return function (it) {
-      var tmp$;
-      switch (it.roomType.name) {
-        case 'NONE':
-          tmp$ = 'EmptyTile';
-          break;
-        case 'STANDARD':
-          tmp$ = 'Room';
-          break;
-        default:tmp$ = Kotlin.noWhenBranchMatched();
-          break;
-      }
-      var region = tmp$;
-      this$TileView.atlas_0.setRegion_puj7f4$(this$TileView.atlasPath_0, region);
-      return Unit;
-    };
+  function TileView$leftWall$lambda($receiver) {
+    $receiver.alpha = 0.7;
+    return Unit;
   }
   TileView.$metadata$ = {kind: Kind_CLASS, simpleName: 'TileView', interfaces: [ContainerImpl]};
   function Isometric() {
@@ -1824,7 +1868,7 @@
   var package$model = package$ggj19.model || (package$ggj19.model = {});
   package$model.GameCharacter = GameCharacter;
   Object.defineProperty(GameCharacterType, 'MUSICIAN', {get: GameCharacterType$MUSICIAN_getInstance});
-  Object.defineProperty(GameCharacterType, 'OLD_PERSON', {get: GameCharacterType$OLD_PERSON_getInstance});
+  Object.defineProperty(GameCharacterType, 'GRANDPA', {get: GameCharacterType$GRANDPA_getInstance});
   Object.defineProperty(GameCharacterType, 'PARENT', {get: GameCharacterType$PARENT_getInstance});
   Object.defineProperty(GameCharacterType, 'COOK', {get: GameCharacterType$COOK_getInstance});
   Object.defineProperty(GameCharacterType, 'UNKNOWN', {get: GameCharacterType$UNKNOWN_getInstance});

@@ -25,9 +25,9 @@ object GameRules {
 
 	private val dislikeRules: Map<GameCharacterType, List<GameCharacterType>> = mapOf(
 			MUSICIAN to listOf(MUSICIAN, PARENT),
-			OLD_PERSON to listOf(OLD_PERSON, COOK),
+			GRANDPA to listOf(GRANDPA, COOK),
 			PARENT to listOf(PARENT, MUSICIAN),
-			COOK to listOf(OLD_PERSON, COOK)
+			COOK to listOf(GRANDPA, COOK)
 	)
 
 	fun calculateHappiness(characters: List<GameCharacter>): Map<String, Boolean> {

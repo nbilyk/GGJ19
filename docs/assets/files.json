@@ -2,127 +2,205 @@
 	"files": [
 		{
 			"path": "assets/build.txt",
-			"modified": 1548618206071,
+			"modified": 1548628471537,
 			"size": 4,
 			"mimeType": "text/plain"
 		},
 		{
 			"path": "assets/ggj.json",
-			"modified": 1548618203754,
-			"size": 1978,
+			"modified": 1548628467706,
+			"size": 4775,
 			"mimeType": null
 		},
 		{
 			"path": "assets/ggj0.png",
-			"modified": 1548618203756,
-			"size": 17291,
+			"modified": 1548628467708,
+			"size": 234107,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/levelData.txt",
-			"modified": 1548618203758,
-			"size": 2946,
+			"modified": 1548628467710,
+			"size": 5790,
 			"mimeType": "text/plain"
 		},
 		{
 			"path": "assets/music/background.mp3",
-			"modified": 1548618203762,
+			"modified": 1548628467714,
 			"size": 1243499,
 			"mimeType": "audio/mpeg"
 		},
 		{
+			"path": "assets/soundfx/character_pickup.mp3",
+			"modified": 1548628467717,
+			"size": 14744,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/character_placement.mp3",
+			"modified": 1548628467719,
+			"size": 19964,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/character_rearrangement.mp3",
+			"modified": 1548628467720,
+			"size": 18920,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/cook_negative.mp3",
+			"modified": 1548628467721,
+			"size": 75296,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/cook_positive.mp3",
+			"modified": 1548628467723,
+			"size": 74252,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/elderly_negative.mp3",
+			"modified": 1548628467724,
+			"size": 67988,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/elderly_positive.mp3",
+			"modified": 1548628467725,
+			"size": 66944,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/musician_negative.mp3",
+			"modified": 1548628467727,
+			"size": 75296,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/musician_positive.mp3",
+			"modified": 1548628467728,
+			"size": 71120,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/negative_connection_generic.mp3",
+			"modified": 1548628467729,
+			"size": 17876,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/parent_negative.mp3",
+			"modified": 1548628467730,
+			"size": 73208,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/parent_positive.mp3",
+			"modified": 1548628467732,
+			"size": 71120,
+			"mimeType": "audio/mpeg"
+		},
+		{
+			"path": "assets/soundfx/positive_connection_generic.mp3",
+			"modified": 1548628467733,
+			"size": 60680,
+			"mimeType": "audio/mpeg"
+		},
+		{
 			"path": "assets/uiskin/mainFont.fnt",
-			"modified": 1548618203783,
+			"modified": 1548628467751,
 			"size": 37704,
 			"mimeType": null
 		},
 		{
 			"path": "assets/uiskin/uiskin.json",
-			"modified": 1548618203784,
+			"modified": 1548628467752,
 			"size": 8944,
 			"mimeType": null
 		},
 		{
 			"path": "assets/uiskin/uiskin0.png",
-			"modified": 1548618203786,
+			"modified": 1548628467753,
 			"size": 38854,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Alias.png",
-			"modified": 1548618203765,
+			"modified": 1548628467736,
 			"size": 2983,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/AllScroll.png",
-			"modified": 1548618203766,
+			"modified": 1548628467737,
 			"size": 2918,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Cell.png",
-			"modified": 1548618203768,
+			"modified": 1548628467739,
 			"size": 2886,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Copy.png",
-			"modified": 1548618203769,
+			"modified": 1548628467740,
 			"size": 2983,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Crosshair.png",
-			"modified": 1548618203771,
+			"modified": 1548628467741,
 			"size": 2856,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Help.png",
-			"modified": 1548618203772,
+			"modified": 1548628467743,
 			"size": 2940,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/IBeam.png",
-			"modified": 1548618203774,
+			"modified": 1548628467744,
 			"size": 2862,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Move.png",
-			"modified": 1548618203775,
+			"modified": 1548628467745,
 			"size": 2919,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/NotAllowed.png",
-			"modified": 1548618203777,
+			"modified": 1548628467746,
 			"size": 2961,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/PointerWait.png",
-			"modified": 1548618203778,
+			"modified": 1548628467747,
 			"size": 3029,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/ResizeNE.png",
-			"modified": 1548618203779,
+			"modified": 1548628467748,
 			"size": 2884,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/ResizeSE.png",
-			"modified": 1548618203780,
+			"modified": 1548628467749,
 			"size": 2891,
 			"mimeType": "image/png"
 		},
 		{
 			"path": "assets/uiskin/cursors/Wait.png",
-			"modified": 1548618203782,
+			"modified": 1548628467750,
 			"size": 2958,
 			"mimeType": "image/png"
 		}

@@ -31,7 +31,7 @@ data class GameCharacter(
 
 enum class GameCharacterType(val char: Char) {
 	MUSICIAN('M'),
-	OLD_PERSON('G'),
+	GRANDPA('G'),
 	PARENT('P'),
 	COOK('C'),
 	UNKNOWN('U');
@@ -39,6 +39,7 @@ enum class GameCharacterType(val char: Char) {
 	companion object {
 
 		fun fromLetter(char: Char): GameCharacterType {
+			if (char == 'O') return GRANDPA
 			for (value in values()) {
 				if (value.char == char) return value
 			}

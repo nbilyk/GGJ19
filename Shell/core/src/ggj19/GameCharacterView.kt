@@ -37,16 +37,16 @@ class GameCharacterView(owner: Owned) : ContainerImpl(owner) {
 	val isHappy = dataBinding(true)
 
 	private val icon = addChild(atlas { setOrigin(32f, 32f) })
-	private val happyStateIcon = addChild(atlas())
+	private val happyStateIcon = addChild(atlas { setScaling(1.5f, 1.5f); moveTo(10f, 0f) })
 
 	init {
 		cursor(StandardCursors.HAND)
 		data.bind {
 			moveTo(Isometric.twoDToIso(Vector2(
-					(it.col + 0.5f) * TILE_SIZE,
-					(it.row + 0.5f) * TILE_SIZE
+					(it.col + 0.3f) * TILE_SIZE,
+					(it.row + 0.3f) * TILE_SIZE
 			)))
-			icon.setRegion(atlasPath, it.type.char.toString())
+			icon.setRegion(atlasPath, it.type.toString().toLowerCase())
 		}
 		isHappy.bind {
 			happyStateIcon.setRegion(atlasPath, if (it) "smiley" else "smiley-cry")
