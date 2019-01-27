@@ -35,9 +35,14 @@
   var cursor_0 = $module$AcornUiCore.com.acornui.core.cursor.cursor_8kxuli$;
   var Vector2 = $module$AcornUtils.com.acornui.math.Vector2;
   var moveTo = $module$AcornUiCore.com.acornui.component.layout.moveTo_jveujf$;
-  var replaceAt = $module$AcornUtils.com.acornui.collection.replaceAt_g8jm4q$;
-  var ensureNotNull = Kotlin.ensureNotNull;
+  var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
   var equals = Kotlin.equals;
+  var abs = Kotlin.kotlin.math.abs_za3lpa$;
+  var listOf = Kotlin.kotlin.collections.listOf_i5x0yv$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var ensureNotNull = Kotlin.ensureNotNull;
   var recycle = $module$AcornUiCore.com.acornui.core.cache.recycle_xjf92d$;
   var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
   var keyDown = $module$AcornUiCore.com.acornui.core.input.keyDown_w26x3n$;
@@ -56,32 +61,20 @@
   var numberToInt = Kotlin.numberToInt;
   var ElementContainerImpl = $module$AcornUiCore.com.acornui.component.ElementContainerImpl;
   var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_287e2$;
-  var CanvasLayoutContainer = $module$AcornUiCore.com.acornui.component.layout.algorithm.CanvasLayoutContainer;
-  var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
-  var AssetType = $module$AcornUiCore.com.acornui.core.asset.AssetType;
-  var load = $module$AcornUiCore.com.acornui.core.asset.load_k5bt3m$;
-  var then = $module$AcornUtils.com.acornui.async.then_7jcrga$;
-  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
-  var text = $module$AcornUiCore.com.acornui.component.text.text_7i1swk$;
-  var NavBindable = $module$AcornUiCore.com.acornui.core.nav.NavBindable;
-  var split = Kotlin.kotlin.text.split_ip8yn$;
-  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
-  var poll = $module$AcornUtils.com.acornui.collection.poll_vvxzk3$;
-  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
-  var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
-  var ButtonState = $module$AcornUiCore.com.acornui.component.ButtonState;
-  var atlas_0 = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
-  var to = Kotlin.kotlin.to_ujzrz7$;
-  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
-  var iconButton = $module$AcornUiCore.com.acornui.component.iconButton_hzc8f9$;
-  var core = $module$AcornUiCore.com.acornui.core;
   var HAlign = $module$AcornUiCore.com.acornui.component.layout.HAlign;
   var rect = $module$AcornUiCore.com.acornui.component.rect_8hpnyb$;
   var Pad_init = $module$AcornUtils.com.acornui.math.Pad_init_mx4ult$;
+  var click = $module$AcornUiCore.com.acornui.core.input.interaction.click_w26x3n$;
+  var PopUpInfo = $module$AcornUiCore.com.acornui.core.popup.PopUpInfo;
+  var addPopUp = $module$AcornUiCore.com.acornui.core.popup.addPopUp_40ntlz$;
+  var text = $module$AcornUiCore.com.acornui.component.text.text_os944a$;
+  var iconButton = $module$AcornUiCore.com.acornui.component.iconButton_27nmo1$;
   var spacer = $module$AcornUiCore.com.acornui.component.layout.spacer_4yhnsi$;
+  var text_0 = $module$AcornUiCore.com.acornui.component.text.text_7i1swk$;
   var reversed = Kotlin.kotlin.collections.reversed_7wnvza$;
   var hGroup = $module$AcornUiCore.com.acornui.component.layout.algorithm.hGroup_aiug52$;
   var panel = $module$AcornUiCore.com.acornui.component.panel_4k1mq$;
+  var atlas_0 = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
   var println = Kotlin.kotlin.io.println_s8jyv4$;
   var toString = Kotlin.toString;
   var stack = $module$AcornUiCore.com.acornui.component.stack_339xz$;
@@ -93,6 +86,15 @@
   var math = $module$AcornUtils.com.acornui.math;
   var createPropertyTween = $module$AcornUiCore.com.acornui.core.tween.createPropertyTween_abp5vu$;
   var driveTween = $module$AcornUiCore.com.acornui.core.tween.driveTween_asoma$;
+  var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
+  var ButtonState = $module$AcornUiCore.com.acornui.component.ButtonState;
+  var iconButton_0 = $module$AcornUiCore.com.acornui.component.iconButton_hzc8f9$;
+  var core = $module$AcornUiCore.com.acornui.core;
+  var AssetType = $module$AcornUiCore.com.acornui.core.asset.AssetType;
+  var load = $module$AcornUiCore.com.acornui.core.asset.load_k5bt3m$;
+  var then = $module$AcornUtils.com.acornui.async.then_7jcrga$;
+  var CanvasLayoutContainer = $module$AcornUiCore.com.acornui.component.layout.algorithm.CanvasLayoutContainer;
+  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
   var orthographicCamera = $module$AcornUiCore.com.acornui.core.graphic.orthographicCamera_fsqvpo$;
   var dragAttachment = $module$AcornUiCore.com.acornui.core.input.interaction.dragAttachment_rt6gw7$;
   var TossScroller = $module$AcornUiCore.com.acornui.component.scroll.TossScroller;
@@ -103,29 +105,43 @@
   var inject = $module$AcornUiCore.com.acornui.core.di.inject_y3a68v$;
   var Persistence = $module$AcornUiCore.com.acornui.core.persistance.Persistence;
   var logging = $module$AcornUtils.com.acornui.logging;
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var NavBindable = $module$AcornUiCore.com.acornui.core.nav.NavBindable;
+  var split = Kotlin.kotlin.text.split_ip8yn$;
+  var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
+  var poll = $module$AcornUtils.com.acornui.collection.poll_vvxzk3$;
+  var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+  var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var WindowPanel = $module$AcornUiCore.com.acornui.component.WindowPanel;
+  var button = $module$AcornUiCore.com.acornui.component.button_l5thvq$;
   var Enum = Kotlin.kotlin.Enum;
   var toBoxedChar = Kotlin.toBoxedChar;
   var throwISE = Kotlin.throwISE;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
-  var cachedGroup = $module$AcornUiCore.com.acornui.core.asset.cachedGroup_xd4dkp$;
-  var loadFontFromAtlas = $module$AcornUiCore.com.acornui.component.text.loadFontFromAtlas_itrc35$;
+  var BasicUiSkin = $module$AcornUiCore.com.acornui.skins.BasicUiSkin;
   var charStyle = $module$AcornUiCore.com.acornui.component.text.charStyle_8j5cku$;
   var addStyleRule = $module$AcornUiCore.com.acornui.component.style.addStyleRule_h9ypmx$;
+  var CharStyle = $module$AcornUiCore.com.acornui.component.text.CharStyle;
+  var Button = $module$AcornUiCore.com.acornui.component.Button;
+  var withAncestor = $module$AcornUiCore.com.acornui.component.style.withAncestor_5idwg3$;
+  var addStyleRule_0 = $module$AcornUiCore.com.acornui.component.style.addStyleRule_lbpgd4$;
+  var cachedGroup = $module$AcornUiCore.com.acornui.core.asset.cachedGroup_xd4dkp$;
+  var loadFontFromAtlas = $module$AcornUiCore.com.acornui.component.text.loadFontFromAtlas_itrc35$;
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var launch = $module$AcornUtils.com.acornui.async.launch_g2bo5h$;
-  var BasicUiSkin = $module$AcornUiCore.com.acornui.skins.BasicUiSkin;
+  var Panel = $module$AcornUiCore.com.acornui.component.Panel;
   GameCharacterIconView.prototype = Object.create(StackLayoutContainer.prototype);
   GameCharacterIconView.prototype.constructor = GameCharacterIconView;
   GameCharacterView.prototype = Object.create(ContainerImpl.prototype);
   GameCharacterView.prototype.constructor = GameCharacterView;
   GameStage.prototype = Object.create(ElementContainerImpl.prototype);
   GameStage.prototype.constructor = GameStage;
+  GameView.prototype = Object.create(CanvasLayoutContainer.prototype);
+  GameView.prototype.constructor = GameView;
   GGJ19.prototype = Object.create(CanvasLayoutContainer.prototype);
   GGJ19.prototype.constructor = GGJ19;
-  LevelView.prototype = Object.create(CanvasLayoutContainer.prototype);
-  LevelView.prototype.constructor = LevelView;
+  LevelChooser.prototype = Object.create(WindowPanel.prototype);
+  LevelChooser.prototype.constructor = LevelChooser;
   GameCharacterType.prototype = Object.create(Enum.prototype);
   GameCharacterType.prototype.constructor = GameCharacterType;
   RoomType.prototype = Object.create(Enum.prototype);
@@ -134,6 +150,8 @@
   Skin.prototype.constructor = Skin;
   TileView.prototype = Object.create(ContainerImpl.prototype);
   TileView.prototype.constructor = TileView;
+  VictoryView.prototype = Object.create(Panel.prototype);
+  VictoryView.prototype.constructor = VictoryView;
   var config;
   function GameCharacterIconView(owner) {
     StackLayoutContainer.call(this, owner);
@@ -159,13 +177,16 @@
     };
   }
   GameCharacterIconView.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterIconView', interfaces: [StackLayoutContainer]};
-  function GameCharacterView(owner, initialCharacter) {
+  function GameCharacterView(owner) {
     ContainerImpl.call(this, owner);
     this.atlasPath_0 = 'assets/ggj.json';
-    this.data = dataBinding(this, initialCharacter);
+    this.data = dataBinding(this, emptyCharacter);
+    this.isHappy = dataBinding(this, true);
     this.icon_0 = this.addChild_mxweac$(atlas(this, GameCharacterView$icon$lambda));
+    this.happyStateIcon_0 = this.addChild_mxweac$(atlas(this));
     cursor_0(this, cursor.StandardCursors.HAND);
     this.data.bind_qlkmfe$(GameCharacterView_init$lambda(this));
+    this.isHappy.bind_qlkmfe$(GameCharacterView_init$lambda_0(this));
   }
   function GameCharacterView$icon$lambda($receiver) {
     $receiver.setOrigin_y2kzbl$(32.0, 32.0);
@@ -178,12 +199,91 @@
       return Unit;
     };
   }
+  function GameCharacterView_init$lambda_0(this$GameCharacterView) {
+    return function (it) {
+      this$GameCharacterView.happyStateIcon_0.setRegion_puj7f4$(this$GameCharacterView.atlasPath_0, it ? 'smiley' : 'smiley-cry');
+      return Unit;
+    };
+  }
   GameCharacterView.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterView', interfaces: [ContainerImpl]};
+  function GameRules() {
+    GameRules_instance = this;
+    this.dislikeRules_0 = mapOf([to(GameCharacterType$MUSICIAN_getInstance(), listOf([GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$PARENT_getInstance()])), to(GameCharacterType$OLD_PERSON_getInstance(), listOf([GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$COOK_getInstance()])), to(GameCharacterType$PARENT_getInstance(), listOf([GameCharacterType$PARENT_getInstance(), GameCharacterType$MUSICIAN_getInstance()])), to(GameCharacterType$COOK_getInstance(), listOf([GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$COOK_getInstance()]))]);
+  }
+  GameRules.prototype.calculateHappiness_lpv8jf$ = function (characters) {
+    var tmp$, tmp$_0, tmp$_1;
+    var happiness = HashMap_init();
+    tmp$ = characters.iterator();
+    while (tmp$.hasNext()) {
+      var character = tmp$.next();
+      var key = character.id;
+      happiness.put_xwzc9p$(key, true);
+    }
+    tmp$_0 = characters.iterator();
+    while (tmp$_0.hasNext()) {
+      var character_0 = tmp$_0.next();
+      tmp$_1 = this.dislikeRules_0.get_11rb$(character_0.type);
+      if (tmp$_1 == null) {
+        continue;
+      }
+      var dislikeRule = tmp$_1;
+      var neighbors = this.neighbors_0(character_0, characters);
+      var firstOrNull$result;
+      firstOrNull$break: do {
+        var tmp$_2;
+        tmp$_2 = neighbors.iterator();
+        while (tmp$_2.hasNext()) {
+          var element = tmp$_2.next();
+          if (dislikeRule.contains_11rb$(element.type)) {
+            firstOrNull$result = element;
+            break firstOrNull$break;
+          }
+        }
+        firstOrNull$result = null;
+      }
+       while (false);
+      if (firstOrNull$result != null) {
+        var key_0 = character_0.id;
+        happiness.put_xwzc9p$(key_0, false);
+      }
+    }
+    return happiness;
+  };
+  GameRules.prototype.neighbors_0 = function ($receiver, all) {
+    var destination = ArrayList_init();
+    var tmp$;
+    tmp$ = all.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      var predicate$result;
+      if (equals(element.id, $receiver.id)) {
+        predicate$result = false;
+      }
+       else if (!element.isPlaced) {
+        predicate$result = false;
+      }
+       else {
+        predicate$result = element.row === $receiver.row && abs($receiver.col - element.col | 0) <= 1 || (element.col === $receiver.col && abs($receiver.row - element.row | 0) <= 1);
+      }
+      if (predicate$result)
+        destination.add_11rb$(element);
+    }
+    return destination;
+  };
+  GameRules.$metadata$ = {kind: Kind_OBJECT, simpleName: 'GameRules', interfaces: []};
+  var GameRules_instance = null;
+  function GameRules_getInstance() {
+    if (GameRules_instance === null) {
+      new GameRules();
+    }
+    return GameRules_instance;
+  }
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
-  function GameStage(owner, currentLevel, controlsState) {
+  function GameStage(owner, currentLevel, controlsState, characterHappiness) {
     ElementContainerImpl.call(this, owner);
-    this.currentLevel = currentLevel;
-    this.controlsState = controlsState;
+    this.currentLevel_0 = currentLevel;
+    this.controlsState_0 = controlsState;
+    this.characterHappiness_0 = characterHappiness;
     var tmp$;
     var a = ArrayList_init_0(20);
     tmp$ = 20 - 1 | 0;
@@ -199,7 +299,7 @@
     }
     this.tileViews_0 = a;
     this.characterViews_0 = ArrayList_init();
-    this.dragView_0 = new GameCharacterView(owner, emptyCharacter);
+    this.dragView_0 = new GameCharacterView(owner);
     this.interactivityMode = InteractivityMode.ALWAYS;
     var origin = Isometric_getInstance().twoDToIso_9wm29l$(new Vector2(10 * TileView$Companion_getInstance().TILE_SIZE, 10 * TileView$Companion_getInstance().TILE_SIZE));
     this.setOrigin_y2kzbl$(origin.x, origin.y);
@@ -211,18 +311,7 @@
     this.tmpGridP_0 = new GridPosition();
     this.tmpVec2_0 = new Vector2();
   }
-  function GameStage$initTileViews$lambda$lambda(closure$row, closure$col, closure$newTile) {
-    return function (it) {
-      return it.copy_5ccj1q$(void 0, replaceAt(it.grid, closure$row, replaceAt(it.grid.get_za3lpa$(closure$row), closure$col, closure$newTile)));
-    };
-  }
-  function GameStage$initTileViews$lambda(this$GameStage, closure$row, closure$col) {
-    return function (newTile) {
-      this$GameStage.currentLevel.change_ru8m0w$(GameStage$initTileViews$lambda$lambda(closure$row, closure$col, newTile));
-      return Unit;
-    };
-  }
-  function GameStage$initTileViews$lambda_0(this$GameStage) {
+  function GameStage$initTileViews$lambda(this$GameStage) {
     return function (it) {
       for (var row = 0; row < 20; row++) {
         for (var col = 0; col < 20; col++) {
@@ -235,20 +324,16 @@
   GameStage.prototype.initTileViews_0 = function () {
     for (var row = 0; row < 20; row++) {
       for (var col = 0; col < 20; col++) {
-        this.unaryPlus_b3a6qy$(this.tileViews_0.get_za3lpa$(row).get_za3lpa$(col));
-        moveTo(this.tileViews_0.get_za3lpa$(row).get_za3lpa$(col), Isometric_getInstance().twoDToIso_dleff0$(col * TileView$Companion_getInstance().TILE_SIZE, row * TileView$Companion_getInstance().TILE_SIZE));
+        var $receiver = this.tileViews_0.get_za3lpa$(row).get_za3lpa$(col);
+        moveTo($receiver, Isometric_getInstance().twoDToIso_dleff0$(col * TileView$Companion_getInstance().TILE_SIZE, row * TileView$Companion_getInstance().TILE_SIZE));
+        this.unaryPlus_b3a6qy$($receiver);
       }
     }
-    for (var row_0 = 0; row_0 < 20; row_0++) {
-      for (var col_0 = 0; col_0 < 20; col_0++) {
-        this.tileViews_0.get_za3lpa$(row_0).get_za3lpa$(col_0).data.bind_qlkmfe$(GameStage$initTileViews$lambda(this, row_0, col_0));
-      }
-    }
-    this.currentLevel.bind_qlkmfe$(GameStage$initTileViews$lambda_0(this));
+    this.currentLevel_0.bind_qlkmfe$(GameStage$initTileViews$lambda(this));
   };
   function GameStage$initCharacters$lambda$lambda(this$GameStage) {
     return function (item, index) {
-      return this$GameStage.unaryPlus_b3a6qy$(this$GameStage.createGameCharacterView_0(item));
+      return this$GameStage.unaryPlus_b3a6qy$(this$GameStage.createGameCharacterView_0());
     };
   }
   function GameStage$initCharacters$lambda$lambda_0(element, item, index) {
@@ -282,7 +367,7 @@
     };
   }
   GameStage.prototype.initCharacters_0 = function () {
-    this.currentLevel.bind_qlkmfe$(GameStage$initCharacters$lambda(this));
+    this.currentLevel_0.bind_qlkmfe$(GameStage$initCharacters$lambda(this));
   };
   function GameStage$initDebugLines$lambda$lambda(this$) {
     return function (it) {
@@ -349,7 +434,7 @@
   }
   GameStage.prototype.initDragView_0 = function () {
     var $receiver = this.dragView_0;
-    this.controlsState.bind_qlkmfe$(GameStage$initDragView$lambda$lambda($receiver, this));
+    this.controlsState_0.bind_qlkmfe$(GameStage$initDragView$lambda$lambda($receiver, this));
     this.unaryPlus_b3a6qy$($receiver);
   };
   function GameStage$createGameCharacterView$lambda$lambda$lambda(closure$old, closure$new) {
@@ -359,15 +444,16 @@
   }
   function GameStage$createGameCharacterView$lambda$lambda(this$GameStage) {
     return function (old, new_0) {
-      this$GameStage.currentLevel.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda(old, new_0));
+      this$GameStage.currentLevel_0.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda(old, new_0));
       return Unit;
     };
   }
   function GameStage$createGameCharacterView$lambda$lambda_0(this$GameStage, this$) {
     return function () {
-      var isLocked = this$GameStage.currentLevel.value.isLocked_44icga$(this$.data.value);
+      var isLocked = this$GameStage.currentLevel_0.value.isLocked_44icga$(this$.data.value);
       this$.interactivityMode = isLocked ? InteractivityMode.NONE : InteractivityMode.ALL;
       this$.colorTint = isLocked ? Color.Companion.GRAY : Color.Companion.WHITE;
+      this$.alpha = isLocked ? 0.5 : 1.0;
       return Unit;
     };
   }
@@ -379,7 +465,7 @@
   function GameStage$createGameCharacterView$lambda$lambda_1(this$, this$GameStage) {
     return function (f) {
       this$.visible = false;
-      this$GameStage.controlsState.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_0(this$));
+      this$GameStage.controlsState_0.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_0(this$));
       return Unit;
     };
   }
@@ -390,18 +476,26 @@
     return function (f) {
       this$.visible = true;
       var gameCharacter = this$.data.value;
-      placeCharacter(this$GameStage.currentLevel, gameCharacter, this$GameStage.canvasToGrid_ewdjp1$(this$GameStage.mouse.canvasX, this$GameStage.mouse.canvasY, new GridPosition()));
-      this$GameStage.controlsState.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_1);
+      placeCharacter(this$GameStage.currentLevel_0, gameCharacter, this$GameStage.canvasToGrid_ewdjp1$(this$GameStage.mouse.canvasX, this$GameStage.mouse.canvasY, new GridPosition()));
+      this$GameStage.controlsState_0.change_ru8m0w$(GameStage$createGameCharacterView$lambda$lambda$lambda_1);
       return Unit;
     };
   }
-  GameStage.prototype.createGameCharacterView_0 = function (character) {
-    var $receiver = new GameCharacterView(this, character);
+  function GameStage$createGameCharacterView$lambda$lambda_3(this$) {
+    return function (it) {
+      var tmp$;
+      this$.isHappy.value = (tmp$ = it.get_11rb$(this$.data.value.id)) != null ? tmp$ : true;
+      return Unit;
+    };
+  }
+  GameStage.prototype.createGameCharacterView_0 = function () {
+    var $receiver = new GameCharacterView(this);
     $receiver.setScaling_y2kzbl$(0.6, 0.6);
     $receiver.data.changed.add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda(this));
-    bind(or($receiver.data, this.currentLevel), GameStage$createGameCharacterView$lambda$lambda_0(this, $receiver));
+    bind(or($receiver.data, this.currentLevel_0), GameStage$createGameCharacterView$lambda$lambda_0(this, $receiver));
     dragStart($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_1($receiver, this));
     dragEnd($receiver).add_trkh7z$(GameStage$createGameCharacterView$lambda$lambda_2($receiver, this));
+    this.characterHappiness_0.bind_qlkmfe$(GameStage$createGameCharacterView$lambda$lambda_3($receiver));
     return $receiver;
   };
   GameStage.prototype.getChildrenUnderPoint_88w43d$$default = function (canvasX, canvasY, onlyInteractive, returnAll, out, rayCache) {
@@ -433,106 +527,15 @@
     return out;
   };
   GameStage.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameStage', interfaces: [ElementContainerImpl]};
-  function GGJ19(owner) {
-    CanvasLayoutContainer.call(this, owner);
-    this.atlasPath_0 = 'assets/ggj.json';
-    this.levels_0 = dataBinding(this, listOf(new GameLevel()));
-    this.currentLevel_0 = dataBinding(this, 0);
-    (new Skin(get_stage(this))).apply();
-    then(load(this, 'assets/levelData.txt', AssetType.Companion.TEXT), GGJ19_init$lambda(this));
-    var $receiver = new LevelView(this);
-    bind(or(this.levels_0, this.currentLevel_0), GGJ19_init$lambda$lambda(this, $receiver));
-    var levelView = this.layout_ge8abi$(this.unaryPlus_b3a6qy$($receiver), GGJ19_init$lambda_0);
-    bind(or(this.levels_0, this.currentLevel_0), GGJ19_init$lambda_1(this, levelView));
-  }
-  function GGJ19_init$lambda(this$GGJ19) {
-    return function (it) {
-      this$GGJ19.levels_0.value = parseGameData(it);
-      return Unit;
-    };
-  }
-  function GGJ19_init$lambda$lambda(this$GGJ19, this$) {
-    return function () {
-      var tmp$;
-      this$.originalData.value = (tmp$ = getOrNull(this$GGJ19.levels_0.value, this$GGJ19.currentLevel_0.value)) != null ? tmp$ : emptyLevel;
-      return Unit;
-    };
-  }
-  function GGJ19_init$lambda_0($receiver) {
-    $receiver.fill();
-    return Unit;
-  }
-  function GGJ19_init$lambda$lambda_0($receiver) {
-    $receiver.center();
-    return Unit;
-  }
-  function GGJ19_init$lambda_1(this$GGJ19, closure$levelView) {
-    return function () {
-      if (!this$GGJ19.levels_0.value.isEmpty() && this$GGJ19.currentLevel_0.value >= this$GGJ19.levels_0.value.size) {
-        closure$levelView.visible = false;
-        this$GGJ19.layout_ge8abi$(this$GGJ19.unaryPlus_b3a6qy$(text(this$GGJ19, 'Victory!!!')), GGJ19_init$lambda$lambda_0);
-      }
-      return Unit;
-    };
-  }
-  GGJ19.$metadata$ = {kind: Kind_CLASS, simpleName: 'GGJ19', interfaces: [NavBindable, CanvasLayoutContainer]};
-  var throwCCE = Kotlin.throwCCE;
-  var trim = Kotlin.kotlin.text.trim_gw00vp$;
-  function parseGameData(str) {
-    var tmp$;
-    var lines = toMutableList(split(str, ['\n']));
-    var levels = ArrayList_init();
-    while (!lines.isEmpty()) {
-      eatEmptyLines(lines);
-      var tmp$_0;
-      var a = ArrayList_init_0(20);
-      tmp$_0 = 20 - 1 | 0;
-      for (var i = 0; i <= tmp$_0; i++) {
-        var tmp$_1 = a.add_11rb$;
-        var tmp$_2;
-        var a_0 = ArrayList_init_0(20);
-        tmp$_2 = 20 - 1 | 0;
-        for (var i_0 = 0; i_0 <= tmp$_2; i_0++) {
-          a_0.add_11rb$(new Tile());
-        }
-        tmp$_1.call(a, a_0);
-      }
-      var grid = a;
-      for (var row = 0; row < 20; row++) {
-        var $receiver = poll(lines);
-        var tmp$_3;
-        var cols = split(trim(Kotlin.isCharSequence(tmp$_3 = $receiver) ? tmp$_3 : throwCCE()).toString(), [' ']);
-        for (var col = 0; col < 20; col++) {
-          if (!equals(cols.get_za3lpa$(col), '.')) {
-            grid.get_za3lpa$(row).set_wxm5ur$(col, new Tile(RoomType$STANDARD_getInstance()));
-          }
-        }
-      }
-      eatEmptyLines(lines);
-      var queue = poll(lines);
-      var queueChars = split(queue, [' ']);
-      var pendingCharacters = ArrayList_init();
-      tmp$ = queueChars.iterator();
-      while (tmp$.hasNext()) {
-        var queueChar = tmp$.next();
-        pendingCharacters.add_11rb$(new GameCharacter(void 0, GameCharacterType$Companion_getInstance().fromLetter_s8itvh$(queueChar.charCodeAt(0))));
-      }
-      levels.add_11rb$(new GameLevel(pendingCharacters, grid));
-      eatEmptyLines(lines);
-    }
-    return levels;
-  }
-  function eatEmptyLines($receiver) {
-    while (!$receiver.isEmpty() && (isBlank($receiver.get_za3lpa$(0)) || startsWith($receiver.get_za3lpa$(0), '#'))) {
-      poll($receiver);
-    }
-  }
-  function LevelView(owner) {
+  var emptyMap = Kotlin.kotlin.collections.emptyMap_q3lmfv$;
+  function GameView(owner) {
     CanvasLayoutContainer.call(this, owner);
     this.controlsState_0 = dataBinding(this, new UiControlsStateVo());
-    this.originalData = dataBinding(this, emptyLevel);
-    this.currentLevel_0 = dataBinding(this, this.originalData.value);
-    this.gameStage_0 = new GameStage(this, this.currentLevel_0, this.controlsState_0);
+    this.levels = dataBinding(this, listOf_0(emptyLevel));
+    this.currentLevelNumber = dataBinding(this, 0);
+    this.characterHappiness = dataBinding(this, emptyMap());
+    this.currentLevel_0 = dataBinding(this, emptyLevel);
+    this.gameStage_0 = new GameStage(this, this.currentLevel_0, this.controlsState_0, this.characterHappiness);
     this.overviewCam_0 = orthographicCamera(this, true);
     this.drag_0 = dragAttachment(this);
     this.tossScroller_0 = own(this, new TossScroller(this.gameStage_0, void 0, this.drag_0));
@@ -547,94 +550,63 @@
     this.theme_0 = inject(this, Theme.Companion);
     this.atlasPath_0 = 'assets/ggj.json';
     this.persistence_0 = inject(this, Persistence.Companion);
-    this.originalData.bind_qlkmfe$(LevelView_init$lambda(this));
+    bind(or(this.levels, this.currentLevelNumber), GameView_init$lambda(this));
     this.interactivityMode = InteractivityMode.ALWAYS;
     this.initCameraControls_0();
     this.initStageView_0();
     this.initCharacterQueue_0();
+    this.initCharacterRules_0();
     this.initMusic_0();
+    this.initNextLevelButton_0();
+    this.initVictoryScreen_0();
     this.gridPosition_0 = new GridPosition();
   }
-  function LevelView$initMusic$lambda$lambda(this$) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.style.backgroundColor = new Color(0.0, 0.0, 0.0, 0.6);
+    return Unit;
+  }
+  function GameView$initCharacterQueue$lambda$lambda$lambda($receiver) {
+    return rect($receiver, GameView$initCharacterQueue$lambda$lambda$lambda$lambda);
+  }
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda(this$) {
     return function (it) {
-      this$.toggled = !it.isMuted;
+      this$.text = 'Level ' + it;
       return Unit;
     };
   }
-  function LevelView$initMusic$lambda$lambda$lambda(this$) {
-    return function (it) {
-      return it.copy_6sjg8m$(!this$.toggled);
-    };
-  }
-  function LevelView$initMusic$lambda$lambda_0(this$LevelView, this$) {
-    return function (f) {
-      this$LevelView.controlsState_0.change_ru8m0w$(LevelView$initMusic$lambda$lambda$lambda(this$));
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_0(this$, this$GameView) {
+    return function (e) {
+      if (e.count === 2) {
+        addPopUp(this$, new PopUpInfo(new LevelChooser(this$, this$GameView.levels.value.size, this$GameView.currentLevelNumber)));
+      }
       return Unit;
     };
   }
-  function LevelView$initMusic$lambda(this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_0(this$GameView) {
     return function ($receiver) {
-      $receiver.iconMap_wty2wd$(mapOf([to(ButtonState.UP, atlas_0($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume-control-mute')), to(ButtonState.TOGGLED_UP, atlas_0($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume'))]));
-      $receiver.toggleOnClick = true;
-      this$LevelView.controlsState_0.bind_qlkmfe$(LevelView$initMusic$lambda$lambda($receiver));
-      $receiver.toggledChanged.add_trkh7z$(LevelView$initMusic$lambda$lambda_0(this$LevelView, $receiver));
+      this$GameView.currentLevelNumber.bind_qlkmfe$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda($receiver));
+      click($receiver).add_trkh7z$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_0($receiver, this$GameView));
       return Unit;
     };
   }
-  function LevelView$initMusic$lambda_0($receiver) {
-    $receiver.bottom = 5.0;
-    $receiver.left = 5.0;
-    return Unit;
-  }
-  function LevelView$initMusic$lambda_1(it) {
-    return it.copy_6sjg8m$(false);
-  }
-  function LevelView$initMusic$lambda$lambda_1(this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_1(this$GameView) {
     return function (it) {
-      it.loop = true;
-      it.play();
-      this$LevelView.mainMusic_0 = it;
+      this$GameView.resetLevel_0();
       return Unit;
     };
   }
-  function LevelView$initMusic$lambda_2(this$LevelView) {
-    return function (it) {
-      var tmp$, tmp$_0;
-      if (it.isMuted) {
-        (tmp$ = this$LevelView.mainMusic_0) != null ? (tmp$.stop(), Unit) : null;
-        this$LevelView.persistence_0.setItem_puj7f4$('muted', 'true');
-        this$LevelView.persistence_0.flush();
-      }
-       else {
-        if (this$LevelView.mainMusic_0 == null) {
-          then(load(this$LevelView, 'assets/music/background.mp3', AssetType.Companion.MUSIC), LevelView$initMusic$lambda$lambda_1(this$LevelView));
-        }
-        (tmp$_0 = this$LevelView.mainMusic_0) != null ? (tmp$_0.play(), Unit) : null;
-        this$LevelView.persistence_0.setItem_puj7f4$('muted', 'false');
-        this$LevelView.persistence_0.flush();
-      }
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_1(this$GameView) {
+    return function ($receiver) {
+      $receiver.label = 'Restart';
+      click($receiver).add_trkh7z$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_1(this$GameView));
       return Unit;
     };
   }
-  LevelView.prototype.initMusic_0 = function () {
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(iconButton(this, LevelView$initMusic$lambda(this))), LevelView$initMusic$lambda_0);
-    if (core.userInfo.isDesktop && !equals(this.persistence_0.getItem_61zpoe$('muted'), 'true')) {
-      this.controlsState_0.change_ru8m0w$(LevelView$initMusic$lambda_1);
-    }
-    this.controlsState_0.bind_qlkmfe$(LevelView$initMusic$lambda_2(this));
-  };
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.style.backgroundColor = new Color(0.0, 0.0, 0.0, 0.3);
-    return Unit;
-  }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda($receiver) {
-    return rect($receiver, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda);
-  }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0($receiver) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_2($receiver) {
     $receiver.widthPercent = 1.0;
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda(this$) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_2(this$) {
     return function (item, index) {
       var tmp$ = this$;
       var $receiver = new GameCharacterIconView(this$);
@@ -643,58 +615,60 @@
       return tmp$.unaryPlus_b3a6qy$($receiver);
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_0(element, item, index) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_3(element, item, index) {
     element.data.value = item;
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_1(element) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_4(element) {
     element.dispose();
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_2(element) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_5(element) {
     return element.data.value;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_3(o1, o2) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_6(o1, o2) {
     return true;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1(closure$upNextLbl, this$LevelView, this$) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_3(closure$upNextLbl, this$GameView, this$) {
     return function (newData) {
       var unlockedCharacters = newData.unlockedCharacters;
       if (!unlockedCharacters.isEmpty())
         unlockedCharacters = unlockedCharacters.subList_vux9f0$(1, unlockedCharacters.size);
       closure$upNextLbl.visible = !unlockedCharacters.isEmpty();
-      recycle(reversed(unlockedCharacters), this$LevelView.characterIcons_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda(this$), LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_1, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_2, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_3);
+      recycle(reversed(unlockedCharacters), this$GameView.characterIcons_0, GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_2(this$), GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_3, GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_4, GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_5, GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_6);
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda_0(this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda_0(this$GameView) {
     return function ($receiver) {
-      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(spacer($receiver)), LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0);
-      var upNextLbl = $receiver.unaryPlus_b3a6qy$(text($receiver, 'Up next:'));
-      this$LevelView.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1(upNextLbl, this$LevelView, $receiver));
+      $receiver.unaryPlus_b3a6qy$(text($receiver, GameView$initCharacterQueue$lambda$lambda$lambda$lambda_0(this$GameView)));
+      $receiver.unaryPlus_b3a6qy$(iconButton($receiver, this$GameView.theme_0.atlasPath, 'burn', GameView$initCharacterQueue$lambda$lambda$lambda$lambda_1(this$GameView)));
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(spacer($receiver)), GameView$initCharacterQueue$lambda$lambda$lambda$lambda_2);
+      var upNextLbl = $receiver.unaryPlus_b3a6qy$(text_0($receiver, 'Up next:'));
+      this$GameView.currentLevel_0.bind_qlkmfe$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda_3(upNextLbl, this$GameView, $receiver));
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda_1($receiver) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda_1($receiver) {
     $receiver.widthPercent = 1.0;
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda(this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda(this$GameView) {
     return function ($receiver) {
       $receiver.interactivityMode = InteractivityMode.CHILDREN;
-      $receiver.style.background = LevelView$initCharacterQueue$lambda$lambda$lambda;
+      $receiver.style.background = GameView$initCharacterQueue$lambda$lambda$lambda;
       $receiver.style.padding = Pad_init(5.0);
-      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(hGroup($receiver, LevelView$initCharacterQueue$lambda$lambda$lambda_0(this$LevelView))), LevelView$initCharacterQueue$lambda$lambda$lambda_1);
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(hGroup($receiver, GameView$initCharacterQueue$lambda$lambda$lambda_0(this$GameView))), GameView$initCharacterQueue$lambda$lambda$lambda_1);
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda_0($receiver) {
+  function GameView$initCharacterQueue$lambda$lambda_0($receiver) {
     $receiver.widthPercent = 1.0;
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2(this$LevelView, this$) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_4(this$GameView, this$) {
     return function (f) {
-      var $receiver = this$LevelView.currentLevel_0.value.characters;
+      var $receiver = this$GameView.currentLevel_0.value.characters;
       var firstOrNull$result;
       firstOrNull$break: do {
         var tmp$;
@@ -714,147 +688,161 @@
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_4(this$) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_7(this$) {
     return function (it) {
       return it.copy_6sjg8m$(void 0, void 0, this$.data.value);
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3(this$, this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_5(this$, this$GameView) {
     return function (e) {
       this$.alpha = 0.2;
       println('Drag start gciv ' + e.currentTarget);
-      this$LevelView.controlsState_0.change_ru8m0w$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_4(this$));
+      this$GameView.controlsState_0.change_ru8m0w$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_7(this$));
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_5(it) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_8(it) {
     return it.copy_6sjg8m$(void 0, void 0, null);
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_4(this$, this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda$lambda_6(this$, this$GameView) {
     return function (f) {
       this$.alpha = 1.0;
       var gameCharacter = this$.data.value;
       println('Drag end ' + toString(gameCharacter));
       if (gameCharacter != null) {
-        placeCharacter(this$LevelView.currentLevel_0, gameCharacter, this$LevelView.mouseGridPosition_0);
-        this$LevelView.controlsState_0.change_ru8m0w$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_5);
+        placeCharacter(this$GameView.currentLevel_0, gameCharacter, this$GameView.mouseGridPosition_0);
+        this$GameView.controlsState_0.change_ru8m0w$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_8);
       }
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda_2($receiver) {
+  function GameView$initCharacterQueue$lambda$lambda$lambda_2($receiver) {
     $receiver.width = 64.0;
     $receiver.height = 64.0;
     $receiver.center();
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda$lambda_1(this$LevelView) {
+  function GameView$initCharacterQueue$lambda$lambda_1(this$GameView) {
     return function ($receiver) {
       $receiver.interactivityMode = InteractivityMode.CHILDREN;
       $receiver.style.padding = Pad_init(5.0);
-      $receiver.unaryPlus_b3a6qy$(atlas_0($receiver, this$LevelView.atlasPath_0, 'CurrentCharacterPresentationBg'));
+      $receiver.unaryPlus_b3a6qy$(atlas_0($receiver, this$GameView.atlasPath_0, 'CurrentCharacterPresentationBg'));
       var $receiver_0 = new GameCharacterIconView($receiver);
-      var this$LevelView_0 = this$LevelView;
+      var this$GameView_0 = this$GameView;
       cursor_0($receiver_0, cursor.StandardCursors.HAND);
-      this$LevelView_0.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2(this$LevelView_0, $receiver_0));
-      dragStart($receiver_0).add_trkh7z$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3($receiver_0, this$LevelView_0));
-      dragEnd($receiver_0).add_trkh7z$(LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_4($receiver_0, this$LevelView_0));
-      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$($receiver_0), LevelView$initCharacterQueue$lambda$lambda$lambda_2);
+      this$GameView_0.currentLevel_0.bind_qlkmfe$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda_4(this$GameView_0, $receiver_0));
+      dragStart($receiver_0).add_trkh7z$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda_5($receiver_0, this$GameView_0));
+      dragEnd($receiver_0).add_trkh7z$(GameView$initCharacterQueue$lambda$lambda$lambda$lambda_6($receiver_0, this$GameView_0));
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$($receiver_0), GameView$initCharacterQueue$lambda$lambda$lambda_2);
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda_2($receiver) {
+  function GameView$initCharacterQueue$lambda$lambda_2($receiver) {
     $receiver.width = 106.0;
     $receiver.height = 106.0;
     return Unit;
   }
-  function LevelView$initCharacterQueue$lambda(this$LevelView) {
+  function GameView$initCharacterQueue$lambda(this$GameView) {
     return function ($receiver) {
       $receiver.interactivityMode = InteractivityMode.CHILDREN;
       $receiver.style.gap = 0.0;
       $receiver.style.horizontalAlign = HAlign.RIGHT;
-      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(panel($receiver, LevelView$initCharacterQueue$lambda$lambda(this$LevelView))), LevelView$initCharacterQueue$lambda$lambda_0);
-      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(stack($receiver, LevelView$initCharacterQueue$lambda$lambda_1(this$LevelView))), LevelView$initCharacterQueue$lambda$lambda_2);
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(panel($receiver, GameView$initCharacterQueue$lambda$lambda(this$GameView))), GameView$initCharacterQueue$lambda$lambda_0);
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(stack($receiver, GameView$initCharacterQueue$lambda$lambda_1(this$GameView))), GameView$initCharacterQueue$lambda$lambda_2);
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda_0($receiver) {
+  function GameView$initCharacterQueue$lambda_0($receiver) {
     $receiver.widthPercent = 1.0;
     return Unit;
   }
-  LevelView.prototype.initCharacterQueue_0 = function () {
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(vGroup(this, LevelView$initCharacterQueue$lambda(this))), LevelView$initCharacterQueue$lambda_0);
+  GameView.prototype.initCharacterQueue_0 = function () {
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(vGroup(this, GameView$initCharacterQueue$lambda(this))), GameView$initCharacterQueue$lambda_0);
   };
-  function LevelView$initCameraControls$lambda(this$LevelView) {
+  function GameView$initCharacterRules$lambda$lambda(closure$level) {
+    return function (it) {
+      return GameRules_getInstance().calculateHappiness_lpv8jf$(closure$level.characters);
+    };
+  }
+  function GameView$initCharacterRules$lambda(this$GameView) {
+    return function (level) {
+      this$GameView.characterHappiness.change_ru8m0w$(GameView$initCharacterRules$lambda$lambda(level));
+      return Unit;
+    };
+  }
+  GameView.prototype.initCharacterRules_0 = function () {
+    this.currentLevel_0.bind_qlkmfe$(GameView$initCharacterRules$lambda(this));
+  };
+  function GameView$initCameraControls$lambda(this$GameView) {
     return function (newWidth, newHeight, f) {
-      this$LevelView.overviewCam_0.setViewport_dleff0$(newWidth, newHeight);
-      this$LevelView.updateCam_0();
+      this$GameView.overviewCam_0.setViewport_dleff0$(newWidth, newHeight);
+      this$GameView.updateCam_0();
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_0(this$LevelView) {
+  function GameView$initCameraControls$lambda_0(this$GameView) {
     return function (it) {
-      this$LevelView.moveCamera_0(it.value);
+      this$GameView.moveCamera_0(it.value);
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_1(this$LevelView) {
+  function GameView$initCameraControls$lambda_1(this$GameView) {
     return function (it) {
-      this$LevelView.moveCamera_0(void 0, it.value);
+      this$GameView.moveCamera_0(void 0, it.value);
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_2(this$LevelView, closure$startZoom) {
+  function GameView$initCameraControls$lambda_2(this$GameView, closure$startZoom) {
     return function (it) {
-      closure$startZoom.v = this$LevelView.controlsState_0.value.camera.zoom;
+      closure$startZoom.v = this$GameView.controlsState_0.value.camera.zoom;
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_3(closure$startZoom, this$LevelView) {
+  function GameView$initCameraControls$lambda_3(closure$startZoom, this$GameView) {
     return function (it) {
-      this$LevelView.zoomCamera_0(it.startDistance * closure$startZoom.v / it.distance);
+      this$GameView.zoomCamera_0(it.startDistance * closure$startZoom.v / it.distance);
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_4(this$LevelView) {
+  function GameView$initCameraControls$lambda_4(this$GameView) {
     return function (it) {
-      if (!this$LevelView.hScroll_0.changed.isDispatching && !this$LevelView.vScroll_0.changed.isDispatching) {
-        this$LevelView.hScroll_0.value = it.camera.x;
-        this$LevelView.vScroll_0.value = it.camera.y;
+      if (!this$GameView.hScroll_0.changed.isDispatching && !this$GameView.vScroll_0.changed.isDispatching) {
+        this$GameView.hScroll_0.value = it.camera.x;
+        this$GameView.vScroll_0.value = it.camera.y;
       }
-      this$LevelView.updateCam_0();
+      this$GameView.updateCam_0();
       return Unit;
     };
   }
-  function LevelView$initCameraControls$lambda_5(this$LevelView) {
+  function GameView$initCameraControls$lambda_5(this$GameView) {
     return function (it) {
-      this$LevelView.tossScroller_0.stop();
+      this$GameView.tossScroller_0.stop();
       if (it.deltaY !== 0.0) {
-        this$LevelView.zoomCamera_0(this$LevelView.controlsState_0.value.camera.zoom * (it.deltaY > 0.0 ? 1.2 : 0.8));
+        this$GameView.zoomCamera_0(this$GameView.controlsState_0.value.camera.zoom * (it.deltaY > 0.0 ? 1.2 : 0.8));
       }
       return Unit;
     };
   }
-  LevelView.prototype.initCameraControls_0 = function () {
-    this.window.sizeChanged.add_trkh7z$(LevelView$initCameraControls$lambda(this));
+  GameView.prototype.initCameraControls_0 = function () {
+    this.window.sizeChanged.add_trkh7z$(GameView$initCameraControls$lambda(this));
     this.hScroll_0.min = -this.stageH_0;
     this.vScroll_0.min = -this.stageW_0 * 0.5;
     this.hScroll_0.max = this.stageW_0;
     this.vScroll_0.max = this.stageH_0 * 0.5;
-    this.hScroll_0.changed.add_trkh7z$(LevelView$initCameraControls$lambda_0(this));
-    this.vScroll_0.changed.add_trkh7z$(LevelView$initCameraControls$lambda_1(this));
+    this.hScroll_0.changed.add_trkh7z$(GameView$initCameraControls$lambda_0(this));
+    this.vScroll_0.changed.add_trkh7z$(GameView$initCameraControls$lambda_1(this));
     var startZoom = {v: 0.0};
-    pinchStart(this).add_trkh7z$(LevelView$initCameraControls$lambda_2(this, startZoom));
-    pinch(this).add_trkh7z$(LevelView$initCameraControls$lambda_3(startZoom, this));
-    this.controlsState_0.bind_qlkmfe$(LevelView$initCameraControls$lambda_4(this));
-    wheel(this).add_trkh7z$(LevelView$initCameraControls$lambda_5(this));
+    pinchStart(this).add_trkh7z$(GameView$initCameraControls$lambda_2(this, startZoom));
+    pinch(this).add_trkh7z$(GameView$initCameraControls$lambda_3(startZoom, this));
+    this.controlsState_0.bind_qlkmfe$(GameView$initCameraControls$lambda_4(this));
+    wheel(this).add_trkh7z$(GameView$initCameraControls$lambda_5(this));
   };
-  LevelView.prototype.initStageView_0 = function () {
+  GameView.prototype.initStageView_0 = function () {
     var $receiver = this.gameStage_0;
     $receiver.cameraOverride = this.overviewCam_0;
     this.unaryPlus_b3a6qy$($receiver);
   };
-  LevelView.prototype.updateCam_0 = function () {
+  GameView.prototype.updateCam_0 = function () {
     var cam = this.controlsState_0.value.camera;
     var z = cam.zoom;
     var w = this.overviewCam_0.viewportWidth * z;
@@ -865,24 +853,24 @@
     this.tossScrollBinding_0.modelToPixelsY = 1.0 / z;
     this.window.requestRender();
   };
-  function LevelView$moveCamera$lambda(this$LevelView, closure$x, closure$y, closure$zoom) {
+  function GameView$moveCamera$lambda(this$GameView, closure$x, closure$y, closure$zoom) {
     return function (it) {
-      tween.TweenRegistry.kill_4hrdoq$(this$LevelView, 'camera', true);
+      tween.TweenRegistry.kill_4hrdoq$(this$GameView, 'camera', true);
       return it.copy_6sjg8m$(void 0, it.camera.copy_y2kzbl$(closure$x, closure$y, closure$zoom));
     };
   }
-  LevelView.prototype.moveCamera_0 = function (x, y, zoom) {
+  GameView.prototype.moveCamera_0 = function (x, y, zoom) {
     if (x === void 0)
       x = this.controlsState_0.value.camera.x;
     if (y === void 0)
       y = this.controlsState_0.value.camera.y;
     if (zoom === void 0)
       zoom = this.controlsState_0.value.camera.zoom;
-    this.controlsState_0.change_ru8m0w$(LevelView$moveCamera$lambda(this, x, y, zoom));
+    this.controlsState_0.change_ru8m0w$(GameView$moveCamera$lambda(this, x, y, zoom));
   };
-  function LevelView$zoomCamera$lambda(this$LevelView, closure$zoom) {
+  function GameView$zoomCamera$lambda(this$GameView, closure$zoom) {
     return function (it) {
-      tween.TweenRegistry.kill_4hrdoq$(this$LevelView, 'camera', true);
+      tween.TweenRegistry.kill_4hrdoq$(this$GameView, 'camera', true);
       var value = closure$zoom;
       var clamp_73gzaq$result;
       clamp_73gzaq$break: do {
@@ -902,24 +890,24 @@
       return it.copy_6sjg8m$(void 0, cam.copy_y2kzbl$(void 0, void 0, newZoom));
     };
   }
-  LevelView.prototype.zoomCamera_0 = function (zoom) {
-    this.controlsState_0.change_ru8m0w$(LevelView$zoomCamera$lambda(this, zoom));
+  GameView.prototype.zoomCamera_0 = function (zoom) {
+    this.controlsState_0.change_ru8m0w$(GameView$zoomCamera$lambda(this, zoom));
   };
-  function LevelView$tweenCamera$lambda() {
+  function GameView$tweenCamera$lambda() {
     return 0.0;
   }
-  function LevelView$tweenCamera$lambda$lambda(closure$start, closure$end, closure$alpha) {
+  function GameView$tweenCamera$lambda$lambda(closure$start, closure$end, closure$alpha) {
     return function (it) {
       return it.copy_6sjg8m$(void 0, closure$start.lerp_browbj$(closure$end, closure$alpha));
     };
   }
-  function LevelView$tweenCamera$lambda_0(this$LevelView, closure$start, closure$end) {
+  function GameView$tweenCamera$lambda_0(this$GameView, closure$start, closure$end) {
     return function (alpha) {
-      this$LevelView.controlsState_0.change_ru8m0w$(LevelView$tweenCamera$lambda$lambda(closure$start, closure$end, alpha));
+      this$GameView.controlsState_0.change_ru8m0w$(GameView$tweenCamera$lambda$lambda(closure$start, closure$end, alpha));
       return Unit;
     };
   }
-  LevelView.prototype.tweenCamera_0 = function (x, y, zoom, duration, ease, delay) {
+  GameView.prototype.tweenCamera_0 = function (x, y, zoom, duration, ease, delay) {
     if (x === void 0)
       x = this.controlsState_0.value.camera.x;
     if (y === void 0)
@@ -947,21 +935,161 @@
     }
      while (false);
     var end = new CameraVo(x, y, clamp_73gzaq$result);
-    driveTween(this, createPropertyTween(this, 'camera', duration, ease, LevelView$tweenCamera$lambda, LevelView$tweenCamera$lambda_0(this, start, end), 1.0, delay));
+    driveTween(this, createPropertyTween(this, 'camera', duration, ease, GameView$tweenCamera$lambda, GameView$tweenCamera$lambda_0(this, start, end), 1.0, delay));
   };
-  LevelView.prototype.resetLevel = function () {
-    this.currentLevel_0.value = this.originalData.value;
+  GameView.prototype.resetLevel_0 = function () {
+    var tmp$;
+    this.currentLevel_0.value = (tmp$ = getOrNull(this.levels.value, this.currentLevelNumber.value)) != null ? tmp$ : emptyLevel;
   };
-  Object.defineProperty(LevelView.prototype, 'mouseGridPosition_0', {get: function () {
-    return this.gameStage_0.canvasToGrid_ewdjp1$(this.mouse.canvasX, this.mouse.canvasY, this.gridPosition_0);
-  }});
-  function LevelView_init$lambda(this$LevelView) {
+  function GameView$initMusic$lambda$lambda(this$) {
     return function (it) {
-      this$LevelView.currentLevel_0.value = it;
+      this$.toggled = !it.isMuted;
       return Unit;
     };
   }
-  LevelView.$metadata$ = {kind: Kind_CLASS, simpleName: 'LevelView', interfaces: [CanvasLayoutContainer]};
+  function GameView$initMusic$lambda$lambda$lambda(this$) {
+    return function (it) {
+      return it.copy_6sjg8m$(!this$.toggled);
+    };
+  }
+  function GameView$initMusic$lambda$lambda_0(this$GameView, this$) {
+    return function (f) {
+      this$GameView.controlsState_0.change_ru8m0w$(GameView$initMusic$lambda$lambda$lambda(this$));
+      return Unit;
+    };
+  }
+  function GameView$initMusic$lambda(this$GameView) {
+    return function ($receiver) {
+      $receiver.iconMap_wty2wd$(mapOf([to(ButtonState.UP, atlas_0($receiver, this$GameView.theme_0.atlasPath, 'speaker-volume-control-mute')), to(ButtonState.TOGGLED_UP, atlas_0($receiver, this$GameView.theme_0.atlasPath, 'speaker-volume'))]));
+      $receiver.toggleOnClick = true;
+      this$GameView.controlsState_0.bind_qlkmfe$(GameView$initMusic$lambda$lambda($receiver));
+      $receiver.toggledChanged.add_trkh7z$(GameView$initMusic$lambda$lambda_0(this$GameView, $receiver));
+      return Unit;
+    };
+  }
+  function GameView$initMusic$lambda_0($receiver) {
+    $receiver.bottom = 5.0;
+    $receiver.left = 5.0;
+    return Unit;
+  }
+  function GameView$initMusic$lambda_1(it) {
+    return it.copy_6sjg8m$(false);
+  }
+  function GameView$initMusic$lambda$lambda_1(this$GameView) {
+    return function (it) {
+      it.loop = true;
+      it.play();
+      this$GameView.mainMusic_0 = it;
+      return Unit;
+    };
+  }
+  function GameView$initMusic$lambda_2(this$GameView) {
+    return function (it) {
+      var tmp$, tmp$_0;
+      if (it.isMuted) {
+        (tmp$ = this$GameView.mainMusic_0) != null ? (tmp$.stop(), Unit) : null;
+        this$GameView.persistence_0.setItem_puj7f4$('muted', 'true');
+        this$GameView.persistence_0.flush();
+      }
+       else {
+        if (this$GameView.mainMusic_0 == null) {
+          then(load(this$GameView, 'assets/music/background.mp3', AssetType.Companion.MUSIC), GameView$initMusic$lambda$lambda_1(this$GameView));
+        }
+        (tmp$_0 = this$GameView.mainMusic_0) != null ? (tmp$_0.play(), Unit) : null;
+        this$GameView.persistence_0.setItem_puj7f4$('muted', 'false');
+        this$GameView.persistence_0.flush();
+      }
+      return Unit;
+    };
+  }
+  GameView.prototype.initMusic_0 = function () {
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(iconButton_0(this, GameView$initMusic$lambda(this))), GameView$initMusic$lambda_0);
+    if (core.userInfo.isDesktop && !equals(this.persistence_0.getItem_61zpoe$('muted'), 'true')) {
+      this.controlsState_0.change_ru8m0w$(GameView$initMusic$lambda_1);
+    }
+    this.controlsState_0.bind_qlkmfe$(GameView$initMusic$lambda_2(this));
+  };
+  function GameView$initNextLevelButton$lambda$lambda(this$GameView, this$) {
+    return function () {
+      var showButton = false;
+      if (!this$GameView.currentLevel_0.value.characters.isEmpty()) {
+        var $receiver = this$GameView.currentLevel_0.value.characters;
+        var firstOrNull$result;
+        firstOrNull$break: do {
+          var tmp$;
+          tmp$ = $receiver.iterator();
+          while (tmp$.hasNext()) {
+            var element = tmp$.next();
+            if (!element.isPlaced) {
+              firstOrNull$result = element;
+              break firstOrNull$break;
+            }
+          }
+          firstOrNull$result = null;
+        }
+         while (false);
+        var nextUnplaced = firstOrNull$result;
+        println('nextUnplaced ' + toString(nextUnplaced));
+        if (nextUnplaced == null) {
+          println('All placed');
+          if (!this$GameView.characterHappiness.value.containsValue_11rc$(false)) {
+            println('All Happy');
+            showButton = true;
+          }
+        }
+      }
+      this$.visible = showButton;
+      return Unit;
+    };
+  }
+  function GameView$initNextLevelButton$lambda$lambda$lambda(it) {
+    return it + 1 | 0;
+  }
+  function GameView$initNextLevelButton$lambda$lambda_0(this$GameView) {
+    return function (it) {
+      this$GameView.currentLevelNumber.change_ru8m0w$(GameView$initNextLevelButton$lambda$lambda$lambda);
+      return Unit;
+    };
+  }
+  function GameView$initNextLevelButton$lambda(this$GameView) {
+    return function ($receiver) {
+      $receiver.label = 'Next Level!';
+      bind(or(this$GameView.currentLevel_0, this$GameView.characterHappiness), GameView$initNextLevelButton$lambda$lambda(this$GameView, $receiver));
+      click($receiver).add_trkh7z$(GameView$initNextLevelButton$lambda$lambda_0(this$GameView));
+      return Unit;
+    };
+  }
+  function GameView$initNextLevelButton$lambda_0($receiver) {
+    $receiver.bottom = 10.0;
+    $receiver.horizontalCenter = 0.0;
+    return Unit;
+  }
+  GameView.prototype.initNextLevelButton_0 = function () {
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(iconButton(this, this.atlasPath_0, 'smiley', GameView$initNextLevelButton$lambda(this))), GameView$initNextLevelButton$lambda_0);
+  };
+  function GameView$initVictoryScreen$lambda(this$GameView) {
+    return function () {
+      if (!this$GameView.levels.value.isEmpty() && this$GameView.currentLevelNumber.value >= this$GameView.levels.value.size) {
+        this$GameView.visible = false;
+        addPopUp(this$GameView, new PopUpInfo(new VictoryView(this$GameView)));
+      }
+      return Unit;
+    };
+  }
+  GameView.prototype.initVictoryScreen_0 = function () {
+    bind(or(this.levels, this.currentLevelNumber), GameView$initVictoryScreen$lambda(this));
+  };
+  Object.defineProperty(GameView.prototype, 'mouseGridPosition_0', {get: function () {
+    return this.gameStage_0.canvasToGrid_ewdjp1$(this.mouse.canvasX, this.mouse.canvasY, this.gridPosition_0);
+  }});
+  function GameView_init$lambda(this$GameView) {
+    return function () {
+      var tmp$;
+      this$GameView.currentLevel_0.value = (tmp$ = getOrNull(this$GameView.levels.value, this$GameView.currentLevelNumber.value)) != null ? tmp$ : emptyLevel;
+      return Unit;
+    };
+  }
+  GameView.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameView', interfaces: [CanvasLayoutContainer]};
   function UiControlsStateVo(isMuted, camera, dragging) {
     if (isMuted === void 0)
       isMuted = true;
@@ -1097,6 +1225,109 @@
   GridPosition.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.row, other.row) && Kotlin.equals(this.col, other.col)))));
   };
+  function GGJ19(owner) {
+    CanvasLayoutContainer.call(this, owner);
+    (new Skin(get_stage(this))).apply();
+    var $receiver = new GameView(this);
+    then(load($receiver, 'assets/levelData.txt', AssetType.Companion.TEXT), GGJ19_init$lambda$lambda($receiver));
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$($receiver), GGJ19_init$lambda);
+  }
+  function GGJ19_init$lambda$lambda(this$) {
+    return function (it) {
+      this$.levels.value = parseGameData(it);
+      return Unit;
+    };
+  }
+  function GGJ19_init$lambda($receiver) {
+    $receiver.fill();
+    return Unit;
+  }
+  GGJ19.$metadata$ = {kind: Kind_CLASS, simpleName: 'GGJ19', interfaces: [NavBindable, CanvasLayoutContainer]};
+  var throwCCE = Kotlin.throwCCE;
+  var trim = Kotlin.kotlin.text.trim_gw00vp$;
+  function parseGameData(str) {
+    var tmp$;
+    var lines = toMutableList(split(str, ['\n']));
+    var levels = ArrayList_init();
+    while (!lines.isEmpty()) {
+      eatEmptyLines(lines);
+      var tmp$_0;
+      var a = ArrayList_init_0(20);
+      tmp$_0 = 20 - 1 | 0;
+      for (var i = 0; i <= tmp$_0; i++) {
+        var tmp$_1 = a.add_11rb$;
+        var tmp$_2;
+        var a_0 = ArrayList_init_0(20);
+        tmp$_2 = 20 - 1 | 0;
+        for (var i_0 = 0; i_0 <= tmp$_2; i_0++) {
+          a_0.add_11rb$(new Tile());
+        }
+        tmp$_1.call(a, a_0);
+      }
+      var grid = a;
+      for (var row = 0; row < 20; row++) {
+        var $receiver = poll(lines);
+        var tmp$_3;
+        var cols = split(trim(Kotlin.isCharSequence(tmp$_3 = $receiver) ? tmp$_3 : throwCCE()).toString(), [' ']);
+        for (var col = 0; col < 20; col++) {
+          if (!equals(cols.get_za3lpa$(col), '.')) {
+            grid.get_za3lpa$(row).set_wxm5ur$(col, new Tile(RoomType$STANDARD_getInstance()));
+          }
+        }
+      }
+      eatEmptyLines(lines);
+      var queue = poll(lines);
+      var queueChars = split(queue, [' ']);
+      var pendingCharacters = ArrayList_init();
+      tmp$ = queueChars.iterator();
+      while (tmp$.hasNext()) {
+        var queueChar = tmp$.next();
+        pendingCharacters.add_11rb$(new GameCharacter(void 0, GameCharacterType$Companion_getInstance().fromLetter_s8itvh$(queueChar.charCodeAt(0))));
+      }
+      levels.add_11rb$(new GameLevel(pendingCharacters, grid));
+      eatEmptyLines(lines);
+    }
+    return levels;
+  }
+  function eatEmptyLines($receiver) {
+    while (!$receiver.isEmpty() && (isBlank($receiver.get_za3lpa$(0)) || startsWith($receiver.get_za3lpa$(0), '#'))) {
+      poll($receiver);
+    }
+  }
+  function LevelChooser(owner, levels, levelBinding) {
+    WindowPanel.call(this, owner);
+    this.unaryPlus_b3a6qy$(vGroup(this, LevelChooser_init$lambda(levels, levelBinding)));
+  }
+  function LevelChooser_init$lambda$lambda$lambda(closure$i, this$) {
+    return function (it) {
+      this$.toggled = closure$i === (it + 1 | 0);
+      return Unit;
+    };
+  }
+  function LevelChooser_init$lambda$lambda$lambda_0(closure$i, closure$levelBinding) {
+    return function (it) {
+      closure$levelBinding.value = closure$i - 1 | 0;
+      return Unit;
+    };
+  }
+  function LevelChooser_init$lambda$lambda(closure$levelBinding, closure$i) {
+    return function ($receiver) {
+      closure$levelBinding.bind_qlkmfe$(LevelChooser_init$lambda$lambda$lambda(closure$i, $receiver));
+      click($receiver).add_trkh7z$(LevelChooser_init$lambda$lambda$lambda_0(closure$i, closure$levelBinding));
+      return Unit;
+    };
+  }
+  function LevelChooser_init$lambda(closure$levels, closure$levelBinding) {
+    return function ($receiver) {
+      var tmp$;
+      tmp$ = closure$levels;
+      for (var i = 1; i <= tmp$; i++) {
+        $receiver.unaryPlus_b3a6qy$(button($receiver, 'Level ' + i, LevelChooser_init$lambda$lambda(closure$levelBinding, i)));
+      }
+      return Unit;
+    };
+  }
+  LevelChooser.$metadata$ = {kind: Kind_CLASS, simpleName: 'LevelChooser', interfaces: [WindowPanel]};
   function GameCharacter(id, type, row, col) {
     GameCharacter$Companion_getInstance();
     if (id === void 0)
@@ -1165,9 +1396,10 @@
     GameCharacterType_initFields = function () {
     };
     GameCharacterType$MUSICIAN_instance = new GameCharacterType('MUSICIAN', 0, 77);
-    GameCharacterType$GRANDMA_instance = new GameCharacterType('GRANDMA', 1, 71);
-    GameCharacterType$ARTIST_instance = new GameCharacterType('ARTIST', 2, 65);
-    GameCharacterType$UNKNOWN_instance = new GameCharacterType('UNKNOWN', 3, 85);
+    GameCharacterType$OLD_PERSON_instance = new GameCharacterType('OLD_PERSON', 1, 71);
+    GameCharacterType$PARENT_instance = new GameCharacterType('PARENT', 2, 80);
+    GameCharacterType$COOK_instance = new GameCharacterType('COOK', 3, 67);
+    GameCharacterType$UNKNOWN_instance = new GameCharacterType('UNKNOWN', 4, 85);
     GameCharacterType$Companion_getInstance();
   }
   var GameCharacterType$MUSICIAN_instance;
@@ -1175,15 +1407,20 @@
     GameCharacterType_initFields();
     return GameCharacterType$MUSICIAN_instance;
   }
-  var GameCharacterType$GRANDMA_instance;
-  function GameCharacterType$GRANDMA_getInstance() {
+  var GameCharacterType$OLD_PERSON_instance;
+  function GameCharacterType$OLD_PERSON_getInstance() {
     GameCharacterType_initFields();
-    return GameCharacterType$GRANDMA_instance;
+    return GameCharacterType$OLD_PERSON_instance;
   }
-  var GameCharacterType$ARTIST_instance;
-  function GameCharacterType$ARTIST_getInstance() {
+  var GameCharacterType$PARENT_instance;
+  function GameCharacterType$PARENT_getInstance() {
     GameCharacterType_initFields();
-    return GameCharacterType$ARTIST_instance;
+    return GameCharacterType$PARENT_instance;
+  }
+  var GameCharacterType$COOK_instance;
+  function GameCharacterType$COOK_getInstance() {
+    GameCharacterType_initFields();
+    return GameCharacterType$COOK_instance;
   }
   var GameCharacterType$UNKNOWN_instance;
   function GameCharacterType$UNKNOWN_getInstance() {
@@ -1214,17 +1451,19 @@
   }
   GameCharacterType.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterType', interfaces: [Enum]};
   function GameCharacterType$values() {
-    return [GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$GRANDMA_getInstance(), GameCharacterType$ARTIST_getInstance(), GameCharacterType$UNKNOWN_getInstance()];
+    return [GameCharacterType$MUSICIAN_getInstance(), GameCharacterType$OLD_PERSON_getInstance(), GameCharacterType$PARENT_getInstance(), GameCharacterType$COOK_getInstance(), GameCharacterType$UNKNOWN_getInstance()];
   }
   GameCharacterType.values = GameCharacterType$values;
   function GameCharacterType$valueOf(name) {
     switch (name) {
       case 'MUSICIAN':
         return GameCharacterType$MUSICIAN_getInstance();
-      case 'GRANDMA':
-        return GameCharacterType$GRANDMA_getInstance();
-      case 'ARTIST':
-        return GameCharacterType$ARTIST_getInstance();
+      case 'OLD_PERSON':
+        return GameCharacterType$OLD_PERSON_getInstance();
+      case 'PARENT':
+        return GameCharacterType$PARENT_getInstance();
+      case 'COOK':
+        return GameCharacterType$COOK_getInstance();
       case 'UNKNOWN':
         return GameCharacterType$UNKNOWN_getInstance();
       default:throwISE('No enum constant ggj19.model.GameCharacterType.' + name);
@@ -1419,6 +1658,20 @@
   }
   Skin.prototype.initTheme = function () {
     this.theme.textColor = new Color(1.0, 1.0, 1.0, 1.0);
+    this.theme.panelBgColor = Color.Companion.DARK_GRAY;
+    this.theme.controlBarBgColor = new Color(0.3, 0.3, 0.3, 1.0);
+  };
+  function Skin$apply$lambda($receiver) {
+    $receiver.selectable = false;
+    return Unit;
+  }
+  Skin.prototype.apply = function () {
+    BasicUiSkin.prototype.apply.call(this);
+    addStyleRule(this.target, charStyle(Skin$apply$lambda));
+    var charStyle_0 = new CharStyle();
+    charStyle_0.colorTint = Color.Companion.DARK_GRAY;
+    charStyle_0.selectable = false;
+    addStyleRule_0(this.target, charStyle_0, withAncestor(Button.Companion));
   };
   function Skin$loadBitmapFonts$lambda$lambda($receiver) {
     $receiver.fontKey = 'assets/uiskin/mainFont.fnt';
@@ -1482,7 +1735,7 @@
     ContainerImpl.call(this, owner);
     this.atlasPath_0 = 'assets/ggj.json';
     this.data = dataBinding(this, new Tile());
-    this.atlas_0 = this.addChild_mxweac$(atlas_0(this, this.atlasPath_0, 'EmptyTile', TileView$atlas$lambda));
+    this.atlas_0 = this.addChild_mxweac$(atlas(this, TileView$atlas$lambda));
     this.data.bind_qlkmfe$(TileView_init$lambda(this));
   }
   function TileView$Companion() {
@@ -1508,7 +1761,7 @@
       var tmp$;
       switch (it.roomType.name) {
         case 'NONE':
-          tmp$ = 'EmptyRoom';
+          tmp$ = 'EmptyTile';
           break;
         case 'STANDARD':
           tmp$ = 'Room';
@@ -1545,27 +1798,35 @@
     }
     return Isometric_instance;
   }
+  function VictoryView(owner) {
+    Panel.call(this, owner);
+    this.unaryPlus_b3a6qy$(text_0(this, 'Victory!!!'));
+  }
+  VictoryView.$metadata$ = {kind: Kind_CLASS, simpleName: 'VictoryView', interfaces: [Panel]};
   Object.defineProperty(_, 'config', {get: function () {
     return config;
   }});
   var package$ggj19 = _.ggj19 || (_.ggj19 = {});
   package$ggj19.GameCharacterIconView = GameCharacterIconView;
   package$ggj19.GameCharacterView = GameCharacterView;
+  Object.defineProperty(package$ggj19, 'GameRules', {get: GameRules_getInstance});
   $$importsForInline$$.AcornUtils = $module$AcornUtils;
   package$ggj19.GameStage = GameStage;
-  package$ggj19.GGJ19 = GGJ19;
-  package$ggj19.parseGameData_61zpoe$ = parseGameData;
-  package$ggj19.LevelView = LevelView;
+  package$ggj19.GameView = GameView;
   package$ggj19.UiControlsStateVo = UiControlsStateVo;
   package$ggj19.CameraVo = CameraVo;
   package$ggj19.placeCharacter_opltb5$ = placeCharacter;
   package$ggj19.GridPosition = GridPosition;
+  package$ggj19.GGJ19 = GGJ19;
+  package$ggj19.parseGameData_61zpoe$ = parseGameData;
+  package$ggj19.LevelChooser = LevelChooser;
   Object.defineProperty(GameCharacter, 'Companion', {get: GameCharacter$Companion_getInstance});
   var package$model = package$ggj19.model || (package$ggj19.model = {});
   package$model.GameCharacter = GameCharacter;
   Object.defineProperty(GameCharacterType, 'MUSICIAN', {get: GameCharacterType$MUSICIAN_getInstance});
-  Object.defineProperty(GameCharacterType, 'GRANDMA', {get: GameCharacterType$GRANDMA_getInstance});
-  Object.defineProperty(GameCharacterType, 'ARTIST', {get: GameCharacterType$ARTIST_getInstance});
+  Object.defineProperty(GameCharacterType, 'OLD_PERSON', {get: GameCharacterType$OLD_PERSON_getInstance});
+  Object.defineProperty(GameCharacterType, 'PARENT', {get: GameCharacterType$PARENT_getInstance});
+  Object.defineProperty(GameCharacterType, 'COOK', {get: GameCharacterType$COOK_getInstance});
   Object.defineProperty(GameCharacterType, 'UNKNOWN', {get: GameCharacterType$UNKNOWN_getInstance});
   Object.defineProperty(GameCharacterType, 'Companion', {get: GameCharacterType$Companion_getInstance});
   package$model.GameCharacterType = GameCharacterType;
@@ -1580,6 +1841,7 @@
   package$ggj19.TileView = TileView;
   var package$util = package$ggj19.util || (package$ggj19.util = {});
   Object.defineProperty(package$util, 'Isometric', {get: Isometric_getInstance});
+  package$ggj19.VictoryView = VictoryView;
   config = new AppConfig(void 0, void 0, void 0, void 0, 60, void 0, void 0, new WindowConfig('GGJ19', void 0, void 0, new Color(0.2, 0.2, 0.2, 1.0)), new GlConfig(true));
   emptyCharacter = new GameCharacter();
   emptyLevel = new GameLevel();

@@ -2454,15 +2454,6 @@
       $receiver.set_wxm5ur$(i, value);
   }
   var Math_0 = Math;
-  function replaceAt($receiver, index, newValue) {
-    var tmp$;
-    var newList = ArrayList_init_0($receiver.size);
-    tmp$ = get_lastIndex($receiver);
-    for (var i = 0; i <= tmp$; i++) {
-      newList.add_11rb$(i === index ? newValue : $receiver.get_za3lpa$(i));
-    }
-    return newList;
-  }
   function replace_0($receiver, oldValue, newValue) {
     var tmp$, tmp$_0;
     var newList = ArrayList_init_0($receiver.size);
@@ -11069,7 +11060,6 @@
   }});
   package$collection.arrayListObtain_287e2$ = arrayListObtain;
   package$collection.addOrSet_yd8n6p$ = addOrSet;
-  package$collection.replaceAt_g8jm4q$ = replaceAt;
   package$collection.replace_3odih2$ = replace_0;
   package$collection.ListView = ListView;
   package$collection.copy_go3l1a$ = copy_1;

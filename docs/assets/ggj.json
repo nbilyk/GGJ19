@@ -10,15 +10,15 @@
 			"filterMag": "LINEAR",
 			"regions": [
 				{
-					"name": "A.png",
+					"name": "C.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 617,
+						"x": 677,
 						"y": 0,
-						"width": 62,
-						"height": 67
+						"width": 54,
+						"height": 70
 					},
-					"padding": [ 0, 0, 0, 0 ]
+					"padding": [ 0, 0, 0, 1 ]
 				},
 				{
 					"name": "CurrentCharacterPresentationBg.png",
@@ -44,12 +44,12 @@
 				},
 				{
 					"name": "G.png",
-					"isRotated": true,
+					"isRotated": false,
 					"bounds": {
-						"x": 681,
+						"x": 617,
 						"y": 0,
-						"width": 70,
-						"height": 58
+						"width": 58,
+						"height": 70
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
@@ -63,6 +63,17 @@
 						"height": 67
 					},
 					"padding": [ 0, 0, 1, 0 ]
+				},
+				{
+					"name": "P.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 0,
+						"y": 195,
+						"width": 68,
+						"height": 59
+					},
+					"padding": [ 0, 0, 0, 0 ]
 				},
 				{
 					"name": "Room.png",

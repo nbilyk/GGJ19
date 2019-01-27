@@ -421,6 +421,7 @@
   DividerStyle.prototype = Object.create(StyleBase.prototype);
   DividerStyle.prototype.constructor = DividerStyle;
   WindowPanel.prototype = Object.create(ElementContainerImpl.prototype);
+  WindowPanel.prototype.constructor = WindowPanel;
   WindowPanelStyle.prototype = Object.create(StyleBase.prototype);
   WindowPanelStyle.prototype.constructor = WindowPanelStyle;
   Platform.prototype = Object.create(Enum.prototype);
@@ -1540,6 +1541,17 @@
     if (init === void 0)
       init = button$lambda;
     var b = new Button($receiver);
+    init(b);
+    return b;
+  }
+  function button$lambda_0($receiver) {
+    return Unit;
+  }
+  function button_0($receiver, label, init) {
+    if (init === void 0)
+      init = button$lambda_0;
+    var b = new Button($receiver);
+    b.label = label;
     init(b);
     return b;
   }
@@ -4661,6 +4673,17 @@
     if (init === void 0)
       init = iconButton$lambda;
     var b = new IconButton($receiver);
+    init(b);
+    return b;
+  }
+  function iconButton$lambda_1($receiver) {
+    return Unit;
+  }
+  function iconButton_1($receiver, atlasPath, region, init) {
+    if (init === void 0)
+      init = iconButton$lambda_1;
+    var b = new IconButton($receiver);
+    contentsAtlas(b, atlasPath, region);
     init(b);
     return b;
   }
@@ -13846,10 +13869,102 @@
     this.styleTags.add_11rb$(WindowPanel$Companion_getInstance());
     this.watch_s0mkkf$(this.style, void 0, WindowPanel_init$lambda(this));
   }
+  Object.defineProperty(WindowPanel.prototype, 'closing', {get: function () {
+    return this.closing_rm01v6$_0;
+  }});
+  Object.defineProperty(WindowPanel.prototype, 'closed', {get: function () {
+    return this.closed_wyw46z$_0;
+  }});
+  Object.defineProperty(WindowPanel.prototype, 'label', {get: function () {
+    return this.textField.label;
+  }, set: function (value) {
+    this.textField.label = value;
+  }});
+  WindowPanel.prototype.createLayoutData = function () {
+    return new StackLayoutData();
+  };
+  WindowPanel.prototype.onElementAdded_37cm5m$ = function (oldIndex, newIndex, element) {
+    this.contents_2eh42x$_0.addElement_3vm7z1$(newIndex, element);
+  };
+  WindowPanel.prototype.onElementRemoved_pjtgc4$ = function (index, element) {
+    this.contents_2eh42x$_0.removeElement_11rb$(element);
+  };
+  WindowPanel.prototype.close = function () {
+    this._closing_nwimgr$_0.dispatch_xwzc9p$(this, this.cancel.reset());
+    if (!this.cancel.canceled) {
+      this._closed_7n7vco$_0.dispatch_11rb$(this);
+    }
+  };
+  WindowPanel.prototype.updateSizeConstraints_mby7og$ = function (out) {
+    var tmp$, tmp$_0;
+    var padding = this.style.padding;
+    var titleBarPadding = this.style.titleBarPadding;
+    var cS = this.contents_2eh42x$_0.sizeConstraints;
+    var tCS = this.textField.sizeConstraints;
+    out.width.min = padding.expandWidth_81sz4$(cS.width.min);
+    out.width.max = padding.expandWidth_81sz4$(cS.width.max);
+    out.height.min = ((tmp$ = padding.expandHeight_81sz4$(cS.height.min)) != null ? tmp$ : 0.0) + ((tmp$_0 = titleBarPadding.expandHeight_81sz4$(tCS.height.min)) != null ? tmp$_0 : 0.0);
+    out.set_9oah19$(this.contents_2eh42x$_0.sizeConstraints);
+  };
+  WindowPanel.prototype.updateLayout_64u75x$ = function (explicitWidth, explicitHeight, out) {
+    var tmp$;
+    var padding = this.style.padding;
+    var titleBarPadding = this.style.titleBarPadding;
+    var closeButton = ensureNotNull(this.closeButton_63gmc9$_0);
+    var background = ensureNotNull(this.background_1opdtp$_0);
+    this.textField.setSize_yxjqmk$(explicitWidth == null ? null : titleBarPadding.reduceWidth2_mx4ult$(explicitWidth - closeButton.width - this.style.titleBarGap), null);
+    var a = this.textField.height;
+    var b = closeButton.height;
+    var tFH = Math_0.max(a, b);
+    this.textField.moveTo_y2kzbl$(titleBarPadding.left, titleBarPadding.top + (tFH - this.textField.height) * 0.5);
+    var a_0 = this.textField.height;
+    var b_0 = closeButton.height;
+    var titleBarHeight = titleBarPadding.expandHeight2_mx4ult$(Math_0.max(a_0, b_0));
+    var contentsW = explicitWidth;
+    var contentsH = explicitHeight == null ? null : explicitHeight - titleBarHeight;
+    this.contents_2eh42x$_0.setSize_yxjqmk$(padding.reduceWidth_81sz4$(contentsW), padding.reduceHeight_81sz4$(contentsH));
+    this.contents_2eh42x$_0.setPosition_y2kzbl$(padding.left, titleBarHeight + padding.top);
+    var a_1 = titleBarPadding.expandWidth2_mx4ult$(this.textField.width + this.style.titleBarGap + closeButton.width);
+    var b_1 = padding.expandWidth2_mx4ult$(this.contents_2eh42x$_0.width);
+    var measuredWidth = Math_0.max(a_1, b_1);
+    background.setSize_yxjqmk$(measuredWidth, padding.expandHeight2_mx4ult$(this.contents_2eh42x$_0.height));
+    background.setPosition_y2kzbl$(0.0, titleBarHeight);
+    out.set_dleff0$(measuredWidth, titleBarHeight + background.height);
+    (tmp$ = this.titleBarBackground_fxzqoo$_0) != null ? (tmp$.setSize_yxjqmk$(out.width, titleBarHeight), Unit) : null;
+    closeButton.setPosition_y2kzbl$(out.width - titleBarPadding.right - closeButton.width, titleBarPadding.top);
+  };
   function WindowPanel$Companion() {
     WindowPanel$Companion_instance = this;
   }
+  WindowPanel$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: [StyleTag]};
   var WindowPanel$Companion_instance = null;
+  function WindowPanel$Companion_getInstance() {
+    if (WindowPanel$Companion_instance === null) {
+      new WindowPanel$Companion();
+    }
+    return WindowPanel$Companion_instance;
+  }
+  function WindowPanel_init$lambda$lambda(this$WindowPanel) {
+    return function (it) {
+      this$WindowPanel.close();
+      return Unit;
+    };
+  }
+  function WindowPanel_init$lambda(this$WindowPanel) {
+    return function (it) {
+      var tmp$, tmp$_0, tmp$_1;
+      (tmp$ = this$WindowPanel.background_1opdtp$_0) != null ? (tmp$.dispose(), Unit) : null;
+      this$WindowPanel.background_1opdtp$_0 = this$WindowPanel.addChild_3i6itm$(0, it.background(this$WindowPanel));
+      (tmp$_0 = this$WindowPanel.titleBarBackground_fxzqoo$_0) != null ? (tmp$_0.dispose(), Unit) : null;
+      this$WindowPanel.titleBarBackground_fxzqoo$_0 = this$WindowPanel.addChild_3i6itm$(1, it.titleBarBackground(this$WindowPanel));
+      (tmp$_1 = this$WindowPanel.closeButton_63gmc9$_0) != null ? (tmp$_1.dispose(), Unit) : null;
+      this$WindowPanel.closeButton_63gmc9$_0 = it.closeButton(this$WindowPanel);
+      click(ensureNotNull(this$WindowPanel.closeButton_63gmc9$_0)).add_trkh7z$(WindowPanel_init$lambda$lambda(this$WindowPanel));
+      this$WindowPanel.addChild_3i6itm$(2, ensureNotNull(this$WindowPanel.closeButton_63gmc9$_0));
+      return Unit;
+    };
+  }
+  WindowPanel.$metadata$ = {kind: Kind_CLASS, simpleName: 'WindowPanel', interfaces: [LayoutDataProvider, Closeable, Labelable, ElementContainerImpl]};
   function WindowPanelStyle() {
     WindowPanelStyle$Companion_getInstance();
     StyleBase.call(this);
@@ -22566,6 +22681,10 @@
     };
   }
   PopUpManagerImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'PopUpManagerImpl', interfaces: [PopUpManager, ElementLayoutContainerImpl]};
+  function addPopUp($receiver, popUpInfo) {
+    inject($receiver, PopUpManager$Companion_getInstance()).addPopUp_gyhesl$(popUpInfo);
+    return popUpInfo.child;
+  }
   function UrlRequestData(url, method, headers, user, password, formData, variables, body, timeout) {
     if (url === void 0)
       url = '';
@@ -26878,6 +26997,9 @@
     var infoMessageStyle = new CharStyle();
     infoMessageStyle.colorTint = this.theme.infoColor;
     addStyleRule(this.target, infoMessageStyle, withAncestor(TextStyleTags_getInstance().info));
+    var charStyle_0 = new CharStyle();
+    charStyle_0.selectable = false;
+    addStyleRule(this.target, charStyle_0, withAncestor(Button$Companion_getInstance()));
   };
   function BasicUiSkin$loadBitmapFonts$lambda$lambda($receiver) {
     $receiver.fontKey = 'assets/uiskin/verdana_14.fnt';
@@ -28032,7 +28154,6 @@
     this.textField.text = value;
   }});
   function CheckboxSkinPart_init$lambda($receiver) {
-    set_selectable_1($receiver, false);
     $receiver.includeInLayout = false;
     return Unit;
   }
@@ -28252,6 +28373,7 @@
   package$component.ToggleableRo = ToggleableRo;
   package$component.Toggleable = Toggleable;
   package$component.button_907r7w$ = button;
+  package$component.button_l5thvq$ = button_0;
   package$component.CameraElementRo = CameraElementRo;
   package$component.CameraElement = CameraElement;
   package$component.localToCanvas_n8adu8$ = localToCanvas;
@@ -28337,6 +28459,7 @@
   Object.defineProperty(IconButton, 'Companion', {get: IconButton$Companion_getInstance});
   package$component.IconButton = IconButton;
   package$component.iconButton_hzc8f9$ = iconButton;
+  package$component.iconButton_27nmo1$ = iconButton_1;
   package$component.IconButtonSkinPart = IconButtonSkinPart;
   package$component.Image = Image;
   package$component.image_e3xjfr$ = image;
@@ -28635,6 +28758,7 @@
   package$component.VDivider = VDivider;
   Object.defineProperty(DividerStyle, 'Companion', {get: DividerStyle$Companion_getInstance});
   package$component.DividerStyle = DividerStyle;
+  Object.defineProperty(WindowPanel, 'Companion', {get: WindowPanel$Companion_getInstance});
   package$component.WindowPanel = WindowPanel;
   Object.defineProperty(WindowPanelStyle, 'Companion', {get: WindowPanelStyle$Companion_getInstance});
   package$component.WindowPanelStyle = WindowPanelStyle;
@@ -28973,6 +29097,7 @@
   Object.defineProperty(PopUpManagerStyle, 'Companion', {get: PopUpManagerStyle$Companion_getInstance});
   package$popup.PopUpManagerStyle = PopUpManagerStyle;
   package$popup.PopUpManagerImpl = PopUpManagerImpl;
+  package$popup.addPopUp_40ntlz$ = addPopUp;
   var package$request = package$core.request || (package$core.request = {});
   package$request.UrlRequestData = UrlRequestData;
   Object.defineProperty(package$request, 'UrlRequestMethod', {get: UrlRequestMethod_getInstance});
