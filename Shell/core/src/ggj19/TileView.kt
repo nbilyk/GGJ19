@@ -16,34 +16,53 @@
 
 package ggj19
 
+import com.acornui.component.AtlasComponent
 import com.acornui.component.ContainerImpl
 import com.acornui.component.atlas
 import com.acornui.core.di.Owned
 import com.acornui.core.observe.dataBinding
+import com.acornui.math.MinMaxRo
 import ggj19.model.RoomType
 import ggj19.model.Tile
+import kotlin.random.Random
 
 class TileView(owner: Owned) : ContainerImpl(owner) {
 
 	private val atlasPath = "assets/ggj.json"
 	val data = dataBinding(Tile())
 
-	private val atlas = addChild(atlas {
-		originY = 64f
-		originX = 128f
-		setScaling(0.5f, 0.5f)
-	})
+	private val grass = addChild(piece("floor_grass_a"))
+	private val floor = addChild(piece("floor${Random.nextInt(3)}"))
+	private val rightWall = addChild(piece("right_wall${Random.nextInt(3)}"))
+	private val leftWall = addChild(piece("left_wall${Random.nextInt(3)}"))
 
 	init {
 		data.bind {
-			val region = when (it.roomType) {
-				RoomType.NONE -> "EmptyTile"
-				RoomType.STANDARD -> "Room"
-			}
-			atlas.setRegion(atlasPath, region)
+			val isRoom = it.roomType == RoomType.STANDARD
+			grass.visible = !isRoom
 		}
+	}
 
+	fun renderGround(clip: MinMaxRo) {
+		floor.render(clip)
+		grass.render(clip)
+	}
 
+	fun renderRightWall(clip: MinMaxRo) {
+		rightWall.render(clip)
+	}
+
+	fun renderLeftWall(clip: MinMaxRo) {
+		leftWall.render(clip)
+	}
+
+	private fun piece(region: String): AtlasComponent {
+		return atlas(atlasPath, region) {
+			visible = false
+			originY = 64f
+			originX = 128f
+			setScaling(0.5f, 0.5f)
+		}
 	}
 
 	companion object {

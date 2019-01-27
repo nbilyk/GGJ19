@@ -35,10 +35,12 @@ import com.acornui.core.observe.DataBinding
 import com.acornui.core.observe.or
 import com.acornui.core.time.onTick
 import com.acornui.graphic.Color
+import com.acornui.math.MinMaxRo
 import com.acornui.math.RayRo
 import com.acornui.math.Vector2
 import com.acornui.signal.bind
 import ggj19.model.GameLevel
+import ggj19.model.RoomType
 import ggj19.model.emptyCharacter
 import ggj19.util.Isometric
 
@@ -70,7 +72,7 @@ class GameStage(
 		for (row in 0 until GameLevel.MAX_ROWS) {
 			for (col in 0 until GameLevel.MAX_COLS) {
 				+tileViews[row][col].apply {
-					moveTo(Isometric.twoDToIso(col * TileView.TILE_SIZE, row * TileView.TILE_SIZE))
+					moveTo(Isometric.twoDToIso(col * TileView.TILE_SIZE + 1f, row * TileView.TILE_SIZE + 1f))
 				}
 			}
 		}
@@ -103,16 +105,10 @@ class GameStage(
 	private fun initDebugLines() {
 		// Debug lines
 		+staticMeshC {
-			visible = false
-			stage.keyDown().add {
-				if (it.ctrlKey && it.keyCode == Ascii.D) {
-					visible = !visible
-				}
-			}
 			mesh = staticMesh {
 				buildMesh {
-					//							MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 1f)
-					MeshBuilderStyle.lineStyle.colorTint = Color.RED
+					MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 0.5f)
+//					MeshBuilderStyle.lineStyle.colorTint = Color.RED
 
 					for (row in 0..GameLevel.MAX_ROWS) {
 						val ptA = Isometric.twoDToIso(Vector2(0f, row * TileView.TILE_SIZE))
@@ -224,5 +220,36 @@ class GameStage(
 		out.col = (tmpVec2.x / TileView.TILE_SIZE).toInt()
 		out.row = (tmpVec2.y / TileView.TILE_SIZE).toInt()
 		return out
+	}
+
+	override fun render(clip: MinMaxRo) {
+		for (row in 0 until GameLevel.MAX_ROWS) {
+			for (col in 0 until GameLevel.MAX_COLS) {
+				val tile = tileViews[row][col]
+				tile.renderGround(clip)
+			}
+		}
+		super.render(clip)
+		val characterViews = characterViews
+		val grid = currentLevel.value.grid
+
+		for (row in 0 until GameLevel.MAX_ROWS) {
+			for (col in 0 until GameLevel.MAX_COLS) {
+				val tile = tileViews[row][col]
+				if (grid[row][col].roomType != RoomType.NONE) {
+					tile.renderRightWall(clip)
+					tile.renderLeftWall(clip)
+					// Character
+					val char = characterViews.firstOrNull { it.data.value.row == row && it.data.value.col == col }
+					char?.render(clip)
+				}
+
+				if (row > 0 && grid[row - 1][col].roomType != RoomType.NONE)
+					tile.renderRightWall(clip)
+				if (col > 0 && grid[row][col - 1].roomType != RoomType.NONE)
+					tile.renderLeftWall(clip)
+			}
+		}
+		dragView.render(clip)
 	}
 }
