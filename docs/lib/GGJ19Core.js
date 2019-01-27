@@ -596,7 +596,7 @@
   }
   function GameView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda(this$) {
     return function (it) {
-      this$.text = 'Level ' + it;
+      this$.text = 'Level ' + (it + 1 | 0);
       return Unit;
     };
   }
@@ -1301,7 +1301,9 @@
         }
       }
       eatEmptyLines(lines);
-      var queue = poll(lines);
+      var $receiver_0 = poll(lines);
+      var tmp$_4;
+      var queue = trim(Kotlin.isCharSequence(tmp$_4 = $receiver_0) ? tmp$_4 : throwCCE()).toString();
       var queueChars = split(queue, [' ']);
       var pendingCharacters = ArrayList_init();
       tmp$ = queueChars.iterator();

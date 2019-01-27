@@ -130,7 +130,7 @@ class GameView(owner: Owned) : CanvasLayoutContainer(owner) {
 				+hGroup {
 					+text {
 						currentLevelNumber.bind {
-							text = "Level $it"
+							text = "Level ${it + 1}"
 						}
 						click().add { e ->
 							if (e.count == 2) {

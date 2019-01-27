@@ -58,7 +58,7 @@ fun parseGameData(str: String): List<GameLevel> {
 			}
 		}
 		lines.eatEmptyLines()
-		val queue = lines.poll()
+		val queue = lines.poll().trim()
 		val queueChars = queue.split(" ")
 		val pendingCharacters = ArrayList<GameCharacter>()
 		for (queueChar in queueChars) {
