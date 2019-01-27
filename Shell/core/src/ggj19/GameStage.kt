@@ -25,25 +25,33 @@ import com.acornui.component.drawing.line
 import com.acornui.component.drawing.staticMesh
 import com.acornui.component.drawing.staticMeshC
 import com.acornui.component.layout.moveTo
+import com.acornui.core.Disposable
 import com.acornui.core.cache.recycle
+import com.acornui.core.cursor.StandardCursors
+import com.acornui.core.cursor.cursor
 import com.acornui.core.di.Owned
 import com.acornui.core.input.Ascii
+import com.acornui.core.input.interaction.dragEnd
+import com.acornui.core.input.interaction.dragStart
 import com.acornui.core.input.keyDown
-import com.acornui.core.observe.dataBinding
+import com.acornui.core.observe.DataBinding
+import com.acornui.core.observe.or
+import com.acornui.core.time.onTick
 import com.acornui.graphic.Color
 import com.acornui.math.RayRo
 import com.acornui.math.Vector2
+import com.acornui.signal.bind
 import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
-import ggj19.model.emptyLevel
+import ggj19.model.emptyCharacter
 import ggj19.util.Isometric
 
-class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
-
-	val currentLevel = dataBinding(emptyLevel)
+class GameStage(owner: Owned, val currentLevel: DataBinding<GameLevel>, val controlsState: DataBinding<UiControlsStateVo>) : ElementContainerImpl<UiComponent>(owner) {
 
 	private val tileViews: List<List<TileView>> = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { TileView(this) } }
 	private val characterViews = ArrayList<GameCharacterView>()
+
+	private val dragView = GameCharacterView(owner, emptyCharacter)
 
 	init {
 		interactivityMode = InteractivityMode.ALWAYS
@@ -54,6 +62,7 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 		initTileViews()
 		initCharacters()
 		initDebugLines()
+		initDragView()
 	}
 
 	private fun initTileViews() {
@@ -130,14 +139,58 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 		}
 	}
 
+	private var tick: Disposable? = null
+
+	private fun initDragView() {
+		+dragView.apply {
+			controlsState.bind {
+				data.value = it.dragging ?: emptyCharacter
+				val oldIsDragging = visible
+				val newIsDragging = it.dragging != null
+				if (oldIsDragging != newIsDragging) {
+					visible = newIsDragging
+					if (visible) {
+						if (tick == null) {
+							tick = onTick {
+								this@GameStage.mousePosition(tmpVec2)
+								dragView.setPosition(tmpVec2.x, tmpVec2.y)
+							}
+						}
+					} else {
+						tick?.dispose()
+						tick = null
+					}
+				}
+			}
+		}
+	}
+
 	private fun createGameCharacterView(character: GameCharacter): GameCharacterView {
 		return GameCharacterView(this, character).apply {
-			defaultWidth = 32f
-			defaultHeight = 32f
+			setScaling(0.6f, 0.6f) // TODO: TEMP
 			data.changed.add { old, new ->
 				currentLevel.change {
 					it.copy(characters = it.characters.replace(old, new))
 				}
+
+			}
+
+			(data or currentLevel).bind {
+				val isLocked = currentLevel.value.isLocked(data.value)
+				interactivityMode = if (isLocked) InteractivityMode.NONE else InteractivityMode.ALL
+				colorTint = if (isLocked) Color.GRAY else Color.WHITE
+			}
+
+			dragStart().add { _ ->
+				visible = false
+				controlsState.change { it.copy(dragging = data.value) }
+			}
+
+			dragEnd().add { _ ->
+				visible = true
+				val gameCharacter = data.value
+				currentLevel.placeCharacter(gameCharacter, canvasToGrid(mouse.canvasX, mouse.canvasY, GridPosition()))
+				controlsState.change { it.copy(dragging = null) }
 			}
 		}
 	}
@@ -152,6 +205,7 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 			canvasToGrid(canvasX, canvasY, tmpGridP)
 			for (i in characterViews.lastIndex downTo 0) {
 				val characterView = characterViews[i]
+				if (!characterView.visible || (onlyInteractive && !characterView.interactivityEnabled)) continue
 				val m = characterView.data.value
 				if (m.row == tmpGridP.row && m.col == tmpGridP.col) {
 					out.add(characterView)

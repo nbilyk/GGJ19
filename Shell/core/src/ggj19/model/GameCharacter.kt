@@ -16,16 +16,17 @@
 
 package ggj19.model
 
-import com.acornui.core.UidUtil
-
 data class GameCharacter(
-		val id: String = UidUtil.createUid(),
+		val id: String = (++nextId).toString(),
 		val type: GameCharacterType = GameCharacterType.UNKNOWN,
 		val row: Int = -1,
-		val col: Int = -1,
-		val isLocked: Boolean = false
+		val col: Int = -1
 ) {
 	val isPlaced: Boolean = (col != -1)
+
+	companion object {
+		private var nextId = 0
+	}
 }
 
 enum class GameCharacterType(val char: Char) {
@@ -45,3 +46,4 @@ enum class GameCharacterType(val char: Char) {
 	}
 }
 
+val emptyCharacter = GameCharacter()

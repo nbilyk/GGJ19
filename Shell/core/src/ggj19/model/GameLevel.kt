@@ -20,11 +20,23 @@ import com.acornui.collection.ArrayList
 
 data class GameLevel(
 		val characters: List<GameCharacter> = emptyList(),
-		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { Tile() }}
+		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { Tile() }},
+		val initialLockedCount: Int = 0
 ) {
 
+
+	val placedCount: Int
+		get() = characters.count { it.isPlaced }
+
 	val unlockedCharacters: List<GameCharacter>
-		get() = characters.filter { !it.isLocked }
+		get() {
+			return characters.subList(maxOf(initialLockedCount, placedCount - 1), characters.size)
+		}
+
+	fun isLocked(character: GameCharacter): Boolean {
+		val index = characters.indexOf(character)
+		return index < placedCount - 1
+	}
 
 	fun getTile(row: Int, col: Int): Tile? {
 		if (row < 0 || col < 0 || row >= MAX_ROWS || col >= MAX_COLS) return null

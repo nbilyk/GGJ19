@@ -1299,6 +1299,8 @@
     ClassCastException.prototype.constructor = ClassCastException;
     NoSuchElementException.prototype = Object.create(RuntimeException.prototype);
     NoSuchElementException.prototype.constructor = NoSuchElementException;
+    ArithmeticException.prototype = Object.create(RuntimeException.prototype);
+    ArithmeticException.prototype.constructor = ArithmeticException;
     NoWhenBranchMatchedException.prototype = Object.create(RuntimeException.prototype);
     NoWhenBranchMatchedException.prototype.constructor = NoWhenBranchMatchedException;
     UninitializedPropertyAccessException.prototype = Object.create(RuntimeException.prototype);
@@ -3125,6 +3127,12 @@
         list.set_wxm5ur$(i, array[i]);
       }
     }
+    function checkCountOverflow(count) {
+      if (count < 0) {
+        throwCountOverflow();
+      }
+      return count;
+    }
     function AbstractMutableCollection() {
       AbstractCollection.call(this);
     }
@@ -4573,6 +4581,11 @@
       NoSuchElementException.call($this, null);
       return $this;
     }
+    function ArithmeticException(message) {
+      RuntimeException_init_0(message, this);
+      this.name = 'ArithmeticException';
+    }
+    ArithmeticException.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArithmeticException', interfaces: [RuntimeException]};
     function NoWhenBranchMatchedException(message, cause) {
       RuntimeException.call(this, message, cause);
       this.name = 'NoWhenBranchMatchedException';
@@ -6080,6 +6093,9 @@
           return listOf($receiver.get_za3lpa$(0));
         default:return $receiver;
       }
+    }
+    function throwCountOverflow() {
+      throw new ArithmeticException('Count overflow has happened.');
     }
     function collectionSizeOrDefault($receiver, default_0) {
       return Kotlin.isType($receiver, Collection) ? $receiver.size : default_0;
@@ -7769,6 +7785,7 @@
     package$collections.toMutableList_4c7yge$ = toMutableList_9;
     package$collections.toSet_7wnvza$ = toSet_8;
     package$collections.Collection = Collection;
+    package$collections.checkCountOverflow_za3lpa$ = checkCountOverflow;
     package$collections.joinTo_gcc71v$ = joinTo_8;
     package$collections.joinToString_fmv235$ = joinToString_8;
     package$collections.asSequence_7wnvza$ = asSequence_8;
@@ -7972,6 +7989,7 @@
     package$kotlin.ClassCastException = ClassCastException;
     package$kotlin.NoSuchElementException_init = NoSuchElementException_init;
     package$kotlin.NoSuchElementException = NoSuchElementException;
+    package$kotlin.ArithmeticException = ArithmeticException;
     package$kotlin.NoWhenBranchMatchedException_init = NoWhenBranchMatchedException_init;
     package$kotlin.NoWhenBranchMatchedException = NoWhenBranchMatchedException;
     package$kotlin.UninitializedPropertyAccessException_init_pdl1vj$ = UninitializedPropertyAccessException_init_0;
@@ -8040,6 +8058,7 @@
     package$collections.arrayListOf_i5x0yv$ = arrayListOf_0;
     package$collections.get_indices_gzk92b$ = get_indices_8;
     package$collections.optimizeReadOnlyList_qzupvv$ = optimizeReadOnlyList;
+    package$collections.throwCountOverflow = throwCountOverflow;
     package$collections.emptyMap_q3lmfv$ = emptyMap;
     package$collections.mapOf_qfcya0$ = mapOf_0;
     package$collections.mutableMapOf_qfcya0$ = mutableMapOf_0;

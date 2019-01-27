@@ -42,7 +42,6 @@ import com.acornui.core.input.interaction.*
 import com.acornui.core.input.wheel
 import com.acornui.core.observe.DataBinding
 import com.acornui.core.observe.dataBinding
-import com.acornui.core.observe.mirror
 import com.acornui.core.tween.TweenRegistry
 import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
@@ -55,16 +54,15 @@ import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
 import ggj19.model.RoomType
 import ggj19.model.emptyLevel
-import ggj19.util.Isometric
 
 class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
-	private val stateData = dataBinding(UiControlsStateVo())
+	private val controlsState = dataBinding(UiControlsStateVo())
 
 	val originalData = dataBinding(emptyLevel)
 	private val currentLevel = dataBinding(originalData.value)
 
-	private val gameStage = GameStage(this)
+	private val gameStage = GameStage(this, currentLevel, controlsState)
 
 	// Camera and toss scrolling properties.
 	private val overviewCam = orthographicCamera(true)
@@ -157,25 +155,27 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 				// The next character you can place.
 				+GameCharacterIconView(this).apply {
 					cursor(StandardCursors.HAND)
+
+					currentLevel.bind { _ ->
+						val firstUnplaced = currentLevel.value.characters.find { !it.isPlaced }
+						data.value = firstUnplaced
+					}
 					dragStart().add { e ->
+						alpha = 0.2f
 						println("Drag start gciv ${e.currentTarget}")
-						stateData.change { it.copy(dragging = currentLevel.value.unlockedCharacters.firstOrNull()) }
+						controlsState.change { it.copy(dragging = data.value) }
 					}
 					dragEnd().add { _ ->
-						val gameCharacter = currentLevel.value.unlockedCharacters.firstOrNull()
+						alpha = 1f
+						val gameCharacter = data.value
 						println("Drag end $gameCharacter")
 						if (gameCharacter != null) {
-							currentLevel.attemptCharacterPlacement(gameCharacter, mouseGridPosition)
-							stateData.change { it.copy(dragging = null) }
+							currentLevel.placeCharacter(gameCharacter, mouseGridPosition)
+							controlsState.change { it.copy(dragging = null) }
 						}
 					}
 
-					currentLevel.bind { newData ->
-						data.value = newData.unlockedCharacters.firstOrNull()
-						val isPlaced = data.value?.isPlaced == true
-						alpha = if (isPlaced) 0.2f else 1f
-						interactivityMode = if (isPlaced) InteractivityMode.NONE else InteractivityMode.ALL
-					}
+
 				} layout { width = 64f; height = 64f; center() }
 			} layout { width = 106f; height = 106f }
 		} layout { widthPercent = 1f }
@@ -201,14 +201,14 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 		var startZoom = 0f
 		pinchStart().add {
-			startZoom = stateData.value.camera.zoom
+			startZoom = controlsState.value.camera.zoom
 		}
 
 		pinch().add {
 			zoomCamera(it.startDistance * startZoom / it.distance)
 		}
 
-		stateData.bind {
+		controlsState.bind {
 			if (!hScroll.changed.isDispatching && !vScroll.changed.isDispatching) {
 				hScroll.value = it.camera.x
 				vScroll.value = it.camera.y
@@ -219,7 +219,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		wheel().add {
 			tossScroller.stop()
 			if (it.deltaY != 0f) {
-				zoomCamera(stateData.value.camera.zoom * if (it.deltaY > 0f) 1.2f else 0.8f)
+				zoomCamera(controlsState.value.camera.zoom * if (it.deltaY > 0f) 1.2f else 0.8f)
 			}
 		}
 	}
@@ -227,12 +227,11 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private fun initStageView() {
 		+gameStage.apply {
 			cameraOverride = overviewCam
-			currentLevel.mirror(this@LevelView.currentLevel)
 		}
 	}
 
 	private fun updateCam() {
-		val cam = stateData.value.camera
+		val cam = controlsState.value.camera
 		val z = cam.zoom
 		val w = overviewCam.viewportWidth * z
 		val h = overviewCam.viewportHeight * z
@@ -245,8 +244,8 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		window.requestRender()
 	}
 
-	private fun moveCamera(x: Float = stateData.value.camera.x, y: Float = stateData.value.camera.y, zoom: Float = stateData.value.camera.zoom) {
-		stateData.change {
+	private fun moveCamera(x: Float = controlsState.value.camera.x, y: Float = controlsState.value.camera.y, zoom: Float = controlsState.value.camera.zoom) {
+		controlsState.change {
 			TweenRegistry.kill(this, "camera", finish = true)
 			it.copy(camera = it.camera.copy(x = x, y = y, zoom = zoom))
 		}
@@ -256,7 +255,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	 * Zooms the camera
 	 */
 	private fun zoomCamera(zoom: Float) {
-		stateData.change {
+		controlsState.change {
 			TweenRegistry.kill(this, "camera", finish = true)
 			val newZoom = MathUtils.clamp(zoom, 0.1f, 4f)
 			val cam = it.camera
@@ -264,11 +263,11 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		}
 	}
 
-	private fun tweenCamera(x: Float = stateData.value.camera.x, y: Float = stateData.value.camera.y, zoom: Float = stateData.value.camera.zoom, duration: Float = 0.5f, ease: Interpolation = Easing.pow3, delay: Float = 0f) {
-		val start = stateData.value.camera.copy()
+	private fun tweenCamera(x: Float = controlsState.value.camera.x, y: Float = controlsState.value.camera.y, zoom: Float = controlsState.value.camera.zoom, duration: Float = 0.5f, ease: Interpolation = Easing.pow3, delay: Float = 0f) {
+		val start = controlsState.value.camera.copy()
 		val end = CameraVo(x, y, MathUtils.clamp(zoom, 0.1f, 4f))
 		driveTween(createPropertyTween(this, "camera", duration, ease, { 0f }, { alpha ->
-			stateData.change {
+			controlsState.change {
 				it.copy(camera = start.lerp(end, alpha))
 			}
 		}, targetValue = 1f, delay = delay))
@@ -309,16 +308,24 @@ data class CameraVo(
 /**
  * Places a character at the given position if that position is empty.
  */
-fun DataBinding<GameLevel>.attemptCharacterPlacement(gameCharacter: GameCharacter, position: GridPosition) {
+fun DataBinding<GameLevel>.placeCharacter(gameCharacter: GameCharacter, position: GridPosition) {
 	val tile = value.getTile(position.row, position.col)
-	Log.debug("attemptCharacterPlacement: Position: $position Tile: $tile Character: $gameCharacter")
+	Log.debug("placeCharacter : Position: $position Tile: $tile Character: $gameCharacter")
+	var foundEmptyLocation = false
 	if (tile != null && tile.roomType == RoomType.STANDARD) {
 		val existingCharacter = value.getCharacterAt(position.row, position.col)
+		if (existingCharacter?.id == gameCharacter.id) return
 		if (existingCharacter == null) {
 			Log.debug("Tile empty, placing...")
+			foundEmptyLocation = true
 			change {
 				it.copy(characters = it.characters.replace(gameCharacter, gameCharacter.copy(row = position.row, col = position.col)))
 			}
+		}
+	}
+	if (!foundEmptyLocation) {
+		change {
+			it.copy(characters = it.characters.replace(gameCharacter, gameCharacter.copy(row = -1, col = -1)))
 		}
 	}
 }
