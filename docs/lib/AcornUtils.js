@@ -690,6 +690,75 @@
   function then_0($receiver, callback) {
     return then($receiver, then$lambda_0(callback));
   }
+  function catch$lambda(this$catch_0, closure$callback_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$catch$lambda(this$catch_0, closure$callback_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$catch$lambda(this$catch_0, closure$callback_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 5;
+    this.local$this$catch = this$catch_0;
+    this.local$closure$callback = closure$callback_0;
+  }
+  Coroutine$catch$lambda.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: null, interfaces: [CoroutineImpl]};
+  Coroutine$catch$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$catch$lambda.prototype.constructor = Coroutine$catch$lambda;
+  Coroutine$catch$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            var tmp$;
+            this.exceptionState_0 = 2;
+            this.state_0 = 1;
+            this.result_0 = this.local$this$catch.await(this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            return this.result_0;
+          case 2:
+            this.exceptionState_0 = 5;
+            var t = this.exception_0;
+            if (Kotlin.isType(t, Throwable)) {
+              return this.local$closure$callback((tmp$ = t.cause) != null ? tmp$ : t);
+            }
+             else {
+              throw t;
+            }
+
+          case 3:
+            this.state_0 = 4;
+            continue;
+          case 4:
+            return;
+          case 5:
+            throw this.exception_0;
+          default:this.state_0 = 5;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 5) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  function catch_0($receiver, callback) {
+    launch(catch$lambda($receiver, callback));
+    return $receiver;
+  }
   function AsyncWorker(work) {
     this._status_0 = Deferred$Status$PENDING_getInstance();
     this._result_0 = null;
@@ -10932,6 +11001,7 @@
   package$async.CancelableDeferred = CancelableDeferred;
   package$async.then_7jcrga$ = then;
   package$async.then_1eax44$ = then_0;
+  package$async.catch_y8s6tb$ = catch_0;
   package$async.LateValue = LateValue;
   package$async.Promise = Promise;
   package$async.awaitAll_4nl6bg$ = awaitAll;

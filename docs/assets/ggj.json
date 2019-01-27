@@ -10,6 +10,17 @@
 			"filterMag": "LINEAR",
 			"regions": [
 				{
+					"name": "A.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 519,
+						"y": 69,
+						"width": 62,
+						"height": 67
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
 					"name": "EmptyTile.png",
 					"isRotated": false,
 					"bounds": {
@@ -19,6 +30,28 @@
 						"height": 128
 					},
 					"padding": [ 0, 64, 0, 0 ]
+				},
+				{
+					"name": "G.png",
+					"isRotated": true,
+					"bounds": {
+						"x": 592,
+						"y": 0,
+						"width": 70,
+						"height": 58
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
+					"name": "M.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 519,
+						"y": 0,
+						"width": 71,
+						"height": 67
+					},
+					"padding": [ 0, 0, 1, 0 ]
 				},
 				{
 					"name": "Room.png",
@@ -36,7 +69,7 @@
 					"isRotated": false,
 					"bounds": {
 						"x": 519,
-						"y": 0,
+						"y": 138,
 						"width": 15,
 						"height": 15
 					},
@@ -46,8 +79,8 @@
 					"name": "smiley.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 519,
-						"y": 17,
+						"x": 664,
+						"y": 0,
 						"width": 15,
 						"height": 15
 					},

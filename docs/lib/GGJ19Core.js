@@ -22,23 +22,24 @@
   var WindowConfig = $module$AcornUiCore.com.acornui.core.WindowConfig;
   var GlConfig = $module$AcornUiCore.com.acornui.core.GlConfig;
   var AppConfig = $module$AcornUiCore.com.acornui.core.AppConfig;
+  var StackLayoutContainer = $module$AcornUiCore.com.acornui.component.StackLayoutContainer;
+  var dataBinding = $module$AcornUiCore.com.acornui.core.observe.dataBinding_7pofm6$;
+  var image = $module$AcornUiCore.com.acornui.component.image_e3xjfr$;
+  var Unit = Kotlin.kotlin.Unit;
+  var unboxChar = Kotlin.unboxChar;
+  var contentsAtlas = $module$AcornUiCore.com.acornui.component.contentsAtlas_7bypn$;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
   var CanvasLayoutContainer = $module$AcornUiCore.com.acornui.component.layout.algorithm.CanvasLayoutContainer;
   var listOf = Kotlin.kotlin.collections.listOf_mh5how$;
-  var dataBinding = $module$AcornUiCore.com.acornui.core.observe.dataBinding_7pofm6$;
   var get_stage = $module$AcornUiCore.com.acornui.component.get_stage_xd4dkp$;
   var AssetType = $module$AcornUiCore.com.acornui.core.asset.AssetType;
   var load = $module$AcornUiCore.com.acornui.core.asset.load_k5bt3m$;
-  var Unit = Kotlin.kotlin.Unit;
   var then = $module$AcornUtils.com.acornui.async.then_7jcrga$;
   var listOf_0 = Kotlin.kotlin.collections.listOf_i5x0yv$;
   var or = $module$AcornUiCore.com.acornui.core.observe.or_x919w3$;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;
   var bind = $module$AcornUtils.com.acornui.signal.bind_3tpvqv$;
   var text = $module$AcornUiCore.com.acornui.component.text.text_7i1swk$;
-  var rect = $module$AcornUiCore.com.acornui.component.rect_8hpnyb$;
-  var text_0 = $module$AcornUiCore.com.acornui.component.text.text_os944a$;
-  var hGroup = $module$AcornUiCore.com.acornui.component.layout.algorithm.hGroup_aiug52$;
-  var Kind_CLASS = Kotlin.Kind.CLASS;
   var NavBindable = $module$AcornUiCore.com.acornui.core.nav.NavBindable;
   var split = Kotlin.kotlin.text.split_ip8yn$;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
@@ -47,6 +48,18 @@
   var equals = Kotlin.equals;
   var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var ButtonState = $module$AcornUiCore.com.acornui.component.ButtonState;
+  var atlas = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
+  var to = Kotlin.kotlin.to_ujzrz7$;
+  var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
+  var click = $module$AcornUiCore.com.acornui.core.input.interaction.click_w26x3n$;
+  var iconButton = $module$AcornUiCore.com.acornui.component.iconButton_hzc8f9$;
+  var rect = $module$AcornUiCore.com.acornui.component.rect_8hpnyb$;
+  var Pad_init = $module$AcornUtils.com.acornui.math.Pad_init_mx4ult$;
+  var spacer = $module$AcornUiCore.com.acornui.component.layout.spacer_4yhnsi$;
+  var recycle = $module$AcornUiCore.com.acornui.core.cache.recycle_xjf92d$;
+  var hGroup = $module$AcornUiCore.com.acornui.component.layout.algorithm.hGroup_aiug52$;
+  var panel = $module$AcornUiCore.com.acornui.component.panel_4k1mq$;
   var replaceAt = $module$AcornUtils.com.acornui.collection.replaceAt_g8jm4q$;
   var pinchStart = $module$AcornUiCore.com.acornui.core.input.interaction.pinchStart_erfg7f$;
   var pinch = $module$AcornUiCore.com.acornui.core.input.interaction.pinch_erfg7f$;
@@ -70,13 +83,24 @@
   var own = $module$AcornUiCore.com.acornui.core.di.own_hwf7iz$;
   var ScrollModelImpl = $module$AcornUiCore.com.acornui.component.scroll.ScrollModelImpl;
   var TossScrollModelBinding = $module$AcornUiCore.com.acornui.component.scroll.TossScrollModelBinding;
+  var Theme = $module$AcornUiCore.com.acornui.skins.Theme;
+  var inject = $module$AcornUiCore.com.acornui.core.di.inject_y3a68v$;
   var InteractivityMode = $module$AcornUiCore.com.acornui.component.InteractivityMode;
   var Enum = Kotlin.kotlin.Enum;
+  var toBoxedChar = Kotlin.toBoxedChar;
   var throwISE = Kotlin.throwISE;
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
+  var cachedGroup = $module$AcornUiCore.com.acornui.core.asset.cachedGroup_xd4dkp$;
+  var loadFontFromAtlas = $module$AcornUiCore.com.acornui.component.text.loadFontFromAtlas_itrc35$;
+  var charStyle = $module$AcornUiCore.com.acornui.component.text.charStyle_8j5cku$;
+  var addStyleRule = $module$AcornUiCore.com.acornui.component.style.addStyleRule_h9ypmx$;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
+  var launch = $module$AcornUtils.com.acornui.async.launch_g2bo5h$;
   var BasicUiSkin = $module$AcornUiCore.com.acornui.skins.BasicUiSkin;
   var ContainerImpl = $module$AcornUiCore.com.acornui.component.ContainerImpl;
-  var atlas = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
+  GameCharacterIconView.prototype = Object.create(StackLayoutContainer.prototype);
+  GameCharacterIconView.prototype.constructor = GameCharacterIconView;
   GGJ19.prototype = Object.create(CanvasLayoutContainer.prototype);
   GGJ19.prototype.constructor = GGJ19;
   LevelView.prototype = Object.create(CanvasLayoutContainer.prototype);
@@ -90,6 +114,25 @@
   TileView.prototype = Object.create(ContainerImpl.prototype);
   TileView.prototype.constructor = TileView;
   var config;
+  function GameCharacterIconView(owner) {
+    StackLayoutContainer.call(this, owner);
+    this.atlasPath_0 = 'assets/ggj.json';
+    this.data = dataBinding(this, new GameCharacter());
+    this.icon_0 = this.layout_ge8abi$(this.unaryPlus_b3a6qy$(image(this)), GameCharacterIconView$icon$lambda);
+    this.data.bind_qlkmfe$(GameCharacterIconView_init$lambda(this));
+  }
+  function GameCharacterIconView$icon$lambda($receiver) {
+    $receiver.width = 32.0;
+    $receiver.height = 32.0;
+    return Unit;
+  }
+  function GameCharacterIconView_init$lambda(this$GameCharacterIconView) {
+    return function (it) {
+      contentsAtlas(this$GameCharacterIconView.icon_0, this$GameCharacterIconView.atlasPath_0, String.fromCharCode(unboxChar(it.type.char)));
+      return Unit;
+    };
+  }
+  GameCharacterIconView.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacterIconView', interfaces: [StackLayoutContainer]};
   function GGJ19(owner) {
     CanvasLayoutContainer.call(this, owner);
     this.atlasPath_0 = 'assets/ggj.json';
@@ -102,8 +145,6 @@
     bind(or(this.levels_0, this.currentLevel_0), GGJ19_init$lambda$lambda(this, $receiver));
     var levelView = this.layout_ge8abi$(this.unaryPlus_b3a6qy$($receiver), GGJ19_init$lambda_0);
     bind(or(this.levels_0, this.currentLevel_0), GGJ19_init$lambda_1(this, levelView));
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(rect(this, GGJ19_init$lambda_2)), GGJ19_init$lambda_3);
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(hGroup(this, GGJ19_init$lambda_4(this))), GGJ19_init$lambda_5);
   }
   function GGJ19_init$lambda(this$GGJ19) {
     return function (it) {
@@ -135,40 +176,10 @@
       return Unit;
     };
   }
-  function GGJ19_init$lambda_2($receiver) {
-    $receiver.style.backgroundColor = new Color(0.0, 0.0, 0.0, 0.3);
-    return Unit;
-  }
-  function GGJ19_init$lambda_3($receiver) {
-    $receiver.widthPercent = 1.0;
-    $receiver.height = 40.0;
-    return Unit;
-  }
-  function GGJ19_init$lambda$lambda$lambda(this$) {
-    return function (it) {
-      this$.text = 'Level ' + it;
-      return Unit;
-    };
-  }
-  function GGJ19_init$lambda$lambda_1(this$GGJ19) {
-    return function ($receiver) {
-      this$GGJ19.currentLevel_0.bind_qlkmfe$(GGJ19_init$lambda$lambda$lambda($receiver));
-      return Unit;
-    };
-  }
-  function GGJ19_init$lambda_4(this$GGJ19) {
-    return function ($receiver) {
-      $receiver.unaryPlus_b3a6qy$(text_0($receiver, GGJ19_init$lambda$lambda_1(this$GGJ19)));
-      return Unit;
-    };
-  }
-  function GGJ19_init$lambda_5($receiver) {
-    $receiver.left = 10.0;
-    $receiver.top = 10.0;
-    return Unit;
-  }
   GGJ19.$metadata$ = {kind: Kind_CLASS, simpleName: 'GGJ19', interfaces: [NavBindable, CanvasLayoutContainer]};
   var ArrayList_init_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  var throwCCE = Kotlin.throwCCE;
+  var trim = Kotlin.kotlin.text.trim_gw00vp$;
   function parseGameData(str) {
     var tmp$;
     var lines = toMutableList(split(str, ['\n']));
@@ -190,7 +201,9 @@
       }
       var grid = a;
       for (var row = 0; row < 20; row++) {
-        var cols = split(poll(lines), [' ']);
+        var $receiver = poll(lines);
+        var tmp$_3;
+        var cols = split(trim(Kotlin.isCharSequence(tmp$_3 = $receiver) ? tmp$_3 : throwCCE()).toString(), [' ']);
         for (var col = 0; col < 20; col++) {
           if (!equals(cols.get_za3lpa$(col), '.')) {
             grid.get_za3lpa$(row).set_wxm5ur$(col, new Tile(RoomType$STANDARD_getInstance()));
@@ -246,52 +259,122 @@
     this.padding_0 = 0.0;
     this.stageW_0 = LevelView$Companion_getInstance().TILE_SIZE * 20 + this.padding_0 * 2.0;
     this.stageH_0 = LevelView$Companion_getInstance().TILE_SIZE * 20 + this.padding_0 * 2.0;
+    this.characterIcons_0 = ArrayList_init();
+    this.mainMusic_0 = null;
+    this.theme_0 = inject(this, Theme.Companion);
     this.originalData.bind_qlkmfe$(LevelView_init$lambda(this));
     this.interactivityMode = InteractivityMode.ALWAYS;
     this.initTileViews_0();
     this.initCameraControls_0();
     this.initStageView_0();
     this.initCharacterQueue_0();
+    this.initMusic_0();
   }
-  var collectionSizeOrDefault = Kotlin.kotlin.collections.collectionSizeOrDefault_ba2ldo$;
-  function LevelView$initCharacterQueue$lambda$lambda$lambda(this$) {
-    return function (level) {
-      var tmp$ = this$;
-      var $receiver = level.pendingCharacters;
-      var destination = ArrayList_init_0(collectionSizeOrDefault($receiver, 10));
-      var tmp$_0;
-      tmp$_0 = $receiver.iterator();
-      while (tmp$_0.hasNext()) {
-        var item = tmp$_0.next();
-        destination.add_11rb$(item.type);
+  function LevelView$initMusic$lambda$lambda$lambda(this$LevelView) {
+    return function (it) {
+      it.loop = true;
+      it.play();
+      this$LevelView.mainMusic_0 = it;
+      return Unit;
+    };
+  }
+  function LevelView$initMusic$lambda$lambda(this$, this$LevelView) {
+    return function (f) {
+      var tmp$, tmp$_0;
+      if (this$.toggled) {
+        if (this$LevelView.mainMusic_0 == null) {
+          then(load(this$, 'assets/music/file0413.mp3', AssetType.Companion.MUSIC), LevelView$initMusic$lambda$lambda$lambda(this$LevelView));
+        }
+        (tmp$ = this$LevelView.mainMusic_0) != null ? (tmp$.play(), Unit) : null;
       }
-      tmp$.text = 'Chars: ' + destination;
+       else {
+        (tmp$_0 = this$LevelView.mainMusic_0) != null ? (tmp$_0.stop(), Unit) : null;
+      }
       return Unit;
     };
   }
-  function LevelView$initCharacterQueue$lambda$lambda(this$LevelView) {
+  function LevelView$initMusic$lambda(this$LevelView) {
     return function ($receiver) {
-      this$LevelView.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda($receiver));
+      $receiver.iconMap_wty2wd$(mapOf([to(ButtonState.UP, atlas($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume-control-mute')), to(ButtonState.TOGGLED_UP, atlas($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume'))]));
+      $receiver.toggleOnClick = true;
+      click($receiver).add_trkh7z$(LevelView$initMusic$lambda$lambda($receiver, this$LevelView));
       return Unit;
     };
+  }
+  function LevelView$initMusic$lambda_0($receiver) {
+    $receiver.bottom = 5.0;
+    $receiver.left = 5.0;
+    return Unit;
+  }
+  LevelView.prototype.initMusic_0 = function () {
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(iconButton(this, LevelView$initMusic$lambda(this))), LevelView$initMusic$lambda_0);
+  };
+  function LevelView$initCharacterQueue$lambda$lambda$lambda($receiver) {
+    $receiver.style.backgroundColor = new Color(0.0, 0.0, 0.0, 0.3);
+    return Unit;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda($receiver) {
+    return rect($receiver, LevelView$initCharacterQueue$lambda$lambda$lambda);
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda_0($receiver) {
+    $receiver.widthPercent = 1.0;
+    return Unit;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda(this$) {
+    return function (item, index) {
+      return this$.unaryPlus_b3a6qy$(new GameCharacterIconView(this$));
+    };
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0(element, item, index) {
+    element.data.value = item;
+    return Unit;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1(element) {
+    element.dispose();
+    return Unit;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2(element) {
+    return element.data.value;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3(o1, o2) {
+    return true;
+  }
+  function LevelView$initCharacterQueue$lambda$lambda$lambda_1(this$LevelView, this$) {
+    return function (newData) {
+      recycle(newData.characters, this$LevelView.characterIcons_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda(this$), LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3);
+      return Unit;
+    };
+  }
+  function LevelView$initCharacterQueue$lambda$lambda_0(this$LevelView) {
+    return function ($receiver) {
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(spacer($receiver)), LevelView$initCharacterQueue$lambda$lambda$lambda_0);
+      $receiver.unaryPlus_b3a6qy$(text($receiver, 'Up next:'));
+      this$LevelView.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda_1(this$LevelView, $receiver));
+      return Unit;
+    };
+  }
+  function LevelView$initCharacterQueue$lambda$lambda_1($receiver) {
+    $receiver.widthPercent = 1.0;
+    return Unit;
   }
   function LevelView$initCharacterQueue$lambda(this$LevelView) {
     return function ($receiver) {
-      $receiver.unaryPlus_b3a6qy$(text_0($receiver, LevelView$initCharacterQueue$lambda$lambda(this$LevelView)));
+      $receiver.style.background = LevelView$initCharacterQueue$lambda$lambda;
+      $receiver.style.padding = Pad_init(5.0);
+      $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(hGroup($receiver, LevelView$initCharacterQueue$lambda$lambda_0(this$LevelView))), LevelView$initCharacterQueue$lambda$lambda_1);
       return Unit;
     };
   }
   function LevelView$initCharacterQueue$lambda_0($receiver) {
-    $receiver.right = 10.0;
-    $receiver.top = 10.0;
+    $receiver.widthPercent = 1.0;
     return Unit;
   }
   LevelView.prototype.initCharacterQueue_0 = function () {
-    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(hGroup(this, LevelView$initCharacterQueue$lambda(this))), LevelView$initCharacterQueue$lambda_0);
+    this.layout_ge8abi$(this.unaryPlus_b3a6qy$(panel(this, LevelView$initCharacterQueue$lambda(this))), LevelView$initCharacterQueue$lambda_0);
   };
   function LevelView$initTileViews$lambda$lambda(closure$row, closure$col, closure$newTile) {
     return function (it) {
-      return it.copy_tgih01$(void 0, replaceAt(it.grid, closure$row, replaceAt(it.grid.get_za3lpa$(closure$row), closure$col, closure$newTile)));
+      return it.copy_vxcl5s$(void 0, replaceAt(it.grid, closure$row, replaceAt(it.grid.get_za3lpa$(closure$row), closure$col, closure$newTile)));
     };
   }
   function LevelView$initTileViews$lambda(this$LevelView, closure$row, closure$col) {
@@ -615,6 +698,8 @@
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y) && Kotlin.equals(this.zoom, other.zoom)))));
   };
   function GameCharacter(type, x, y) {
+    if (type === void 0)
+      type = GameCharacterType$UNKNOWN_getInstance();
     if (x === void 0)
       x = -1;
     if (y === void 0)
@@ -649,18 +734,19 @@
   GameCharacter.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.type, other.type) && Kotlin.equals(this.x, other.x) && Kotlin.equals(this.y, other.y)))));
   };
-  function GameCharacterType(name, ordinal) {
+  function GameCharacterType(name, ordinal, char) {
     Enum.call(this);
+    this.char = toBoxedChar(char);
     this.name$ = name;
     this.ordinal$ = ordinal;
   }
   function GameCharacterType_initFields() {
     GameCharacterType_initFields = function () {
     };
-    GameCharacterType$MUSICIAN_instance = new GameCharacterType('MUSICIAN', 0);
-    GameCharacterType$GRANDMA_instance = new GameCharacterType('GRANDMA', 1);
-    GameCharacterType$ARTIST_instance = new GameCharacterType('ARTIST', 2);
-    GameCharacterType$UNKNOWN_instance = new GameCharacterType('UNKNOWN', 3);
+    GameCharacterType$MUSICIAN_instance = new GameCharacterType('MUSICIAN', 0, 77);
+    GameCharacterType$GRANDMA_instance = new GameCharacterType('GRANDMA', 1, 71);
+    GameCharacterType$ARTIST_instance = new GameCharacterType('ARTIST', 2, 65);
+    GameCharacterType$UNKNOWN_instance = new GameCharacterType('UNKNOWN', 3, 85);
     GameCharacterType$Companion_getInstance();
   }
   var GameCharacterType$MUSICIAN_instance;
@@ -687,21 +773,14 @@
     GameCharacterType$Companion_instance = this;
   }
   GameCharacterType$Companion.prototype.fromLetter_s8itvh$ = function (char) {
-    var tmp$;
-    switch (char) {
-      case 71:
-        tmp$ = GameCharacterType$GRANDMA_getInstance();
-        break;
-      case 65:
-        tmp$ = GameCharacterType$ARTIST_getInstance();
-        break;
-      case 77:
-        tmp$ = GameCharacterType$MUSICIAN_getInstance();
-        break;
-      default:tmp$ = GameCharacterType$UNKNOWN_getInstance();
-        break;
+    var tmp$, tmp$_0;
+    tmp$ = GameCharacterType$values();
+    for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
+      var value = tmp$[tmp$_0];
+      if (unboxChar(value.char) === char)
+        return value;
     }
-    return tmp$;
+    return GameCharacterType$UNKNOWN_getInstance();
   };
   GameCharacterType$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
   var GameCharacterType$Companion_instance = null;
@@ -731,10 +810,10 @@
     }
   }
   GameCharacterType.valueOf_61zpoe$ = GameCharacterType$valueOf;
-  function GameLevel(pendingCharacters, grid, placedCharacters) {
+  function GameLevel(characters, grid) {
     GameLevel$Companion_getInstance();
-    if (pendingCharacters === void 0)
-      pendingCharacters = emptyList();
+    if (characters === void 0)
+      characters = emptyList();
     if (grid === void 0) {
       var tmp$;
       var a = ArrayList_init_0(20);
@@ -751,11 +830,8 @@
       }
       grid = a;
     }
-    if (placedCharacters === void 0)
-      placedCharacters = emptyList();
-    this.pendingCharacters = pendingCharacters;
+    this.characters = characters;
     this.grid = grid;
-    this.placedCharacters = placedCharacters;
   }
   GameLevel.prototype.getTile_vux9f0$ = function (row, col) {
     return this.grid.get_za3lpa$(row).get_za3lpa$(col);
@@ -775,29 +851,25 @@
   }
   GameLevel.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameLevel', interfaces: []};
   GameLevel.prototype.component1 = function () {
-    return this.pendingCharacters;
+    return this.characters;
   };
   GameLevel.prototype.component2 = function () {
     return this.grid;
   };
-  GameLevel.prototype.component3 = function () {
-    return this.placedCharacters;
-  };
-  GameLevel.prototype.copy_tgih01$ = function (pendingCharacters, grid, placedCharacters) {
-    return new GameLevel(pendingCharacters === void 0 ? this.pendingCharacters : pendingCharacters, grid === void 0 ? this.grid : grid, placedCharacters === void 0 ? this.placedCharacters : placedCharacters);
+  GameLevel.prototype.copy_vxcl5s$ = function (characters, grid) {
+    return new GameLevel(characters === void 0 ? this.characters : characters, grid === void 0 ? this.grid : grid);
   };
   GameLevel.prototype.toString = function () {
-    return 'GameLevel(pendingCharacters=' + Kotlin.toString(this.pendingCharacters) + (', grid=' + Kotlin.toString(this.grid)) + (', placedCharacters=' + Kotlin.toString(this.placedCharacters)) + ')';
+    return 'GameLevel(characters=' + Kotlin.toString(this.characters) + (', grid=' + Kotlin.toString(this.grid)) + ')';
   };
   GameLevel.prototype.hashCode = function () {
     var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.pendingCharacters) | 0;
+    result = result * 31 + Kotlin.hashCode(this.characters) | 0;
     result = result * 31 + Kotlin.hashCode(this.grid) | 0;
-    result = result * 31 + Kotlin.hashCode(this.placedCharacters) | 0;
     return result;
   };
   GameLevel.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.pendingCharacters, other.pendingCharacters) && Kotlin.equals(this.grid, other.grid) && Kotlin.equals(this.placedCharacters, other.placedCharacters)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.characters, other.characters) && Kotlin.equals(this.grid, other.grid)))));
   };
   var emptyLevel;
   function Tile(roomType) {
@@ -865,6 +937,62 @@
   Skin.prototype.initTheme = function () {
     this.theme.textColor = new Color(1.0, 1.0, 1.0, 1.0);
   };
+  function Skin$loadBitmapFonts$lambda$lambda($receiver) {
+    $receiver.fontKey = 'assets/uiskin/mainFont.fnt';
+    return Unit;
+  }
+  function Skin$loadBitmapFonts$lambda(this$Skin_0, closure$group_0) {
+    return function (continuation_0, suspended) {
+      var instance = new Coroutine$Skin$loadBitmapFonts$lambda(this$Skin_0, closure$group_0, continuation_0);
+      if (suspended)
+        return instance;
+      else
+        return instance.doResume(null);
+    };
+  }
+  function Coroutine$Skin$loadBitmapFonts$lambda(this$Skin_0, closure$group_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$this$Skin = this$Skin_0;
+    this.local$closure$group = closure$group_0;
+  }
+  Coroutine$Skin$loadBitmapFonts$lambda.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: null, interfaces: [CoroutineImpl]};
+  Coroutine$Skin$loadBitmapFonts$lambda.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$Skin$loadBitmapFonts$lambda.prototype.constructor = Coroutine$Skin$loadBitmapFonts$lambda;
+  Coroutine$Skin$loadBitmapFonts$lambda.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = loadFontFromAtlas(this.local$this$Skin, 'assets/uiskin/mainFont.fnt', this.local$this$Skin.theme.atlasPath, this.local$closure$group, this);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            return addStyleRule(this.local$this$Skin.target, charStyle(Skin$loadBitmapFonts$lambda$lambda)), Unit;
+          default:this.state_0 = 1;
+            throw new Error('State Machine Unreachable execution');
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
+  Skin.prototype.loadBitmapFonts = function () {
+    var group = cachedGroup(this);
+    launch(Skin$loadBitmapFonts$lambda(this, group));
+  };
   Skin.$metadata$ = {kind: Kind_CLASS, simpleName: 'Skin', interfaces: [BasicUiSkin]};
   function TileView(owner) {
     ContainerImpl.call(this, owner);
@@ -925,6 +1053,7 @@
     return config;
   }});
   var package$ggj19 = _.ggj19 || (_.ggj19 = {});
+  package$ggj19.GameCharacterIconView = GameCharacterIconView;
   package$ggj19.GGJ19 = GGJ19;
   $$importsForInline$$.AcornUtils = $module$AcornUtils;
   package$ggj19.parseGameData_61zpoe$ = parseGameData;

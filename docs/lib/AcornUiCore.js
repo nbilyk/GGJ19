@@ -29,6 +29,7 @@
   var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED;
   var CoroutineImpl = Kotlin.kotlin.coroutines.CoroutineImpl;
   var then = $module$AcornUtils.com.acornui.async.then_1eax44$;
+  var catch_0 = $module$AcornUtils.com.acornui.async.catch_y8s6tb$;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var Color = $module$AcornUtils.com.acornui.graphic.Color;
@@ -322,6 +323,7 @@
   HeadingGroupStyle.prototype = Object.create(StyleBase.prototype);
   HeadingGroupStyle.prototype.constructor = HeadingGroupStyle;
   IconButton.prototype = Object.create(Button.prototype);
+  IconButton.prototype.constructor = IconButton;
   SingleElementContainerImpl.prototype = Object.create(ContainerImpl.prototype);
   SingleElementContainerImpl.prototype.constructor = SingleElementContainerImpl;
   IconButtonSkinPart.prototype = Object.create(SingleElementContainerImpl.prototype);
@@ -372,6 +374,7 @@
   OptionListStyle.prototype = Object.create(StyleBase.prototype);
   OptionListStyle.prototype.constructor = OptionListStyle;
   Panel.prototype = Object.create(ElementContainerImpl.prototype);
+  Panel.prototype.constructor = Panel;
   PanelStyle.prototype = Object.create(StyleBase.prototype);
   PanelStyle.prototype.constructor = PanelStyle;
   ProgressBarRectStyle.prototype = Object.create(StyleBase.prototype);
@@ -737,7 +740,7 @@
             var atlasData = this.result_0;
             tmp$ = atlasData.findRegion_61zpoe$(this.local$closure$regionName);
             if (tmp$ == null) {
-              throw Exception_init("Region '" + this.local$closure$regionName + "' not found in atlas.");
+              throw Exception_init("Region '" + this.local$closure$regionName + "' not found in atlas " + this.local$closure$atlasPath + '.');
             }
 
             var page = tmp$.component1();
@@ -836,11 +839,14 @@
   function atlas$lambda_0($receiver) {
     return Unit;
   }
+  function atlas$lambda_1(it) {
+    throw it;
+  }
   function atlas_0($receiver, atlasPath, region, init) {
     if (init === void 0)
       init = atlas$lambda_0;
     var a = new AtlasComponent($receiver);
-    a.setRegion_puj7f4$(atlasPath, region);
+    catch_0(a.setRegion_puj7f4$(atlasPath, region), atlas$lambda_1);
     init(a);
     return a;
   }
@@ -4588,6 +4594,46 @@
     this._element_0 = null;
     this._contentsContainer_0 = null;
   }
+  IconButton.prototype.iconMap_wty2wd$ = function (map) {
+    if (!map.containsKey_11rb$(ButtonState$UP_getInstance()))
+      throw IllegalArgumentException_init('iconMap must at least set the icon for the UP state.');
+    this._element_0 = null;
+    this._iconMap_0 = map;
+    this.refreshContents_0();
+  };
+  Object.defineProperty(IconButton.prototype, 'element', {get: function () {
+    return this._element_0;
+  }, set: function (value) {
+    if (value === this._element_0)
+      return;
+    this._element_0 = value;
+    this.refreshContents_0();
+  }});
+  IconButton.prototype.onCurrentStateChanged_l4icno$ = function (previousState, newState, previousSkinPart, newSkinPart) {
+    this.refreshContents_0();
+  };
+  function IconButton$getContents$lambda(closure$iconMap) {
+    return function (it) {
+      return closure$iconMap.get_11rb$(it);
+    };
+  }
+  IconButton.prototype.getContents_0 = function () {
+    var iconMap = this._iconMap_0;
+    if (iconMap != null) {
+      return backupWalk(this.currentState, IconButton$getContents$lambda(iconMap));
+    }
+    return this._element_0;
+  };
+  IconButton.prototype.refreshContents_0 = function () {
+    var tmp$, tmp$_0;
+    var contents = this.getContents_0();
+    var currentContentsContainer = Kotlin.isType(tmp$ = this.currentSkinPart, SingleElementContainer) ? tmp$ : null;
+    if (currentContentsContainer != null && !equals(currentContentsContainer.element, contents)) {
+      (tmp$_0 = this._contentsContainer_0) != null ? (tmp$_0.element = null) : null;
+      this._contentsContainer_0 = currentContentsContainer;
+      currentContentsContainer.element = contents;
+    }
+  };
   function IconButton$Companion() {
     IconButton$Companion_instance = this;
   }
@@ -4598,6 +4644,17 @@
       new IconButton$Companion();
     }
     return IconButton$Companion_instance;
+  }
+  IconButton.$metadata$ = {kind: Kind_CLASS, simpleName: 'IconButton', interfaces: [SingleElementContainer, Button]};
+  function iconButton$lambda($receiver) {
+    return Unit;
+  }
+  function iconButton($receiver, init) {
+    if (init === void 0)
+      init = iconButton$lambda;
+    var b = new IconButton($receiver);
+    init(b);
+    return b;
   }
   function IconButtonSkinPart(owner, texture, padding, hGap, vAlign, iconOnLeft) {
     if (padding === void 0)
@@ -7005,6 +7062,36 @@
     this.styleTags.add_11rb$(Panel$Companion_getInstance());
     this.watch_s0mkkf$(this.style, void 0, Panel_init$lambda(this));
   }
+  Object.defineProperty(Panel.prototype, 'closing', {get: function () {
+    return this.closing_zdnqny$_0;
+  }});
+  Object.defineProperty(Panel.prototype, 'closed', {get: function () {
+    return this.closed_jgzedx$_0;
+  }});
+  Panel.prototype.createLayoutData = function () {
+    return new StackLayoutData();
+  };
+  Panel.prototype.onElementAdded_37cm5m$ = function (oldIndex, newIndex, element) {
+    this.contents_wgyz1j$_0.addElement_3vm7z1$(newIndex, element);
+  };
+  Panel.prototype.onElementRemoved_pjtgc4$ = function (index, element) {
+    this.contents_wgyz1j$_0.removeElement_11rb$(element);
+  };
+  Panel.prototype.updateSizeConstraints_mby7og$ = function (out) {
+    out.set_9oah19$(this.contents_wgyz1j$_0.sizeConstraints);
+  };
+  Panel.prototype.updateLayout_64u75x$ = function (explicitWidth, explicitHeight, out) {
+    var tmp$;
+    this.contents_wgyz1j$_0.setSize_yxjqmk$(explicitWidth, explicitHeight);
+    out.set_i12l7q$(this.contents_wgyz1j$_0.bounds);
+    (tmp$ = this.background_etfwj1$_0) != null ? (tmp$.setSize_yxjqmk$(out.width, out.height), Unit) : null;
+  };
+  Panel.prototype.close = function () {
+    this.closing.dispatch_xwzc9p$(this, this.cancel.reset());
+    if (!this.cancel.canceled) {
+      this.closed.dispatch_11rb$(this);
+    }
+  };
   function Panel$Companion() {
     Panel$Companion_instance = this;
   }
@@ -7016,6 +7103,16 @@
     }
     return Panel$Companion_instance;
   }
+  function Panel_init$lambda(this$Panel) {
+    return function (it) {
+      var tmp$;
+      this$Panel.contents_wgyz1j$_0.style.padding = it.padding;
+      (tmp$ = this$Panel.background_etfwj1$_0) != null ? (tmp$.dispose(), Unit) : null;
+      this$Panel.background_etfwj1$_0 = this$Panel.addChild_3i6itm$(0, it.background(this$Panel));
+      return Unit;
+    };
+  }
+  Panel.$metadata$ = {kind: Kind_CLASS, simpleName: 'Panel', interfaces: [LayoutDataProvider, Closeable, ElementContainerImpl]};
   function PanelStyle() {
     PanelStyle$Companion_getInstance();
     StyleBase.call(this);
@@ -7050,6 +7147,16 @@
     return PanelStyle$Companion_instance;
   }
   PanelStyle.$metadata$ = {kind: Kind_CLASS, simpleName: 'PanelStyle', interfaces: [StyleBase]};
+  function panel$lambda($receiver) {
+    return Unit;
+  }
+  function panel($receiver, init) {
+    if (init === void 0)
+      init = panel$lambda;
+    var p = new Panel($receiver);
+    init(p);
+    return p;
+  }
   function ProgressBarRect(owner) {
     ProgressBarRect$Companion_getInstance();
     ContainerImpl.call(this, owner);
@@ -15056,6 +15163,83 @@
     this.navigateToUrl_w9b03s$(url, target, null);
   };
   Location.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Location', interfaces: []};
+  function recycle$lambda_1(a, b) {
+    return equals(a, b);
+  }
+  function recycle_0(data, existingElements, factory, configure, disposer, retriever, equality) {
+    if (equality === void 0)
+      equality = recycle$lambda_1;
+    var tmp$, tmp$_0, tmp$_1;
+    var remainingData = data != null ? copy_0(data) : null;
+    var toRecycle = copy_0(existingElements);
+    var iterator = toRecycle.iterator();
+    loop_label: while (iterator.hasNext()) {
+      var next = iterator.next();
+      var tmp$_2;
+      if (remainingData != null) {
+        var indexOfFirst$result;
+        indexOfFirst$break: do {
+          var tmp$_3;
+          var index = 0;
+          tmp$_3 = remainingData.iterator();
+          while (tmp$_3.hasNext()) {
+            var item = tmp$_3.next();
+            if (equality(retriever(next), item)) {
+              indexOfFirst$result = index;
+              break indexOfFirst$break;
+            }
+            index = index + 1 | 0;
+          }
+          indexOfFirst$result = -1;
+        }
+         while (false);
+        tmp$_2 = indexOfFirst$result;
+      }
+       else
+        tmp$_2 = null;
+      var index_0 = (tmp$ = tmp$_2) != null ? tmp$ : -1;
+      if (index_0 === -1) {
+        disposer(next);
+        iterator.remove();
+      }
+       else {
+        remainingData != null ? remainingData.removeAt_za3lpa$(index_0) : null;
+      }
+    }
+    existingElements.clear();
+    if (data != null) {
+      tmp$_0 = get_lastIndex(data);
+      loop_label: for (var i = 0; i <= tmp$_0; i++) {
+        var item_0 = data.get_za3lpa$(i);
+        var indexOfFirst$result_0;
+        indexOfFirst$break: do {
+          var tmp$_4;
+          var index_1 = 0;
+          tmp$_4 = toRecycle.iterator();
+          while (tmp$_4.hasNext()) {
+            var item_1 = tmp$_4.next();
+            if (equality(retriever(item_1), item_0)) {
+              indexOfFirst$result_0 = index_1;
+              break indexOfFirst$break;
+            }
+            index_1 = index_1 + 1 | 0;
+          }
+          indexOfFirst$result_0 = -1;
+        }
+         while (false);
+        var foundIndex = indexOfFirst$result_0;
+        if (foundIndex === -1) {
+          tmp$_1 = factory(item_0, i);
+        }
+         else {
+          tmp$_1 = toRecycle.removeAt_za3lpa$(foundIndex);
+        }
+        var element = tmp$_1;
+        configure(element, item_0, i);
+        existingElements.add_11rb$(element);
+      }
+    }
+  }
   function CursorManager() {
     CursorManager$Companion_getInstance();
   }
@@ -27889,6 +28073,7 @@
   package$component.HtmlComponent = HtmlComponent;
   Object.defineProperty(IconButton, 'Companion', {get: IconButton$Companion_getInstance});
   package$component.IconButton = IconButton;
+  package$component.iconButton_hzc8f9$ = iconButton;
   package$component.IconButtonSkinPart = IconButtonSkinPart;
   package$component.Image = Image;
   package$component.image_e3xjfr$ = image;
@@ -28004,6 +28189,7 @@
   package$component.Panel = Panel;
   Object.defineProperty(PanelStyle, 'Companion', {get: PanelStyle$Companion_getInstance});
   package$component.PanelStyle = PanelStyle;
+  package$component.panel_4k1mq$ = panel;
   Object.defineProperty(ProgressBarRect, 'Companion', {get: ProgressBarRect$Companion_getInstance});
   package$component.ProgressBarRect = ProgressBarRect;
   Object.defineProperty(ProgressBarRectStyle, 'Companion', {get: ProgressBarRectStyle$Companion_getInstance});
@@ -28246,6 +28432,8 @@
   package$audio.MusicReadyState = MusicReadyState;
   var package$browser = package$core.browser || (package$core.browser = {});
   package$browser.Location = Location;
+  var package$cache = package$core.cache || (package$core.cache = {});
+  package$cache.recycle_xjf92d$ = recycle_0;
   Object.defineProperty(CursorManager, 'Companion', {get: CursorManager$Companion_getInstance});
   var package$cursor = package$core.cursor || (package$core.cursor = {});
   package$cursor.CursorManager = CursorManager;
