@@ -13,10 +13,21 @@
 					"name": "A.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 519,
-						"y": 69,
+						"x": 617,
+						"y": 0,
 						"width": 62,
 						"height": 67
+					},
+					"padding": [ 0, 0, 0, 0 ]
+				},
+				{
+					"name": "CurrentCharacterPresentationBg.png",
+					"isRotated": false,
+					"bounds": {
+						"x": 519,
+						"y": 0,
+						"width": 96,
+						"height": 96
 					},
 					"padding": [ 0, 0, 0, 0 ]
 				},
@@ -35,7 +46,7 @@
 					"name": "G.png",
 					"isRotated": true,
 					"bounds": {
-						"x": 592,
+						"x": 681,
 						"y": 0,
 						"width": 70,
 						"height": 58
@@ -47,7 +58,7 @@
 					"isRotated": false,
 					"bounds": {
 						"x": 519,
-						"y": 0,
+						"y": 98,
 						"width": 71,
 						"height": 67
 					},
@@ -69,7 +80,7 @@
 					"isRotated": false,
 					"bounds": {
 						"x": 519,
-						"y": 138,
+						"y": 167,
 						"width": 15,
 						"height": 15
 					},
@@ -79,8 +90,8 @@
 					"name": "smiley.png",
 					"isRotated": false,
 					"bounds": {
-						"x": 664,
-						"y": 0,
+						"x": 592,
+						"y": 98,
 						"width": 15,
 						"height": 15
 					},

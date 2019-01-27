@@ -51,6 +51,7 @@
   var AtlasPageDecorator = $module$AcornUiCore.com.acornui.core.graphic.AtlasPageDecorator;
   var AssetType = $module$AcornUiCore.com.acornui.core.asset.AssetType;
   var UiComponentImpl = $module$AcornUiCore.com.acornui.component.UiComponentImpl;
+  var onTick = $module$AcornUiCore.com.acornui.core.time.onTick_1ilr4g$;
   var lastOrNull = Kotlin.kotlin.collections.lastOrNull_2p1efm$;
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;

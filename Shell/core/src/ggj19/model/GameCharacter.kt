@@ -17,11 +17,16 @@
 package ggj19.model
 
 data class GameCharacter(
+		val id: String = (++nextId).toString(),
 		val type: GameCharacterType = GameCharacterType.UNKNOWN,
-		val x: Int = -1,
-		val y: Int = -1
+		val row: Int = -1,
+		val col: Int = -1
 ) {
-	val isPlaced: Boolean = (x != -1)
+	val isPlaced: Boolean = (col != -1)
+
+	companion object {
+		private var nextId = 0
+	}
 }
 
 enum class GameCharacterType(val char: Char) {
@@ -41,3 +46,4 @@ enum class GameCharacterType(val char: Char) {
 	}
 }
 
+val emptyCharacter = GameCharacter()

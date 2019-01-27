@@ -45,4 +45,8 @@ class TileView(owner: Owned) : ContainerImpl(owner) {
 
 
 	}
+
+	companion object {
+		const val TILE_SIZE = 64f
+	}
 }

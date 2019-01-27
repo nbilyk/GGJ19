@@ -16,29 +16,35 @@
 
 package ggj19
 
-import com.acornui.component.StackLayoutContainer
-import com.acornui.component.contentsAtlas
-import com.acornui.component.image
+
+import com.acornui.component.ContainerImpl
+import com.acornui.component.atlas
+import com.acornui.component.layout.moveTo
+import com.acornui.core.cursor.StandardCursors
+import com.acornui.core.cursor.cursor
 import com.acornui.core.di.Owned
 import com.acornui.core.observe.dataBinding
+import com.acornui.math.Vector2
+import ggj19.TileView.Companion.TILE_SIZE
 import ggj19.model.GameCharacter
+import ggj19.util.Isometric
 
-class GameCharacterIconView(owner: Owned) : StackLayoutContainer(owner) {
+class GameCharacterView(owner: Owned, initialCharacter: GameCharacter) : ContainerImpl(owner) {
 
 	private val atlasPath = "assets/ggj.json"
 
-	val data = dataBinding<GameCharacter?>(null)
+	val data = dataBinding(initialCharacter)
 
-	private val icon = +image() layout { fill() }
+	private val icon = addChild(atlas { setOrigin(32f, 32f) })
 
 	init {
+		cursor(StandardCursors.HAND)
 		data.bind {
-			if (it != null) {
-				visible = true
-				icon.contentsAtlas(atlasPath, it.type.char.toString())
-			} else {
-				visible = false
-			}
+			moveTo(Isometric.twoDToIso(Vector2(
+					(it.col + 0.5f) * TILE_SIZE,
+					(it.row + 0.5f) * TILE_SIZE
+			)))
+			icon.setRegion(atlasPath, it.type.char.toString())
 		}
 	}
 }

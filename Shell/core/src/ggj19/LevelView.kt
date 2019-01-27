@@ -17,16 +17,12 @@
 package ggj19
 
 import com.acornui.async.then
-import com.acornui.collection.ArrayList
-import com.acornui.collection.replaceAt
+import com.acornui.collection.replace
 import com.acornui.component.*
-import com.acornui.component.drawing.MeshBuilderStyle
-import com.acornui.component.drawing.line
-import com.acornui.component.drawing.staticMesh
-import com.acornui.component.drawing.staticMeshC
+import com.acornui.component.layout.HAlign
 import com.acornui.component.layout.algorithm.CanvasLayoutContainer
 import com.acornui.component.layout.algorithm.hGroup
-import com.acornui.component.layout.moveTo
+import com.acornui.component.layout.algorithm.vGroup
 import com.acornui.component.layout.spacer
 import com.acornui.component.scroll.ScrollModelImpl
 import com.acornui.component.scroll.TossScrollModelBinding
@@ -36,39 +32,37 @@ import com.acornui.core.asset.AssetType
 import com.acornui.core.asset.load
 import com.acornui.core.audio.Music
 import com.acornui.core.cache.recycle
+import com.acornui.core.cursor.StandardCursors
+import com.acornui.core.cursor.cursor
 import com.acornui.core.di.Owned
 import com.acornui.core.di.inject
 import com.acornui.core.di.own
 import com.acornui.core.graphic.orthographicCamera
-import com.acornui.core.input.Ascii
-import com.acornui.core.input.interaction.click
-import com.acornui.core.input.interaction.dragAttachment
-import com.acornui.core.input.interaction.pinch
-import com.acornui.core.input.interaction.pinchStart
-import com.acornui.core.input.keyDown
+import com.acornui.core.input.interaction.*
 import com.acornui.core.input.wheel
+import com.acornui.core.observe.DataBinding
 import com.acornui.core.observe.dataBinding
 import com.acornui.core.tween.TweenRegistry
 import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
 import com.acornui.graphic.Color
+import com.acornui.logging.Log
 import com.acornui.math.*
 import com.acornui.skins.Theme
+import ggj19.TileView.Companion.TILE_SIZE
 import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
+import ggj19.model.RoomType
 import ggj19.model.emptyLevel
-import ggj19.util.Isometric
 
 class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
-	private val stateData = dataBinding(UiControlsStateVo())
+	private val controlsState = dataBinding(UiControlsStateVo())
 
 	val originalData = dataBinding(emptyLevel)
 	private val currentLevel = dataBinding(originalData.value)
 
-	private val tileViews: List<List<TileView>> = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { TileView(this) } }
-
-	private val gameStage = container()
+	private val gameStage = GameStage(this, currentLevel, controlsState)
 
 	// Camera and toss scrolling properties.
 	private val overviewCam = orthographicCamera(true)
@@ -87,11 +81,12 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 	private val theme = inject(Theme)
 
+	private val atlasPath = "assets/ggj.json"
+
 	init {
 		originalData.bind { currentLevel.value = it }
 		interactivityMode = InteractivityMode.ALWAYS
 
-		initTileViews()
 		initCameraControls()
 		initStageView()
 		initCharacterQueue()
@@ -120,55 +115,70 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	}
 
 	private fun initCharacterQueue() {
-		+panel {
-			style.background = {
-				rect {
-					style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
-				}
-			}
-			style.padding = Pad(5f)
-			+hGroup {
-				+spacer() layout { widthPercent = 1f }
-				val upNextLbl = +text("Up next:")
-				currentLevel.bind { newData ->
-					var unplaced = newData.characters.filter { !it.isPlaced }
-					if (unplaced.isNotEmpty()) unplaced = unplaced.subList(1, unplaced.size)
-					upNextLbl.visible = unplaced.isNotEmpty()
-
-					recycle(
-							data = unplaced,
-							existingElements = characterIcons,
-							factory = { item, index -> +GameCharacterIconView(this) },
-							configure = { element, item, index -> element.data.value = item },
-							disposer = { element -> element.dispose() },
-							retriever = { element -> element.data.value },
-							equality = { o1, o2 -> true }
-					)
-				}
-			} layout { widthPercent = 1f }
-		} layout { widthPercent = 1f }
-	}
-
-	private fun initTileViews() {
-		for (row in 0 until GameLevel.MAX_ROWS) {
-			for (col in 0 until GameLevel.MAX_COLS) {
-				tileViews[row][col].data.bind { newTile ->
-					currentLevel.change {
-						it.copy(
-								grid = it.grid.replaceAt(row, it.grid[row].replaceAt(col, newTile))
-						)
+		+vGroup {
+			interactivityMode = InteractivityMode.CHILDREN
+			style.gap = 0f
+			style.horizontalAlign = HAlign.RIGHT
+			+panel {
+				interactivityMode = InteractivityMode.CHILDREN
+				style.background = {
+					rect {
+						style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
 					}
 				}
-			}
-		}
+				style.padding = Pad(5f)
+				+hGroup {
+					+spacer() layout { widthPercent = 1f }
+					val upNextLbl = +text("Up next:")
+					currentLevel.bind { newData ->
+						var unlockedCharacters = newData.unlockedCharacters
+						if (unlockedCharacters.isNotEmpty()) unlockedCharacters = unlockedCharacters.subList(1, unlockedCharacters.size)
+						upNextLbl.visible = unlockedCharacters.isNotEmpty()
 
-		currentLevel.bind {
-			for (row in 0 until GameLevel.MAX_ROWS) {
-				for (col in 0 until GameLevel.MAX_COLS) {
-					tileViews[row][col].data.value = it.getTile(row, col)
-				}
-			}
-		}
+						recycle(
+								data = unlockedCharacters.reversed(),
+								existingElements = characterIcons,
+								factory = { item, index -> +GameCharacterIconView(this).apply { defaultWidth = 32f; defaultHeight = 32f } },
+								configure = { element, item, index -> element.data.value = item },
+								disposer = { element -> element.dispose() },
+								retriever = { element -> element.data.value },
+								equality = { o1, o2 -> true }
+						)
+					}
+				} layout { widthPercent = 1f }
+			} layout { widthPercent = 1f }
+			+stack {
+				interactivityMode = InteractivityMode.CHILDREN
+				style.padding = Pad(5f)
+				+atlas(atlasPath, "CurrentCharacterPresentationBg")
+
+				// The next character you can place.
+				+GameCharacterIconView(this).apply {
+					cursor(StandardCursors.HAND)
+
+					currentLevel.bind { _ ->
+						val firstUnplaced = currentLevel.value.characters.find { !it.isPlaced }
+						data.value = firstUnplaced
+					}
+					dragStart().add { e ->
+						alpha = 0.2f
+						println("Drag start gciv ${e.currentTarget}")
+						controlsState.change { it.copy(dragging = data.value) }
+					}
+					dragEnd().add { _ ->
+						alpha = 1f
+						val gameCharacter = data.value
+						println("Drag end $gameCharacter")
+						if (gameCharacter != null) {
+							currentLevel.placeCharacter(gameCharacter, mouseGridPosition)
+							controlsState.change { it.copy(dragging = null) }
+						}
+					}
+
+
+				} layout { width = 64f; height = 64f; center() }
+			} layout { width = 106f; height = 106f }
+		} layout { widthPercent = 1f }
 	}
 
 	private fun initCameraControls() {
@@ -191,14 +201,14 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 		var startZoom = 0f
 		pinchStart().add {
-			startZoom = stateData.value.camera.zoom
+			startZoom = controlsState.value.camera.zoom
 		}
 
 		pinch().add {
 			zoomCamera(it.startDistance * startZoom / it.distance)
 		}
 
-		stateData.bind {
+		controlsState.bind {
 			if (!hScroll.changed.isDispatching && !vScroll.changed.isDispatching) {
 				hScroll.value = it.camera.x
 				vScroll.value = it.camera.y
@@ -209,7 +219,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		wheel().add {
 			tossScroller.stop()
 			if (it.deltaY != 0f) {
-				zoomCamera(stateData.value.camera.zoom * if (it.deltaY > 0f) 1.2f else 0.8f)
+				zoomCamera(controlsState.value.camera.zoom * if (it.deltaY > 0f) 1.2f else 0.8f)
 			}
 		}
 	}
@@ -217,51 +227,11 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private fun initStageView() {
 		+gameStage.apply {
 			cameraOverride = overviewCam
-
-			val origin = Isometric.twoDToIso(Vector2(GameLevel.MAX_COLS / 2 * TILE_SIZE, GameLevel.MAX_ROWS / 2 * TILE_SIZE))
-			setOrigin(origin.x, origin.y)
-
-			+container {
-
-				for (row in 0 until GameLevel.MAX_ROWS) {
-					for (col in 0 until GameLevel.MAX_COLS) {
-						+tileViews[row][col]
-						tileViews[row][col].moveTo(Isometric.twoDToIso(col * TILE_SIZE, row * TILE_SIZE))
-					}
-				}
-
-				// Debug lines
-				+staticMeshC {
-					visible = false
-					stage.keyDown().add {
-						if (it.ctrlKey && it.keyCode == Ascii.D) {
-							visible = !visible
-						}
-					}
-					mesh = staticMesh {
-						buildMesh {
-							//							MeshBuilderStyle.lineStyle.colorTint = Color(0.25f, 0.25f, 0.25f, 1f)
-							MeshBuilderStyle.lineStyle.colorTint = Color.RED
-
-							for (row in 0 until GameLevel.MAX_ROWS) {
-								val ptA = Isometric.twoDToIso(Vector2(0f, row * TILE_SIZE))
-								val ptB = Isometric.twoDToIso(Vector2(GameLevel.MAX_ROWS * TILE_SIZE, row * TILE_SIZE))
-								line(ptA.x, ptA.y, ptB.x, ptB.y)
-							}
-							for (col in 0 until GameLevel.MAX_COLS) {
-								val ptA = Isometric.twoDToIso(Vector2(col * TILE_SIZE, 0f))
-								val ptB = Isometric.twoDToIso(Vector2(col * TILE_SIZE, GameLevel.MAX_ROWS * TILE_SIZE))
-								line(ptA.x, ptA.y, ptB.x, ptB.y)
-							}
-						}
-					}
-				}
-			}
 		}
 	}
 
 	private fun updateCam() {
-		val cam = stateData.value.camera
+		val cam = controlsState.value.camera
 		val z = cam.zoom
 		val w = overviewCam.viewportWidth * z
 		val h = overviewCam.viewportHeight * z
@@ -274,8 +244,8 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		window.requestRender()
 	}
 
-	private fun moveCamera(x: Float = stateData.value.camera.x, y: Float = stateData.value.camera.y, zoom: Float = stateData.value.camera.zoom) {
-		stateData.change {
+	private fun moveCamera(x: Float = controlsState.value.camera.x, y: Float = controlsState.value.camera.y, zoom: Float = controlsState.value.camera.zoom) {
+		controlsState.change {
 			TweenRegistry.kill(this, "camera", finish = true)
 			it.copy(camera = it.camera.copy(x = x, y = y, zoom = zoom))
 		}
@@ -285,7 +255,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	 * Zooms the camera
 	 */
 	private fun zoomCamera(zoom: Float) {
-		stateData.change {
+		controlsState.change {
 			TweenRegistry.kill(this, "camera", finish = true)
 			val newZoom = MathUtils.clamp(zoom, 0.1f, 4f)
 			val cam = it.camera
@@ -293,11 +263,11 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		}
 	}
 
-	private fun tweenCamera(x: Float = stateData.value.camera.x, y: Float = stateData.value.camera.y, zoom: Float = stateData.value.camera.zoom, duration: Float = 0.5f, ease: Interpolation = Easing.pow3, delay: Float = 0f) {
-		val start = stateData.value.camera.copy()
+	private fun tweenCamera(x: Float = controlsState.value.camera.x, y: Float = controlsState.value.camera.y, zoom: Float = controlsState.value.camera.zoom, duration: Float = 0.5f, ease: Interpolation = Easing.pow3, delay: Float = 0f) {
+		val start = controlsState.value.camera.copy()
 		val end = CameraVo(x, y, MathUtils.clamp(zoom, 0.1f, 4f))
 		driveTween(createPropertyTween(this, "camera", duration, ease, { 0f }, { alpha ->
-			stateData.change {
+			controlsState.change {
 				it.copy(camera = start.lerp(end, alpha))
 			}
 		}, targetValue = 1f, delay = delay))
@@ -308,13 +278,17 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		currentLevel.value = originalData.value
 	}
 
-	companion object {
-		const val TILE_SIZE = 64f
-	}
+	// Utility
+
+	private val gridPosition = GridPosition()
+
+	private val mouseGridPosition: GridPosition
+		get() = gameStage.canvasToGrid(mouse.canvasX, mouse.canvasY, gridPosition)
 }
 
 data class UiControlsStateVo(
-		val camera: CameraVo = CameraVo()
+		val camera: CameraVo = CameraVo(),
+		val dragging: GameCharacter? = null
 )
 
 data class CameraVo(
@@ -330,3 +304,30 @@ data class CameraVo(
 		return CameraVo((other.x - x) * alpha + x, (other.y - y) * alpha + y, (other.zoom - zoom) * alpha + zoom)
 	}
 }
+
+/**
+ * Places a character at the given position if that position is empty.
+ */
+fun DataBinding<GameLevel>.placeCharacter(gameCharacter: GameCharacter, position: GridPosition) {
+	val tile = value.getTile(position.row, position.col)
+	Log.debug("placeCharacter : Position: $position Tile: $tile Character: $gameCharacter")
+	var foundEmptyLocation = false
+	if (tile != null && tile.roomType == RoomType.STANDARD) {
+		val existingCharacter = value.getCharacterAt(position.row, position.col)
+		if (existingCharacter?.id == gameCharacter.id) return
+		if (existingCharacter == null) {
+			Log.debug("Tile empty, placing...")
+			foundEmptyLocation = true
+			change {
+				it.copy(characters = it.characters.replace(gameCharacter, gameCharacter.copy(row = position.row, col = position.col)))
+			}
+		}
+	}
+	if (!foundEmptyLocation) {
+		change {
+			it.copy(characters = it.characters.replace(gameCharacter, gameCharacter.copy(row = -1, col = -1)))
+		}
+	}
+}
+
+data class GridPosition(var row: Int = 0, var col: Int = 0)

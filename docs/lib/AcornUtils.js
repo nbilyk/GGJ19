@@ -2463,6 +2463,24 @@
     }
     return newList;
   }
+  function replace_0($receiver, oldValue, newValue) {
+    var tmp$, tmp$_0;
+    var newList = ArrayList_init_0($receiver.size);
+    var found = false;
+    tmp$ = get_lastIndex($receiver);
+    for (var i = 0; i <= tmp$; i++) {
+      if ($receiver.get_za3lpa$(i) === oldValue) {
+        found = true;
+        tmp$_0 = newValue;
+      }
+       else
+        tmp$_0 = $receiver.get_za3lpa$(i);
+      newList.add_11rb$(tmp$_0);
+    }
+    if (!found)
+      throw Exception_init('Could not find ' + oldValue);
+    return newList;
+  }
   var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
   var Comparator = Kotlin.kotlin.Comparator;
   function ListView() {
@@ -11052,6 +11070,7 @@
   package$collection.arrayListObtain_287e2$ = arrayListObtain;
   package$collection.addOrSet_yd8n6p$ = addOrSet;
   package$collection.replaceAt_g8jm4q$ = replaceAt;
+  package$collection.replace_3odih2$ = replace_0;
   package$collection.ListView = ListView;
   package$collection.copy_go3l1a$ = copy_1;
   Object.defineProperty(package$collection, '_stringMap', {get: function () {

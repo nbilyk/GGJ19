@@ -105,6 +105,7 @@
   var array = $module$AcornUtils.com.acornui.serialization.array_5r75ej$;
   var int = $module$AcornUtils.com.acornui.serialization.int_uavegi$;
   var int_0 = $module$AcornUtils.com.acornui.serialization.int_6g08gh$;
+  var onTick = $module$AcornUiCore.com.acornui.core.time.onTick_1ilr4g$;
   var Updatable = $module$AcornUiCore.com.acornui.core.Updatable;
   var Sprite = $module$AcornUiCore.com.acornui.component.Sprite;
   var getOrNull = Kotlin.kotlin.collections.getOrNull_yzln2o$;

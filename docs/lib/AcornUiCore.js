@@ -356,6 +356,12 @@
   ScaleLayoutData.prototype.constructor = ScaleLayoutData;
   ScaleBoxLayoutContainer.prototype = Object.create(ElementLayoutContainerImpl.prototype);
   ScaleBoxLayoutContainer.prototype.constructor = ScaleBoxLayoutContainer;
+  VerticalLayoutStyle.prototype = Object.create(StyleBase.prototype);
+  VerticalLayoutStyle.prototype.constructor = VerticalLayoutStyle;
+  VerticalLayoutData.prototype = Object.create(BasicLayoutData.prototype);
+  VerticalLayoutData.prototype.constructor = VerticalLayoutData;
+  VerticalLayoutContainer.prototype = Object.create(ElementLayoutContainerImpl.prototype);
+  VerticalLayoutContainer.prototype.constructor = VerticalLayoutContainer;
   VirtualHorizontalLayoutStyle.prototype = Object.create(StyleBase.prototype);
   VirtualHorizontalLayoutStyle.prototype.constructor = VirtualHorizontalLayoutStyle;
   VirtualVerticalLayoutStyle.prototype = Object.create(StyleBase.prototype);
@@ -481,6 +487,8 @@
   DateTimeFormatType.prototype.constructor = DateTimeFormatType;
   NumberFormatType.prototype = Object.create(Enum.prototype);
   NumberFormatType.prototype.constructor = NumberFormatType;
+  OnTick.prototype = Object.create(UpdatableChildBase.prototype);
+  OnTick.prototype.constructor = OnTick;
   Timer.prototype = Object.create(UpdatableChildBase.prototype);
   Timer.prototype.constructor = Timer;
   Tick.prototype = Object.create(UpdatableChildBase.prototype);
@@ -861,7 +869,7 @@
      else {
       existing = contents;
     }
-    existing.setRegion_puj7f4$(atlasPath, region);
+    return existing.setRegion_puj7f4$(atlasPath, region);
   }
   function AttachmentHolder() {
   }
@@ -5938,15 +5946,223 @@
   function VerticalLayout() {
     this.style_uoy1bx$_0 = new VerticalLayoutStyle();
   }
+  Object.defineProperty(VerticalLayout.prototype, 'style', {get: function () {
+    return this.style_uoy1bx$_0;
+  }});
+  VerticalLayout.prototype.calculateSizeConstraints_ou9zy3$ = function (elements, out) {
+    var tmp$;
+    var padding = this.style.padding;
+    var gap = this.style.gap;
+    var minWidth = 0.0;
+    var minHeight = 0.0;
+    tmp$ = get_lastIndex(elements);
+    for (var i = 0; i <= tmp$; i++) {
+      var element = elements.get_za3lpa$(i);
+      var sC = element.sizeConstraints;
+      var iMinWidth = sC.width.min;
+      if (iMinWidth != null) {
+        var b = minWidth;
+        minWidth = Math_0.max(iMinWidth, b);
+      }
+      var iMinHeight = sC.height.min;
+      if (iMinHeight != null)
+        minHeight += iMinHeight;
+    }
+    minWidth += padding.left + padding.right;
+    minHeight += gap * get_lastIndex(elements) + padding.top + padding.bottom;
+    out.width.min = minWidth;
+    out.height.min = minHeight;
+  };
+  VerticalLayout.prototype.layout_dyymdl$ = function (explicitWidth, explicitHeight, elements, out) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    var padding = this.style.padding;
+    var gap = this.style.gap;
+    var childAvailableWidth = padding.reduceWidth_81sz4$(explicitWidth);
+    var childAvailableHeight = padding.reduceHeight_81sz4$(explicitHeight);
+    var maxWidth = childAvailableWidth != null ? childAvailableWidth : 0.0;
+    tmp$ = get_lastIndex(elements);
+    for (var i = 0; i <= tmp$; i++) {
+      var element = elements.get_za3lpa$(i);
+      var layoutData = this.get_layoutDataCast_oj5rn9$(element);
+      if ((childAvailableHeight == null || (layoutData != null ? layoutData.heightPercent : null) == null) && (layoutData != null ? layoutData.widthPercent : null) == null) {
+        var w = layoutData != null ? layoutData.getPreferredWidth_81sz4$(childAvailableWidth) : null;
+        var h = layoutData != null ? layoutData.getPreferredHeight_81sz4$(childAvailableHeight) : null;
+        element.setSize_yxjqmk$(w, h);
+        if (element.width > maxWidth)
+          maxWidth = element.width;
+      }
+    }
+    var inflexibleHeight = 0.0;
+    var flexibleHeight = 0.0;
+    tmp$_0 = get_lastIndex(elements);
+    for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
+      var element_0 = elements.get_za3lpa$(i_0);
+      var layoutData_0 = this.get_layoutDataCast_oj5rn9$(element_0);
+      if (childAvailableHeight == null || (layoutData_0 != null ? layoutData_0.heightPercent : null) == null) {
+        if ((layoutData_0 != null ? layoutData_0.widthPercent : null) != null) {
+          var w_0 = layoutData_0.getPreferredWidth_81sz4$(maxWidth);
+          var h_0 = layoutData_0.getPreferredHeight_81sz4$(childAvailableHeight);
+          element_0.setSize_yxjqmk$(w_0, h_0);
+        }
+        inflexibleHeight += element_0.height;
+        if (element_0.width > maxWidth)
+          maxWidth = element_0.width;
+      }
+       else {
+        flexibleHeight += ensureNotNull(layoutData_0.heightPercent) * childAvailableHeight;
+      }
+      inflexibleHeight += gap;
+    }
+    inflexibleHeight -= gap;
+    if (childAvailableHeight != null) {
+      var tmp$_5;
+      if (flexibleHeight > 0) {
+        var value = (childAvailableHeight - inflexibleHeight) / flexibleHeight;
+        var clamp_73gzaq$result;
+        clamp_73gzaq$break: do {
+          if (Kotlin.compareTo(value, 0.0) <= 0) {
+            clamp_73gzaq$result = 0.0;
+            break clamp_73gzaq$break;
+          }
+          if (Kotlin.compareTo(value, 1.0) >= 0) {
+            clamp_73gzaq$result = 1.0;
+            break clamp_73gzaq$break;
+          }
+          clamp_73gzaq$result = value;
+        }
+         while (false);
+        tmp$_5 = clamp_73gzaq$result;
+      }
+       else
+        tmp$_5 = 1.0;
+      var scale = tmp$_5;
+      tmp$_1 = get_lastIndex(elements);
+      for (var i_1 = 0; i_1 <= tmp$_1; i_1++) {
+        var element_1 = elements.get_za3lpa$(i_1);
+        var layoutData_1 = this.get_layoutDataCast_oj5rn9$(element_1);
+        if ((layoutData_1 != null ? layoutData_1.heightPercent : null) != null) {
+          var w_1 = layoutData_1.getPreferredWidth_81sz4$(childAvailableWidth);
+          var h_1 = scale * ensureNotNull(layoutData_1.heightPercent) * childAvailableHeight;
+          element_1.setSize_yxjqmk$(w_1, h_1);
+          if (element_1.width > maxWidth)
+            maxWidth = element_1.width;
+        }
+      }
+    }
+    var y = padding.top;
+    if (childAvailableHeight != null && this.style.verticalAlign !== VAlign$TOP_getInstance()) {
+      var d = childAvailableHeight - (inflexibleHeight + flexibleHeight);
+      if (d > 0.0) {
+        if (this.style.verticalAlign === VAlign$BOTTOM_getInstance()) {
+          y += d;
+        }
+         else if (this.style.verticalAlign === VAlign$MIDDLE_getInstance()) {
+          var x = d * 0.5;
+          y += numberToInt(Math_0.floor(x));
+        }
+      }
+    }
+    tmp$_2 = get_lastIndex(elements);
+    for (var i_2 = 0; i_2 <= tmp$_2; i_2++) {
+      var element_2 = elements.get_za3lpa$(i_2);
+      var layoutData_2 = this.get_layoutDataCast_oj5rn9$(element_2);
+      switch (((tmp$_3 = layoutData_2 != null ? layoutData_2.horizontalAlign : null) != null ? tmp$_3 : this.style.horizontalAlign).name) {
+        case 'LEFT':
+          tmp$_4 = padding.left;
+          break;
+        case 'CENTER':
+          tmp$_4 = (maxWidth - element_2.width) * 0.5 + padding.left;
+          break;
+        case 'RIGHT':
+          tmp$_4 = maxWidth - element_2.width + padding.left;
+          break;
+        default:tmp$_4 = Kotlin.noWhenBranchMatched();
+          break;
+      }
+      var x_0 = tmp$_4;
+      element_2.moveTo_y2kzbl$(x_0, y);
+      y += element_2.height + gap;
+    }
+    y += padding.bottom - gap;
+    out.set_dleff0$(maxWidth + padding.left + padding.right, y);
+  };
+  VerticalLayout.prototype.createLayoutData = function () {
+    return new VerticalLayoutData();
+  };
+  VerticalLayout.$metadata$ = {kind: Kind_CLASS, simpleName: 'VerticalLayout', interfaces: [LayoutAlgorithm]};
+  function VerticalLayoutStyle() {
+    VerticalLayoutStyle$Companion_getInstance();
+    StyleBase.call(this);
+    this.type_lpenzl$_0 = VerticalLayoutStyle$Companion_getInstance();
+    this.gap_jwxppx$_0 = this.prop_mh5how$(5.0).provideDelegate_mj51p5$(this, VerticalLayoutStyle$gap_metadata);
+    this.padding_hzwuli$_0 = this.prop_mh5how$(Pad_init()).provideDelegate_mj51p5$(this, VerticalLayoutStyle$padding_metadata);
+    this.horizontalAlign_uaej2u$_0 = this.prop_mh5how$(HAlign$LEFT_getInstance()).provideDelegate_mj51p5$(this, VerticalLayoutStyle$horizontalAlign_metadata);
+    this.verticalAlign_alkjcs$_0 = this.prop_mh5how$(VAlign$TOP_getInstance()).provideDelegate_mj51p5$(this, VerticalLayoutStyle$verticalAlign_metadata);
+  }
+  Object.defineProperty(VerticalLayoutStyle.prototype, 'type', {get: function () {
+    return this.type_lpenzl$_0;
+  }});
   var VerticalLayoutStyle$gap_metadata = new PropertyMetadata('gap');
+  Object.defineProperty(VerticalLayoutStyle.prototype, 'gap', {get: function () {
+    return this.gap_jwxppx$_0.getValue_lrcp0p$(this, VerticalLayoutStyle$gap_metadata);
+  }, set: function (gap) {
+    this.gap_jwxppx$_0.setValue_9rddgb$(this, VerticalLayoutStyle$gap_metadata, gap);
+  }});
   var VerticalLayoutStyle$padding_metadata = new PropertyMetadata('padding');
+  Object.defineProperty(VerticalLayoutStyle.prototype, 'padding', {get: function () {
+    return this.padding_hzwuli$_0.getValue_lrcp0p$(this, VerticalLayoutStyle$padding_metadata);
+  }, set: function (padding) {
+    this.padding_hzwuli$_0.setValue_9rddgb$(this, VerticalLayoutStyle$padding_metadata, padding);
+  }});
   var VerticalLayoutStyle$horizontalAlign_metadata = new PropertyMetadata('horizontalAlign');
+  Object.defineProperty(VerticalLayoutStyle.prototype, 'horizontalAlign', {get: function () {
+    return this.horizontalAlign_uaej2u$_0.getValue_lrcp0p$(this, VerticalLayoutStyle$horizontalAlign_metadata);
+  }, set: function (horizontalAlign) {
+    this.horizontalAlign_uaej2u$_0.setValue_9rddgb$(this, VerticalLayoutStyle$horizontalAlign_metadata, horizontalAlign);
+  }});
   var VerticalLayoutStyle$verticalAlign_metadata = new PropertyMetadata('verticalAlign');
+  Object.defineProperty(VerticalLayoutStyle.prototype, 'verticalAlign', {get: function () {
+    return this.verticalAlign_alkjcs$_0.getValue_lrcp0p$(this, VerticalLayoutStyle$verticalAlign_metadata);
+  }, set: function (verticalAlign) {
+    this.verticalAlign_alkjcs$_0.setValue_9rddgb$(this, VerticalLayoutStyle$verticalAlign_metadata, verticalAlign);
+  }});
   function VerticalLayoutStyle$Companion() {
     VerticalLayoutStyle$Companion_instance = this;
   }
+  VerticalLayoutStyle$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: [StyleType]};
   var VerticalLayoutStyle$Companion_instance = null;
+  function VerticalLayoutStyle$Companion_getInstance() {
+    if (VerticalLayoutStyle$Companion_instance === null) {
+      new VerticalLayoutStyle$Companion();
+    }
+    return VerticalLayoutStyle$Companion_instance;
+  }
+  VerticalLayoutStyle.$metadata$ = {kind: Kind_CLASS, simpleName: 'VerticalLayoutStyle', interfaces: [StyleBase]};
+  function VerticalLayoutData() {
+    BasicLayoutData.call(this);
+    this.horizontalAlign_41xjh3$_0 = this.bindable_mh5how$(null);
+  }
   var VerticalLayoutData$horizontalAlign_metadata = new PropertyMetadata('horizontalAlign');
+  Object.defineProperty(VerticalLayoutData.prototype, 'horizontalAlign', {get: function () {
+    return this.horizontalAlign_41xjh3$_0.getValue_lrcp0p$(this, VerticalLayoutData$horizontalAlign_metadata);
+  }, set: function (horizontalAlign) {
+    this.horizontalAlign_41xjh3$_0.setValue_9rddgb$(this, VerticalLayoutData$horizontalAlign_metadata, horizontalAlign);
+  }});
+  VerticalLayoutData.$metadata$ = {kind: Kind_CLASS, simpleName: 'VerticalLayoutData', interfaces: [BasicLayoutData]};
+  function VerticalLayoutContainer(owner) {
+    ElementLayoutContainerImpl.call(this, owner, new VerticalLayout());
+  }
+  VerticalLayoutContainer.$metadata$ = {kind: Kind_CLASS, simpleName: 'VerticalLayoutContainer', interfaces: [ElementLayoutContainerImpl]};
+  function vGroup$lambda($receiver) {
+    return Unit;
+  }
+  function vGroup($receiver, init) {
+    if (init === void 0)
+      init = vGroup$lambda;
+    var verticalGroup = new VerticalLayoutContainer($receiver);
+    init(verticalGroup);
+    return verticalGroup;
+  }
   function VirtualHorizontalLayout() {
     this.direction_ggsm6x$_0 = VirtualLayoutDirection$HORIZONTAL_getInstance();
   }
@@ -14653,7 +14869,7 @@
     var b = this.gcFrames_0 / 5 | 0;
     this.checkInterval_0 = Math_0.max(1, b);
     this.timerPending_0 = this.checkInterval_0;
-    enterFrame_1(timeDriver, void 0, CacheImpl_init$lambda(this));
+    tick_1(timeDriver, void 0, CacheImpl_init$lambda(this));
   }
   CacheImpl.prototype.containsKey_sxhxtw$ = function (key) {
     return this.cache_0.containsKey_11rb$(key);
@@ -19332,7 +19548,7 @@
       return;
     this.watchingMouse_0 = value;
     if (value) {
-      this._enterFrame_0 = enterFrame_1(this.timeDriver_0, -1, getCallableRef('enterFrameHandler', function ($receiver) {
+      this._enterFrame_0 = tick_1(this.timeDriver_0, -1, getCallableRef('enterFrameHandler', function ($receiver) {
         return $receiver.enterFrameHandler_0(), Unit;
       }.bind(null, this)));
       mouseMove(this.stage_0).add_trkh7z$(getCallableRef('stageMouseMoveHandler', function ($receiver, event) {
@@ -19427,7 +19643,7 @@
       return;
     this.watchingTouch_0 = value;
     if (value) {
-      this._enterFrame_0 = enterFrame_1(this.timeDriver_0, -1, getCallableRef('enterFrameHandler', function ($receiver) {
+      this._enterFrame_0 = tick_1(this.timeDriver_0, -1, getCallableRef('enterFrameHandler', function ($receiver) {
         return $receiver.enterFrameHandler_0(), Unit;
       }.bind(null, this)));
       touchMove(this.stage_0).add_trkh7z$(getCallableRef('stageTouchMoveHandler', function ($receiver, event) {
@@ -19640,6 +19856,12 @@
     if (affordance === void 0)
       affordance = DragAttachment$Companion_getInstance().DEFAULT_AFFORDANCE;
     return createOrReuseAttachment($receiver, DragAttachment$Companion_getInstance(), dragAttachment$lambda($receiver, affordance));
+  }
+  function dragStart($receiver) {
+    return dragAttachment($receiver).dragStart;
+  }
+  function dragEnd($receiver) {
+    return dragAttachment($receiver).dragEnd;
   }
   function KeyInteractionRo() {
     KeyInteractionRo$Companion_getInstance();
@@ -23332,6 +23554,52 @@
   var DateUtil$Companion_instance = null;
   var Eras_instance = null;
   var Months_instance = null;
+  function OnTick(component, callback) {
+    UpdatableChildBase.call(this);
+    this.component_0 = component;
+    this.callback_0 = callback;
+    this.timeDriver_0 = inject(this.component_0, TimeDriver$Companion_getInstance());
+    this.componentActivatedHandler_0 = OnTick$componentActivatedHandler$lambda(this);
+    this.componentDeactivatedHandler_0 = OnTick$componentDeactivatedHandler$lambda(this);
+    this.componentDisposedHandler_0 = OnTick$componentDisposedHandler$lambda(this);
+    this.component_0.activated.add_trkh7z$(this.componentActivatedHandler_0);
+    this.component_0.deactivated.add_trkh7z$(this.componentDeactivatedHandler_0);
+    this.component_0.disposed.add_trkh7z$(this.componentDisposedHandler_0);
+    if (this.component_0.isActive) {
+      this.timeDriver_0.addChild_sxf3l3$(this);
+    }
+  }
+  OnTick.prototype.update_mx4ult$ = function (tickTime) {
+    this.callback_0(tickTime);
+  };
+  OnTick.prototype.dispose = function () {
+    this.remove();
+    this.component_0.activated.remove_trkh7z$(this.componentActivatedHandler_0);
+    this.component_0.deactivated.remove_trkh7z$(this.componentDeactivatedHandler_0);
+    this.component_0.disposed.remove_trkh7z$(this.componentDisposedHandler_0);
+  };
+  function OnTick$componentActivatedHandler$lambda(this$OnTick) {
+    return function (it) {
+      this$OnTick.timeDriver_0.addChild_sxf3l3$(this$OnTick);
+      return Unit;
+    };
+  }
+  function OnTick$componentDeactivatedHandler$lambda(this$OnTick) {
+    return function (it) {
+      this$OnTick.timeDriver_0.removeChild_11rb$(this$OnTick);
+      return Unit;
+    };
+  }
+  function OnTick$componentDisposedHandler$lambda(this$OnTick) {
+    return function (it) {
+      this$OnTick.dispose();
+      return Unit;
+    };
+  }
+  OnTick.$metadata$ = {kind: Kind_CLASS, simpleName: 'OnTick', interfaces: [Disposable, UpdatableChildBase]};
+  function onTick($receiver, callback) {
+    return new OnTick($receiver, callback);
+  }
   function TimeDriver() {
     TimeDriver$Companion_getInstance();
   }
@@ -23674,11 +23942,6 @@
   Tick.$metadata$ = {kind: Kind_CLASS, simpleName: 'Tick', interfaces: [Disposable, Clearable, UpdatableChildBase]};
   function callLater($receiver, callback) {
     return tick_0($receiver, 1, 1, callback);
-  }
-  function enterFrame_1(timeDriver, repetitions, callback) {
-    if (repetitions === void 0)
-      repetitions = -1;
-    return tick_1(timeDriver, repetitions, callback);
   }
   function tick($receiver, repetitions, callback) {
     if (repetitions === void 0)
@@ -28129,6 +28392,11 @@
   package$algorithm.ScaleBoxLayoutContainer = ScaleBoxLayoutContainer;
   package$algorithm.scaleBox_1me2zx$ = scaleBox;
   package$algorithm.VerticalLayout = VerticalLayout;
+  Object.defineProperty(VerticalLayoutStyle, 'Companion', {get: VerticalLayoutStyle$Companion_getInstance});
+  package$algorithm.VerticalLayoutStyle = VerticalLayoutStyle;
+  package$algorithm.VerticalLayoutData = VerticalLayoutData;
+  package$algorithm.VerticalLayoutContainer = VerticalLayoutContainer;
+  package$algorithm.vGroup_hlverc$ = vGroup;
   var package$virtual = package$algorithm.virtual || (package$algorithm.virtual = {});
   package$virtual.VirtualHorizontalLayout = VirtualHorizontalLayout;
   Object.defineProperty(VirtualHorizontalLayoutStyle, 'Companion', {get: VirtualHorizontalLayoutStyle$Companion_getInstance});
@@ -28593,6 +28861,8 @@
   Object.defineProperty(DragInteraction, 'Companion', {get: DragInteraction$Companion_getInstance});
   package$interaction.DragInteraction = DragInteraction;
   package$interaction.dragAttachment_rt6gw7$ = dragAttachment;
+  package$interaction.dragStart_jz45q0$ = dragStart;
+  package$interaction.dragEnd_jz45q0$ = dragEnd;
   Object.defineProperty(KeyInteractionRo, 'Companion', {get: KeyInteractionRo$Companion_getInstance});
   package$interaction.KeyInteractionRo = KeyInteractionRo;
   package$interaction.KeyInteraction = KeyInteraction;
@@ -28753,6 +29023,7 @@
   var package$time = package$core.time || (package$core.time = {});
   package$time.DateRo = DateRo;
   package$time.Date = Date_0;
+  package$time.onTick_1ilr4g$ = onTick;
   Object.defineProperty(TimeDriver, 'Companion', {get: TimeDriver$Companion_getInstance});
   package$time.TimeDriver = TimeDriver;
   package$time.TimeDriverImpl = TimeDriverImpl;
@@ -28765,7 +29036,6 @@
   Object.defineProperty(Tick, 'Companion', {get: Tick$Companion_getInstance});
   package$time.Tick = Tick;
   package$time.callLater_wa5o32$ = callLater;
-  package$time.enterFrame_fym93q$ = enterFrame_1;
   package$time.tick_7tkcza$ = tick;
   package$time.tick_bght4e$ = tick_0;
   package$time.tick_fym93q$ = tick_1;
