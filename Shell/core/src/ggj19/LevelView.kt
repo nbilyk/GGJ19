@@ -42,9 +42,11 @@ import com.acornui.core.input.interaction.*
 import com.acornui.core.input.wheel
 import com.acornui.core.observe.DataBinding
 import com.acornui.core.observe.dataBinding
+import com.acornui.core.persistance.Persistence
 import com.acornui.core.tween.TweenRegistry
 import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
+import com.acornui.core.userInfo
 import com.acornui.graphic.Color
 import com.acornui.logging.Log
 import com.acornui.math.*
@@ -82,6 +84,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private val theme = inject(Theme)
 
 	private val atlasPath = "assets/ggj.json"
+	private val persistence = inject(Persistence)
 
 	init {
 		originalData.bind { currentLevel.value = it }
@@ -97,21 +100,37 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		+iconButton {
 			iconMap(mapOf(ButtonState.UP to atlas(theme.atlasPath, "speaker-volume-control-mute"), ButtonState.TOGGLED_UP to atlas(theme.atlasPath, "speaker-volume")))
 			toggleOnClick = true
-			click().add { _ ->
-				if (toggled) {
-					if (mainMusic == null) {
-						load("assets/music/file0413.mp3", AssetType.MUSIC).then {
-							it.loop = true
-							it.play()
-							mainMusic = it
-						}
-					}
-					mainMusic?.play()
-				} else {
-					mainMusic?.stop()
+			controlsState.bind { toggled = !it.isMuted }
+			toggledChanged.add { _ ->
+				controlsState.change {
+					it.copy(isMuted = !toggled)
 				}
 			}
 		} layout { bottom = 5f; left = 5f }
+
+		if (userInfo.isDesktop && persistence.getItem("muted") != "true") {
+			// On desktop we can start unmuted.
+			controlsState.change { it.copy(isMuted = false) }
+		}
+
+		controlsState.bind {
+			if (it.isMuted) {
+				mainMusic?.stop()
+				persistence.setItem("muted", "true")
+				persistence.flush()
+			} else {
+				if (mainMusic == null) {
+					load("assets/music/background.mp3", AssetType.MUSIC).then {
+						it.loop = true
+						it.play()
+						mainMusic = it
+					}
+				}
+				mainMusic?.play()
+				persistence.setItem("muted", "false")
+				persistence.flush()
+			}
+		}
 	}
 
 	private fun initCharacterQueue() {
@@ -287,6 +306,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 }
 
 data class UiControlsStateVo(
+		val isMuted: Boolean = true,
 		val camera: CameraVo = CameraVo(),
 		val dragging: GameCharacter? = null
 )

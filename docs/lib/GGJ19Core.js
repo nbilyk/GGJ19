@@ -73,8 +73,8 @@
   var atlas_0 = $module$AcornUiCore.com.acornui.component.atlas_8684q0$;
   var to = Kotlin.kotlin.to_ujzrz7$;
   var mapOf = Kotlin.kotlin.collections.mapOf_qfcya0$;
-  var click = $module$AcornUiCore.com.acornui.core.input.interaction.click_w26x3n$;
   var iconButton = $module$AcornUiCore.com.acornui.component.iconButton_hzc8f9$;
+  var core = $module$AcornUiCore.com.acornui.core;
   var HAlign = $module$AcornUiCore.com.acornui.component.layout.HAlign;
   var rect = $module$AcornUiCore.com.acornui.component.rect_8hpnyb$;
   var Pad_init = $module$AcornUtils.com.acornui.math.Pad_init_mx4ult$;
@@ -101,6 +101,7 @@
   var TossScrollModelBinding = $module$AcornUiCore.com.acornui.component.scroll.TossScrollModelBinding;
   var Theme = $module$AcornUiCore.com.acornui.skins.Theme;
   var inject = $module$AcornUiCore.com.acornui.core.di.inject_y3a68v$;
+  var Persistence = $module$AcornUiCore.com.acornui.core.persistance.Persistence;
   var logging = $module$AcornUtils.com.acornui.logging;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Enum = Kotlin.kotlin.Enum;
@@ -372,7 +373,7 @@
   }
   function GameStage$createGameCharacterView$lambda$lambda$lambda_0(this$) {
     return function (it) {
-      return it.copy_3sm4bf$(void 0, this$.data.value);
+      return it.copy_6sjg8m$(void 0, void 0, this$.data.value);
     };
   }
   function GameStage$createGameCharacterView$lambda$lambda_1(this$, this$GameStage) {
@@ -383,7 +384,7 @@
     };
   }
   function GameStage$createGameCharacterView$lambda$lambda$lambda_1(it) {
-    return it.copy_3sm4bf$(void 0, null);
+    return it.copy_6sjg8m$(void 0, void 0, null);
   }
   function GameStage$createGameCharacterView$lambda$lambda_2(this$, this$GameStage) {
     return function (f) {
@@ -545,6 +546,7 @@
     this.mainMusic_0 = null;
     this.theme_0 = inject(this, Theme.Companion);
     this.atlasPath_0 = 'assets/ggj.json';
+    this.persistence_0 = inject(this, Persistence.Companion);
     this.originalData.bind_qlkmfe$(LevelView_init$lambda(this));
     this.interactivityMode = InteractivityMode.ALWAYS;
     this.initCameraControls_0();
@@ -553,26 +555,20 @@
     this.initMusic_0();
     this.gridPosition_0 = new GridPosition();
   }
-  function LevelView$initMusic$lambda$lambda$lambda(this$LevelView) {
+  function LevelView$initMusic$lambda$lambda(this$) {
     return function (it) {
-      it.loop = true;
-      it.play();
-      this$LevelView.mainMusic_0 = it;
+      this$.toggled = !it.isMuted;
       return Unit;
     };
   }
-  function LevelView$initMusic$lambda$lambda(this$, this$LevelView) {
+  function LevelView$initMusic$lambda$lambda$lambda(this$) {
+    return function (it) {
+      return it.copy_6sjg8m$(!this$.toggled);
+    };
+  }
+  function LevelView$initMusic$lambda$lambda_0(this$LevelView, this$) {
     return function (f) {
-      var tmp$, tmp$_0;
-      if (this$.toggled) {
-        if (this$LevelView.mainMusic_0 == null) {
-          then(load(this$, 'assets/music/file0413.mp3', AssetType.Companion.MUSIC), LevelView$initMusic$lambda$lambda$lambda(this$LevelView));
-        }
-        (tmp$ = this$LevelView.mainMusic_0) != null ? (tmp$.play(), Unit) : null;
-      }
-       else {
-        (tmp$_0 = this$LevelView.mainMusic_0) != null ? (tmp$_0.stop(), Unit) : null;
-      }
+      this$LevelView.controlsState_0.change_ru8m0w$(LevelView$initMusic$lambda$lambda$lambda(this$));
       return Unit;
     };
   }
@@ -580,7 +576,8 @@
     return function ($receiver) {
       $receiver.iconMap_wty2wd$(mapOf([to(ButtonState.UP, atlas_0($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume-control-mute')), to(ButtonState.TOGGLED_UP, atlas_0($receiver, this$LevelView.theme_0.atlasPath, 'speaker-volume'))]));
       $receiver.toggleOnClick = true;
-      click($receiver).add_trkh7z$(LevelView$initMusic$lambda$lambda($receiver, this$LevelView));
+      this$LevelView.controlsState_0.bind_qlkmfe$(LevelView$initMusic$lambda$lambda($receiver));
+      $receiver.toggledChanged.add_trkh7z$(LevelView$initMusic$lambda$lambda_0(this$LevelView, $receiver));
       return Unit;
     };
   }
@@ -589,8 +586,42 @@
     $receiver.left = 5.0;
     return Unit;
   }
+  function LevelView$initMusic$lambda_1(it) {
+    return it.copy_6sjg8m$(false);
+  }
+  function LevelView$initMusic$lambda$lambda_1(this$LevelView) {
+    return function (it) {
+      it.loop = true;
+      it.play();
+      this$LevelView.mainMusic_0 = it;
+      return Unit;
+    };
+  }
+  function LevelView$initMusic$lambda_2(this$LevelView) {
+    return function (it) {
+      var tmp$, tmp$_0;
+      if (it.isMuted) {
+        (tmp$ = this$LevelView.mainMusic_0) != null ? (tmp$.stop(), Unit) : null;
+        this$LevelView.persistence_0.setItem_puj7f4$('muted', 'true');
+        this$LevelView.persistence_0.flush();
+      }
+       else {
+        if (this$LevelView.mainMusic_0 == null) {
+          then(load(this$LevelView, 'assets/music/background.mp3', AssetType.Companion.MUSIC), LevelView$initMusic$lambda$lambda_1(this$LevelView));
+        }
+        (tmp$_0 = this$LevelView.mainMusic_0) != null ? (tmp$_0.play(), Unit) : null;
+        this$LevelView.persistence_0.setItem_puj7f4$('muted', 'false');
+        this$LevelView.persistence_0.flush();
+      }
+      return Unit;
+    };
+  }
   LevelView.prototype.initMusic_0 = function () {
     this.layout_ge8abi$(this.unaryPlus_b3a6qy$(iconButton(this, LevelView$initMusic$lambda(this))), LevelView$initMusic$lambda_0);
+    if (core.userInfo.isDesktop && !equals(this.persistence_0.getItem_61zpoe$('muted'), 'true')) {
+      this.controlsState_0.change_ru8m0w$(LevelView$initMusic$lambda_1);
+    }
+    this.controlsState_0.bind_qlkmfe$(LevelView$initMusic$lambda_2(this));
   };
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda($receiver) {
     $receiver.style.backgroundColor = new Color(0.0, 0.0, 0.0, 0.3);
@@ -685,7 +716,7 @@
   }
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_4(this$) {
     return function (it) {
-      return it.copy_3sm4bf$(void 0, this$.data.value);
+      return it.copy_6sjg8m$(void 0, void 0, this$.data.value);
     };
   }
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3(this$, this$LevelView) {
@@ -697,7 +728,7 @@
     };
   }
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda$lambda_5(it) {
-    return it.copy_3sm4bf$(void 0, null);
+    return it.copy_6sjg8m$(void 0, void 0, null);
   }
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_4(this$, this$LevelView) {
     return function (f) {
@@ -837,7 +868,7 @@
   function LevelView$moveCamera$lambda(this$LevelView, closure$x, closure$y, closure$zoom) {
     return function (it) {
       tween.TweenRegistry.kill_4hrdoq$(this$LevelView, 'camera', true);
-      return it.copy_3sm4bf$(it.camera.copy_y2kzbl$(closure$x, closure$y, closure$zoom));
+      return it.copy_6sjg8m$(void 0, it.camera.copy_y2kzbl$(closure$x, closure$y, closure$zoom));
     };
   }
   LevelView.prototype.moveCamera_0 = function (x, y, zoom) {
@@ -868,7 +899,7 @@
        while (false);
       var newZoom = clamp_73gzaq$result;
       var cam = it.camera;
-      return it.copy_3sm4bf$(cam.copy_y2kzbl$(void 0, void 0, newZoom));
+      return it.copy_6sjg8m$(void 0, cam.copy_y2kzbl$(void 0, void 0, newZoom));
     };
   }
   LevelView.prototype.zoomCamera_0 = function (zoom) {
@@ -879,7 +910,7 @@
   }
   function LevelView$tweenCamera$lambda$lambda(closure$start, closure$end, closure$alpha) {
     return function (it) {
-      return it.copy_3sm4bf$(closure$start.lerp_browbj$(closure$end, closure$alpha));
+      return it.copy_6sjg8m$(void 0, closure$start.lerp_browbj$(closure$end, closure$alpha));
     };
   }
   function LevelView$tweenCamera$lambda_0(this$LevelView, closure$start, closure$end) {
@@ -931,35 +962,42 @@
     };
   }
   LevelView.$metadata$ = {kind: Kind_CLASS, simpleName: 'LevelView', interfaces: [CanvasLayoutContainer]};
-  function UiControlsStateVo(camera, dragging) {
+  function UiControlsStateVo(isMuted, camera, dragging) {
+    if (isMuted === void 0)
+      isMuted = true;
     if (camera === void 0)
       camera = new CameraVo();
     if (dragging === void 0)
       dragging = null;
+    this.isMuted = isMuted;
     this.camera = camera;
     this.dragging = dragging;
   }
   UiControlsStateVo.$metadata$ = {kind: Kind_CLASS, simpleName: 'UiControlsStateVo', interfaces: []};
   UiControlsStateVo.prototype.component1 = function () {
-    return this.camera;
+    return this.isMuted;
   };
   UiControlsStateVo.prototype.component2 = function () {
+    return this.camera;
+  };
+  UiControlsStateVo.prototype.component3 = function () {
     return this.dragging;
   };
-  UiControlsStateVo.prototype.copy_3sm4bf$ = function (camera, dragging) {
-    return new UiControlsStateVo(camera === void 0 ? this.camera : camera, dragging === void 0 ? this.dragging : dragging);
+  UiControlsStateVo.prototype.copy_6sjg8m$ = function (isMuted, camera, dragging) {
+    return new UiControlsStateVo(isMuted === void 0 ? this.isMuted : isMuted, camera === void 0 ? this.camera : camera, dragging === void 0 ? this.dragging : dragging);
   };
   UiControlsStateVo.prototype.toString = function () {
-    return 'UiControlsStateVo(camera=' + Kotlin.toString(this.camera) + (', dragging=' + Kotlin.toString(this.dragging)) + ')';
+    return 'UiControlsStateVo(isMuted=' + Kotlin.toString(this.isMuted) + (', camera=' + Kotlin.toString(this.camera)) + (', dragging=' + Kotlin.toString(this.dragging)) + ')';
   };
   UiControlsStateVo.prototype.hashCode = function () {
     var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.isMuted) | 0;
     result = result * 31 + Kotlin.hashCode(this.camera) | 0;
     result = result * 31 + Kotlin.hashCode(this.dragging) | 0;
     return result;
   };
   UiControlsStateVo.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.camera, other.camera) && Kotlin.equals(this.dragging, other.dragging)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.isMuted, other.isMuted) && Kotlin.equals(this.camera, other.camera) && Kotlin.equals(this.dragging, other.dragging)))));
   };
   function CameraVo(x, y, zoom) {
     if (x === void 0)

@@ -1,0 +1,67 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GGJ19Jvm:jar">
+    <output-path>$PROJECT_DIR$/out/jvm/artifacts/GGJ19Jvm_jar</output-path>
+    <root id="archive" name="GGJ19Jvm.jar">
+      <element id="module-output" name="GGJ19Jvm" />
+      <element id="module-output" name="GGJ19Core" />
+      <element id="module-output" name="AcornUtils" />
+      <element id="module-output" name="AcornUiCore" />
+      <element id="module-output" name="AcornGame" />
+      <element id="module-output" name="AcornSpine" />
+      <element id="module-output" name="AcornUiLwjglBackend" />
+      <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-reflect.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-test.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-stdlib.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-stdlib-jdk7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$KOTLIN_BUNDLED$/lib/kotlin-stdlib-jdk8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-nfd-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-nfd-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-stb-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-stb-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-glfw-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-glfw-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-nfd-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-stb-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-glfw-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-openal-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-openal-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-opengl-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-opengl-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-jemalloc-3.2.1-natives-linux.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-jemalloc-3.2.1-natives-macos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-openal-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-opengl-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/runtime/lwjgl-jemalloc-3.2.1-natives-windows.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jorbis-0.0.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-nfd-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-stb-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jlayer-1.0.2-gdx.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-glfw-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-openal-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-opengl-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-jemalloc-3.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jorbis-0.0.17-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jorbis-0.0.17-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-nfd-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-nfd-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-stb-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-stb-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jlayer-1.0.2-gdx-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/jlayer-1.0.2-gdx-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-glfw-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-glfw-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-openal-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-openal-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-opengl-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-opengl-3.2.1-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-jemalloc-3.2.1-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$ACORNUI_HOME$/AcornUiLwjglBackend/externalLib/compile/lwjgl-jemalloc-3.2.1-sources.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
