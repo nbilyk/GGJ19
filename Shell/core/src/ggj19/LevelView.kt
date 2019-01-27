@@ -16,6 +16,7 @@
 
 package ggj19
 
+import com.acornui.async.then
 import com.acornui.collection.ArrayList
 import com.acornui.collection.replaceAt
 import com.acornui.component.*
@@ -31,11 +32,16 @@ import com.acornui.component.scroll.ScrollModelImpl
 import com.acornui.component.scroll.TossScrollModelBinding
 import com.acornui.component.scroll.TossScroller
 import com.acornui.component.text.text
+import com.acornui.core.asset.AssetType
+import com.acornui.core.asset.load
+import com.acornui.core.audio.Music
 import com.acornui.core.cache.recycle
 import com.acornui.core.di.Owned
+import com.acornui.core.di.inject
 import com.acornui.core.di.own
 import com.acornui.core.graphic.orthographicCamera
 import com.acornui.core.input.Ascii
+import com.acornui.core.input.interaction.click
 import com.acornui.core.input.interaction.dragAttachment
 import com.acornui.core.input.interaction.pinch
 import com.acornui.core.input.interaction.pinchStart
@@ -47,6 +53,7 @@ import com.acornui.core.tween.createPropertyTween
 import com.acornui.core.tween.driveTween
 import com.acornui.graphic.Color
 import com.acornui.math.*
+import com.acornui.skins.Theme
 import ggj19.model.GameCharacter
 import ggj19.model.GameLevel
 import ggj19.model.emptyLevel
@@ -76,6 +83,9 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 	private val stageH = TILE_SIZE * GameLevel.MAX_ROWS + padding * 2f
 
 	private val characterIcons = ArrayList<GameCharacterIconView>()
+	private var mainMusic: Music? = null
+
+	private val theme = inject(Theme)
 
 	init {
 		originalData.bind { currentLevel.value = it }
@@ -85,6 +95,28 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 		initCameraControls()
 		initStageView()
 		initCharacterQueue()
+		initMusic()
+	}
+
+	private fun initMusic() {
+		+iconButton {
+			iconMap(mapOf(ButtonState.UP to atlas(theme.atlasPath, "speaker-volume-control-mute"), ButtonState.TOGGLED_UP to atlas(theme.atlasPath, "speaker-volume")))
+			toggleOnClick = true
+			click().add { _ ->
+				if (toggled) {
+					if (mainMusic == null) {
+						load("assets/music/file0413.mp3", AssetType.MUSIC).then {
+							it.loop = true
+							it.play()
+							mainMusic = it
+						}
+					}
+					mainMusic?.play()
+				} else {
+					mainMusic?.stop()
+				}
+			}
+		} layout { bottom = 5f; left = 5f }
 	}
 
 	private fun initCharacterQueue() {
@@ -97,6 +129,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 			style.padding = Pad(5f)
 			+hGroup {
 				+spacer() layout { widthPercent = 1f }
+				+text("Up next:")
 				currentLevel.bind { newData ->
 					recycle(
 							data = newData.characters,

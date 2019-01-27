@@ -87,7 +87,7 @@ fun parseGameData(str: String): List<GameLevel> {
 		lines.eatEmptyLines()
 		val grid = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { Tile() } }
 		for (row in 0 until GameLevel.MAX_ROWS) {
-			val cols = lines.poll().split(" ")
+			val cols = lines.poll().trim().split(" ")
 			for (col in 0 until GameLevel.MAX_COLS) {
 				if (cols[col] != ".") {
 					grid[row][col] = Tile(roomType = RoomType.STANDARD)

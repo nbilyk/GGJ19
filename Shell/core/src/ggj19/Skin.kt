@@ -16,7 +16,12 @@
 
 package ggj19
 
+import com.acornui.async.launch
 import com.acornui.component.UiComponent
+import com.acornui.component.style.addStyleRule
+import com.acornui.component.text.charStyle
+import com.acornui.component.text.loadFontFromAtlas
+import com.acornui.core.asset.cachedGroup
 import com.acornui.graphic.Color
 import com.acornui.skins.BasicUiSkin
 
@@ -24,5 +29,13 @@ class Skin(stage: UiComponent) : BasicUiSkin(stage) {
 
 	override fun initTheme() {
 		theme.textColor = Color(1f, 1f, 1f, 1f)
+	}
+
+	override fun loadBitmapFonts() {
+		val group = cachedGroup()
+		launch {
+			loadFontFromAtlas("assets/uiskin/mainFont.fnt", theme.atlasPath, group)
+			target.addStyleRule(charStyle { fontKey = "assets/uiskin/mainFont.fnt" })
+		}
 	}
 }

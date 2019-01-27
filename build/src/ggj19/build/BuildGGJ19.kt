@@ -14,7 +14,6 @@ fun main(args: Array<String>) {
 
 object GGJ19Core : CoreModule(File("Shell/core"), name = "GGJ19Core") {
 	init {
-		resources += skin("basic")
 		moduleDependencies = arrayListOf(AcornUtils, AcornUiCore, AcornGame, AcornSpine)
 	}
 }
