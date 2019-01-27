@@ -339,17 +339,30 @@
   function LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3(o1, o2) {
     return true;
   }
-  function LevelView$initCharacterQueue$lambda$lambda$lambda_1(this$LevelView, this$) {
+  function LevelView$initCharacterQueue$lambda$lambda$lambda_1(closure$upNextLbl, this$LevelView, this$) {
     return function (newData) {
-      recycle(newData.characters, this$LevelView.characterIcons_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda(this$), LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3);
+      var $receiver = newData.characters;
+      var destination = ArrayList_init();
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (!element.isPlaced)
+          destination.add_11rb$(element);
+      }
+      var unplaced = destination;
+      if (!unplaced.isEmpty())
+        unplaced = unplaced.subList_vux9f0$(1, unplaced.size);
+      closure$upNextLbl.visible = !unplaced.isEmpty();
+      recycle(unplaced, this$LevelView.characterIcons_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda(this$), LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_0, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_1, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_2, LevelView$initCharacterQueue$lambda$lambda$lambda$lambda_3);
       return Unit;
     };
   }
   function LevelView$initCharacterQueue$lambda$lambda_0(this$LevelView) {
     return function ($receiver) {
       $receiver.layout_ge8abi$($receiver.unaryPlus_b3a6qy$(spacer($receiver)), LevelView$initCharacterQueue$lambda$lambda$lambda_0);
-      $receiver.unaryPlus_b3a6qy$(text($receiver, 'Up next:'));
-      this$LevelView.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda_1(this$LevelView, $receiver));
+      var upNextLbl = $receiver.unaryPlus_b3a6qy$(text($receiver, 'Up next:'));
+      this$LevelView.currentLevel_0.bind_qlkmfe$(LevelView$initCharacterQueue$lambda$lambda$lambda_1(upNextLbl, this$LevelView, $receiver));
       return Unit;
     };
   }
@@ -707,6 +720,7 @@
     this.type = type;
     this.x = x;
     this.y = y;
+    this.isPlaced = this.x !== -1;
   }
   GameCharacter.$metadata$ = {kind: Kind_CLASS, simpleName: 'GameCharacter', interfaces: []};
   GameCharacter.prototype.component1 = function () {
