@@ -48,11 +48,6 @@ class GGJ19(owner: Owned) : CanvasLayoutContainer(owner), NavBindable {
 			levels.value = parseGameData(it)
 		}
 
-		// Temp data:
-		levels.value = listOf(GameLevel(
-				characters = listOf(GameCharacter(GameCharacterType.ARTIST), GameCharacter(GameCharacterType.GRANDMA), GameCharacter(GameCharacterType.ARTIST))
-		))
-
 		val levelView = +LevelView(this).apply {
 			(levels or currentLevel).bind {
 				originalData.value = levels.value.getOrNull(currentLevel.value) ?: emptyLevel
@@ -99,7 +94,7 @@ fun parseGameData(str: String): List<GameLevel> {
 		val queueChars = queue.split(" ")
 		val pendingCharacters = ArrayList<GameCharacter>()
 		for (queueChar in queueChars) {
-			pendingCharacters.add(GameCharacter(GameCharacterType.fromLetter(queueChar[0])))
+			pendingCharacters.add(GameCharacter(type = GameCharacterType.fromLetter(queueChar[0])))
 		}
 		levels.add(GameLevel(pendingCharacters, grid))
 		lines.eatEmptyLines()

@@ -23,8 +23,16 @@ data class GameLevel(
 		val grid: List<List<Tile>> = ArrayList(MAX_ROWS) { ArrayList(MAX_COLS) { Tile() }}
 ) {
 
-	fun getTile(row: Int, col: Int): Tile {
+	val unlockedCharacters: List<GameCharacter>
+		get() = characters.filter { !it.isLocked }
+
+	fun getTile(row: Int, col: Int): Tile? {
+		if (row < 0 || col < 0 || row >= MAX_ROWS || col >= MAX_COLS) return null
 		return grid[row][col]
+	}
+
+	fun getCharacterAt(row: Int, col: Int): GameCharacter? {
+		return characters.find { it.row == row && it.col == col }
 	}
 
 	companion object {
