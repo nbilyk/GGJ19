@@ -16,13 +16,13 @@
 
 package ggj19.model
 
-import com.acornui.core.UidUtil
-
 data class GameCharacter(
 		val type: GameCharacterType = GameCharacterType.UNKNOWN,
 		val x: Int = -1,
 		val y: Int = -1
-)
+) {
+	val isPlaced: Boolean = (x != -1)
+}
 
 enum class GameCharacterType(val char: Char) {
 	MUSICIAN('M'),

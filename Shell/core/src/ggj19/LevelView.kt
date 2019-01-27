@@ -129,10 +129,14 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 			style.padding = Pad(5f)
 			+hGroup {
 				+spacer() layout { widthPercent = 1f }
-				+text("Up next:")
+				val upNextLbl = +text("Up next:")
 				currentLevel.bind { newData ->
+					var unplaced = newData.characters.filter { !it.isPlaced }
+					if (unplaced.isNotEmpty()) unplaced = unplaced.subList(1, unplaced.size)
+					upNextLbl.visible = unplaced.isNotEmpty()
+
 					recycle(
-							data = newData.characters,
+							data = unplaced,
 							existingElements = characterIcons,
 							factory = { item, index -> +GameCharacterIconView(this) },
 							configure = { element, item, index -> element.data.value = item },
