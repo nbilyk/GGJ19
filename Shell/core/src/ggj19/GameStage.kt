@@ -43,7 +43,7 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 	val currentLevel = dataBinding(emptyLevel)
 
 	private val tileViews: List<List<TileView>> = ArrayList(GameLevel.MAX_ROWS) { ArrayList(GameLevel.MAX_COLS) { TileView(this) } }
-	private val characters = ArrayList<GameCharacterView>()
+	private val characterViews = ArrayList<GameCharacterView>()
 
 	init {
 		interactivityMode = InteractivityMode.ALWAYS
@@ -91,7 +91,7 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 			val placedCharacters = newData.characters.filter { it.isPlaced }
 			recycle(
 					data = placedCharacters,
-					existingElements = characters,
+					existingElements = characterViews,
 					factory = { item, index -> +createGameCharacterView(item) },
 					configure = { element, item, index -> element.data.value = item },
 					disposer = { element -> element.dispose() },
@@ -142,7 +142,37 @@ class GameStage(owner: Owned) : ElementContainerImpl<UiComponent>(owner) {
 		}
 	}
 
+	private val tmpGridP = GridPosition()
+
+	// Overriding the hit testing to account for isometric.
 	override fun getChildrenUnderPoint(canvasX: Float, canvasY: Float, onlyInteractive: Boolean, returnAll: Boolean, out: MutableList<UiComponentRo>, rayCache: RayRo?): MutableList<UiComponentRo> {
-		return super.getChildrenUnderPoint(canvasX, canvasY, onlyInteractive, returnAll, out, rayCache)
+		if (!visible || (onlyInteractive && inheritedInteractivityMode == InteractivityMode.NONE)) return out
+
+		if ((returnAll || out.isEmpty())) {
+			canvasToGrid(canvasX, canvasY, tmpGridP)
+			for (i in characterViews.lastIndex downTo 0) {
+				val characterView = characterViews[i]
+				val m = characterView.data.value
+				if (m.row == tmpGridP.row && m.col == tmpGridP.col) {
+					out.add(characterView)
+				}
+				if (!returnAll && !out.isEmpty()) break
+			}
+		}
+		if ((returnAll || out.isEmpty()) && (!onlyInteractive || interactivityEnabled)) {
+			// This component intersects with the ray, but none of its children do.
+			out.add(this)
+		}
+
+		return out
+	}
+
+	private val tmpVec2 = Vector2()
+
+	fun canvasToGrid(canvasX: Float, canvasY: Float, out: GridPosition): GridPosition {
+		Isometric.isoToTwoD(canvasToLocal(tmpVec2.set(canvasX, canvasY)))
+		out.col = (tmpVec2.x / TileView.TILE_SIZE).toInt()
+		out.row = (tmpVec2.y / TileView.TILE_SIZE).toInt()
+		return out
 	}
 }

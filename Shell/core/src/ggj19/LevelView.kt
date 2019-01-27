@@ -118,9 +118,11 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 	private fun initCharacterQueue() {
 		+vGroup {
+			interactivityMode = InteractivityMode.CHILDREN
 			style.gap = 0f
 			style.horizontalAlign = HAlign.RIGHT
 			+panel {
+				interactivityMode = InteractivityMode.CHILDREN
 				style.background = {
 					rect {
 						style.backgroundColor = Color(0f, 0f, 0f, 0.3f)
@@ -148,6 +150,7 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 				} layout { widthPercent = 1f }
 			} layout { widthPercent = 1f }
 			+stack {
+				interactivityMode = InteractivityMode.CHILDREN
 				style.padding = Pad(5f)
 				+atlas(atlasPath, "CurrentCharacterPresentationBg")
 
@@ -278,16 +281,10 @@ class LevelView(owner: Owned) : CanvasLayoutContainer(owner) {
 
 	// Utility
 
-	private val dropPosition = Vector2()
 	private val gridPosition = GridPosition()
 
 	private val mouseGridPosition: GridPosition
-		get() {
-			Isometric.isoToTwoD(gameStage.mousePosition(dropPosition))
-			gridPosition.col = (dropPosition.x / TILE_SIZE).toInt()
-			gridPosition.row = (dropPosition.y / TILE_SIZE).toInt()
-			return gridPosition
-		}
+		get() = gameStage.canvasToGrid(mouse.canvasX, mouse.canvasY, gridPosition)
 }
 
 data class UiControlsStateVo(
@@ -326,4 +323,4 @@ fun DataBinding<GameLevel>.attemptCharacterPlacement(gameCharacter: GameCharacte
 	}
 }
 
-class GridPosition(var row: Int = 0, var col: Int = 0)
+data class GridPosition(var row: Int = 0, var col: Int = 0)
